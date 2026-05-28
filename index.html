@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Studio26</title>
+
+  <!-- Favicon: inline SVG -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23111'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='central' text-anchor='middle' fill='%23fff' font-family='serif' font-size='13' letter-spacing='0.5'%3E26%3C/text%3E%3C/svg%3E">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Studio26">
+  <meta property="og:description" content="Something is being built here.">
+  <meta property="og:url" content="https://studio26.me">
+  <meta property="og:type" content="website">
+
+  <!-- Editorial serif -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=DM+Mono:wght@300&display=swap" rel="stylesheet">
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html, body {
+      width: 100%; height: 100%;
+      overflow: hidden;
+      background: #0a0a0a;
+    }
+
+    /* Fallback texture if video fails */
+    body {
+      background-image:
+        radial-gradient(ellipse at 20% 50%, #1a1a1a 0%, transparent 60%),
+        radial-gradient(ellipse at 80% 20%, #111 0%, transparent 50%);
+    }
+
+    /* Full-viewport video */
+    .video-wrap {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+    }
+
+    video {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    /* Overlay */
+    .overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 1;
+      background: rgba(0, 0, 0, 0.35);
+    }
+
+    /* UI layer */
+    .ui {
+      position: fixed;
+      inset: 0;
+      z-index: 2;
+    }
+
+    /* Logo — top left */
+    .logo {
+      position: absolute;
+      top: clamp(24px, 4vw, 48px);
+      left: clamp(24px, 4vw, 48px);
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 300;
+      font-size: clamp(18px, 2.4vw, 28px);
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: #fff;
+      opacity: 0;
+      animation: fadeIn 1.2s ease forwards 0.8s;
+    }
+
+    /* Tagline — lower third, centred */
+    .tagline {
+      position: absolute;
+      bottom: clamp(80px, 12vh, 140px);
+      left: 50%;
+      transform: translateX(-50%);
+      white-space: nowrap;
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-weight: 300;
+      font-size: clamp(15px, 2vw, 22px);
+      letter-spacing: 0.08em;
+      color: rgba(255, 255, 255, 0.88);
+      opacity: 0;
+      animation: fadeIn 1.4s ease forwards 1.4s;
+    }
+
+    /* Footer — bottom right */
+    .footer {
+      position: absolute;
+      bottom: clamp(20px, 3vh, 36px);
+      right: clamp(24px, 4vw, 48px);
+      text-align: right;
+      font-family: 'DM Mono', monospace;
+      font-weight: 300;
+      font-size: clamp(10px, 1.1vw, 13px);
+      letter-spacing: 0.06em;
+      color: rgba(255, 255, 255, 0.55);
+      line-height: 1.6;
+      opacity: 0;
+      animation: fadeIn 1s ease forwards 2s;
+    }
+
+    .footer a {
+      color: inherit;
+      text-decoration: none;
+      transition: opacity 0.2s;
+    }
+    .footer a:hover { opacity: 0.85; }
+
+    @media (max-width: 767px) {
+      .tagline {
+        left: clamp(24px, 4vw, 48px);
+        transform: none;
+      }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Logo doesn't shift vertically */
+    .logo { transform: none; }
+    @keyframes fadeInFlat {
+      from { opacity: 0; }
+      to   { opacity: 1; }
+    }
+    .logo { animation-name: fadeInFlat; }
+    .footer { animation-name: fadeInFlat; }
+
+    /* Sound toggle — bottom left */
+    .sound-btn {
+      position: absolute;
+      bottom: clamp(20px, 3vh, 36px);
+      left: clamp(24px, 4vw, 48px);
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 4px;
+      color: rgba(255, 255, 255, 0.55);
+      opacity: 0;
+      animation: fadeInFlat 1s ease forwards 2s;
+      transition: color 0.25s;
+      line-height: 0;
+    }
+
+    .sound-btn:hover { color: rgba(255, 255, 255, 0.9); }
+
+    .sound-btn svg { width: 18px; height: 18px; display: block; }
+
+    /* Show the right icon based on state */
+    .sound-btn .icon-muted   { display: block; }
+    .sound-btn .icon-unmuted { display: none; }
+    .sound-btn.unmuted .icon-muted   { display: none; }
+    .sound-btn.unmuted .icon-unmuted { display: block; }
+  </style>
+</head>
+<body>
+
+  <div class="video-wrap">
+    <video id="bgVideo" autoplay muted loop playsinline preload="auto" aria-hidden="true"></video>
+  </div>
+  <script>
+    (function () {
+      var mobile = window.matchMedia('(max-width: 767px)').matches;
+      var base = 'https://pub-accaa99b083244a1a58f40dfa9cfaa9f.r2.dev/';
+      var vid = document.getElementById('bgVideo');
+      vid.src = base + (mobile ? 'studio26-teaser-mobile.mp4' : 'studio26-teaser.mp4');
+    })();
+  </script>
+
+  <div class="overlay" aria-hidden="true"></div>
+
+  <div class="ui">
+    <div class="logo">Studio26</div>
+
+    <p class="tagline">Something is being built here.</p>
+
+    <div class="footer">
+      <div>studio26.me</div>
+      <div><a href="mailto:hello@studio26.me">hello@studio26.me</a></div>
+    </div>
+
+    <button class="sound-btn" id="soundBtn" aria-label="Unmute">
+      <!-- Muted: speaker with line through it -->
+      <svg class="icon-muted" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/>
+        <line x1="23" y1="9" x2="17" y2="15"/>
+        <line x1="17" y1="9" x2="23" y2="15"/>
+      </svg>
+      <!-- Unmuted: speaker with waves -->
+      <svg class="icon-unmuted" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/>
+        <path d="M15.54 8.46a5 5 0 0 1 0 7.07"/>
+        <path d="M19.07 4.93a10 10 0 0 1 0 14.14"/>
+      </svg>
+    </button>
+  </div>
+
+  <script>
+    const btn = document.getElementById('soundBtn');
+    const video = document.querySelector('video');
+
+    btn.addEventListener('click', () => {
+      video.muted = !video.muted;
+      btn.classList.toggle('unmuted', !video.muted);
+      btn.setAttribute('aria-label', video.muted ? 'Unmute' : 'Mute');
+    });
+  </script>
+
+</body>
+</html>
