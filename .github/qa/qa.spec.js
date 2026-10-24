@@ -85,6 +85,8 @@ test.describe('Pillar 2 — Mobile Responsiveness', () => {
   }
 
   test('Screenshot captures at all breakpoints (artifacts)', async ({ page }) => {
+    // Six full loads, each waiting out the streaming hero video before networkidle.
+    test.setTimeout(VIEWPORTS.length * 45000);
     const fs = require('fs');
     if (!fs.existsSync('qa-screenshots')) fs.mkdirSync('qa-screenshots', { recursive: true });
     for (const vp of VIEWPORTS) {
