@@ -2,7 +2,7 @@
   // Booking link is set here once, so every "Book a call" button follows it.
   var BOOKING_URL = '';
   if (BOOKING_URL) {
-    document.querySelectorAll('[data-booking], a[href="#book"]').forEach(function (a) {
+    document.querySelectorAll('[data-booking], a[href="#book"], a[href="/#book"]').forEach(function (a) {
       a.href = BOOKING_URL;
       a.target = '_blank';
       a.rel = 'noopener';
@@ -28,6 +28,53 @@
     toggle.addEventListener('click', function () {
       if (reel.paused) reel.play().catch(function () {}); else reel.pause();
     });
+  }
+
+  // Sample ads: load and play only while on screen; never autoplay under reduced motion; a manual pause sticks.
+  var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  document.querySelectorAll('[data-autoplay-video]').forEach(function (v) {
+    var btn = v.parentElement.querySelector('.reel-toggle');
+    var name = btn.getAttribute('aria-label').replace(/^(Play|Pause) /, '');
+    var userPaused = false;
+    var load = function () { if (!v.getAttribute('src')) v.src = v.dataset.src; };
+    var sync = function () {
+      btn.classList.toggle('paused', v.paused);
+      btn.setAttribute('aria-label', (v.paused ? 'Play ' : 'Pause ') + name);
+    };
+    v.addEventListener('play', sync);
+    v.addEventListener('pause', sync);
+    btn.addEventListener('click', function () {
+      load();
+      if (v.paused) { userPaused = false; v.play().catch(function () {}); } else { userPaused = true; v.pause(); }
+    });
+    if (!reduceMotion && 'IntersectionObserver' in window) {
+      new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          if (e.isIntersecting) { load(); if (!userPaused) v.play().catch(function () {}); } else { v.pause(); }
+        });
+      }, { threshold: 0.4 }).observe(v);
+    }
+  });
+
+  // Live ad demo: the Remotion bundle loads only as the visitor approaches the section.
+  var demo = document.getElementById('demo');
+  if (demo) {
+    var loadDemo = function () {
+      if (document.getElementById('adDemoScript')) return;
+      var s = document.createElement('script');
+      s.id = 'adDemoScript';
+      s.src = '/assets/ad-demo.js?v=5';
+      s.async = true;
+      document.body.appendChild(s);
+    };
+    if ('IntersectionObserver' in window) {
+      var demoObserver = new IntersectionObserver(function (entries) {
+        if (entries.some(function (e) { return e.isIntersecting; })) { loadDemo(); demoObserver.disconnect(); }
+      }, { rootMargin: '600px 0px' });
+      demoObserver.observe(demo);
+    } else {
+      loadDemo();
+    }
   }
 
   // Enquiry form: inline validation, then POST as JSON. Without JS the form posts normally.

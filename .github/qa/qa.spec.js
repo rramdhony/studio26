@@ -160,6 +160,45 @@ test.describe('Pillar 2 — Mobile Responsiveness', () => {
 });
 
 // ─────────────────────────────────────────────
+// OTHER PAGES — core checks from all three pillars
+// ─────────────────────────────────────────────
+for (const path of ['/ai-video', '/privacy']) {
+  test.describe(`Other pages — ${path}`, () => {
+
+    test('Zero console errors and 404s', async ({ page }) => {
+      const problems = [];
+      page.on('console', msg => { if (msg.type() === 'error') problems.push(msg.text()); });
+      page.on('pageerror', err => problems.push(err.message));
+      page.on('response', res => { if (res.status() === 404) problems.push(`404 ${res.url()}`); });
+      await page.goto(BASE_URL + path);
+      await page.waitForLoadState('networkidle');
+      expect(problems, problems.join('\n')).toEqual([]);
+    });
+
+    test('No horizontal scroll at 375px and 1440px', async ({ page }) => {
+      for (const width of [375, 1440]) {
+        await page.setViewportSize({ width, height: 900 });
+        await page.goto(BASE_URL + path);
+        await page.waitForLoadState('networkidle');
+        const overflow = await page.evaluate(() => document.documentElement.scrollWidth > document.documentElement.clientWidth);
+        expect(overflow, `Horizontal scroll at ${width}px`).toBe(false);
+      }
+    });
+
+    test('axe-core WCAG 2.1 AA, one <h1>, skip link', async ({ page }) => {
+      await page.goto(BASE_URL + path);
+      await page.waitForLoadState('networkidle');
+      const results = await new AxeBuilder({ page }).withTags(['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa']).analyze();
+      expect(results.violations.map(v => `${v.id}: ${v.nodes[0].html.slice(0, 100)}`)).toEqual([]);
+      expect(await page.$$eval('h1', els => els.length)).toBe(1);
+      await page.keyboard.press('Tab');
+      expect(await page.evaluate(() => document.activeElement?.getAttribute('href'))).toBe('#main-content');
+    });
+
+  });
+}
+
+// ─────────────────────────────────────────────
 // PILLAR 3 — WCAG 2.1 AA ACCESSIBILITY
 // ─────────────────────────────────────────────
 test.describe('Pillar 3 — WCAG 2.1 AA', () => {
