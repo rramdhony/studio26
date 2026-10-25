@@ -17,7 +17,7 @@ const NEEDS = { website: 'A website', video: 'An AI video ad', both: 'Both', uns
 const MAX = { name: 120, email: 200, company: 160, message: 4000 };
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const MAX_BODY_BYTES = 20_000;
-const PER_IP_PER_HOUR = 5;
+const DEFAULT_PER_IP_PER_HOUR = 5;
 
 function json(body, status = 200, extra = {}) {
   return new Response(JSON.stringify(body), {
@@ -75,18 +75,20 @@ async function handleEnquiry(request, env, ctx, url) {
   if (!(enquiry.need in NEEDS)) return fail('Please choose what you need.', 422);
   if (!enquiry.message || enquiry.message.length > MAX.message) return fail('Please tell us a little about the project.', 422);
 
+  // Without a salt the stored IP hashes are trivially reversible, so treat it as a configuration error.
+  if (!env.DB || !env.IP_SALT) return fail('Enquiries are temporarily unavailable. Please email hello@studio26.me.', 503);
+
   const ip = request.headers.get('CF-Connecting-IP') || '';
   if (!(await verifyTurnstile(field('cf-turnstile-response'), ip, env))) {
     return fail('We could not confirm you are a person. Please try again, or email hello@studio26.me.', 403);
   }
 
-  if (!env.DB) return fail('Enquiries are temporarily unavailable. Please email hello@studio26.me.', 503);
-
-  const ipHash = await hash(ip + (env.IP_SALT || ''));
+  const ipHash = await hash(ip + env.IP_SALT);
+  const limit = Number(env.ENQUIRY_LIMIT_PER_HOUR) || DEFAULT_PER_IP_PER_HOUR;
   const recent = await env.DB.prepare(
     "SELECT COUNT(*) AS n FROM enquiries WHERE ip_hash = ? AND created_at > datetime('now', '-1 hour')"
   ).bind(ipHash).first();
-  if (recent && recent.n >= PER_IP_PER_HOUR) return fail('You have sent several enquiries already. Please email hello@studio26.me.', 429);
+  if (recent && recent.n >= limit) return fail('You have sent several enquiries already. Please email hello@studio26.me.', 429);
 
   await env.DB.prepare(
     'INSERT INTO enquiries (name, email, company, need, message, ip_hash, user_agent) VALUES (?, ?, ?, ?, ?, ?, ?)'

@@ -7,6 +7,29 @@ const AxeBuilder = require('@axe-core/playwright').default;
 
 const BASE_URL = 'http://localhost:3000';
 
+// Bring a page to its final visual state: load every lazy image, then let CSS animations finish.
+async function settle(page, label) {
+  await page.evaluate(async () => {
+    const step = Math.max(200, Math.floor(window.innerHeight * 0.8));
+    for (let y = 0; y < document.documentElement.scrollHeight; y += step) {
+      window.scrollTo(0, y);
+      await new Promise(r => setTimeout(r, 120));
+    }
+    window.scrollTo(0, 0);
+  });
+  await page.waitForFunction(
+    () => Array.from(document.images).every(img => img.complete && img.naturalWidth > 0),
+    null, { timeout: 15000 }
+  ).catch(() => {});
+  const broken = await page.$$eval('img', imgs =>
+    imgs.filter(img => !(img.complete && img.naturalWidth > 0)).map(img => img.currentSrc || img.src));
+  expect(broken, `Images not loaded at ${label}:\n${broken.join('\n')}`).toEqual([]);
+  await page.waitForFunction(
+    () => document.getAnimations().every(a => a.playState !== 'running'),
+    null, { timeout: 10000 }
+  );
+}
+
 // ─────────────────────────────────────────────
 // PILLAR 1 — FUNCTIONAL QA
 // ─────────────────────────────────────────────
@@ -85,14 +108,15 @@ test.describe('Pillar 2 — Mobile Responsiveness', () => {
   }
 
   test('Screenshot captures at all breakpoints (artifacts)', async ({ page }) => {
-    // Six full loads, each waiting out the streaming hero video before networkidle.
-    test.setTimeout(VIEWPORTS.length * 45000);
+    // Six full loads, each waiting out the streaming hero video, lazy images and the opening animation.
+    test.setTimeout(VIEWPORTS.length * 60000);
     const fs = require('fs');
     if (!fs.existsSync('qa-screenshots')) fs.mkdirSync('qa-screenshots', { recursive: true });
     for (const vp of VIEWPORTS) {
       await page.setViewportSize({ width: vp.width, height: vp.height });
       await page.goto(BASE_URL);
       await page.waitForLoadState('networkidle');
+      await settle(page, vp.name);
       await page.screenshot({
         path: `qa-screenshots/${vp.name}.png`,
         fullPage: true,
@@ -100,39 +124,63 @@ test.describe('Pillar 2 — Mobile Responsiveness', () => {
     }
   });
 
-  test('Interactive elements meet 44x44px tap target at 375px', async ({ page }) => {
-    await page.setViewportSize({ width: 375, height: 812 });
-    await page.goto(BASE_URL);
-    await page.waitForLoadState('networkidle');
+  for (const path of ['/', '/ai-video']) {
+    test(`Interactive elements meet 44x44px tap target at 375px (${path})`, async ({ page }) => {
+      await page.setViewportSize({ width: 375, height: 812 });
+      await page.goto(BASE_URL + path);
+      await page.waitForLoadState('networkidle');
 
-    const violations = await page.evaluate(() => {
-      const selectors = 'a, button, input, select, textarea, [role="button"], [role="link"]';
-      return Array.from(document.querySelectorAll(selectors))
-        .filter(el => {
-          const rect = el.getBoundingClientRect();
-          if (rect.width === 0 && rect.height === 0) return false; // hidden
-          if (el.tagName === 'A' && el.closest('p, li, td, dd')) return false; // inline text link exemption
-          return rect.width < 44 || rect.height < 44;
-        })
-        .map(el => {
-          const rect = el.getBoundingClientRect();
-          return {
-            element: el.outerHTML.slice(0, 80),
-            w: Math.round(rect.width),
-            h: Math.round(rect.height),
-          };
-        });
+      const violations = await page.evaluate(() => {
+        const selectors = 'a, button, input, select, textarea, [role="button"], [role="link"]';
+        return Array.from(document.querySelectorAll(selectors))
+          .map(el => {
+            // Visually hidden inputs are operated through their label, so the label is the target.
+            const label = el.id ? document.querySelector(`label[for="${el.id}"]`) : null;
+            const r = el.getBoundingClientRect();
+            const invisible = getComputedStyle(el).opacity === '0' || r.width < 2 || r.height < 2;
+            const target = el.tagName === 'INPUT' && label && invisible ? label : el;
+            return { el, rect: target.getBoundingClientRect() };
+          })
+          .filter(({ el, rect }) => {
+            if (rect.width === 0 && rect.height === 0) return false; // hidden
+            if (el.closest('[aria-hidden="true"]') || el.getAttribute('tabindex') === '-1') return false; // not reachable
+            if (el.tagName === 'A') {
+              // Inline text link exemption: only when the link sits inside a longer run of text.
+              const block = el.closest('p, li, td, dd');
+              if (block && block.textContent.trim().length > el.textContent.trim().length) return false;
+            }
+            return rect.width < 44 || rect.height < 44;
+          })
+          .map(({ el, rect }) => `${Math.round(rect.width)}x${Math.round(rect.height)}px: ${el.outerHTML.slice(0, 80)}`);
+      });
+
+      expect(violations, `Tap targets below 44x44px:\n${violations.join('\n')}`).toEqual([]);
     });
+  }
 
-    if (violations.length > 0) {
-      console.warn(
-        `[Tap target] ${violations.length} element(s) below 44x44px:\n` +
-        violations.map(v => `  ${v.w}x${v.h}px — ${v.element}`).join('\n')
-      );
+  test('Hero reel pane stays within the reel safe crop (2:3 to 9:10) on desktop sizes', async ({ page }) => {
+    for (const [width, height] of [[1024, 768], [1024, 900], [1440, 900], [1920, 1080], [2560, 1080]]) {
+      await page.setViewportSize({ width, height });
+      await page.goto(BASE_URL);
+      const ratio = await page.$eval('.hero-reel', el => { const r = el.getBoundingClientRect(); return r.width / r.height; });
+      expect(ratio, `Reel pane ratio ${ratio.toFixed(2)} at ${width}x${height}`).toBeGreaterThanOrEqual(0.66);
+      expect(ratio, `Reel pane ratio ${ratio.toFixed(2)} at ${width}x${height}`).toBeLessThanOrEqual(0.9);
     }
-    // Hard-fail: uncomment the line below to block deploy on tap target violations
-    // expect(violations, 'Tap target violations').toEqual([]);
   });
+
+  for (const path of ['/', '/ai-video']) {
+    test(`Header items stay on one line at 1024, 1280 and 1440px (${path})`, async ({ page }) => {
+      for (const width of [1024, 1280, 1440]) {
+        await page.setViewportSize({ width, height: 900 });
+        await page.goto(BASE_URL + path);
+        const wrapped = await page.$$eval('.site-head a', els =>
+          els.filter(e => e.getBoundingClientRect().height > 52).map(e => e.textContent.trim()));
+        expect(wrapped, `Header items wrapping at ${width}px`).toEqual([]);
+        const overflow = await page.$eval('.site-head', h => h.scrollWidth > h.clientWidth + 1);
+        expect(overflow, `Header overflows its column at ${width}px`).toBe(false);
+      }
+    });
+  }
 
   test('No font size below 14px on mobile', async ({ page }) => {
     await page.setViewportSize({ width: 375, height: 812 });
@@ -157,6 +205,77 @@ test.describe('Pillar 2 — Mobile Responsiveness', () => {
     expect(violations, `Font sizes below 14px:\n${JSON.stringify(violations, null, 2)}`).toEqual([]);
   });
 
+});
+
+// ─────────────────────────────────────────────
+// ENQUIRY FORM — the paths that reach the Worker and D1
+// ─────────────────────────────────────────────
+test.describe('Enquiry form', () => {
+  const valid = { name: 'QA Test', email: 'qa@example.com', company: '', need: 'website', message: 'Automated QA enquiry.' };
+  const post = (request, data, headers = {}) =>
+    request.post(`${BASE_URL}/api/enquiry`, { headers: { Origin: BASE_URL, Accept: 'application/json', ...headers }, data });
+
+  test('Empty submit shows inline errors linked to their fields and focuses the first', async ({ page }) => {
+    await page.goto(`${BASE_URL}/#contact`);
+    await page.click('#enquiry button[type="submit"]');
+    await expect(page.locator('#formStatus')).toHaveText('Please check the highlighted fields.');
+    for (const id of ['f-name', 'f-email', 'f-message']) {
+      await expect(page.locator(`#${id}`)).toHaveAttribute('aria-invalid', 'true');
+      await expect(page.locator(`#${id}`)).toHaveAttribute('aria-describedby', `${id}-error`);
+      await expect(page.locator(`#${id}-error`)).toBeVisible();
+    }
+    await expect(page.locator('#f-name')).toBeFocused();
+  });
+
+  test('A valid enquiry passes Turnstile, is stored and confirmed', async ({ page }) => {
+    await page.goto(`${BASE_URL}/#contact`);
+    await page.fill('#f-name', valid.name);
+    await page.fill('#f-email', valid.email);
+    await page.fill('#f-message', valid.message);
+    await page.click('label[for="need-both"]');
+    await page.click('#enquiry button[type="submit"]');
+    await expect(page.locator('#formStatus')).toHaveText(/Thank you/, { timeout: 20000 });
+    await expect(page.locator('#f-name')).toHaveValue('');
+  });
+
+  test('API rejects a submission without a Turnstile token', async ({ request }) => {
+    const res = await post(request, valid);
+    expect(res.status()).toBe(403);
+    expect((await res.json()).error).toMatch(/confirm you are a person/);
+  });
+
+  test('API rejects cross-origin posts', async ({ request }) => {
+    const res = await post(request, valid, { Origin: 'https://evil.example' });
+    expect(res.status()).toBe(403);
+  });
+
+  test('API rejects an invalid email', async ({ request }) => {
+    const res = await post(request, { ...valid, email: 'not-an-email' });
+    expect(res.status()).toBe(422);
+  });
+
+  test('Honeypot submissions get a silent success', async ({ request }) => {
+    const res = await post(request, { ...valid, website: 'http://spam.example' });
+    expect(res.status()).toBe(200);
+    expect(await res.json()).toEqual({ ok: true });
+  });
+
+  test('Without JavaScript the form posts and gets a readable reply page', async ({ browser }) => {
+    const context = await browser.newContext({ javaScriptEnabled: false });
+    const page = await context.newPage();
+    await page.goto(`${BASE_URL}/#contact`);
+    await page.fill('#f-name', valid.name);
+    await page.fill('#f-email', valid.email);
+    await page.fill('#f-message', valid.message);
+    // Keyboard submit: with JavaScript disabled, Playwright's click stability check never resolves.
+    await page.locator('#enquiry button[type="submit"]').focus();
+    await page.keyboard.press('Enter');
+    // Turnstile needs JavaScript, so the honest reply is a clear refusal with a way back.
+    await expect(page.locator('h1')).toHaveText('Your enquiry was not sent');
+    await expect(page.getByText('email hello@studio26.me')).toBeVisible();
+    await expect(page.getByRole('link', { name: 'Back to studio26.me' })).toBeVisible();
+    await context.close();
+  });
 });
 
 // ─────────────────────────────────────────────

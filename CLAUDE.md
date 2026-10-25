@@ -32,6 +32,9 @@ Videos live on **Cloudflare R2** (`studio26-assets`, public base
 - `studio26-teaser.mp4` / `studio26-teaser-mobile.mp4` full 42.4s reels with piano (old teaser).
 Bump the `?v=` query in `assets/site.js` whenever an R2 file is replaced.
 
+Images under `public/` (work captures, posters) are cached for a year as immutable. Never
+replace an image in place: bump its `?v=` query in the HTML, or give it a new filename.
+
 ## Design rules
 
 - Paper `#FAFAF8`, ink `#0C0C0C`, blue `#1A4BFF`. Cormorant Garamond italic for display,

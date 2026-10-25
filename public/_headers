@@ -10,6 +10,7 @@
 /assets/*.js
   Cache-Control: public, max-age=0, must-revalidate
 
+# Images are cached for a year. Never replace one in place: bump its ?v= in the HTML (or rename it) so returning visitors fetch the new file.
 /assets/work/*
   Cache-Control: public, max-age=31536000, immutable
 
