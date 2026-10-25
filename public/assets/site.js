@@ -35,6 +35,31 @@
   if (!form) return;
   var status = document.getElementById('formStatus');
 
+  // Load Cloudflare Turnstile only once someone starts the form, so most visitors never fetch it.
+  var turnstileRequested = false;
+  function loadTurnstile() {
+    if (turnstileRequested) return;
+    turnstileRequested = true;
+    var s = document.createElement('script');
+    s.src = 'https://challenges.cloudflare.com/turnstile/v0/api.js';
+    s.async = true;
+    document.head.appendChild(s);
+  }
+  form.addEventListener('focusin', loadTurnstile);
+  form.addEventListener('pointerdown', loadTurnstile);
+
+  function turnstileToken(timeoutMs) {
+    return new Promise(function (resolve) {
+      var start = Date.now();
+      (function check() {
+        var input = form.querySelector('[name="cf-turnstile-response"]');
+        if (input && input.value) return resolve(input.value);
+        if (Date.now() - start > timeoutMs) return resolve('');
+        setTimeout(check, 200);
+      })();
+    });
+  }
+
   var messages = {
     name: 'Please tell us your name.',
     email: 'Please enter an email address we can reply to.',
@@ -87,14 +112,16 @@
     var button = form.querySelector('button[type="submit"]');
     button.disabled = true;
     status.textContent = 'Sending…';
+    loadTurnstile();
 
-    var data = {};
-    new FormData(form).forEach(function (value, key) { data[key] = value; });
-
-    fetch(form.action, {
+    turnstileToken(10000).then(function () {
+      var data = {};
+      new FormData(form).forEach(function (value, key) { data[key] = value; });
+      return fetch(form.action, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-      body: JSON.stringify(data),
+        body: JSON.stringify(data),
+      });
     })
       .then(function (res) { return res.json().catch(function () { return {}; }).then(function (body) { return { ok: res.ok, body: body }; }); })
       .then(function (r) {

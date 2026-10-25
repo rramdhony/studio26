@@ -5,3 +5,9 @@ compatibility_date = "2026-05-25"
 [assets]
 directory = "./public"
 binding = "ASSETS"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "studio26-db"
+database_id = "250ea13a-9a9d-4c04-816d-204b7b2eef9c"
+migrations_dir = "migrations"

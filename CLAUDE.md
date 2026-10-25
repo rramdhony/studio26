@@ -1,52 +1,49 @@
 # Studio26
 
-Pre-launch teaser page for studio26.me. Full-viewport autoplaying video with
-minimal branding overlay. Piano audio, user-unmutable via speaker toggle.
+Website for studio26.me, a boutique design studio in Mauritius selling distinctive
+websites and AI video ads. Hand-written HTML/CSS/JS; no framework, no build step.
 
 ## Deployment
 
-- **Type:** Cloudflare Pages (project name: `studio26`)
-- **Live URL:** https://studio26.me
-- **Pipeline:** push to `main` → GitHub Actions → `wrangler pages deploy` → live in ~60s
+- **Type:** Cloudflare Worker with static assets (`wrangler.toml`, Worker name `studio26-site`).
+  The `main` branch still runs the old Pages teaser until Phase 1 launches.
+- **Pipeline:** push to `main` → GitHub Actions → `npx wrangler deploy`. QA runs locally first.
+- **Live URL:** https://studio26.me (moves from the Pages project to the Worker at launch).
 
-## Architecture
+## Layout
 
-Single `index.html` file. No build step, no frameworks, no npm.
+- `public/` everything served to the browser: `index.html`, `privacy.html`, `assets/site.css`,
+  `assets/site.js`, `assets/work/*` (WebP + JPEG captures of client sites), `_headers`
+  (caching + security headers + CSP).
+- `src/index.js` Worker: serves `public/`, plus `POST /api/enquiry` (validation, same-origin
+  check, Turnstile, per-IP rate limit, D1 insert, optional email alert).
+- `migrations/` D1 schema for `studio26-db` (`enquiries` table).
+- `.dev.vars` local secrets (git-ignored): Turnstile test secret, IP salt.
 
-### Video
+Headers in `public/_headers` apply to static files only; set headers on `/api` responses in
+`src/index.js`.
 
-Videos are hosted on **Cloudflare R2** — not in this repo.
-- **Bucket:** `studio26-assets`
-- **Public base URL:** `https://pub-accaa99b083244a1a58f40dfa9cfaa9f.r2.dev/`
-- `studio26-teaser.mp4` — 16:9 landscape, served to desktop (≥ 768px)
-- `studio26-teaser-mobile.mp4` — 9:16 portrait, served to mobile (< 768px)
+## Media
 
-To swap a video: upload the new file to R2 via Wrangler or the Cloudflare dashboard.
-The HTML references R2 URLs directly — no code change needed if the filename stays the same.
+Videos live on **Cloudflare R2** (`studio26-assets`, public base
+`https://pub-accaa99b083244a1a58f40dfa9cfaa9f.r2.dev/`), never in this repo:
+- `studio26-hero.mp4` 1080×1350 silent 24s loop for the hero pane (rendered from the
+  `studio26-reel` Remotion project, composition `ShowreelPane`).
+- `studio26-teaser.mp4` / `studio26-teaser-mobile.mp4` full 42.4s reels with piano (old teaser).
+Bump the `?v=` query in `assets/site.js` whenever an R2 file is replaced.
 
-### Video switching
+## Design rules
 
-Inline JS at page load checks `window.matchMedia('(max-width: 767px)')` and sets
-the video `src` before buffering starts. No flicker, no framework needed.
+- Paper `#FAFAF8`, ink `#0C0C0C`, blue `#1A4BFF`. Cormorant Garamond italic for display,
+  Plus Jakarta Sans for text, DM Mono only for URLs.
+- One orchestrated motion moment (the hero opening); no scroll reveals on other sections.
+- Content is never hidden by default behind JavaScript.
+- Follow the Studio26 QA Standard: `npm run qa` must be green before pushing.
 
-### Key CSS rules
+## Before launch (still placeholders)
 
-- `object-fit: cover` on the video — fills the viewport at any aspect ratio
-- All font sizes and margins use `clamp()` — no separate breakpoints needed
-- Tagline is `left: 50%; transform: translateX(-50%)` on desktop, left-aligned
-  at `24px` on mobile (media query) to prevent right-edge clipping
-
-### Fonts
-
-- **Cormorant Garamond** (logo + tagline) — loaded from Google Fonts
-- **DM Mono** (footer) — loaded from Google Fonts
-
-### Animations
-
-CSS only. Logo fades in at 0.8s, tagline at 1.4s, footer + sound button at 2s.
-
-## What to avoid
-
-- Do not add the video files to this repo — they are large and live on R2
-- Do not add npm/node_modules — this is intentionally zero-dependency
-- Keep `index.html` under 10KB
+- Prices (`data-price` spans), founder photo, booking URL (`BOOKING_URL` in `assets/site.js`).
+- Production Turnstile sitekey in `index.html` and `TURNSTILE_SECRET` / `IP_SALT` as Worker secrets.
+- Email alerts need studio26.me onboarded to Cloudflare Email Service, then a `send_email`
+  binding named `NOTIFY` plus `NOTIFY_TO` / `NOTIFY_FROM` vars.
+- Apply the D1 migration remotely: `npx wrangler d1 migrations apply studio26-db --remote`.

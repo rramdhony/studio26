@@ -40,8 +40,8 @@
   <section class="hero" aria-labelledby="hero-title">
     <div class="hero-copy">
       <h1 class="hero-title" id="hero-title">
-        <span class="line"><span class="word" style="--i:0">Websites</span> <span class="word" style="--i:1">that</span> <span class="word" style="--i:2">look</span></span>
-        <span class="line"><span class="word" style="--i:3">like</span> <span class="word" style="--i:4">their</span> <span class="word" style="--i:5">owners.</span></span>
+        <span class="line"><span class="word w0">Websites</span> <span class="word w1">that</span> <span class="word w2">look</span></span>
+        <span class="line"><span class="word w3">like</span> <span class="word w4">their</span> <span class="word w5">owners.</span></span>
       </h1>
       <p class="hero-sub">Studio26 is a boutique design studio in Mauritius. We design and build distinctive websites, and the AI video ads that bring people to them.</p>
       <div class="hero-actions">
@@ -96,7 +96,7 @@
   <section class="work" id="work" aria-labelledby="work-title">
     <h2 class="section-title" id="work-title">Selected work</h2>
     <ul class="work-grid">
-      <li class="work-card" style="--bg:#0F1923;--fg:#FFFFFF">
+      <li class="work-card c-arizen">
         <a class="work-link" href="https://www.arizenafrica.com/" rel="noopener">
           <picture>
             <source type="image/webp" srcset="/assets/work/arizen-800.webp 800w, /assets/work/arizen-1400.webp 1400w" sizes="(min-width: 900px) 30vw, 100vw">
@@ -109,7 +109,7 @@
           </span>
         </a>
       </li>
-      <li class="work-card" style="--bg:#F7F0E3;--fg:#173C35">
+      <li class="work-card c-diaspora">
         <a class="work-link" href="https://mauritiusglobaldiaspora.com/" rel="noopener">
           <picture>
             <source type="image/webp" srcset="/assets/work/diaspora-800.webp 800w, /assets/work/diaspora-1400.webp 1400w" sizes="(min-width: 900px) 30vw, 100vw">
@@ -122,7 +122,7 @@
           </span>
         </a>
       </li>
-      <li class="work-card" style="--bg:#100C0D;--fg:#FFF9ED">
+      <li class="work-card c-mauradio">
         <a class="work-link" href="https://mauradio.com/" rel="noopener">
           <picture>
             <source type="image/webp" srcset="/assets/work/mauradio-800.webp 800w, /assets/work/mauradio-1400.webp 1400w" sizes="(min-width: 900px) 30vw, 100vw">
@@ -135,7 +135,7 @@
           </span>
         </a>
       </li>
-      <li class="work-card" style="--bg:#F4F5FB;--fg:#1B2559">
+      <li class="work-card c-aiunit">
         <a class="work-link" href="https://aim.govmu.org/aim/" rel="noopener">
           <picture>
             <source type="image/webp" srcset="/assets/work/aiunit-800.webp 800w, /assets/work/aiunit-1400.webp 1400w" sizes="(min-width: 900px) 30vw, 100vw">
@@ -148,7 +148,7 @@
           </span>
         </a>
       </li>
-      <li class="work-card" style="--bg:#0F1729;--fg:#FFFFFF">
+      <li class="work-card c-nextalent">
         <a class="work-link" href="https://nextalentafrica.com/" rel="noopener">
           <picture>
             <source type="image/webp" srcset="/assets/work/nextalent-800.webp 800w, /assets/work/nextalent-1400.webp 1400w" sizes="(min-width: 900px) 30vw, 100vw">
@@ -161,7 +161,7 @@
           </span>
         </a>
       </li>
-      <li class="work-card" style="--bg:#0E0D0A;--fg:#F3EDE2">
+      <li class="work-card c-awi">
         <a class="work-link" href="https://awipartners.africa/" rel="noopener">
           <picture>
             <source type="image/webp" srcset="/assets/work/awi-800.webp 800w, /assets/work/awi-1400.webp 1400w" sizes="(min-width: 900px) 30vw, 100vw">
@@ -236,15 +236,17 @@
       </div>
       <fieldset class="field choices">
         <legend>What do you need?</legend>
-        <label class="choice"><input type="radio" name="need" value="website" checked> A website</label>
-        <label class="choice"><input type="radio" name="need" value="video"> An AI video ad</label>
-        <label class="choice"><input type="radio" name="need" value="both"> Both</label>
-        <label class="choice"><input type="radio" name="need" value="unsure"> Not sure yet</label>
+        <input class="choice-input" type="radio" id="need-website" name="need" value="website" checked><label class="choice" for="need-website">A website</label>
+        <input class="choice-input" type="radio" id="need-video" name="need" value="video"><label class="choice" for="need-video">An AI video ad</label>
+        <input class="choice-input" type="radio" id="need-both" name="need" value="both"><label class="choice" for="need-both">Both</label>
+        <input class="choice-input" type="radio" id="need-unsure" name="need" value="unsure"><label class="choice" for="need-unsure">Not sure yet</label>
       </fieldset>
       <div class="field">
         <label for="f-message">About your project</label>
         <textarea id="f-message" name="message" rows="5" required maxlength="4000"></textarea>
       </div>
+      <!-- Turnstile test sitekey (always passes) until the production widget exists. -->
+      <div class="cf-turnstile" data-sitekey="1x00000000000000000000AA" data-theme="dark" data-appearance="interaction-only"></div>
       <div class="hp" aria-hidden="true">
         <label for="f-website">Leave this empty</label>
         <input id="f-website" name="website" type="text" tabindex="-1" autocomplete="off">
