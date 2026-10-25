@@ -35,6 +35,15 @@ Bump the `?v=` query in `assets/site.js` whenever an R2 file is replaced.
 Images under `public/` (work captures, posters) are cached for a year as immutable. Never
 replace an image in place: bump its `?v=` query in the HTML, or give it a new filename.
 
+The editable source for the `/ai-video` live preview and the rendered concept ads lives in the
+private `rramdhony/studio26-reel` repository, normally checked out beside this site repo.
+Edit `studio26-reel/src/ads/` and `studio26-reel/src/demo/entry.tsx`, then run
+`npm run build:demo` from that repository to regenerate `public/assets/ad-demo.js` here.
+Its build script also accepts `STUDIO26_SITE` when the site checkout is elsewhere. Commit the
+source and generated bundle together, and bump the `ad-demo.js?v=` URL in `public/assets/site.js`.
+Use `npm run render:ads` in the reel repository when the published sample videos change;
+those rendered MP4s are uploaded to R2 and are not stored in this repo.
+
 ## Design rules
 
 - Paper `#FAFAF8`, ink `#0C0C0C`, blue `#1A4BFF`. Cormorant Garamond italic for display,

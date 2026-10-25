@@ -279,6 +279,90 @@ test.describe('Enquiry form', () => {
 });
 
 // ─────────────────────────────────────────────
+// AI VIDEO PAGE — sample playback and the live demo
+// ─────────────────────────────────────────────
+test.describe('AI video page — samples and live demo', () => {
+  // Copy, numbers and motifs that belong to the invented concept brands, never to a visitor's ad.
+  const SAMPLE_COPY = /HOT\.|FLAKY|FOLDED|DHOLL|ROUGAILLE|RS 60|KESTREL|SMEs|MONTH-END|TWELVE ROOMS|LAGOON|FILAOS|FOURTH IS ON US|FIRST MONTH FREE|SLOW MORNINGS/i;
+
+  async function openDemo(page) {
+    await page.goto(`${BASE_URL}/ai-video`);
+    await page.locator('#demo').scrollIntoViewIfNeeded();
+    await page.waitForSelector('#demoPlayer .reel-toggle', { timeout: 20000 });
+  }
+
+  test('Samples start on their posters and only one plays at a time', async ({ page }) => {
+    await page.goto(`${BASE_URL}/ai-video`);
+    await page.locator('#samples').scrollIntoViewIfNeeded();
+    await page.waitForTimeout(800);
+    const playing = () => page.$$eval('[data-sample-video]', vs => vs.map(v => !v.paused));
+    expect(await playing()).toEqual([false, false, false]);
+    expect(await page.$$eval('[data-sample-video]', vs => vs.every(v => !v.getAttribute('src')))).toBe(true);
+    const buttons = page.locator('.phone .reel-toggle');
+    await buttons.nth(0).click();
+    await expect.poll(playing, { timeout: 15000 }).toEqual([true, false, false]);
+    await buttons.nth(1).click();
+    await expect.poll(playing, { timeout: 15000 }).toEqual([false, true, false]);
+    await expect(buttons.nth(1)).toHaveAttribute('aria-label', 'Pause Dholl Republik ad');
+    await expect(buttons.nth(0)).toHaveAttribute('aria-label', 'Play Maison Filaos ad');
+  });
+
+  test('The live demo uses only the visitor\'s words, in every style', async ({ page }) => {
+    test.setTimeout(90000);
+    await openDemo(page);
+    await page.fill('#d-name', 'Ruben Studio');
+    await page.fill('#d-about', 'Seafood in Grand Baie');
+    await page.fill('#d-offer', 'Free dessert on Fridays');
+    for (const look of ['elegant', 'bold', 'clean']) {
+      await page.click(`label[for="look-${look}"]`);
+      await expect(page.locator('#demoPlayer')).toHaveAttribute('data-look', look);
+      // Sample the rendered frame across a full 10-second loop.
+      const seen = new Set();
+      for (let i = 0; i < 27; i++) {
+        seen.add((await page.textContent('#demoPlayer')) || '');
+        await page.waitForTimeout(400);
+      }
+      const text = [...seen].join(' | ');
+      expect(text, `${look}: concept-brand copy appeared`).not.toMatch(SAMPLE_COPY);
+      for (const words of ['Ruben', 'Grand Baie', 'on Fridays']) {
+        expect(text, `${look}: "${words}" never appeared`).toContain(words);
+      }
+    }
+  });
+
+  test('Editing the offer jumps straight to the offer scene', async ({ page }) => {
+    await openDemo(page);
+    await page.fill('#d-offer', 'Two for one on Tuesdays');
+    await expect(page.locator('#demoPlayer')).toContainText('on Tuesdays', { timeout: 3000 });
+  });
+
+  test('Format choice changes the preview shape and is announced', async ({ page }) => {
+    await openDemo(page);
+    for (const [fmt, ratio, label] of [['wide', 16 / 9, 'widescreen'], ['feed', 4 / 5, 'feed'], ['vertical', 9 / 16, 'vertical']]) {
+      await page.click(`label[for="fmt-${fmt}"]`);
+      await expect(page.locator('#demoPlayer')).toHaveAttribute('data-format', fmt);
+      const r = await page.$eval('#demoPlayer', el => el.getBoundingClientRect().width / el.getBoundingClientRect().height);
+      expect(Math.abs(r - ratio), `${fmt} preview ratio ${r.toFixed(2)}`).toBeLessThan(0.03);
+      await expect(page.locator('#demoStatus')).toContainText(`${label} cut`);
+    }
+  });
+
+  test('Reduced motion: nothing autoplays and the preview control tells the truth', async ({ browser }) => {
+    const context = await browser.newContext({ reducedMotion: 'reduce' });
+    const page = await context.newPage();
+    await openDemo(page);
+    const toggle = page.locator('#demoPlayer .reel-toggle');
+    await expect(toggle).toHaveAttribute('aria-label', 'Play preview');
+    await toggle.click();
+    await expect(toggle).toHaveAttribute('aria-label', 'Pause preview');
+    await toggle.click();
+    await expect(toggle).toHaveAttribute('aria-label', 'Play preview');
+    expect(await page.$$eval('[data-sample-video]', vs => vs.every(v => v.paused))).toBe(true);
+    await context.close();
+  });
+});
+
+// ─────────────────────────────────────────────
 // OTHER PAGES — core checks from all three pillars
 // ─────────────────────────────────────────────
 for (const path of ['/ai-video', '/privacy']) {

@@ -30,29 +30,30 @@
     });
   }
 
-  // Sample ads: load and play only while on screen; never autoplay under reduced motion; a manual pause sticks.
-  var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  document.querySelectorAll('[data-autoplay-video]').forEach(function (v) {
+  // Sample ads start on their posters; the visitor plays one at a time, and it pauses off screen.
+  var samples = Array.prototype.slice.call(document.querySelectorAll('[data-sample-video]'));
+  samples.forEach(function (v) {
     var btn = v.parentElement.querySelector('.reel-toggle');
     var name = btn.getAttribute('aria-label').replace(/^(Play|Pause) /, '');
-    var userPaused = false;
-    var load = function () { if (!v.getAttribute('src')) v.src = v.dataset.src; };
     var sync = function () {
       btn.classList.toggle('paused', v.paused);
       btn.setAttribute('aria-label', (v.paused ? 'Play ' : 'Pause ') + name);
     };
-    v.addEventListener('play', sync);
-    v.addEventListener('pause', sync);
-    btn.addEventListener('click', function () {
-      load();
-      if (v.paused) { userPaused = false; v.play().catch(function () {}); } else { userPaused = true; v.pause(); }
+    var toggle = function () {
+      if (!v.getAttribute('src')) v.src = v.dataset.src;
+      if (v.paused) v.play().catch(function () {}); else v.pause();
+    };
+    v.addEventListener('play', function () {
+      samples.forEach(function (other) { if (other !== v && !other.paused) other.pause(); });
+      sync();
     });
-    if (!reduceMotion && 'IntersectionObserver' in window) {
+    v.addEventListener('pause', sync);
+    btn.addEventListener('click', toggle);
+    v.addEventListener('click', toggle);
+    if ('IntersectionObserver' in window) {
       new IntersectionObserver(function (entries) {
-        entries.forEach(function (e) {
-          if (e.isIntersecting) { load(); if (!userPaused) v.play().catch(function () {}); } else { v.pause(); }
-        });
-      }, { threshold: 0.4 }).observe(v);
+        entries.forEach(function (e) { if (!e.isIntersecting && !v.paused) v.pause(); });
+      }, { threshold: 0.2 }).observe(v);
     }
   });
 
@@ -63,7 +64,7 @@
       if (document.getElementById('adDemoScript')) return;
       var s = document.createElement('script');
       s.id = 'adDemoScript';
-      s.src = '/assets/ad-demo.js?v=5';
+      s.src = '/assets/ad-demo.js?v=6';
       s.async = true;
       document.body.appendChild(s);
     };

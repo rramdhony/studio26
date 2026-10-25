@@ -49,7 +49,7 @@
     <ul class="sample-grid">
       <li class="sample">
         <div class="phone">
-          <video data-autoplay-video muted loop playsinline preload="none" poster="/assets/ads/hotel-poster.webp?v=1" data-src="https://pub-accaa99b083244a1a58f40dfa9cfaa9f.r2.dev/ads/ad-hotel-vertical.mp4?v=1" aria-describedby="sample-hotel"></video>
+          <video data-sample-video muted loop playsinline preload="none" poster="/assets/ads/hotel-poster.webp?v=1" data-src="https://pub-accaa99b083244a1a58f40dfa9cfaa9f.r2.dev/ads/ad-hotel-vertical.mp4?v=1" aria-describedby="sample-hotel"></video>
           <button class="reel-toggle paused" type="button" aria-label="Play Maison Filaos ad">
             <svg class="i-pause" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><rect x="6" y="5" width="4" height="14"/><rect x="14" y="5" width="4" height="14"/></svg>
             <svg class="i-play" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><polygon points="7 4 20 12 7 20 7 4"/></svg>
@@ -60,7 +60,7 @@
       </li>
       <li class="sample">
         <div class="phone">
-          <video data-autoplay-video muted loop playsinline preload="none" poster="/assets/ads/street-poster.webp?v=1" data-src="https://pub-accaa99b083244a1a58f40dfa9cfaa9f.r2.dev/ads/ad-street-vertical.mp4?v=1" aria-describedby="sample-street"></video>
+          <video data-sample-video muted loop playsinline preload="none" poster="/assets/ads/street-poster.webp?v=1" data-src="https://pub-accaa99b083244a1a58f40dfa9cfaa9f.r2.dev/ads/ad-street-vertical.mp4?v=1" aria-describedby="sample-street"></video>
           <button class="reel-toggle paused" type="button" aria-label="Play Dholl Republik ad">
             <svg class="i-pause" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><rect x="6" y="5" width="4" height="14"/><rect x="14" y="5" width="4" height="14"/></svg>
             <svg class="i-play" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><polygon points="7 4 20 12 7 20 7 4"/></svg>
@@ -71,7 +71,7 @@
       </li>
       <li class="sample">
         <div class="phone">
-          <video data-autoplay-video muted loop playsinline preload="none" poster="/assets/ads/firm-poster.webp?v=1" data-src="https://pub-accaa99b083244a1a58f40dfa9cfaa9f.r2.dev/ads/ad-firm-vertical.mp4?v=1" aria-describedby="sample-firm"></video>
+          <video data-sample-video muted loop playsinline preload="none" poster="/assets/ads/firm-poster.webp?v=1" data-src="https://pub-accaa99b083244a1a58f40dfa9cfaa9f.r2.dev/ads/ad-firm-vertical.mp4?v=1" aria-describedby="sample-firm"></video>
           <button class="reel-toggle paused" type="button" aria-label="Play Kestrel Books ad">
             <svg class="i-pause" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><rect x="6" y="5" width="4" height="14"/><rect x="14" y="5" width="4" height="14"/></svg>
             <svg class="i-play" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><polygon points="7 4 20 12 7 20 7 4"/></svg>
@@ -85,22 +85,26 @@
 
   <section class="demo" id="demo" aria-labelledby="demo-title">
     <div class="demo-copy">
-      <h2 class="section-title" id="demo-title">Make it yours</h2>
-      <p>Every ad is built from a template, so one idea becomes as many versions as you need. Try it: change the name, the offer or the look, and the ad rebuilds.</p>
-      <form class="demo-controls" id="demoControls">
+      <h2 class="section-title" id="demo-title">Try it with your business</h2>
+      <p>Type your business, what you do and your offer, then pick a style. The preview below is rebuilt around your words as you type. The three styles come from the sample ads above; your own ad would get a look made for you.</p>
+      <div class="demo-controls" id="demoControls" role="group" aria-labelledby="demo-title">
         <div class="field">
           <label for="d-name">Business name</label>
-          <input id="d-name" name="name" type="text" maxlength="28" value="Maison Filaos" autocomplete="off">
+          <input id="d-name" name="name" type="text" maxlength="28" value="Studio26" autocomplete="off">
+        </div>
+        <div class="field">
+          <label for="d-about">What you do</label>
+          <input id="d-about" name="about" type="text" maxlength="40" value="Websites and AI video ads" autocomplete="off">
         </div>
         <div class="field">
           <label for="d-offer">Your offer</label>
-          <input id="d-offer" name="offer" type="text" maxlength="40" value="The fourth night is on us." autocomplete="off">
+          <input id="d-offer" name="offer" type="text" maxlength="40" value="Free 30-minute discovery call" autocomplete="off">
         </div>
         <fieldset class="field choices">
-          <legend>Look</legend>
-          <input class="choice-input" type="radio" id="look-elegant" name="look" value="hotel" checked><label class="choice" for="look-elegant">Elegant</label>
-          <input class="choice-input" type="radio" id="look-bold" name="look" value="street"><label class="choice" for="look-bold">Bold</label>
-          <input class="choice-input" type="radio" id="look-clean" name="look" value="firm"><label class="choice" for="look-clean">Clean</label>
+          <legend>Style</legend>
+          <input class="choice-input" type="radio" id="look-elegant" name="look" value="elegant" checked><label class="choice" for="look-elegant">Elegant</label>
+          <input class="choice-input" type="radio" id="look-bold" name="look" value="bold"><label class="choice" for="look-bold">Bold</label>
+          <input class="choice-input" type="radio" id="look-clean" name="look" value="clean"><label class="choice" for="look-clean">Clean</label>
         </fieldset>
         <fieldset class="field choices">
           <legend>Format</legend>
@@ -108,8 +112,7 @@
           <input class="choice-input" type="radio" id="fmt-feed" name="format" value="feed"><label class="choice" for="fmt-feed">Feed 4:5</label>
           <input class="choice-input" type="radio" id="fmt-wide" name="format" value="wide"><label class="choice" for="fmt-wide">Wide 16:9</label>
         </fieldset>
-        <button class="btn btn-ink demo-submit" type="submit">Update preview</button>
-      </form>
+      </div>
     </div>
     <div class="demo-stage">
       <div class="demo-player" id="demoPlayer" aria-label="Live ad preview" role="group">
