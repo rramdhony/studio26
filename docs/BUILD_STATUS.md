@@ -67,3 +67,15 @@ Final local Lighthouse: performance95, accessibility100, bestpractices100, SEO10
 Opus verification: PASS for bounded colour/type implementation. LCP target remains open, explicitly not launch/performance sign-off. Initial review: docs/reviews/section-05-opus-review.md. No push/deploy. Preview http://127.0.0.1:3000/.
 
 Review follow-ups: prototype studies must be excluded or archived before any filesystem-based deployment; no deployment is authorised now. The complete-wordmark img uses the exact single URL in the preload and has no srcset, so duplicate srcset fetching does not apply. Reduced-motion control is hidden by JS and CSS and tested; the desktop reserved empty row is an optional spacing refinement.
+
+## Preview publication — 31 October 2026
+
+Ruben requested replacing the workers.dev preview while leaving production alone. Published website commit2bd5bde from phase-1-site directly to existing Worker studio26-site. Cloudflare VersionID a1bd84e9-088d-49bb-ace9-49021b58972a. Preview: https://studio26-site.ruben-ramdhony.workers.dev/.
+
+Main was not merged or changed (remote main remains ca57ee40c135ca3c0b7a60a0a800632b3511dc63). Production studio26.me remains on Pages project studio26 and still serves the teaser. API preflight confirmed no studio26-site custom domains and no Worker routes on studio26.me. No DNS/domain/route migration, remote database writes/migrations, secrets changes or production deployment.
+
+Pre-push npm run qa:58passed2.7minutes. Wrangler dry-run passed. Published an exact git-archive snapshot under ../tooling/deployments/preview-2bd5bde, so untracked public/studies/colour was excluded. Remote study URL returns404. Remote homepage, canonical CSS, Syne font, AWI-map thumbnail, motion script, /ai-video and /privacy return200. Remote CSS byte-matches the committed snapshot (working-copy CRLF differs only by line endings).
+
+Production HTML matches unchanged main after decoding Cloudflare's per-request email-obfuscation markup; raw response hashes naturally vary because encoded email keys change on each request. Evidence: ../tooling/reports/preview-deploy-preflight.json, preview-deploy-previous-version.json and preview-deploy-verified.json. Prior preview version for rollback: aa136d5b-b5a4-41b3-9357-e0d62c31408a.
+
+The new AI-video rethink branch remains separate and was not merged. Existing launch follow-ups/LCP2.9s remain open; this publication is a preview milestone, not production sign-off.
