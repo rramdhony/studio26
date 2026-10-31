@@ -727,3 +727,36 @@ test.describe('Section 02 — selected work', () => {
     await context.close();
   });
 });
+
+test.describe('Section 03 — services', () => {
+  test('Service scope stays legible at every required width', async ({ page }) => {
+    await page.emulateMedia({ reducedMotion: 'reduce' });
+    for (const width of [375, 390, 430, 768, 1024, 1440]) {
+      await page.setViewportSize({ width, height: 900 });
+      await page.goto('/');
+      const services = page.locator('#services .service');
+      await expect(services).toHaveCount(2);
+      for (const service of await services.all()) {
+        await expect(service.locator('h3')).toBeVisible();
+        for (const element of await service.locator('h3, p, li').all()) {
+          const box = await element.boundingBox();
+          expect(box.x).toBeGreaterThanOrEqual(0);
+          expect(box.x + box.width).toBeLessThanOrEqual(width);
+          expect(await element.evaluate(el => el.scrollWidth <= el.clientWidth + 1)).toBe(true);
+        }
+        if (width <= 640) {
+          const title = await service.locator('h3').boundingBox();
+          const lede = await service.locator('.service-lede').boundingBox();
+          expect(lede.y).toBeGreaterThanOrEqual(title.y + title.height);
+        }
+      }
+      await expect(page.locator('#services [data-price="website"]')).toHaveText('[price]');
+      await expect(page.locator('#services [data-price="video"]')).toHaveText('[price]');
+      await expect(page.locator('#services .service-more a')).toHaveAttribute('href', '/ai-video');
+      if (width === 1440 || width === 390) {
+        await page.evaluate(() => window.scrollTo(0, document.getElementById('services').offsetTop));
+        await page.screenshot({ path: `qa-screenshots/section-03-${width}.png` });
+      }
+    }
+  });
+});
