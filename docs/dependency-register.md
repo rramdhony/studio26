@@ -34,7 +34,7 @@ Last updated: 31 Oct 2026 (Claude, from package.json and public/assets).
 |---|---|---|---|
 | studio26-complete-v1.webp (1536x1024) | brand-kit v1 [TO CONFIRM origin: AI-generated or rendered] | [TO CONFIRM] | Soft on retina desktop; a 2880 px master is needed |
 | sculpture-26-v1.webp (1536x1024) | brand-kit v1 [TO CONFIRM] | [TO CONFIRM] | Second frame of the opening; skipped under reduced motion |
-| Work thumbnails (arizen, diaspora, mauradio, aiunit, nextalent, awi) | screenshots of the live sites | [TO CONFIRM client permission] | See claims items in docs/CLAUDE_SESSION_2026-10-31.md |
+| Work thumbnails (arizen, diaspora, mauradio, aiunit, nextalent, awi) | screenshots of the live sites | [TO CONFIRM client permission] | Add an Apricus thumbnail when it joins Selected work |
 
 ## Reference only (must not ship)
 

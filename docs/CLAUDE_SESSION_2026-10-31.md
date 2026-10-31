@@ -42,15 +42,8 @@ to Ruben's laptop) while Codex was paused for its usage reset.
 
 ## Needs Ruben's decision (do not change without it)
 
-- Claims in Selected work and the founder paragraph:
-  - "AI Unit, Government of Mauritius" (aim.govmu.org) is listed as Studio26
-    work. It was built in Ruben's MITCI role. The plan forbids implying
-    government endorsement; confirm wording or remove.
-  - AWI Partners is listed as a client. Confirm it is a real commissioned
-    client and not a practice build.
-  - Apricus Co Ltd (apricus-mu.com, carries a "Site by Studio26" credit) is a
-    paying client but is not in Selected work.
-  - "From [price]" placeholders remain on both service cards.
+- Selected work: add Apricus Co Ltd (apricus-mu.com, carries a "Site by Studio26" credit). Approved by Ruben. Existing entries stay as they are.
+- "From [price]" placeholders remain on both service cards.
 - Palette: chrome/cobalt replaces the plan's vermilion. Confirm, then update
   the plan's colour tokens.
 - Wordmark case: "studio26" vs "STUDIO26".
