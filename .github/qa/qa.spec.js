@@ -731,9 +731,13 @@ test.describe('Section 02 — selected work', () => {
 test.describe('Section 03 — services', () => {
   test('Service scope stays legible at every required width', async ({ page }) => {
     await page.emulateMedia({ reducedMotion: 'reduce' });
-    for (const width of [375, 390, 430, 768, 1024, 1440]) {
+    for (const width of [375, 390, 430, 641, 700, 768, 1024, 1440]) {
       await page.setViewportSize({ width, height: 900 });
       await page.goto('/');
+      expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
+      const heading = await page.locator('#services h2').boundingBox();
+      expect(heading.x).toBeGreaterThanOrEqual(0);
+      expect(heading.x + heading.width).toBeLessThanOrEqual(width);
       const services = page.locator('#services .service');
       await expect(services).toHaveCount(2);
       for (const service of await services.all()) {
