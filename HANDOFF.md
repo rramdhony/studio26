@@ -4,6 +4,8 @@ Written 2026-10-25 when Codex took over from Claude Code. Branch: `phase-1-site`
 Preview: https://studio26-site.ruben-ramdhony.workers.dev (Worker `studio26-site`).
 studio26.me still serves the old teaser from `main`.
 
+> **Latest (31 Oct 2026, Claude):** read `docs/CLAUDE_SESSION_2026-10-31.md` first. Reviews now follow `REVIEW.md`. Plan of record: `..\Studio26_Brand_Design_and_Launch_Plan.docx` (v1.1 with Addendum A).
+
 ## Ground rules (decided by Ruben)
 
 - Nothing goes to `main` until Phases 1, 3 and 2 are all built and tested on `phase-1-site`.
