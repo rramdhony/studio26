@@ -48,3 +48,6 @@ Codex skills frontend-design and web-design-guidelines; MCP servers 21st,
 context7 (4.4.4, installed in ..\tooling), blender (MCP for Blender 2.2.6),
 plus earlier Docker, fileclaw, filesystem, node_repl and notebooklm. Not part of
 the website build; listed so their use stays visible.
+### AWI screenshot refresh, 31 October 2026
+
+AWI thumbnail refreshed at Ruben's request with the Africa map fully rendered. Captured from https://awipartners.africa/ at 1440x900 using the browser; excluded the right scrollbar and retained the complete map. New files: awi-map-v2-800.webp, awi-map-v2-1400.webp, awi-map-v2-1400.jpg. Native 8:5 output; previous v1 assets preserved. No other project images changed.
