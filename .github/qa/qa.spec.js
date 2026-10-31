@@ -764,3 +764,27 @@ test.describe('Section 03 — services', () => {
     }
   });
 });
+
+test('Section 04 — four process steps preserve order and readable content', async ({ page }) => {
+  await page.emulateMedia({ reducedMotion: 'reduce' });
+  for (const width of [375, 390, 430, 768, 1024, 1440]) {
+    await page.setViewportSize({ width, height: 900 });
+    await page.goto('/');
+    const steps = page.locator('.process ol > li');
+    await expect(steps.locator('h3')).toHaveText(['Discovery call', 'Direction', 'Build', 'Launch']);
+    for (let i = 0; i < 4; i++) {
+      const box = await steps.nth(i).boundingBox();
+      expect(box.x).toBeGreaterThanOrEqual(0);
+      expect(box.x + box.width).toBeLessThanOrEqual(width);
+      expect(await steps.nth(i).evaluate(el => el.scrollWidth <= el.clientWidth + 1)).toBe(true);
+      if (i > 0) {
+        const prev = await steps.nth(i - 1).boundingBox();
+        expect(box.y > prev.y || (box.y === prev.y && box.x > prev.x)).toBe(true);
+      }
+    }
+    if (width === 1440 || width === 390) {
+      await page.evaluate(() => window.scrollTo(0, document.querySelector('.process').offsetTop));
+      await page.screenshot({ path: `qa-screenshots/section-04-${width}.png` });
+    }
+  }
+});
