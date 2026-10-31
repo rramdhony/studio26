@@ -1,5 +1,5 @@
 # Studio26 build status
-Current approved direction: Ruben selected colour study B (cobalt + warm light). Main homepage uses Syne display type and Instrument Sans body/navigation/forms, peach opening, deep cobalt services, peach/periwinkle process and midnight enquiry. Earlier section notes below describe the implementation history. Ruben explicitly chose to retain the current opening timing after seeing the 2.9s LCP result; the 2.5s target remains open. This is not a full-site QA/launch sign-off.
+Current approved direction: Ruben selected softened study B. Instrument Sans500 is the main headline font and remains body/navigation/form type; Syne remains the other display type. Peach opening, soft periwinkle/lavender/peach services, muted-blue accents, warm process gradient and softened navy enquiry. Earlier section notes below describe the implementation history. Ruben explicitly chose to retain the current opening timing after seeing the 2.9s LCP result; the 2.5s target remains open. This is not a full-site QA/launch sign-off.
 
 ## Section 01 cinematic opening
 
@@ -79,3 +79,11 @@ Pre-push npm run qa:58passed2.7minutes. Wrangler dry-run passed. Published an ex
 Production HTML matches unchanged main after decoding Cloudflare's per-request email-obfuscation markup; raw response hashes naturally vary because encoded email keys change on each request. Evidence: ../tooling/reports/preview-deploy-preflight.json, preview-deploy-previous-version.json and preview-deploy-verified.json. Prior preview version for rollback: aa136d5b-b5a4-41b3-9357-e0d62c31408a.
 
 The new AI-video rethink branch remains separate and was not merged. Existing launch follow-ups/LCP2.9s remain open; this publication is a preview milestone, not production sign-off.
+
+## Section 06 softened palette and rounded main headline
+
+Ruben approved the actual b-soft study and requested replacing cobalt with this shade. Applied5b6cc21, service-link hover contrast guardb715657. UI accent#475c89, CTAhover/focus#303f5d. Servicegradient#b8c8f3/#d5d4ed/#f0d9d0, text#253047, secondary#414b60. Process#f6cbb0/#ecd8d5/#dedcec. Enquiry#273449. Mainh1 InstrumentSans500,lineheight1.06 for a rounded descender; other Syne headings retained as in approvedstudy. Approved artwork unchanged. No newassets/fonts/requests/packages,copy,JS,motion,backend,headers or AI-video changes.
+
+Initial and verification Opus5.5 reviews:PASS. Full58checks passed2.8minutes; post-hover focused4checks passed (mobiletaptargets,axe,servicebreakpointchecks). HTML validation passed. Existing InstrumentSansvariableface400-700 covers500. Globalblue uses reviewed; contact/radio/field/footer focuspaper overrides retained, servicehovertext explicitlydeepnavy so it remains legible across gradient. Key text contrast>=5.25:1, whiteCTA6.65:1, focusring>=3.98:1. No fullmanualQAorproduction sign-off. LCP target remains open; original reveal timing retained per Ruben.
+
+Publish only existing workers.dev preview from a committed snapshot excluding untrackedstudies. Main/studio26.me remain untouched. Deployment record to follow after live verification.
