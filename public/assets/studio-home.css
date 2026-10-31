@@ -104,3 +104,82 @@
 }
 
 
+/* Section 02: all six projects, alternating large and supporting panels.
+   Homepage scope keeps the parallel AI-video work independent. */
+.studio-home .work {
+  max-width: 1600px;
+  margin-inline: auto;
+  padding: clamp(64px, 7vw, 112px) var(--px) clamp(80px, 9vw, 144px);
+}
+.studio-home .work .section-title {
+  margin-bottom: clamp(32px, 4vw, 64px);
+  font-family: var(--sans);
+  font-size: clamp(40px, 5.4vw, 80px);
+  font-weight: 500;
+  font-style: normal;
+  line-height: 1.05;
+  letter-spacing: -0.06em;
+}
+.studio-home .work-grid {
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  column-gap: clamp(24px, 4vw, 64px);
+  row-gap: clamp(64px, 7vw, 112px);
+  align-items: start;
+}
+.studio-home .work-card { min-width: 0; grid-column: span 7; }
+.studio-home .work-card:nth-child(4n + 2),
+.studio-home .work-card:nth-child(4n + 3) { grid-column: span 5; }
+.studio-home .work-card:nth-child(even) { margin-top: clamp(64px, 9vw, 144px); }
+.studio-home .work-link {
+  height: auto;
+  background: transparent;
+  color: var(--ink);
+  border-radius: 0;
+}
+.studio-home .work-link picture {
+  display: block;
+  overflow: hidden;
+  padding: clamp(12px, 2.2vw, 32px);
+  background: var(--bg);
+}
+.studio-home .work-link img {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 8 / 5;
+  object-fit: contain;
+  object-position: center;
+}
+.studio-home .work-caption { flex: none; padding: 20px 0 0; gap: 8px; }
+.studio-home .work-name {
+  font-family: var(--sans);
+  font-weight: 500;
+  font-size: clamp(25px, 2.6vw, 40px);
+  line-height: 1.1;
+  letter-spacing: -0.045em;
+}
+.studio-home .work-desc { font-size: 16px; line-height: 1.5; opacity: 1; color: var(--mid); }
+.studio-home .work-url {
+  margin-top: 4px;
+  font-family: var(--sans);
+  font-size: 14px;
+  line-height: 1.5;
+  opacity: 1;
+  color: var(--mid);
+  overflow-wrap: anywhere;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+.studio-home .work-link:hover .work-name,
+.studio-home .work-link:focus-visible .work-name { color: var(--blue); }
+@media (max-width: 900px) {
+  .studio-home .work-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .studio-home .work-card:nth-child(n) { grid-column: auto; }
+  .studio-home .work-card:nth-child(even) { margin-top: 64px; }
+}
+@media (max-width: 640px) {
+  .studio-home .work-grid { grid-template-columns: minmax(0, 1fr); row-gap: 48px; }
+  .studio-home .work-card:nth-child(n) { margin-top: 0; }
+  .studio-home .work-link picture { padding: 16px; }
+  .studio-home .work-caption { padding-top: 16px; gap: 6px; }
+  .studio-home .work-name { font-size: 30px; }
+}

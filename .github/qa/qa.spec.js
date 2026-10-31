@@ -649,3 +649,68 @@ test.describe('Opening review regressions', () => {
     await expect(page.locator('#opening')).toHaveAttribute('data-intro-state', 'running');
   });
 });
+
+test.describe('Section 02 — selected work', () => {
+  test('Six projects stay framed and in reading order at every required breakpoint', async ({ page }) => {
+    await page.emulateMedia({ reducedMotion: 'reduce' });
+    for (const width of [375, 390, 430, 768, 1024, 1440]) {
+      await page.setViewportSize({ width, height: 900 });
+      await page.goto('/');
+      const cards = page.locator('#work .work-card');
+      await expect(cards).toHaveCount(6);
+      for (let i = 0; i < 6; i++) {
+        const card = cards.nth(i);
+        await card.scrollIntoViewIfNeeded();
+        const img = card.locator('img');
+        await expect(img).toHaveJSProperty('complete', true);
+        expect(await img.evaluate(el => el.naturalWidth)).toBeGreaterThan(0);
+        const bounds = await card.boundingBox();
+        expect(bounds.x).toBeGreaterThanOrEqual(-1);
+        expect(bounds.x + bounds.width).toBeLessThanOrEqual(width + 1);
+        const frame = await img.boundingBox();
+        expect(Math.abs(frame.width / frame.height - 1.6)).toBeLessThan(0.01);
+        if (i > 0) {
+          const previous = await cards.nth(i - 1).boundingBox();
+          expect(bounds.y).toBeGreaterThan(previous.y);
+          if (width <= 640) expect(bounds.y).toBeGreaterThan(previous.y + previous.height);
+        }
+      }
+      expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBeLessThanOrEqual(width);
+      await page.locator('#work').scrollIntoViewIfNeeded();
+      if (width === 1440 || width === 390) {
+        await page.screenshot({ path: `qa-screenshots/section-02-${width}.png` });
+      }
+    }
+  });
+
+  test('Every project link works with keyboard focus and has a visible focus indicator', async ({ page }) => {
+    await page.goto('/');
+    const links = page.locator('#work .work-link');
+    for (let i = 0; i < 6; i++) {
+      const link = links.nth(i);
+      await link.focus();
+      await expect(link).toBeFocused();
+      expect(await link.getAttribute('href')).toMatch(/^https:\/\//);
+      const box = await link.boundingBox();
+      expect(box.width).toBeGreaterThanOrEqual(44);
+      expect(box.height).toBeGreaterThanOrEqual(44);
+      const outline = await link.evaluate(el => getComputedStyle(el).outlineStyle);
+      expect(outline).not.toBe('none');
+      await page.keyboard.press('Tab');
+      if (i < 5) await expect(links.nth(i + 1)).toBeFocused();
+    }
+  });
+
+  test('All six project routes and images remain available without JavaScript', async ({ browser }) => {
+    const context = await browser.newContext({ javaScriptEnabled: false, viewport: { width: 390, height: 844 } });
+    const page = await context.newPage();
+    await page.goto(BASE_URL);
+    await expect(page.locator('#work .work-link')).toHaveCount(6);
+    for (const link of await page.locator('#work .work-link').all()) {
+      await link.scrollIntoViewIfNeeded();
+      await expect(link).toBeVisible();
+      await expect(link.locator('.work-name')).not.toHaveText('');
+    }
+    await context.close();
+  });
+});
