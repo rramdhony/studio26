@@ -365,6 +365,7 @@
 .studio-home .service-list,
 .studio-home .service-price { color: #414b60; }
 .studio-home .services :focus-visible { outline-color: #475c89; }
+.studio-home .services .btn-link:hover { color: #303f5d; }
 .studio-home .work { padding-top: 96px; padding-bottom: 96px; }
 .studio-home .work-name { font-family: var(--display); font-weight: 600; letter-spacing: -0.025em; }
 .studio-home .process {
