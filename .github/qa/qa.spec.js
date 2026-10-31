@@ -158,13 +158,22 @@ test.describe('Pillar 2 — Mobile Responsiveness', () => {
     });
   }
 
-  test('Hero reel pane stays within the reel safe crop (2:3 to 9:10) on desktop sizes', async ({ page }) => {
-    for (const [width, height] of [[1024, 768], [1024, 900], [1440, 900], [1920, 1080], [2560, 1080]]) {
+  test('Opening artwork remains fully framed at desktop sizes', async ({ page }) => {
+    for (const [width, height] of [[1024, 768], [1440, 900], [1800, 1000], [1920, 1080], [2560, 1080]]) {
       await page.setViewportSize({ width, height });
+      await page.emulateMedia({ reducedMotion: 'reduce' });
       await page.goto(BASE_URL);
-      const ratio = await page.$eval('.hero-reel', el => { const r = el.getBoundingClientRect(); return r.width / r.height; });
-      expect(ratio, `Reel pane ratio ${ratio.toFixed(2)} at ${width}x${height}`).toBeGreaterThanOrEqual(0.66);
-      expect(ratio, `Reel pane ratio ${ratio.toFixed(2)} at ${width}x${height}`).toBeLessThanOrEqual(0.9);
+      const art = page.locator('#introComplete');
+      await expect(art).toBeVisible();
+      const frame = await page.locator('.opening-stage').boundingBox();
+      const image = await art.boundingBox();
+      expect(image.width / image.height).toBeCloseTo(1.5, 1);
+      expect(frame.width, `Artwork frame overflows at ${width}px`).toBeLessThanOrEqual(width + 1);
+      expect(frame.x).toBeGreaterThanOrEqual(-1);
+      expect(frame.x + frame.width).toBeLessThanOrEqual(width + 1);
+      // The complete lettering occupies the central horizontal band of the approved master.
+      expect(frame.height / image.height).toBeGreaterThan(0.45);
+      if (width === 1440) await page.screenshot({ path: 'qa-screenshots/opening-desktop.png' });
     }
   });
 
@@ -543,4 +552,98 @@ test.describe('Pillar 3 — WCAG 2.1 AA', () => {
     }
   });
 
+});
+
+test.describe('Cinematic opening', () => {
+  test('Can pause, resume and replay without hiding the offer', async ({ page }) => {
+    await page.goto(BASE_URL);
+    const section = page.locator('#opening');
+    const button = page.locator('#introToggle');
+    await expect(button).toBeVisible();
+    if (await section.getAttribute('data-intro-state') === 'complete') await button.click();
+    await expect(section).toHaveAttribute('data-intro-state', 'running');
+    await button.click();
+    await expect(section).toHaveAttribute('data-intro-state', 'paused');
+    await expect(page.locator('#hero-title')).toBeVisible();
+    await expect(page.getByRole('link', { name: 'Start a project', exact: true }).first()).toBeVisible();
+    await button.click();
+    await expect(section).toHaveAttribute('data-intro-state', 'running');
+    await expect(button).toHaveText(/Replay opening/, { timeout: 7000 });
+    await button.click();
+    await expect(section).toHaveAttribute('data-intro-state', 'running');
+  });
+  test('Reduced motion displays the completed mark without loading the opening frame', async ({ page }) => {
+    await page.emulateMedia({ reducedMotion: 'reduce' });
+    const openings = [];
+    page.on('request', r => { if (r.url().includes('sculpture-26-v1')) openings.push(r.url()); });
+    await page.goto(BASE_URL);
+    await expect(page.locator('#introComplete')).toBeVisible();
+    await expect(page.locator('#introToggle')).toBeHidden();
+    await expect(page.locator('#opening')).toHaveAttribute('data-intro-state', 'complete');
+    expect(openings).toEqual([]);
+  });
+  test('Without JavaScript the completed mark, offer and enquiry route remain available', async ({ browser }) => {
+    const context = await browser.newContext({ javaScriptEnabled: false });
+    const page = await context.newPage();
+    await page.goto(BASE_URL);
+    await expect(page.locator('#introComplete')).toBeVisible();
+    await expect(page.locator('#hero-title')).toBeVisible();
+    await expect(page.locator('#introToggle')).toBeHidden();
+    await expect(page.locator('.opening-project')).toHaveAttribute('href', '#contact');
+    await context.close();
+  });
+  test('Loss of the animation library leaves a complete, usable opening', async ({ page }) => {
+    await page.route('**/vendor/gsap-*.min.js', route => route.abort());
+    await page.goto(BASE_URL);
+    await expect(page.locator('#introComplete')).toBeVisible();
+    await expect(page.locator('#hero-title')).toBeVisible();
+    await expect(page.locator('#introToggle')).toBeHidden();
+  });
+});
+
+
+test.describe('Opening review regressions', () => {
+  test('A slow opening-image response never replaces settled artwork automatically', async ({ page }) => {
+    await page.route('**/brand/sculpture-26-v1.webp', async route => {
+      await new Promise(resolve => setTimeout(resolve, 1700));
+      await route.continue();
+    });
+    await page.goto(BASE_URL);
+    await expect(page.locator('#opening')).toHaveAttribute('data-intro-state', 'complete');
+    await expect(page.locator('#introComplete')).toBeVisible();
+    await expect(page.locator('#introToggle')).toHaveText(/Replay opening/);
+  });
+  test('An unavailable opening frame leaves the completed mark and no unusable control', async ({ page }) => {
+    await page.route('**/brand/sculpture-26-v1.webp', route => route.abort());
+    await page.goto(BASE_URL);
+    await expect(page.locator('#opening')).toHaveAttribute('data-intro-state', 'complete');
+    await expect(page.locator('#introComplete')).toBeVisible();
+    await expect(page.locator('#introToggle')).toBeHidden();
+  });
+  test('Motion preference changes keep focus and require an explicit replay', async ({ page }) => {
+    await page.goto(BASE_URL);
+    const control = page.locator('#introToggle');
+    await expect(control).toBeVisible();
+    await control.focus();
+    await page.emulateMedia({ reducedMotion: 'reduce' });
+    await expect(control).toBeHidden();
+    await expect(page.locator('.opening-project')).toBeFocused();
+    await page.emulateMedia({ reducedMotion: 'no-preference' });
+    await expect(control).toHaveText(/Replay opening/);
+    await expect(page.locator('#opening')).toHaveAttribute('data-intro-state', 'complete');
+  });
+  test('Replay works when the control is visible near the bottom of the opening', async ({ page }) => {
+    await page.setViewportSize({ width: 390, height: 500 });
+    await page.goto(BASE_URL);
+    const control = page.locator('#introToggle');
+    await expect(control).toBeVisible();
+    await control.scrollIntoViewIfNeeded();
+    await expect(control).toHaveText(/Replay opening/, { timeout: 6000 });
+    await control.click();
+    await expect(page.locator('#opening')).toHaveAttribute('data-intro-state', 'running');
+    await control.click();
+    await expect(page.locator('#opening')).toHaveAttribute('data-intro-state', 'paused');
+    await control.click();
+    await expect(page.locator('#opening')).toHaveAttribute('data-intro-state', 'running');
+  });
 });

@@ -13,16 +13,16 @@
   <meta property="og:type" content="website">
   <meta property="og:image" content="https://studio26.me/assets/og.jpg">
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;1,300&family=DM+Mono:wght@400&family=Plus+Jakarta+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="preload" href="/assets/fonts/instrument-sans-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="/assets/site.css">
+  <link rel="stylesheet" href="/assets/studio-home.css">
+  <link rel="preload" href="/assets/brand/sculpture-26-v1.webp" as="image" media="(prefers-reduced-motion: no-preference)">
 </head>
-<body>
+<body class="studio-home">
 
 <a class="skip-link" href="#main-content">Skip to main content</a>
 
-<header class="site-head">
+<header class="site-head site-head-full">
   <a class="wordmark" href="/" aria-label="Studio26 home">studio26</a>
   <nav aria-label="Main navigation">
     <ul class="nav-list">
@@ -32,32 +32,27 @@
       <li><a href="#contact">Contact</a></li>
     </ul>
   </nav>
-  <a class="btn btn-ink nav-cta" href="#book">Book a call</a>
+  <a class="btn btn-ink nav-cta" href="#contact">Start a project</a>
 </header>
 
 <main id="main-content">
 
-  <section class="hero" aria-labelledby="hero-title">
-    <div class="hero-copy">
-      <h1 class="hero-title" id="hero-title">
-        <span class="line"><span class="word w0">Websites</span> <span class="word w1">that</span> <span class="word w2">look</span></span>
-        <span class="line"><span class="word w3">like</span> <span class="word w4">their</span> <span class="word w5">owners.</span></span>
-      </h1>
-      <p class="hero-sub">Studio26 is a boutique design studio in Mauritius. We design and build distinctive websites, and the AI video ads that bring people to them.</p>
-      <div class="hero-actions">
-        <a class="btn btn-ink" href="#book">Book a free discovery call</a>
-        <a class="btn-link" href="#work">See the work</a>
-      </div>
+  <section class="opening" id="opening" aria-labelledby="hero-title" data-intro-state="static">
+    <div class="opening-topline"><p>Independent design &amp; motion studio</p><p>Mauritius. Working everywhere.</p></div>
+    <div class="opening-heading">
+      <h1 id="hero-title">A presence<br>worth feeling.</h1>
+      <p>Websites with character.<br>Films with a point of view.</p>
     </div>
-
-    <div class="hero-reel">
-      <video id="heroReel" muted loop playsinline preload="metadata" poster="/assets/reel-poster.webp?v=1" aria-describedby="reel-desc"></video>
-      <p class="visually-hidden" id="reel-desc">A looping reel of six websites Studio26 has built, each shown in its client's own colours and typefaces.</p>
-      <button class="reel-toggle" id="reelToggle" type="button" aria-label="Pause reel">
-        <svg class="i-pause" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><rect x="6" y="5" width="4" height="14"/><rect x="14" y="5" width="4" height="14"/></svg>
-        <svg class="i-play" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><polygon points="7 4 20 12 7 20 7 4"/></svg>
-      </button>
+    <div class="opening-stage" role="img" aria-label="The Studio26 wordmark sculpted in brushed chrome and cobalt blue">
+      <img class="opening-mark" id="introComplete" src="/assets/brand/studio26-complete-v1.webp" width="1536" height="1024" alt="" role="presentation" fetchpriority="high">
+      <img class="opening-sculpture" id="introSculpture" src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" width="1536" height="1024" alt="" role="presentation" hidden data-src="/assets/brand/sculpture-26-v1.webp">
     </div>
+    <div class="opening-bottom">
+      <p class="opening-summary">We shape the way your business<br>looks, moves and meets the world.</p>
+      <div class="opening-actions"><a class="opening-project" href="#contact">Start a project<span aria-hidden="true">↗</span></a><a class="opening-work" href="#work">Explore the work<span aria-hidden="true">↓</span></a></div>
+      <button class="opening-control" id="introToggle" type="button" hidden><span class="control-glyph" aria-hidden="true">Ⅱ</span><span data-control-label>Pause opening</span></button>
+    </div>
+    <p class="visually-hidden" id="introStatus" role="status" aria-live="polite"></p>
   </section>
 
   <section class="intro" aria-label="Our approach">
@@ -269,5 +264,7 @@
 </footer>
 
 <script src="/assets/site.js" defer></script>
+<script src="/assets/vendor/gsap-3.15.0.min.js" defer></script>
+<script src="/assets/studio-intro.js" defer></script>
 </body>
 </html>

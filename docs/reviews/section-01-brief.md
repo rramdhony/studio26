@@ -1,0 +1,7 @@
+# Section 01 review brief
+
+Scope: original homepage opening only. The remaining homepage sections and existing backend are unchanged. Review the supplied markup, stylesheet and script. The parent page loads base CSS first, then studio-home.css, then site.js, local GSAP 3.15.0 and studio-intro.js as deferred classic scripts. Body has class studio-home. Header is a static flex layout with four navigation links and a project CTA. Base CSS provides border-box, image max-width, focus-visible, skip link, visually-hidden and the Instrument Sans fallback.
+
+Approved direction: brushed chrome/cobalt sculpture on warm neutral, from supplied two image masters. Finite GSAP reveal, not true 3D. Content and completed artwork visible without JS, GSAP or opening-image decode. No autoplay audio, no scrolling takeover. Pause/resume/replay, reduced motion, offscreen/tab suspension and keyboard support are requirements. Native image master ratio 1536x1024. The sculpture occupies its centre band; composed frame intentionally crops background only. Instrument Sans WOFF2 is local, font-src self is allowed.
+
+Check concrete bugs, race conditions, motion preference handling, image loading, responsive overflow, focus and screen-reader behaviour. Report severity, file and line, impact and minimal fix. Distinguish blockers from optional taste. No claims about unprovided site sections. Limit to 700 words. If no blockers, say so explicitly. Do not edit files.
