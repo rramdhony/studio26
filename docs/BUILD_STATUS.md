@@ -34,3 +34,19 @@ Opus 5.5 initial review: PASS, bounded to section 02. Final verification: PASS. 
 The earlier homepage LCP2.8s is still above the 2.5s target; no new performance measurement is claimed for this section. No production QA sign-off, push, merge or deployment.
 
 Local preview: http://127.0.0.1:3000/#work. The independent AI-video worktree needs a separate preview port while this server runs.
+
+## Section 03 services
+
+User asked to leave video generation/film transition aside and continue other homepage areas. Service layout updated with existing two services, all text, sample-ad destination and [price] placeholders preserved. Homepage-scoped CSS only; AI-video page/worktree untouched.
+
+Open rows replace the old serif service styling: Instrument Sans titles, left service name and right scope on desktop, compact semantic feature lists, stacked mobile content. No new animation, assets, JavaScript, dependencies or network requests. Implementation commit4d23f98.
+
+Seven focused checks passed: services at375/390/430/768/1024/1440, section02 regressions including focus and no-JS, page axe WCAG2.1AA and mobile tap targets. HTML and JSsyntax/diff checks passed. Screenshots visually checked at390 and1440. Opus5.5 review: PASS. Intermediate-width641/700, heading bounds and whole-page overflow checks added after review; no service implementation changes. Full manual launch checklist remains open; existing price placeholders and homepageLCP2.8s are not resolved by this layout work.
+
+## Section 04 process
+
+Existing four-step process aligned with the homepage typography, with original steps and copy unchanged. Implementation c30e62d. Static four-column desktop, two-column tablet and single-column mobile; local Instrument Sans numerals/headings, body16px with max34ch, existing semantic ordered list. No motion, JavaScript, assets, requests, backend or other-page changes.
+
+Opus5.5: PASS, bounded to the committed section diff, report docs/reviews/section-04-opus-review.md. Optional test nits: direct heading overflow assertion and tolerance for comparing subpixel row positions; existing full-page responsive tests cover actual page overflow. Desktop/mobile live visual checks completed. Final full regression:58 passed in2.6minutes, including enhanced services widths641/700 and process reading-order checks. HTML validation passed. No claim of manual multi-browser/assistive-technology sign-off.
+
+Film transition intentionally deferred while Ruben generates footage in Flow. AI-video worktree and user Flow tab untouched. Next homepage areas are the approach/studio/contact presentation; copy, founder assets, commercial choices and broader layout decisions remain subject to Ruben's direction. Known launch follow-ups remain: price placeholders, final portrait, booking/production settings, responsive work image hint and homepageLCP2.8s.
