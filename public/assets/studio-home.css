@@ -9,7 +9,7 @@
 .studio-home {
   --paper: #e8e6e2;
   --ink: #171a1c;
-  --blue: #173fc5;
+  --blue: #475c89;
   --mid: #505459;
   --rule: #c8c8c3;
   --sans: 'Instrument Sans', Arial, sans-serif;
@@ -314,7 +314,7 @@
   .studio-home .step::before { font-size: 40px; margin-bottom: 16px; }
   .studio-home .step-name { margin-bottom: 12px; }
 }
-/* Ruben selected study B: cobalt and warm reflected light. Homepage only. */
+/* Ruben selected softened study B: peach/periwinkle, muted blue, rounded main headline. */
 @font-face {
   font-family: 'Syne';
   src: url('/assets/fonts/syne-latin.woff2') format('woff2');
@@ -326,15 +326,16 @@
 .studio-home .opening { background: linear-gradient(135deg, #f6cbb0 0%, #f0d9d0 24%, #e8e6e2 58%); }
 .studio-home .opening-heading { display: grid; grid-template-columns: minmax(0, 1fr) 240px; gap: 32px; }
 .studio-home .opening-heading h1 {
-  font-family: var(--display);
-  font-weight: 600;
-  letter-spacing: -0.045em;
+  font-family: 'Instrument Sans', Arial, sans-serif;
+  font-weight: 500;
+  letter-spacing: -0.05em;
   font-size: clamp(62px, 7.1vw, 110px);
-  line-height: 1.02;
+  line-height: 1.06;
 }
 .studio-home .opening-heading > p { font-size: 22px; line-height: 1.3; }
-.studio-home .opening-project { background: #173fc5; }
-.studio-home .opening-project:hover { background: #101632; }
+.studio-home .opening-project { background: #475c89; }
+.studio-home .opening-project:hover,
+.studio-home .opening-project:focus-visible { background: #303f5d; }
 .studio-home .opening-stage { margin-top: 0; }
 .studio-home .intro-text {
   font-family: var(--display);
@@ -347,8 +348,8 @@
 .studio-home .services {
   max-width: none;
   padding: 72px var(--px);
-  background: linear-gradient(120deg, #101632, #173fc5 65%, #3158d6);
-  color: #fff;
+  background: linear-gradient(115deg, #b8c8f3 0%, #d5d4ed 52%, #f0d9d0 100%);
+  color: #253047;
 }
 .studio-home .services .section-title,
 .studio-home .service-name,
@@ -360,21 +361,21 @@
   letter-spacing: -0.035em;
   font-weight: 600;
 }
-.studio-home .service { border-color: #a8b8ff; }
+.studio-home .service { border-color: #72788b; }
 .studio-home .service-list,
-.studio-home .service-price { color: #edf0ff; }
-.studio-home .services :focus-visible { outline-color: #fff; }
+.studio-home .service-price { color: #414b60; }
+.studio-home .services :focus-visible { outline-color: #475c89; }
 .studio-home .work { padding-top: 96px; padding-bottom: 96px; }
 .studio-home .work-name { font-family: var(--display); font-weight: 600; letter-spacing: -0.025em; }
 .studio-home .process {
   max-width: none;
-  background: linear-gradient(115deg, #f6cbb0, #e8d2de 55%, #b8c8f3);
-  color: #101632;
+  background: linear-gradient(115deg, #f6cbb0 0%, #ecd8d5 55%, #dedcec 100%);
+  color: #253047;
 }
-.studio-home .step p { color: #30384b; }
-.studio-home .step::before { color: #173fc5; font-family: var(--display); }
+.studio-home .step p { color: #414b60; }
+.studio-home .step::before { color: #475c89; font-family: var(--display); }
 .studio-home .step { border-top-color: #72788b; }
-.studio-home .contact { background: #101632; }
+.studio-home .contact { background: #273449; }
 .studio-home .contact-title {
   font-family: var(--display);
   font-style: normal;
@@ -390,7 +391,7 @@
 }
 @media (max-width: 640px) {
   .studio-home .opening-heading { display: block; margin-top: 24px; }
-  .studio-home .opening-heading h1 { font-size: clamp(42px, 10.9vw, 66px); letter-spacing: -0.035em; }
+  .studio-home .opening-heading h1 { font-size: clamp(42px, 10.9vw, 66px); letter-spacing: -0.05em; }
   .studio-home .opening-heading > p { font-size: 20px; margin-top: 20px; }
   .studio-home .services { padding-top: 56px; padding-bottom: 32px; }
   .studio-home .work { padding-top: 64px; padding-bottom: 64px; }

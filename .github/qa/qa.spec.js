@@ -707,7 +707,7 @@ test.describe('Section 02 — selected work', () => {
         return { width: parseFloat(style.outlineWidth), color: style.outlineColor, clipping };
       });
       expect(ring.width).toBeGreaterThanOrEqual(2);
-      expect(ring.color).toBe('rgb(23, 63, 197)');
+      expect(ring.color).toBe('rgb(71, 92, 137)');
       expect(ring.clipping).toEqual([]);
       await page.keyboard.press('Tab');
       if (i < 5) await expect(links.nth(i + 1)).toBeFocused();
