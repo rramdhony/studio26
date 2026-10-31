@@ -686,9 +686,10 @@ test.describe('Section 02 — selected work', () => {
   test('Every project link works with keyboard focus and has a visible focus indicator', async ({ page }) => {
     await page.goto('/');
     const links = page.locator('#work .work-link');
+    await page.locator('#services .service-more a').focus();
+    await page.keyboard.press('Tab');
     for (let i = 0; i < 6; i++) {
       const link = links.nth(i);
-      await link.focus();
       await expect(link).toBeFocused();
       expect(await link.getAttribute('href')).toMatch(/^https:\/\//);
       const box = await link.boundingBox();
@@ -696,6 +697,18 @@ test.describe('Section 02 — selected work', () => {
       expect(box.height).toBeGreaterThanOrEqual(44);
       const outline = await link.evaluate(el => getComputedStyle(el).outlineStyle);
       expect(outline).not.toBe('none');
+      const ring = await link.evaluate(el => {
+        const style = getComputedStyle(el);
+        const clipping = [];
+        for (let parent = el.parentElement; parent; parent = parent.parentElement) {
+          const parentStyle = getComputedStyle(parent);
+          if ([parentStyle.overflowX, parentStyle.overflowY].some(value => ['hidden', 'clip', 'scroll', 'auto'].includes(value))) clipping.push(parent.tagName);
+        }
+        return { width: parseFloat(style.outlineWidth), color: style.outlineColor, clipping };
+      });
+      expect(ring.width).toBeGreaterThanOrEqual(2);
+      expect(ring.color).toBe('rgb(23, 63, 197)');
+      expect(ring.clipping).toEqual([]);
       await page.keyboard.press('Tab');
       if (i < 5) await expect(links.nth(i + 1)).toBeFocused();
     }
