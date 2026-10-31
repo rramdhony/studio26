@@ -51,3 +51,7 @@ the website build; listed so their use stays visible.
 ### AWI screenshot refresh, 31 October 2026
 
 AWI thumbnail refreshed at Ruben's request with the Africa map fully rendered. Captured from https://awipartners.africa/ at 1440x900 using the browser; excluded the right scrollbar and retained the complete map. New files: awi-map-v2-800.webp, awi-map-v2-1400.webp, awi-map-v2-1400.jpg. Native 8:5 output; previous v1 assets preserved. No other project images changed.
+
+### Selected warm-light identity, 31 October 2026
+
+Ruben selected colour study B. Homepage display headings now use Syne (variable, Latin, weights400-800 declared;500/600 used), self-hosted at public/assets/fonts/syne-latin.woff2. Source: Google Fonts, https://fonts.gstatic.com/s/syne/v24/8vIH7w4qzmVxm2BL9A.woff2. SIL OFL1.1 copyright/license included as Syne-OFL.txt, obtained from google/fonts/ofl/syne/OFL.txt. Instrument Sans remains body/navigation/form type. Study files remain under public/studies/colour for comparison only. No new package dependency.
