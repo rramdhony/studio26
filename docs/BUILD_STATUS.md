@@ -1,4 +1,5 @@
 # Studio26 build status
+Current approved direction: Ruben selected colour study B (cobalt + warm light). Main homepage uses Syne display type and Instrument Sans body/navigation/forms, peach opening, deep cobalt services, peach/periwinkle process and midnight enquiry. Earlier section notes below describe the implementation history. Ruben explicitly chose to retain the current opening timing after seeing the 2.9s LCP result; the 2.5s target remains open. This is not a full-site QA/launch sign-off.
 
 ## Section 01 cinematic opening
 
@@ -50,3 +51,19 @@ Existing four-step process aligned with the homepage typography, with original s
 Opus5.5: PASS, bounded to the committed section diff, report docs/reviews/section-04-opus-review.md. Optional test nits: direct heading overflow assertion and tolerance for comparing subpixel row positions; existing full-page responsive tests cover actual page overflow. Desktop/mobile live visual checks completed. Final full regression:58 passed in2.6minutes, including enhanced services widths641/700 and process reading-order checks. HTML validation passed. No claim of manual multi-browser/assistive-technology sign-off.
 
 Film transition intentionally deferred while Ruben generates footage in Flow. AI-video worktree and user Flow tab untouched. Next homepage areas are the approach/studio/contact presentation; copy, founder assets, commercial choices and broader layout decisions remain subject to Ruben's direction. Known launch follow-ups remain: price placeholders, final portrait, booking/production settings, responsive work image hint and homepageLCP2.8s.
+
+## Section 05 selected warm-light identity
+
+Approved choice: study B. Implementation f74b13b, performance/layout consolidation a8ea45c. All changes homepage-only: stylesheet/font references in head, canonical studio-home.css, licensed local Syne WOFF2 and dependency register. No new JS, changed claims/copy, Worker/backend, AI-video page/worktree or deployment.
+
+Local Syne500/600 display; Instrument Sans reading text. Gradient endpoints: opening#f6cbb0/#f0d9d0/#e8e6e2, services#101632/#173fc5/#3158d6, process#f6cbb0/#e8d2de/#b8c8f3, enquiry#101632. Key contrast calculations: servicewhite>=6.00:1, secondary>=5.29:1, hero secondary>=5.12:1, processbody>=7.02:1, processnumbers>=4.93:1. Services computed colours/focus rules confirmed in browser.
+
+First Opus review requested new performance evidence. Reserved replay-control space prevents the summary shifting when the button appears. Warm styles consolidated into existing sheet, removing an extra blocking request; complete artwork preload first, optional second frame fetched through existing enhancement code. Reveal timing/JS unchanged. Prototype studies retain noindex/nofollow and the previous base stylesheet snapshot, so the comparison remains available locally.
+
+Validation: full58checks passed3.3minutes; after consolidation/control-space fix,18focused regressions passed50.7seconds (motion/fallback/reducedmotion, project framing/order/focus, services at641/700 and required widths, process, axe, tap targets, empty/successful enquiries). HTML validation passed. Desktop services and mobile opening visually checked. Manual Safari/Firefox/assistive-technology checklist remains open.
+
+Final local Lighthouse: performance95, accessibility100, bestpractices100, SEO100; FCP0.9s, LCP2.9s, CLS0, TBT0ms, transfer471KiB. Report: ../tooling/reports/section-05-lighthouse.json. Lab snapshots, not field INP/production data. Original identity baseline had LCP2.8s, CLS0.003. The 2.5s LCP target remains open. Ruben answered 'Keep the current timing' when offered a shorter reveal; no broad performance/QA waiver is inferred.
+
+Opus verification: PASS for bounded colour/type implementation. LCP target remains open, explicitly not launch/performance sign-off. Initial review: docs/reviews/section-05-opus-review.md. No push/deploy. Preview http://127.0.0.1:3000/.
+
+Review follow-ups: prototype studies must be excluded or archived before any filesystem-based deployment; no deployment is authorised now. The complete-wordmark img uses the exact single URL in the preload and has no srcset, so duplicate srcset fetching does not apply. Reduced-motion control is hidden by JS and CSS and tested; the desktop reserved empty row is an optional spacing refinement.
