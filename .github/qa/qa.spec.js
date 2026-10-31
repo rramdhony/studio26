@@ -10,6 +10,8 @@ const BASE_URL = 'http://localhost:3000';
 // Bring a page to its final visual state: load every lazy image, then let CSS animations finish.
 async function settle(page, label) {
   await page.evaluate(async () => {
+    // Force lazy images to load so a fast scroll cannot leave one deferred.
+    document.querySelectorAll('img[loading="lazy"]').forEach(img => { img.loading = 'eager'; });
     const step = Math.max(200, Math.floor(window.innerHeight * 0.8));
     for (let y = 0; y < document.documentElement.scrollHeight; y += step) {
       window.scrollTo(0, y);

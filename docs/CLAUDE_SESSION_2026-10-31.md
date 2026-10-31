@@ -56,3 +56,26 @@ to Ruben's laptop) while Codex was paused for its usage reset.
 - One section per commit; review the committed diff via REVIEW.md.
 - No push or deployment without Ruben's explicit go-ahead.
 - Studio26 standards stay in C:\Users\ruben\.claude (not duplicated here).
+## Update, 31 Oct evening: hero fixes done by Claude
+
+The four hero items above are fixed (Ruben approved Claude doing them):
+
+1. H1 now reads "A presence worth feeling." (space kept at the line break).
+2. Mobile (700 px and below): meta row shows only "Independent design &
+   motion studio"; the location line is hidden on mobile.
+3. Intro paragraph: the line break is kept on desktop and hidden on mobile,
+   so words wrap naturally.
+4. Mobile hero tightened (heading margin 38 to 24 px, subline margin 24 to
+   16 px, stage aspect ratio 1.65 to 2). "Start a project" is now above the
+   fold at 375x667, 390x844 and 430x932.
+
+QA harness: the breakpoint screenshot test was flaky (a lazy founder image
+sometimes not loaded at 375 px). settle() in .github/qa/qa.spec.js now
+switches lazy images to eager before scrolling. Repeated runs pass.
+
+Results: full suite 53 passed; html-validate clean; no horizontal scroll and
+zero console errors at 375, 390, 430, 768 and 1440 px.
+
+Still open: the 2880 px hero master and the two optional hardening items.
+Observation, not changed: at 1440x900 the hero CTAs sit just below the fold
+(CTA bottom at about 973 px); this was already the case before these fixes.
