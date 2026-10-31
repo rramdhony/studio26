@@ -5,6 +5,8 @@ Preview: https://studio26-site.ruben-ramdhony.workers.dev (Worker `studio26-site
 studio26.me still serves the old teaser from `main`.
 
 > **Latest (31 Oct 2026, Claude):** read `docs/CLAUDE_SESSION_2026-10-31.md` first. Reviews now follow `REVIEW.md`. Plan of record: `..\Studio26_Brand_Design_and_Launch_Plan.docx` (v1.1 with Addendum A).
+>
+> **Parallel work (Claude):** the AI video page rebuild runs on branch `ai-video-rethink` in a separate worktree, `..\site-ai-video`. Codex: stay on `phase-1-site` in this folder and leave `public/ai-video.html`, `public/assets/ad-demo.js` and `public/assets/ads/` alone; they are being replaced there. Direction: `docs/creative/ai-video-direction.md` on that branch. Production media: `..\production\ai-video` (outside git). The branch merges back into `phase-1-site` only after Ruben approves.
 
 ## Ground rules (decided by Ruben)
 
