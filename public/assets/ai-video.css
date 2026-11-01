@@ -1,0 +1,104 @@
+/* AI video page. Builds on studio-home.css tokens (Syne display, Instrument Sans, paper, ink, slate). */
+.ai-video { --slate: #475c89; --navy: #273449; --film: #121417; }
+.ai-video :focus-visible { outline: 3px solid var(--slate); outline-offset: 3px; }
+.av-spots :focus-visible, .av-cinema :focus-visible, .av-player :focus-visible { outline-color: #fff; }
+.ai-video .sr-only { position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+html:has(.av-player[open]) { overflow: hidden; }
+
+/* 1. Hero: the feed */
+.av-hero { position: relative; background: linear-gradient(135deg, #f6cbb0 0%, #f0d9d0 32%, #e8e6e2 72%); }
+.av-stage {
+  position: relative; min-height: calc(100svh - 96px); overflow: hidden;
+  display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr); align-items: center;
+  gap: clamp(24px, 4vw, 72px); padding: clamp(32px, 5vw, 72px) var(--px) clamp(64px, 7vw, 104px);
+}
+@media (min-width: 900px) and (prefers-reduced-motion: no-preference) { .av-stage { height: 100svh; min-height: 0; } }
+.av-copy { max-width: 680px; }
+.av-eyebrow { margin: 0 0 22px; font-size: 15px; font-weight: 500; letter-spacing: 0.02em; color: var(--slate); }
+.av-title {
+  margin: 0; font-family: var(--display); font-weight: 600; color: var(--ink);
+  font-size: clamp(52px, 7.4vw, 124px); line-height: 0.92; letter-spacing: -0.045em; max-width: 9.5ch;
+}
+.av-sub { margin: 30px 0 0; max-width: 36ch; font-size: clamp(17px, 1.35vw, 20px); line-height: 1.5; color: #414b60; }
+.av-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 14px 30px; margin-top: 38px; }
+.av-primary {
+  display: inline-flex; align-items: center; min-height: 52px; padding: 0 28px; border-radius: 999px;
+  background: var(--slate); color: #fff; font-size: 16px; font-weight: 600; text-decoration: none;
+}
+.av-primary:hover { background: #303f5d; }
+.av-link { display: inline-flex; align-items: center; min-height: 44px; color: var(--ink); font-size: 16px; font-weight: 500; text-underline-offset: 5px; }
+
+.av-phone {
+  justify-self: center; width: min(clamp(250px, 23vw, 340px), calc((100svh - 190px) * 9 / 19.5)); aspect-ratio: 9 / 19.5; padding: 10px;
+  border-radius: 48px; background: #101215;
+  box-shadow: 0 50px 90px -40px rgba(39, 52, 73, 0.55), 0 0 0 1px rgba(255, 255, 255, 0.06) inset;
+}
+.av-screen { position: relative; height: 100%; border-radius: 38px; overflow: hidden; background: #000; }
+.av-feed { list-style: none; margin: 0; padding: 0; height: 100%; will-change: transform; }
+.av-post { position: relative; height: 100%; }
+.av-post video { display: block; width: 100%; height: 100%; object-fit: cover; }
+.av-post-ui { position: absolute; inset: 0; color: #fff; font-size: 12px; text-shadow: 0 1px 6px rgba(0, 0, 0, 0.45); pointer-events: none; }
+.av-tabs { position: absolute; top: 18px; left: 0; right: 0; text-align: center; opacity: 0.9; letter-spacing: 0.01em; }
+.av-tabs b { margin-right: 12px; font-weight: 600; }
+.av-rail { position: absolute; right: 12px; bottom: 96px; display: grid; gap: 14px; }
+.av-rail i { display: block; width: 30px; height: 30px; border-radius: 50%; background: rgba(255, 255, 255, 0.24); }
+.av-handle { position: absolute; left: 16px; bottom: 20px; font-size: 13px; font-weight: 600; }
+.av-handle small { display: block; margin-top: 3px; font-size: 11px; font-weight: 400; opacity: 0.82; }
+
+.av-cinema { position: absolute; inset: 0; z-index: 3; display: none; background: var(--film); visibility: hidden; }
+.av-motion .av-cinema { display: block; }
+.av-cinema::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to top, rgba(8, 9, 11, 0.74), rgba(8, 9, 11, 0.2) 62%, rgba(8, 9, 11, 0) 80%); pointer-events: none; }
+.av-wide { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.av-card { position: absolute; z-index: 1; left: var(--px); bottom: clamp(36px, 7vh, 80px); color: #fff; }
+.av-card-kicker { margin: 0; font-size: 15px; text-shadow: 0 1px 8px rgba(0, 0, 0, 0.5); }
+.av-card-name {
+  margin: 10px 0 26px; font-family: var(--display); font-weight: 600;
+  font-size: clamp(56px, 7.4vw, 124px); line-height: 0.92; letter-spacing: -0.045em;
+}
+.av-watch {
+  display: inline-flex; align-items: center; gap: 10px; min-height: 48px; padding: 0 24px 0 20px;
+  border: 0; border-radius: 999px; background: #fff; color: var(--ink);
+  font: 600 16px/1 var(--sans); cursor: pointer; text-decoration: none;
+}
+.av-watch::before { content: ''; width: 0; height: 0; border-style: solid; border-width: 6px 0 6px 10px; border-color: transparent transparent transparent currentColor; }
+.av-watch:hover { background: #f0d9d0; }
+.av-dur { font-weight: 400; opacity: 0.74; }
+
+.av-pause {
+  position: absolute; z-index: 4; right: var(--px); top: 22px; display: none; align-items: center; min-height: 44px; padding: 0 18px;
+  border: 1px solid rgba(23, 26, 28, 0.18); border-radius: 999px; background: rgba(255, 255, 255, 0.72);
+  color: var(--ink); font: 500 14px/1 var(--sans); cursor: pointer; -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px);
+}
+.av-js .av-pause { display: inline-flex;
+}
+
+/* The spots (index, and the fallback without motion) */
+.av-spots { background: var(--film); color: #ece9e4; padding: clamp(80px, 10vw, 150px) var(--px); }
+.av-spots-head { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 12px 40px; margin-bottom: clamp(40px, 5vw, 72px); }
+.av-spots-head h2 { margin: 0; font-family: var(--display); font-weight: 600; font-size: clamp(40px, 5vw, 76px); letter-spacing: -0.04em; line-height: 1; color: #f6f3ee; }
+.av-spots-head p { margin: 0; max-width: 34ch; color: #b9bdc6; font-size: 17px; line-height: 1.5; }
+.av-spot-list { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(32px, 4vw, 64px); }
+.av-spot img { display: block; width: 100%; height: auto; aspect-ratio: 16 / 9; object-fit: cover; border-radius: 6px; }
+.av-spot-text h3 { margin: 24px 0 8px; font-family: var(--display); font-weight: 600; font-size: clamp(28px, 2.6vw, 40px); letter-spacing: -0.03em; color: #f6f3ee; }
+.av-spot-text p { margin: 0 0 22px; max-width: 46ch; color: #c3c6cd; font-size: 16px; line-height: 1.55; }
+
+/* Film dialog */
+.av-player { margin: auto; width: min(1200px, 92vw, calc((100dvh - 230px) * 16 / 9)); padding: 0; border: 0; background: #000; border-radius: 8px; overflow: visible; }
+.av-player::backdrop { background: rgba(10, 12, 14, 0.86); }
+.av-player video { display: block; width: 100%; aspect-ratio: 16 / 9; border-radius: 8px; background: #000; }
+.av-close {
+  position: absolute; top: -58px; right: 0; min-height: 44px; padding: 0 18px; border: 1px solid rgba(255, 255, 255, 0.5);
+  border-radius: 999px; background: transparent; color: #fff; font: 500 15px/1 var(--sans); cursor: pointer;
+}
+.av-player-info { position: absolute; top: calc(100% + 14px); left: 0; right: 0; color: #d8dbe0; font-size: 14px; line-height: 1.5; }
+.av-player-info p { margin: 0 0 4px; max-width: 80ch; }
+.av-player-name { font-weight: 600; color: #fff; }
+.av-player-error a { color: #fff; }
+
+@media (max-width: 899px) {
+  .av-stage { grid-template-columns: 1fr; min-height: 0; padding-top: 28px; gap: 48px; }
+  .av-title { font-size: clamp(46px, 13vw, 72px); }
+  .av-phone { width: min(70vw, 300px); }
+  .av-pause { position: static; justify-self: center; }
+  .av-spot-list { grid-template-columns: 1fr; }
+}

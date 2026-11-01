@@ -4,18 +4,20 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>AI video ads · Studio26</title>
-  <meta name="description" content="Short video ads for Reels, TikTok, Shorts and YouTube, designed around your brand and made with AI and motion design by Studio26 in Mauritius.">
+  <meta name="description" content="Short video ads for Reels, TikTok, Shorts and YouTube, made with AI, 3D and motion design and finished by hand by Studio26 in Mauritius.">
   <link rel="icon" type="image/svg+xml" href="/favicon.svg">
   <meta property="og:title" content="AI video ads · Studio26">
-  <meta property="og:description" content="Short video ads, made for the scroll.">
+  <meta property="og:description" content="Ads that stop the scroll.">
   <meta property="og:url" content="https://studio26.me/ai-video">
   <meta property="og:type" content="website">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;1,300&family=DM+Mono:wght@400&family=Plus+Jakarta+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="preload" href="/assets/fonts/syne-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/assets/fonts/instrument-sans-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/video/maison-9x16.webp" as="image">
   <link rel="stylesheet" href="/assets/site.css">
+  <link rel="stylesheet" href="/assets/studio-home.css">
+  <link rel="stylesheet" href="/assets/ai-video.css">
 </head>
-<body>
+<body class="studio-home ai-video">
 
 <a class="skip-link" href="#main-content">Skip to main content</a>
 
@@ -29,153 +31,109 @@
       <li><a href="/#contact">Contact</a></li>
     </ul>
   </nav>
-  <a class="btn btn-ink nav-cta" href="/#book" data-booking>Book a call</a>
+  <a class="btn btn-ink nav-cta" href="/#contact">Start a project</a>
 </header>
 
 <main id="main-content">
 
-  <section class="page-hero" aria-labelledby="page-title">
-    <h1 class="page-title" id="page-title">Short video ads, made for the scroll.</h1>
-    <p class="hero-sub">Fifteen-second ads for Reels, TikTok, Shorts and YouTube, designed around your brand and made with AI and motion design.</p>
-    <div class="hero-actions">
-      <a class="btn btn-ink" href="/#book" data-booking>Book a free discovery call</a>
-      <a class="btn-link" href="#samples">See the samples</a>
+  <section class="av-hero" id="feed" aria-labelledby="av-title">
+    <div class="av-stage">
+      <div class="av-copy">
+        <p class="av-eyebrow">AI video ads</p>
+        <h1 class="av-title" id="av-title">Ads that stop the&nbsp;scroll.</h1>
+        <p class="av-sub">Short films for Reels, TikTok, Shorts and YouTube. Made with AI, 3D and motion design, finished by hand in Mauritius.</p>
+        <div class="av-actions">
+          <a class="btn av-primary" href="#spots">See the work</a>
+          <a class="av-link" href="/#contact">Start a project</a>
+        </div>
+      </div>
+
+      <div class="av-phone" role="img" aria-label="A phone playing two concept ads in a social feed: Maison Filaos, an invented boutique hotel, and Kestrel, an invented fintech brand.">
+        <div class="av-screen">
+          <ol class="av-feed">
+            <li class="av-post" data-ad="maison">
+              <video class="av-loop" muted loop playsinline preload="none" poster="/video/maison-9x16.webp" aria-hidden="true">
+                <source src="/video/maison-9x16-loop.mp4" type="video/mp4">
+              </video>
+              <div class="av-post-ui" aria-hidden="true">
+                <span class="av-tabs"><b>For you</b> Following</span>
+                <span class="av-rail"><i></i><i></i><i></i></span>
+                <span class="av-handle">@maisonfilaos<small>Concept work, invented brand</small></span>
+              </div>
+            </li>
+            <li class="av-post" data-ad="kestrel">
+              <video class="av-loop" muted loop playsinline preload="none" poster="/video/kestrel-9x16.webp" aria-hidden="true">
+                <source src="/video/kestrel-9x16-loop.mp4" type="video/mp4">
+              </video>
+              <div class="av-post-ui" aria-hidden="true">
+                <span class="av-tabs"><b>For you</b> Following</span>
+                <span class="av-rail"><i></i><i></i><i></i></span>
+                <span class="av-handle">@kestrel<small>Concept work, invented brand</small></span>
+              </div>
+            </li>
+          </ol>
+        </div>
+      </div>
+
+      <div class="av-cinema" data-ad="maison" inert>
+        <video class="av-wide" muted loop playsinline preload="none" poster="/video/maison-16x9.webp" aria-hidden="true">
+          <source src="/video/maison-16x9-loop.mp4" type="video/mp4">
+        </video>
+        <div class="av-card">
+          <p class="av-card-kicker">Concept, invented brand &middot; Boutique hotel</p>
+          <p class="av-card-name">Maison Filaos</p>
+          <a class="av-watch" href="/video/maison-film.mp4" data-film="maison">Watch with sound</a>
+        </div>
+      </div>
+      <div class="av-cinema" data-ad="kestrel" inert>
+        <video class="av-wide" muted loop playsinline preload="none" poster="/video/kestrel-16x9.webp" aria-hidden="true">
+          <source src="/video/kestrel-16x9-loop.mp4" type="video/mp4">
+        </video>
+        <div class="av-card">
+          <p class="av-card-kicker">Concept, invented brand &middot; Fintech launch</p>
+          <p class="av-card-name">Kestrel</p>
+          <a class="av-watch" href="/video/kestrel-film.mp4" data-film="kestrel">Watch with sound</a>
+        </div>
+      </div>
+
+      <button class="av-pause" type="button">Pause motion</button>
     </div>
   </section>
 
-  <section class="samples" id="samples" aria-labelledby="samples-title">
-    <h2 class="section-title" id="samples-title">Three brands, three looks</h2>
-    <p class="samples-note">Concept work: invented Mauritian brands, made to show range.</p>
-    <ul class="sample-grid">
-      <li class="sample">
-        <div class="phone">
-          <video data-sample-video muted loop playsinline preload="none" poster="/assets/ads/hotel-poster.webp?v=1" data-src="https://pub-accaa99b083244a1a58f40dfa9cfaa9f.r2.dev/ads/ad-hotel-vertical.mp4?v=1" aria-describedby="sample-hotel"></video>
-          <button class="reel-toggle paused" type="button" aria-label="Play Maison Filaos ad">
-            <svg class="i-pause" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><rect x="6" y="5" width="4" height="14"/><rect x="14" y="5" width="4" height="14"/></svg>
-            <svg class="i-play" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><polygon points="7 4 20 12 7 20 7 4"/></svg>
-          </button>
+  <section class="av-spots" id="spots" aria-labelledby="spots-title">
+    <div class="av-spots-head">
+      <h2 id="spots-title" tabindex="-1">The spots</h2>
+      <p>Concept work for invented brands, made to show the range.</p>
+    </div>
+    <ul class="av-spot-list">
+      <li class="av-spot">
+        <img src="/video/maison-16x9.webp" width="1280" height="720" alt="" loading="lazy">
+        <div class="av-spot-text">
+          <h3>Maison Filaos</h3>
+          <p>Boutique hotel. A slow, warm film from five AI shots, cut and typeset by hand.</p>
+          <a class="av-watch" href="/video/maison-film.mp4" data-film="maison">Watch the film<span class="sr-only"> Maison Filaos</span> <span class="av-dur">20 s</span></a>
         </div>
-        <h3 class="sample-name">Maison Filaos</h3>
-        <p class="sample-desc" id="sample-hotel">A boutique hotel. Slow, cinematic, a sunrise over the lagoon.</p>
       </li>
-      <li class="sample">
-        <div class="phone">
-          <video data-sample-video muted loop playsinline preload="none" poster="/assets/ads/street-poster.webp?v=1" data-src="https://pub-accaa99b083244a1a58f40dfa9cfaa9f.r2.dev/ads/ad-street-vertical.mp4?v=1" aria-describedby="sample-street"></video>
-          <button class="reel-toggle paused" type="button" aria-label="Play Dholl Republik ad">
-            <svg class="i-pause" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><rect x="6" y="5" width="4" height="14"/><rect x="14" y="5" width="4" height="14"/></svg>
-            <svg class="i-play" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><polygon points="7 4 20 12 7 20 7 4"/></svg>
-          </button>
+      <li class="av-spot">
+        <img src="/video/kestrel-16x9.webp" width="1280" height="720" alt="" loading="lazy">
+        <div class="av-spot-text">
+          <h3>Kestrel</h3>
+          <p>Fintech launch. Kinetic type and motion design, made in three formats.</p>
+          <a class="av-watch" href="/video/kestrel-film.mp4" data-film="kestrel">Watch the film<span class="sr-only"> Kestrel</span> <span class="av-dur">17 s</span></a>
         </div>
-        <h3 class="sample-name">Dholl Republik</h3>
-        <p class="sample-desc" id="sample-street">A street-food stall. Loud, fast, hard cuts on every word.</p>
-      </li>
-      <li class="sample">
-        <div class="phone">
-          <video data-sample-video muted loop playsinline preload="none" poster="/assets/ads/firm-poster.webp?v=1" data-src="https://pub-accaa99b083244a1a58f40dfa9cfaa9f.r2.dev/ads/ad-firm-vertical.mp4?v=1" aria-describedby="sample-firm"></video>
-          <button class="reel-toggle paused" type="button" aria-label="Play Kestrel Books ad">
-            <svg class="i-pause" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><rect x="6" y="5" width="4" height="14"/><rect x="14" y="5" width="4" height="14"/></svg>
-            <svg class="i-play" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><polygon points="7 4 20 12 7 20 7 4"/></svg>
-          </button>
-        </div>
-        <h3 class="sample-name">Kestrel Books</h3>
-        <p class="sample-desc" id="sample-firm">A bookkeeping firm. Clean, numbers counting, the month closing itself.</p>
       </li>
     </ul>
   </section>
 
-  <section class="demo" id="demo" aria-labelledby="demo-title">
-    <div class="demo-copy">
-      <h2 class="section-title" id="demo-title">Try it with your business</h2>
-      <p>Type your business, what you do and your offer, then pick a style. The preview below is rebuilt around your words as you type. The three styles come from the sample ads above; your own ad would get a look made for you.</p>
-      <div class="demo-controls" id="demoControls" role="group" aria-labelledby="demo-title">
-        <div class="field">
-          <label for="d-name">Business name</label>
-          <input id="d-name" name="name" type="text" maxlength="28" value="Studio26" autocomplete="off">
-        </div>
-        <div class="field">
-          <label for="d-about">What you do</label>
-          <input id="d-about" name="about" type="text" maxlength="40" value="Websites and AI video ads" autocomplete="off">
-        </div>
-        <div class="field">
-          <label for="d-offer">Your offer</label>
-          <input id="d-offer" name="offer" type="text" maxlength="40" value="Free 30-minute discovery call" autocomplete="off">
-        </div>
-        <fieldset class="field choices">
-          <legend>Style</legend>
-          <input class="choice-input" type="radio" id="look-elegant" name="look" value="elegant" checked><label class="choice" for="look-elegant">Elegant</label>
-          <input class="choice-input" type="radio" id="look-bold" name="look" value="bold"><label class="choice" for="look-bold">Bold</label>
-          <input class="choice-input" type="radio" id="look-clean" name="look" value="clean"><label class="choice" for="look-clean">Clean</label>
-        </fieldset>
-        <fieldset class="field choices">
-          <legend>Format</legend>
-          <input class="choice-input" type="radio" id="fmt-vertical" name="format" value="vertical" checked><label class="choice" for="fmt-vertical">Vertical 9:16</label>
-          <input class="choice-input" type="radio" id="fmt-feed" name="format" value="feed"><label class="choice" for="fmt-feed">Feed 4:5</label>
-          <input class="choice-input" type="radio" id="fmt-wide" name="format" value="wide"><label class="choice" for="fmt-wide">Wide 16:9</label>
-        </fieldset>
-      </div>
+  <dialog class="av-player" aria-label="Film player">
+    <button class="av-close" type="button">Close</button>
+    <video controls playsinline preload="none"></video>
+    <div class="av-player-info">
+      <p class="av-player-name"></p>
+      <p class="av-player-text"></p>
+      <p class="av-player-error" hidden>This film did not load. <a href="/video/maison-film.mp4">Open it directly</a>.</p>
     </div>
-    <div class="demo-stage">
-      <div class="demo-player" id="demoPlayer" aria-label="Live ad preview" role="group">
-        <img src="/assets/ads/hotel-poster.webp?v=1" alt="" width="1080" height="1920" loading="lazy" decoding="async">
-      </div>
-      <p class="demo-status" id="demoStatus" role="status" aria-live="polite"></p>
-    </div>
-  </section>
-
-  <section class="process" aria-labelledby="included-title">
-    <h2 class="section-title" id="included-title">What you get</h2>
-    <div class="service-grid">
-      <ul class="service-list">
-        <li>A concept and script built around one offer</li>
-        <li>A 15-second ad and a 6-second cut-down</li>
-        <li>Vertical, feed and widescreen versions</li>
-        <li>Your colours, type and logo built in</li>
-        <li>English or French</li>
-      </ul>
-      <div>
-        <p class="service-lede">Most ads die in the first second of the scroll. Ours open on the one line that matters, keep text clear of the buttons each platform lays over the video, and end on a single action.</p>
-        <p class="service-price">From <span data-price="video">[price]</span></p>
-      </div>
-    </div>
-  </section>
-
-  <section class="process" aria-labelledby="steps-title">
-    <h2 class="section-title" id="steps-title">How it works</h2>
-    <ol class="steps">
-      <li class="step"><h3 class="step-name">Brief</h3><p>A free call about your offer, your audience and where the ad will run.</p></li>
-      <li class="step"><h3 class="step-name">Script and look</h3><p>One idea, written out scene by scene, with the look it will have.</p></li>
-      <li class="step"><h3 class="step-name">First cut</h3><p>A full draft to react to, then one round of changes.</p></li>
-      <li class="step"><h3 class="step-name">Delivery</h3><p>Every format, ready to upload, plus versions for different audiences if you want them.</p></li>
-    </ol>
-  </section>
-
-  <section class="faq" aria-labelledby="faq-title">
-    <h2 class="section-title" id="faq-title">Questions</h2>
-    <details>
-      <summary>Can I use the ad anywhere?</summary>
-      <p>Yes, on any of your own channels and in paid campaigns. Any stock footage or music we use stays under its own licence, which we choose so that ads are allowed.</p>
-    </details>
-    <details>
-      <summary>How long does it take?</summary>
-      <p>[turnaround] from the brief to the final files.</p>
-    </details>
-    <details>
-      <summary>What do you need from me?</summary>
-      <p>Your logo, your colours if you have them, the offer you want to promote, and any photos or footage you already own.</p>
-    </details>
-    <details>
-      <summary>Can you make different versions for different audiences?</summary>
-      <p>Yes. Because each ad is built from a template, changing the language, the offer or the audience is quick and keeps the look consistent.</p>
-    </details>
-  </section>
-
-  <section class="contact contact-band" aria-labelledby="cta-title">
-    <h2 class="contact-title" id="cta-title">Have an offer worth a video?</h2>
-    <div class="book">
-      <a class="btn btn-paper" href="/#book" data-booking>Book a free discovery call</a>
-      <p class="book-alt">Or <a href="/#contact">send us a short brief</a></p>
-    </div>
-  </section>
+  </dialog>
 
 </main>
 
@@ -188,5 +146,8 @@
 </footer>
 
 <script src="/assets/site.js" defer></script>
+<script src="/assets/vendor/gsap-3.15.0.min.js" defer></script>
+<script src="/assets/vendor/ScrollTrigger-3.15.0.min.js" defer></script>
+<script src="/assets/ai-video.js" defer></script>
 </body>
 </html>
