@@ -376,7 +376,7 @@ test.describe('AI video page — samples and live demo', () => {
 // ─────────────────────────────────────────────
 // OTHER PAGES — core checks from all three pillars
 // ─────────────────────────────────────────────
-for (const path of ['/ai-video', '/privacy']) {
+for (const path of ['/ai-video', '/privacy', '/concepts/island', '/concepts/architecture', '/concepts/product']) {
   test.describe(`Other pages — ${path}`, () => {
 
     test('Zero console errors and 404s', async ({ page }) => {
@@ -790,124 +790,56 @@ test('Section 04 — four process steps preserve order and readable content', as
 });
 
 
-test.describe('Section 07 — layered Approach', () => {
-  test('All three designs remain selectable and contained across responsive sizes', async ({ page }) => {
-    test.setTimeout(60000);
+test.describe('Section 08 — creative possibilities', () => {
+  test('Three original concept worlds remain usable across responsive widths', async ({ page }) => {
+    test.setTimeout(90000);
     await page.emulateMedia({ reducedMotion: 'reduce' });
     await page.goto('/');
-    await page.locator('#studio').scrollIntoViewIfNeeded();
-    for (const width of [320, 375, 390, 430, 640, 641, 768, 1024, 1050, 1051, 1440, 1920, 2560]) {
-      await page.setViewportSize({ width, height: 1000 });
-      for (const project of ['mauradio', 'arizen', 'diaspora']) {
-        await page.locator(`label[for="approach-${project}"]`).click();
-        await expect(page.locator(`#approach-${project}`)).toBeChecked();
-        const front = page.locator(`[data-approach-screen="${project}"]`);
-        expect(await front.evaluate(el => getComputedStyle(el).zIndex)).toBe('4');
-        const bounds = await page.locator('#studio').evaluate(section => {
-          const founder = document.getElementById('founder').getBoundingClientRect();
-          const stack = section.querySelector('.approach-stack').getBoundingClientRect();
-          const controls = section.querySelector('.approach-select').getBoundingClientRect();
-          return [...section.querySelectorAll('.approach-screen')].every(el => {
-            const rect = el.getBoundingClientRect();
-            const intersectsControls = rect.left < controls.right && rect.right > controls.left && rect.top < controls.bottom && rect.bottom > controls.top;
-            return rect.left >= 0 && rect.right <= innerWidth + 1 && rect.bottom <= founder.top && rect.top >= stack.top - 32 && rect.bottom <= stack.bottom + 1 && !intersectsControls;
-          });
-        });
-        expect(bounds, `${project} layers overflow at ${width}px`).toBe(true);
-        const caption = front.locator('figcaption');
-        await caption.scrollIntoViewIfNeeded();
-        expect(await caption.evaluate(el => {
-          const rect = el.getBoundingClientRect();
-          const hit = document.elementFromPoint(rect.left + rect.width / 2, rect.top + rect.height / 2);
-          return hit?.closest('[data-approach-screen]') === el.closest('[data-approach-screen]');
-        }), `Front caption obscured at ${width}px`).toBe(true);
+    const section = page.locator('#studio');
+    for (const width of [320,375,390,430,640,641,768,900,901,1024,1440,1920,2560]) {
+      await page.setViewportSize({width,height:1000});
+      for (const key of ['island','architecture','product']) {
+        await section.locator(`[data-select="${key}"]`).click();
+        const world = section.locator(`[data-world="${key}"]`);
+        await expect(world).toBeVisible();
         expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
+        const contained = await world.evaluate(el => [...el.querySelectorAll('.world-copy h3,.world-copy>p,.world-action')].every(node => node.getBoundingClientRect().bottom <= el.querySelector('.world-foot').getBoundingClientRect().top));
+        expect(contained,`${key} content clipped at ${width}`).toBe(true);
+        await expect(world.locator('h3')).not.toHaveText('');
+        await expect(world.locator('.world-foot a')).toHaveAttribute('href',`/concepts/${key}`);
       }
-      for (const label of await page.locator('.approach-choice label').all()) {
-        const box = await label.boundingBox();
-        expect(box.width).toBeGreaterThanOrEqual(44);
-        expect(box.height).toBeGreaterThanOrEqual(44);
-      }
+    }
+    for (const key of ['island','architecture','product']) {
+      await section.locator(`[data-select="${key}"]`).click();
+      const axe = await new AxeBuilder({page}).withTags(['wcag2a','wcag2aa','wcag21a','wcag21aa']).analyze();
+      expect(axe.violations).toEqual([]);
+      const button = section.locator(`[data-effect="${key}"]`);
+      await button.click();
+      await expect(button).toHaveAttribute('aria-pressed','true');
+      await expect.poll(() => section.locator(`[data-world="${key}"] img`).evaluate(img => img.complete && img.naturalWidth > 0)).toBe(true);
     }
     await expect(page.locator('h1')).toHaveCount(1);
-    await expect(page.locator('#studio h2')).toHaveText("A site nobody could mistake for anyone else's.");
-    for (const image of await page.locator('.approach-screen img').all()) {
-      await expect.poll(() => image.evaluate(el => el.complete && el.naturalWidth > 0)).toBe(true);
-    }
+    await expect(section.locator('.concept-disclosure')).toBeVisible();
   });
-
-  test('Native radio keyboard, focus and reduced-motion behaviour', async ({ page }) => {
-    await page.emulateMedia({ reducedMotion: 'reduce' });
+  test('Keyboard selection, focus and reduced-motion change work', async ({page}) => {
     await page.goto('/');
-    const first = page.locator('#approach-mauradio');
-    await first.focus();
-    await first.press('ArrowRight');
-    await expect(page.locator('#approach-arizen')).toBeChecked();
-    await expect(page.locator('#approach-arizen')).toBeFocused();
-    const focus = await page.locator('label[for="approach-arizen"]').evaluate(el => ({ style: getComputedStyle(el).outlineStyle, width: getComputedStyle(el).outlineWidth }));
-    expect(focus).toEqual({ style: 'solid', width: '2px' });
-    expect(await page.locator('.approach-screen').first().evaluate(el => getComputedStyle(el).transitionDuration)).toBe('0s');
-    await page.keyboard.press('Tab');
-    expect(await page.evaluate(() => !document.activeElement.closest('.approach-select'))).toBe(true);
+    await page.locator('#studio [data-select="island"]').focus();
+    await page.keyboard.press('Tab');await page.keyboard.press('Enter');
+    await expect(page.locator('#studio [data-select="architecture"]')).toHaveAttribute('aria-pressed','true');
+    await page.emulateMedia({reducedMotion:'reduce'});
+    await expect.poll(() => page.locator('#studio .world-copy').evaluateAll(nodes => nodes.every(el => el.style.transform==='' && el.style.opacity===''))).toBe(true);
+    const effect=page.locator('#studio [data-effect="architecture"]');
+    await effect.focus();await effect.press('Space');
+    await expect(effect).toHaveAttribute('aria-pressed','true');
+    expect(await effect.evaluate(el => getComputedStyle(el).outlineWidth)).toBe('3px');
+    expect(await page.locator('#studio .world-img').first().evaluate(el => getComputedStyle(el).transitionDuration)).toBe('0s');
   });
-
-  test('Project selection works with JavaScript disabled', async ({ browser }) => {
-    const context = await browser.newContext({ javaScriptEnabled: false, reducedMotion: 'reduce', viewport: { width: 390, height: 844 } });
-    const page = await context.newPage();
-    await page.goto('/');
-    for (const project of ['mauradio', 'arizen', 'diaspora']) {
-      await page.locator(`label[for="approach-${project}"]`).click();
-      await expect(page.locator(`#approach-${project}`)).toBeChecked();
-      expect(await page.locator(`[data-approach-screen="${project}"]`).evaluate(el => getComputedStyle(el).zIndex)).toBe('4');
-    }
-    await expect(page.locator('#studio h2')).toBeVisible();
+  test('All concept content remains available without JavaScript', async ({browser}) => {
+    const context=await browser.newContext({javaScriptEnabled:false,viewport:{width:390,height:844}});
+    const page=await context.newPage();await page.goto('/');
+    await expect(page.locator('#studio [data-world]:visible')).toHaveCount(3);
+    await expect(page.locator('#studio button:visible')).toHaveCount(0);
+    for (const key of ['island','architecture','product']) await expect(page.locator(`#studio [data-world="${key}"] .world-foot a`)).toHaveAttribute('href',`/concepts/${key}`);
     await context.close();
   });
-});
-
-
-test('Section 07 — unsupported selection CSS leaves a complete static layout', async ({ page }) => {
-  await page.route('**/assets/studio-home.css', async route => {
-    const response = await route.fetch();
-    const source = await response.text();
-    const start = source.indexOf('@supports selector(:has(*))');
-    expect(start).toBeGreaterThan(0);
-    let depth = 0;
-    let end = source.indexOf('{', start);
-    for (; end < source.length; end++) {
-      if (source[end] === '{') depth++;
-      if (source[end] === '}' && --depth === 0) { end++; break; }
-    }
-    await route.fulfill({ response, body: source.slice(0, start) + source.slice(end) });
-  });
-  await page.goto('/');
-  for (const width of [390, 1440]) {
-    await page.setViewportSize({ width, height: 1000 });
-    await expect(page.locator('.approach-select')).toBeHidden();
-    const figures = page.locator('.approach-screen');
-    await expect(figures).toHaveCount(3);
-    for (let i = 0; i < 3; i++) {
-      expect(await figures.nth(i).evaluate(el => getComputedStyle(el).position)).toBe('static');
-      const rect = await figures.nth(i).boundingBox();
-      if (i) {
-        const prev = await figures.nth(i - 1).boundingBox();
-        expect(rect.y).toBeGreaterThanOrEqual(prev.y + prev.height);
-      }
-    }
-    expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
-  }
-});
-
-
-test('Section 07 — mobile forced-colours selection keeps label dimensions stable', async ({ page }) => {
-  await page.setViewportSize({ width: 390, height: 844 });
-  await page.emulateMedia({ forcedColors: 'active', reducedMotion: 'reduce' });
-  await page.goto('/');
-  const labels = page.locator('.approach-choice label');
-  const dimensions = () => labels.evaluateAll(nodes => nodes.map(el => ({ width: el.getBoundingClientRect().width, height: el.getBoundingClientRect().height })));
-  const baseline = await dimensions();
-  for (const project of ['arizen', 'diaspora', 'mauradio']) {
-    await page.locator(`label[for="approach-${project}"]`).click();
-    expect(await dimensions()).toEqual(baseline);
-  }
 });
