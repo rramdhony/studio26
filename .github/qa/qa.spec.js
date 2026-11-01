@@ -897,3 +897,17 @@ test('Section 07 — unsupported selection CSS leaves a complete static layout',
     expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
   }
 });
+
+
+test('Section 07 — mobile forced-colours selection keeps label dimensions stable', async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.emulateMedia({ forcedColors: 'active', reducedMotion: 'reduce' });
+  await page.goto('/');
+  const labels = page.locator('.approach-choice label');
+  const dimensions = () => labels.evaluateAll(nodes => nodes.map(el => ({ width: el.getBoundingClientRect().width, height: el.getBoundingClientRect().height })));
+  const baseline = await dimensions();
+  for (const project of ['arizen', 'diaspora', 'mauradio']) {
+    await page.locator(`label[for="approach-${project}"]`).click();
+    expect(await dimensions()).toEqual(baseline);
+  }
+});

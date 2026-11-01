@@ -470,3 +470,7 @@
   .studio-home .approach-choice input:checked + label { border: 3px double ButtonText; padding: 7px 13px; }
   .studio-home .approach-choice input:focus-visible + label { outline-color: Highlight; }
 }
+
+@media (forced-colors: active) and (max-width: 640px) {
+  .studio-home .approach-choice input:checked + label { padding: 7px 9px; }
+}
