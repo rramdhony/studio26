@@ -788,3 +788,69 @@ test('Section 04 — four process steps preserve order and readable content', as
     }
   }
 });
+
+
+test.describe('Section 07 — layered Approach', () => {
+  test('All three designs remain selectable and contained across responsive sizes', async ({ page }) => {
+    test.setTimeout(60000);
+    await page.emulateMedia({ reducedMotion: 'reduce' });
+    await page.goto('/');
+    await page.locator('#studio').scrollIntoViewIfNeeded();
+    for (const width of [320, 375, 390, 430, 640, 641, 768, 1024, 1440, 1920, 2560]) {
+      await page.setViewportSize({ width, height: 1000 });
+      for (const project of ['mauradio', 'arizen', 'diaspora']) {
+        await page.locator(`label[for="approach-${project}"]`).click();
+        await expect(page.locator(`#approach-${project}`)).toBeChecked();
+        const front = page.locator(`[data-approach-screen="${project}"]`);
+        expect(await front.evaluate(el => getComputedStyle(el).zIndex)).toBe('4');
+        const bounds = await page.locator('#studio').evaluate(section => {
+          const founder = document.getElementById('founder').getBoundingClientRect();
+          return [...section.querySelectorAll('.approach-screen')].every(el => {
+            const rect = el.getBoundingClientRect();
+            return rect.left >= 0 && rect.right <= innerWidth + 1 && rect.bottom <= founder.top;
+          });
+        });
+        expect(bounds, `${project} layers overflow at ${width}px`).toBe(true);
+        expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
+      }
+      for (const label of await page.locator('.approach-choice label').all()) {
+        const box = await label.boundingBox();
+        expect(box.width).toBeGreaterThanOrEqual(44);
+        expect(box.height).toBeGreaterThanOrEqual(44);
+      }
+    }
+    await expect(page.locator('h1')).toHaveCount(1);
+    await expect(page.locator('#studio h2')).toHaveText("A site nobody could mistake for anyone else's.");
+    for (const image of await page.locator('.approach-screen img').all()) {
+      expect(await image.evaluate(el => el.complete && el.naturalWidth > 0)).toBe(true);
+    }
+  });
+
+  test('Native radio keyboard, focus and reduced-motion behaviour', async ({ page }) => {
+    await page.emulateMedia({ reducedMotion: 'reduce' });
+    await page.goto('/');
+    const first = page.locator('#approach-mauradio');
+    await first.focus();
+    await first.press('ArrowRight');
+    await expect(page.locator('#approach-arizen')).toBeChecked();
+    await expect(page.locator('#approach-arizen')).toBeFocused();
+    const focus = await page.locator('label[for="approach-arizen"]').evaluate(el => ({ style: getComputedStyle(el).outlineStyle, width: getComputedStyle(el).outlineWidth }));
+    expect(focus).toEqual({ style: 'solid', width: '2px' });
+    expect(await page.locator('.approach-screen').first().evaluate(el => getComputedStyle(el).transitionDuration)).toBe('0s');
+    await page.keyboard.press('Tab');
+    expect(await page.evaluate(() => !document.activeElement.closest('.approach-select'))).toBe(true);
+  });
+
+  test('Project selection works with JavaScript disabled', async ({ browser }) => {
+    const context = await browser.newContext({ javaScriptEnabled: false, reducedMotion: 'reduce', viewport: { width: 390, height: 844 } });
+    const page = await context.newPage();
+    await page.goto('/');
+    for (const project of ['mauradio', 'arizen', 'diaspora']) {
+      await page.locator(`label[for="approach-${project}"]`).click();
+      await expect(page.locator(`#approach-${project}`)).toBeChecked();
+      expect(await page.locator(`[data-approach-screen="${project}"]`).evaluate(el => getComputedStyle(el).zIndex)).toBe('4');
+    }
+    await expect(page.locator('#studio h2')).toBeVisible();
+    await context.close();
+  });
+});

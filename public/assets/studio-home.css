@@ -411,3 +411,62 @@
 @media (prefers-reduced-motion: reduce) and (max-width: 700px) {
   .studio-home .opening-summary { grid-column: 1 / -1; }
 }
+
+/* Section 07: approved layered Approach study. CSS selection works without JS. */
+.studio-home .approach { max-width: 1800px; margin: auto; padding: clamp(56px, 7vw, 110px) var(--px); color: #253047; }
+.studio-home .approach-layout { display: grid; grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr); gap: clamp(36px, 6vw, 96px); align-items: center; }
+.studio-home .approach-label { font-size: 16px; margin-bottom: 28px; }
+.studio-home .approach h2 { font-family: var(--display); font-size: clamp(36px, 4.5vw, 70px); font-weight: 500; letter-spacing: -.045em; line-height: 1.06; max-width: 16ch; margin-bottom: 30px; }
+.studio-home .approach-text { font-size: clamp(20px, 1.9vw, 27px); line-height: 1.4; letter-spacing: -.025em; max-width: 39ch; }
+.studio-home .approach-select { display: none; border: 0; padding: 0; margin: 28px 0 0; min-width: 0; gap: 8px; flex-wrap: wrap; }
+.studio-home .approach-choice { position: relative; display: block; cursor: pointer; }
+.studio-home .approach-choice input { position: absolute; width: 1px; height: 1px; opacity: 0; margin: 0; clip-path: inset(50%); }
+.studio-home .approach-choice label { display: flex; align-items: center; min-height: 44px; padding: 9px 15px; border: 1px solid #72788b; border-radius: 30px; font-size: 16px; line-height: 1.5; }
+.studio-home .approach-choice input:checked + label { background: #253047; color: var(--paper); border-color: #253047; text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 5px; }
+.studio-home .approach-choice input:focus-visible + label { outline: 2px solid var(--blue); outline-offset: 4px; }
+.studio-home .approach-choice:hover span { border-color: #253047; text-decoration: underline; text-underline-offset: 5px; }
+.studio-home .approach-visual { min-width: 0; }
+.studio-home .approach-stack { display: grid; gap: 24px; }
+.studio-home .approach-screen { margin: 0; padding: 14px; background: #d5d4ed; box-shadow: 0 20px 44px #25304724; }
+.studio-home .approach-screen:nth-child(2) { background: #cbd9ce; }
+.studio-home .approach-screen:nth-child(3) { background: #f0d9d0; }
+.studio-home .approach-screen img { width: 100%; height: auto; aspect-ratio: 8 / 5; object-fit: cover; border: 1px solid #72788b; }
+.studio-home .approach-screen figcaption { padding-top: 12px; font-size: 14px; line-height: 1.55; }
+@supports selector(:has(*)) {
+  .studio-home .approach-select { display: flex; }
+  .studio-home .approach-stack { display: block; position: relative; width: 100%; min-width: 0; height: auto; aspect-ratio: 1; min-height: 640px; isolation: isolate; }
+  .studio-home .approach-screen { position: absolute; width: 82%; left: 8%; top: 24px; transform: rotate(-8deg); z-index: 1; }
+  .studio-home .approach-screen:nth-child(2) { left: 0; top: 112px; transform: rotate(5deg); z-index: 2; }
+  .studio-home .approach-screen:nth-child(3) { left: 15%; top: 220px; transform: rotate(-3deg); z-index: 3; }
+  @media (max-width: 1050px) {
+    .studio-home .approach-stack { min-height: 660px; }
+    .studio-home .approach-screen { width: 75%; }
+    .studio-home .approach-screen:nth-child(3) { top: 260px; }
+  }
+  @media (max-width: 640px) {
+    .studio-home .approach-stack { height: calc(200px + 54vw); min-height: 0; aspect-ratio: auto; }
+    .studio-home .approach-screen { width: 85%; left: 4%; top: 10px; padding: 10px; transform: rotate(-5deg); }
+    .studio-home .approach-screen:nth-child(2) { left: 0; top: 70px; transform: rotate(3deg); }
+    .studio-home .approach-screen:nth-child(3) { left: 11%; top: 145px; }
+  }
+  .studio-home .approach:has(#approach-mauradio:checked) [data-approach-screen="mauradio"],
+  .studio-home .approach:has(#approach-arizen:checked) [data-approach-screen="arizen"],
+  .studio-home .approach:has(#approach-diaspora:checked) [data-approach-screen="diaspora"] { z-index: 4; transform: rotate(0deg) translateY(-12px); }
+  @media (prefers-reduced-motion: no-preference) {
+    .studio-home .approach-screen { transition: transform .25s ease; }
+  }
+}
+@media (max-width: 1050px) {
+  .studio-home .approach-layout { grid-template-columns: minmax(0, 1fr); gap: 40px; }
+  .studio-home .approach-text { max-width: 48ch; }
+  .studio-home .approach-visual { width: min(720px, 100%); margin: auto; }
+}
+@media (max-width: 640px) {
+  .studio-home .approach-layout { gap: 36px; }
+  .studio-home .approach h2 { margin-bottom: 24px; }
+  .studio-home .approach-choice label { padding: 9px 11px; }
+}
+@media (forced-colors: active) {
+  .studio-home .approach-choice input:checked + label { border: 3px double ButtonText; padding: 7px 13px; }
+  .studio-home .approach-choice input:focus-visible + label { outline-color: Highlight; }
+}

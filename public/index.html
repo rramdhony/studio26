@@ -56,10 +56,6 @@
     <p class="visually-hidden" id="introStatus" role="status" aria-live="polite"></p>
   </section>
 
-  <section class="intro" aria-label="Our approach">
-    <p class="intro-text">Too many websites look like they came from the same template. Ours start from your world: your trade, your customers, your colours. The result is a site nobody could mistake for anyone else's.</p>
-  </section>
-
   <section class="services" id="services" aria-labelledby="services-title">
     <h2 class="section-title" id="services-title">What we make</h2>
     <div class="service-grid">
@@ -196,7 +192,48 @@
     </ol>
   </section>
 
-  <section class="studio" id="studio" aria-labelledby="studio-title">
+  <section class="approach" id="studio" aria-labelledby="approach-title">
+    <div class="approach-layout">
+      <div class="approach-copy">
+        <p class="approach-label">Our approach</p>
+        <h2 id="approach-title">A site nobody could mistake for anyone else's.</h2>
+        <p class="approach-text">Too many websites look like they came from the same template. Ours start from your world: your trade, your customers, your colours. The result is a site nobody could mistake for anyone else's.</p>
+        <fieldset class="approach-select">
+          <legend class="visually-hidden">Bring a project to the front</legend>
+          <div class="approach-choice">
+            <input id="approach-mauradio" type="radio" name="approach-project" value="mauradio" checked>
+            <label for="approach-mauradio">mauRadio</label>
+          </div>
+          <div class="approach-choice">
+            <input id="approach-arizen" type="radio" name="approach-project" value="arizen">
+            <label for="approach-arizen">Arizen Africa</label>
+          </div>
+          <div class="approach-choice">
+            <input id="approach-diaspora" type="radio" name="approach-project" value="diaspora">
+            <label for="approach-diaspora">Mauritius Global Diaspora</label>
+          </div>
+        </fieldset>
+      </div>
+      <div class="approach-visual">
+        <div class="approach-stack">
+          <figure class="approach-screen" data-approach-screen="mauradio">
+            <img src="/assets/work/mauradio-800.webp" srcset="/assets/work/mauradio-800.webp 800w, /assets/work/mauradio-1400.webp 1400w" sizes="(max-width: 640px) 76vw, (max-width: 1050px) 540px, (max-width: 1800px) 39vw, 650px" width="800" height="500" loading="lazy" decoding="async" alt="Dark mauRadio homepage with the headline Mauritius, without the distance and a live radio player.">
+            <figcaption>mauRadio</figcaption>
+          </figure>
+          <figure class="approach-screen" data-approach-screen="arizen">
+            <img src="/assets/work/arizen-800.webp" srcset="/assets/work/arizen-800.webp 800w, /assets/work/arizen-1400.webp 1400w" sizes="(max-width: 640px) 76vw, (max-width: 1050px) 540px, (max-width: 1800px) 39vw, 650px" width="800" height="500" loading="lazy" decoding="async" alt="Arizen Africa homepage with the headline Decide well. Grow with confidence, on a dark green background.">
+            <figcaption>Arizen Africa</figcaption>
+          </figure>
+          <figure class="approach-screen" data-approach-screen="diaspora">
+            <img src="/assets/work/diaspora-800.webp" srcset="/assets/work/diaspora-800.webp 800w, /assets/work/diaspora-1400.webp 1400w" sizes="(max-width: 640px) 76vw, (max-width: 1050px) 540px, (max-width: 1800px) 39vw, 650px" width="800" height="500" loading="lazy" decoding="async" alt="Mauritius Global Diaspora homepage with an editorial headline beside a photograph of a Mauritian house.">
+            <figcaption>Mauritius Global Diaspora</figcaption>
+          </figure>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="studio" id="founder" aria-labelledby="studio-title">
     <div class="studio-photo">
       <img src="/assets/founder-placeholder.svg" alt="Ruben Ramdhony, founder of Studio26" width="800" height="1000" loading="lazy" decoding="async">
     </div>
