@@ -344,6 +344,36 @@ test.describe('AI video page: feed, spots and film player', () => {
     await expect(dialog).not.toHaveAttribute('open', '');
     await expect(trigger).toBeFocused();
   });
+
+  test('Layers: rail, keys and drag step through all four layers', async ({ page }) => {
+    await page.setViewportSize({ width: 1440, height: 900 });
+    await page.goto(`${BASE_URL}/ai-video`);
+    const range = page.locator('.av-lrange');
+    await page.locator('.av-lsteps [data-go="3"]').click();
+    await expect(range).toHaveAttribute('aria-valuetext', 'Delivered');
+    await expect(page.locator('.av-lnow')).toContainText('Delivered.');
+    await page.waitForTimeout(1300); // let the wipe settle
+    await range.focus();
+    await page.keyboard.press('ArrowLeft');
+    await expect(range).toHaveAttribute('aria-valuetext', 'Typeset');
+    await page.waitForTimeout(900);
+    const box = await page.locator('.av-lstack').boundingBox();
+    await page.mouse.move(box.x + box.width * 0.6, box.y + 100);
+    await page.mouse.down();
+    await page.mouse.move(box.x + box.width * 0.05, box.y + 100, { steps: 6 });
+    await page.mouse.up();
+    await expect(range).toHaveAttribute('aria-valuetext', 'Cut');
+  });
+
+  test('Layers: without JavaScript the four stills show as a captioned grid', async ({ browser }) => {
+    const context = await browser.newContext({ javaScriptEnabled: false });
+    const page = await context.newPage();
+    await page.goto(`${BASE_URL}/ai-video`);
+    await expect(page.locator('.av-layer')).toHaveCount(4);
+    await expect(page.locator('.av-lcap').first()).toBeVisible();
+    await expect(page.locator('.av-lcontrols')).toBeHidden();
+    await context.close();
+  });
 });
 
 // ─────────────────────────────────────────────
