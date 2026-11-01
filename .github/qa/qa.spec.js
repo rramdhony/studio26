@@ -649,3 +649,142 @@ test.describe('Opening review regressions', () => {
     await expect(page.locator('#opening')).toHaveAttribute('data-intro-state', 'running');
   });
 });
+
+test.describe('Section 02 — selected work', () => {
+  test('Six projects stay framed and in reading order at every required breakpoint', async ({ page }) => {
+    await page.emulateMedia({ reducedMotion: 'reduce' });
+    for (const width of [375, 390, 430, 768, 1024, 1440]) {
+      await page.setViewportSize({ width, height: 900 });
+      await page.goto('/');
+      const cards = page.locator('#work .work-card');
+      await expect(cards).toHaveCount(6);
+      for (let i = 0; i < 6; i++) {
+        const card = cards.nth(i);
+        await card.scrollIntoViewIfNeeded();
+        const img = card.locator('img');
+        await expect(img).toHaveJSProperty('complete', true);
+        expect(await img.evaluate(el => el.naturalWidth)).toBeGreaterThan(0);
+        const bounds = await card.boundingBox();
+        expect(bounds.x).toBeGreaterThanOrEqual(-1);
+        expect(bounds.x + bounds.width).toBeLessThanOrEqual(width + 1);
+        const frame = await img.boundingBox();
+        expect(Math.abs(frame.width / frame.height - 1.6)).toBeLessThan(0.01);
+        if (i > 0) {
+          const previous = await cards.nth(i - 1).boundingBox();
+          expect(bounds.y).toBeGreaterThan(previous.y);
+          if (width <= 640) expect(bounds.y).toBeGreaterThan(previous.y + previous.height);
+        }
+      }
+      expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBeLessThanOrEqual(width);
+      await page.locator('#work').scrollIntoViewIfNeeded();
+      if (width === 1440 || width === 390) {
+        await page.screenshot({ path: `qa-screenshots/section-02-${width}.png` });
+      }
+    }
+  });
+
+  test('Every project link works with keyboard focus and has a visible focus indicator', async ({ page }) => {
+    await page.goto('/');
+    const links = page.locator('#work .work-link');
+    await page.locator('#services .service-more a').focus();
+    await page.keyboard.press('Tab');
+    for (let i = 0; i < 6; i++) {
+      const link = links.nth(i);
+      await expect(link).toBeFocused();
+      expect(await link.getAttribute('href')).toMatch(/^https:\/\//);
+      const box = await link.boundingBox();
+      expect(box.width).toBeGreaterThanOrEqual(44);
+      expect(box.height).toBeGreaterThanOrEqual(44);
+      const outline = await link.evaluate(el => getComputedStyle(el).outlineStyle);
+      expect(outline).not.toBe('none');
+      const ring = await link.evaluate(el => {
+        const style = getComputedStyle(el);
+        const clipping = [];
+        for (let parent = el.parentElement; parent; parent = parent.parentElement) {
+          const parentStyle = getComputedStyle(parent);
+          if ([parentStyle.overflowX, parentStyle.overflowY].some(value => ['hidden', 'clip', 'scroll', 'auto'].includes(value))) clipping.push(parent.tagName);
+        }
+        return { width: parseFloat(style.outlineWidth), color: style.outlineColor, clipping };
+      });
+      expect(ring.width).toBeGreaterThanOrEqual(2);
+      expect(ring.color).toBe('rgb(71, 92, 137)');
+      expect(ring.clipping).toEqual([]);
+      await page.keyboard.press('Tab');
+      if (i < 5) await expect(links.nth(i + 1)).toBeFocused();
+    }
+  });
+
+  test('All six project routes and images remain available without JavaScript', async ({ browser }) => {
+    const context = await browser.newContext({ javaScriptEnabled: false, viewport: { width: 390, height: 844 } });
+    const page = await context.newPage();
+    await page.goto(BASE_URL);
+    await expect(page.locator('#work .work-link')).toHaveCount(6);
+    for (const link of await page.locator('#work .work-link').all()) {
+      await link.scrollIntoViewIfNeeded();
+      await expect(link).toBeVisible();
+      await expect(link.locator('.work-name')).not.toHaveText('');
+    }
+    await context.close();
+  });
+});
+
+test.describe('Section 03 — services', () => {
+  test('Service scope stays legible at every required width', async ({ page }) => {
+    await page.emulateMedia({ reducedMotion: 'reduce' });
+    for (const width of [375, 390, 430, 641, 700, 768, 1024, 1440]) {
+      await page.setViewportSize({ width, height: 900 });
+      await page.goto('/');
+      expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
+      const heading = await page.locator('#services h2').boundingBox();
+      expect(heading.x).toBeGreaterThanOrEqual(0);
+      expect(heading.x + heading.width).toBeLessThanOrEqual(width);
+      const services = page.locator('#services .service');
+      await expect(services).toHaveCount(2);
+      for (const service of await services.all()) {
+        await expect(service.locator('h3')).toBeVisible();
+        for (const element of await service.locator('h3, p, li').all()) {
+          const box = await element.boundingBox();
+          expect(box.x).toBeGreaterThanOrEqual(0);
+          expect(box.x + box.width).toBeLessThanOrEqual(width);
+          expect(await element.evaluate(el => el.scrollWidth <= el.clientWidth + 1)).toBe(true);
+        }
+        if (width <= 640) {
+          const title = await service.locator('h3').boundingBox();
+          const lede = await service.locator('.service-lede').boundingBox();
+          expect(lede.y).toBeGreaterThanOrEqual(title.y + title.height);
+        }
+      }
+      await expect(page.locator('#services [data-price="website"]')).toHaveText('[price]');
+      await expect(page.locator('#services [data-price="video"]')).toHaveText('[price]');
+      await expect(page.locator('#services .service-more a')).toHaveAttribute('href', '/ai-video');
+      if (width === 1440 || width === 390) {
+        await page.evaluate(() => window.scrollTo(0, document.getElementById('services').offsetTop));
+        await page.screenshot({ path: `qa-screenshots/section-03-${width}.png` });
+      }
+    }
+  });
+});
+
+test('Section 04 — four process steps preserve order and readable content', async ({ page }) => {
+  await page.emulateMedia({ reducedMotion: 'reduce' });
+  for (const width of [375, 390, 430, 768, 1024, 1440]) {
+    await page.setViewportSize({ width, height: 900 });
+    await page.goto('/');
+    const steps = page.locator('.process ol > li');
+    await expect(steps.locator('h3')).toHaveText(['Discovery call', 'Direction', 'Build', 'Launch']);
+    for (let i = 0; i < 4; i++) {
+      const box = await steps.nth(i).boundingBox();
+      expect(box.x).toBeGreaterThanOrEqual(0);
+      expect(box.x + box.width).toBeLessThanOrEqual(width);
+      expect(await steps.nth(i).evaluate(el => el.scrollWidth <= el.clientWidth + 1)).toBe(true);
+      if (i > 0) {
+        const prev = await steps.nth(i - 1).boundingBox();
+        expect(box.y > prev.y || (box.y === prev.y && box.x > prev.x)).toBe(true);
+      }
+    }
+    if (width === 1440 || width === 390) {
+      await page.evaluate(() => window.scrollTo(0, document.querySelector('.process').offsetTop));
+      await page.screenshot({ path: `qa-screenshots/section-04-${width}.png` });
+    }
+  }
+});

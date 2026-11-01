@@ -79,3 +79,15 @@ zero console errors at 375, 390, 430, 768 and 1440 px.
 Still open: the 2880 px hero master and the two optional hardening items.
 Observation, not changed: at 1440x900 the hero CTAs sit just below the fold
 (CTA bottom at about 973 px); this was already the case before these fixes.
+## Update, 31 Oct evening: parallel AI video rebuild
+
+Ruben asked for a full Awwwards-standard rethink of everything, starting with
+the AI video page. To avoid disrupting Codex:
+- Branch ai-video-rethink, git worktree at ..\site-ai-video (created from c233994).
+- Codex owns phase-1-site (homepage sections, starting with section 02).
+- Claude owns ai-video.html, ad-demo.js and assets/ads on the new branch.
+- Direction and Flow prompt sheet: docs/creative/ai-video-direction.md (on the branch).
+- Media: C:\Users\ruben\Downloads\studio26\production\ai-video (flow-raw,
+  blender, remotion, audio, masters, posters), not in git.
+- Tooling parity added for Claude and Codex: see ..\SETUP.md (GSAP official
+  skills, build-awwwards-quality-sites, threejs-webgl, context7, blender, figma).
