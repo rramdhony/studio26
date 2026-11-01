@@ -424,7 +424,7 @@
 .studio-home .approach-choice label { display: flex; align-items: center; min-height: 44px; padding: 9px 15px; border: 1px solid #72788b; border-radius: 30px; font-size: 16px; line-height: 1.5; }
 .studio-home .approach-choice input:checked + label { background: #253047; color: var(--paper); border-color: #253047; text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 5px; }
 .studio-home .approach-choice input:focus-visible + label { outline: 2px solid var(--blue); outline-offset: 4px; }
-.studio-home .approach-choice:hover span { border-color: #253047; text-decoration: underline; text-underline-offset: 5px; }
+.studio-home .approach-choice:hover label { border-color: #253047; text-decoration: underline; text-underline-offset: 5px; }
 .studio-home .approach-visual { min-width: 0; }
 .studio-home .approach-stack { display: grid; gap: 24px; }
 .studio-home .approach-screen { margin: 0; padding: 14px; background: #d5d4ed; box-shadow: 0 20px 44px #25304724; }

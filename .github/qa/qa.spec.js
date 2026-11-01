@@ -796,7 +796,7 @@ test.describe('Section 07 — layered Approach', () => {
     await page.emulateMedia({ reducedMotion: 'reduce' });
     await page.goto('/');
     await page.locator('#studio').scrollIntoViewIfNeeded();
-    for (const width of [320, 375, 390, 430, 640, 641, 768, 1024, 1440, 1920, 2560]) {
+    for (const width of [320, 375, 390, 430, 640, 641, 768, 1024, 1050, 1051, 1440, 1920, 2560]) {
       await page.setViewportSize({ width, height: 1000 });
       for (const project of ['mauradio', 'arizen', 'diaspora']) {
         await page.locator(`label[for="approach-${project}"]`).click();
@@ -805,12 +805,22 @@ test.describe('Section 07 — layered Approach', () => {
         expect(await front.evaluate(el => getComputedStyle(el).zIndex)).toBe('4');
         const bounds = await page.locator('#studio').evaluate(section => {
           const founder = document.getElementById('founder').getBoundingClientRect();
+          const stack = section.querySelector('.approach-stack').getBoundingClientRect();
+          const controls = section.querySelector('.approach-select').getBoundingClientRect();
           return [...section.querySelectorAll('.approach-screen')].every(el => {
             const rect = el.getBoundingClientRect();
-            return rect.left >= 0 && rect.right <= innerWidth + 1 && rect.bottom <= founder.top;
+            const intersectsControls = rect.left < controls.right && rect.right > controls.left && rect.top < controls.bottom && rect.bottom > controls.top;
+            return rect.left >= 0 && rect.right <= innerWidth + 1 && rect.bottom <= founder.top && rect.top >= stack.top - 32 && rect.bottom <= stack.bottom + 1 && !intersectsControls;
           });
         });
         expect(bounds, `${project} layers overflow at ${width}px`).toBe(true);
+        const caption = front.locator('figcaption');
+        await caption.scrollIntoViewIfNeeded();
+        expect(await caption.evaluate(el => {
+          const rect = el.getBoundingClientRect();
+          const hit = document.elementFromPoint(rect.left + rect.width / 2, rect.top + rect.height / 2);
+          return hit?.closest('[data-approach-screen]') === el.closest('[data-approach-screen]');
+        }), `Front caption obscured at ${width}px`).toBe(true);
         expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
       }
       for (const label of await page.locator('.approach-choice label').all()) {
@@ -822,7 +832,7 @@ test.describe('Section 07 — layered Approach', () => {
     await expect(page.locator('h1')).toHaveCount(1);
     await expect(page.locator('#studio h2')).toHaveText("A site nobody could mistake for anyone else's.");
     for (const image of await page.locator('.approach-screen img').all()) {
-      expect(await image.evaluate(el => el.complete && el.naturalWidth > 0)).toBe(true);
+      await expect.poll(() => image.evaluate(el => el.complete && el.naturalWidth > 0)).toBe(true);
     }
   });
 
@@ -853,4 +863,37 @@ test.describe('Section 07 — layered Approach', () => {
     await expect(page.locator('#studio h2')).toBeVisible();
     await context.close();
   });
+});
+
+
+test('Section 07 — unsupported selection CSS leaves a complete static layout', async ({ page }) => {
+  await page.route('**/assets/studio-home.css', async route => {
+    const response = await route.fetch();
+    const source = await response.text();
+    const start = source.indexOf('@supports selector(:has(*))');
+    expect(start).toBeGreaterThan(0);
+    let depth = 0;
+    let end = source.indexOf('{', start);
+    for (; end < source.length; end++) {
+      if (source[end] === '{') depth++;
+      if (source[end] === '}' && --depth === 0) { end++; break; }
+    }
+    await route.fulfill({ response, body: source.slice(0, start) + source.slice(end) });
+  });
+  await page.goto('/');
+  for (const width of [390, 1440]) {
+    await page.setViewportSize({ width, height: 1000 });
+    await expect(page.locator('.approach-select')).toBeHidden();
+    const figures = page.locator('.approach-screen');
+    await expect(figures).toHaveCount(3);
+    for (let i = 0; i < 3; i++) {
+      expect(await figures.nth(i).evaluate(el => getComputedStyle(el).position)).toBe('static');
+      const rect = await figures.nth(i).boundingBox();
+      if (i) {
+        const prev = await figures.nth(i - 1).boundingBox();
+        expect(rect.y).toBeGreaterThanOrEqual(prev.y + prev.height);
+      }
+    }
+    expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
+  }
 });
