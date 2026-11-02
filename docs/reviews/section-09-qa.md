@@ -1,0 +1,6 @@
+
+## Section 09 — Inside the studio, 2 November 2026
+
+Replaced the founder-only placeholder section with a team-led atelier story, an explicitly AI-generated fictional planning scene, and Ruben's exact promise: nothing ships without his review and feedback. Studio navigation now lands on #founder; the capability showcase remains #studio. No university affiliations, named team members or government material claimed. User-approved image retains its full 3:2 composition with lazy responsive WebP derivatives. No new scripts, motion, fonts or dependencies.
+
+Functional: all 72 automated checks passed (3.5 minutes), including two new section regressions and no-JavaScript coverage. Responsive: 13 widths from 320 to 2560px checked for overflow and full image framing; desktop1440/mobile390 visually inspected. WCAG2.1AA automated baseline passes; semantic section, visible image disclosure, descriptive alt and readable text retained. HTML validation and diff check passed. Full manual/multibrowser/assistive-tech QA and existing LCP target remain open; original opening timing unchanged. Opus remains pending per user; no new paid review call. Preview publication only; main and production unchanged.

@@ -843,3 +843,41 @@ test.describe('Section 08 — creative possibilities', () => {
     await context.close();
   });
 });
+
+
+test.describe('Section 09 — inside the studio', () => {
+  test('The planning scene and studio story remain fully framed and readable', async ({page}) => {
+    await page.emulateMedia({reducedMotion:'reduce'});
+    await page.goto('/');
+    for (const width of [320,375,390,430,640,641,768,900,901,1024,1440,1920,2560]) {
+      await page.setViewportSize({width,height:1000});
+      const section=page.locator('#founder');
+      await section.scrollIntoViewIfNeeded();
+      expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
+      for (const node of await section.locator('h2,p,figcaption').all()) {
+        expect(await node.evaluate(el => el.scrollWidth <= el.clientWidth + 1)).toBe(true);
+        const rect=await node.boundingBox();
+        expect(rect.x).toBeGreaterThanOrEqual(0);
+        expect(rect.x+rect.width).toBeLessThanOrEqual(width+1);
+      }
+      const image=section.locator('img');
+      await expect.poll(() => image.evaluate(el => el.complete && el.naturalWidth > 0)).toBe(true);
+      const imageBox=await image.boundingBox();
+      expect(imageBox.width/imageBox.height).toBeCloseTo(1.5,2);
+      expect(await image.evaluate(el => getComputedStyle(el).objectFit)).toBe('contain');
+    }
+    await expect(page.locator('#founder figcaption')).toHaveText('Illustrative studio scene, AI-generated.');
+    await expect(page.locator('#founder blockquote')).toContainText('Nothing gets shipped without my review and feedback.');
+    await expect(page.locator('.site-head nav').getByRole('link',{name:'Studio',exact:true})).toHaveAttribute('href','#founder');
+    await expect(page.locator('#founder img')).toHaveAttribute('alt',/five fictional developers/);
+    await expect(page.locator('img[src*="founder-placeholder"]')).toHaveCount(0);
+  });
+  test('The studio story and scene are available without JavaScript', async ({browser}) => {
+    const context=await browser.newContext({javaScriptEnabled:false,viewport:{width:390,height:844}});
+    const page=await context.newPage();await page.goto('/#founder');
+    await expect(page.locator('#founder h2')).toBeVisible();
+    await expect(page.locator('#founder figcaption')).toBeVisible();
+    await expect(page.locator('#founder .atelier-founder-name')).toHaveText('Ruben Ramdhony');
+    await context.close();
+  });
+});

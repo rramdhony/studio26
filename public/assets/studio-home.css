@@ -582,3 +582,35 @@
 .studio-home .possibilities{padding-top:48px}
 .possibilities .concept-disclosure{font-size:14px;padding:0 var(--px) 16px}
 .possibilities .study-head .wordmark{font-family:'Instrument Sans',Arial,sans-serif;font-style:normal}
+
+/* Section 09: a founder-led atelier, using an explicitly illustrative planning scene. */
+.studio-home .atelier { padding: clamp(64px, 7vw, 120px) var(--px); max-width: 1800px; margin: auto; color: #253047; }
+.studio-home .atelier-heading { display: grid; grid-template-columns: minmax(0, 1.45fr) minmax(0, 1fr); gap: clamp(32px, 6vw, 96px); align-items: end; margin-bottom: clamp(36px, 4.5vw, 64px); }
+.studio-home .atelier-label { font-size: 16px; margin-bottom: 22px; }
+.studio-home .atelier h2 { font-family: var(--sans); font-weight: 500; font-size: clamp(40px, 5.2vw, 76px); letter-spacing: -.055em; line-height: 1.05; max-width: 18ch; }
+.studio-home .atelier-intro p { font-size: clamp(18px, 1.45vw, 21px); line-height: 1.55; max-width: 43ch; }
+.studio-home .atelier-intro p + p { margin-top: 20px; }
+.studio-home .atelier-workspace { display: grid; grid-template-columns: minmax(0, 3fr) minmax(0, 1fr); gap: clamp(28px, 4vw, 64px); align-items: center; }
+.studio-home .atelier-scene { margin: 0; min-width: 0; }
+.studio-home .atelier-scene img { display: block; width: 100%; height: auto; aspect-ratio: 3 / 2; object-fit: contain; }
+.studio-home .atelier-scene figcaption { margin-top: 14px; font-size: 14px; line-height: 1.5; color: #414b60; }
+.studio-home .atelier-founder { border-top: 2px solid #475c89; padding-top: 26px; min-width: 0; }
+.studio-home .atelier-founder blockquote { margin: 0 0 30px; }
+.studio-home .atelier-founder blockquote p { font-family: var(--sans); font-size: clamp(25px, 2.4vw, 36px); font-weight: 500; line-height: 1.22; letter-spacing: -.035em; }
+.studio-home .atelier-founder-name { font-size: 18px; font-weight: 600; line-height: 1.4; }
+.studio-home .atelier-founder-role { font-size: 16px; line-height: 1.5; margin-top: 4px; color: #414b60; }
+@media (max-width: 900px) {
+  .studio-home .atelier-heading { grid-template-columns: minmax(0, 1fr); align-items: start; }
+  .studio-home .atelier-intro { max-width: 64ch; }
+  .studio-home .atelier-intro p { max-width: none; }
+  .studio-home .atelier-workspace { grid-template-columns: minmax(0, 1fr); gap: 32px; }
+  .studio-home .atelier-founder { max-width: 620px; }
+}
+@media (max-width: 640px) {
+  .studio-home .atelier { padding-top: 56px; padding-bottom: 56px; }
+  .studio-home .atelier-label { margin-bottom: 18px; }
+  .studio-home .atelier-heading { gap: 26px; }
+  .studio-home .atelier-intro p { font-size: 18px; }
+  .studio-home .atelier-founder blockquote { margin-bottom: 22px; }
+  .studio-home .atelier-founder blockquote p { font-size: 29px; }
+}
