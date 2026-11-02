@@ -139,3 +139,59 @@ Three versioned alpha WebPs built from generated transparent derivative; source 
 ### Preview publication — Section 10
 Final website source6fd0546, WorkerVersion5bded5f8-939f-41a5-94c8-043ce5a60745. Initial implementation5fa9d0f/versionf7048cbc-b5bb-4032-8a2f-c99415640ff2 was followed by a small reload-history refinement: restoring an open modal after refresh avoids an extra owned-history entry. All3section10checks passed8.1s after that change, including reload/Escape/Back/Forward/focus and noJS/failure fallback. Full73regressions had passed3.4min immediately before that scoped refinement. Exact final git-archive snapshot ../tooling/deployments/preview-footer-6fd0546 excludes public/studies and local secrets. Dry run succeeded, phase-1-site pushed; no main merge/push.
 All5new/changedCSS/JS/logo assets byte-match final snapshot, homepage has newfooter/header and no oldform, studies404, liveUI verified including choice response/close and full logo. Report ../tooling/reports/section-10-deploy-verified.json, previousdeployments/parallelpreflight alongside. Production canonicalHTML matches unchangedmain/pre-deployteaser, remote mainca57ee40c135ca3c0b7a60a0a800632b3511dc63. WorkerJS unchanged6.41KiB, no DNS/routes/secrets/vars/remoteDB changes; keep-vars preserves configuration. Rollback reference last approved pre-footer previewf862ad65-91ec-466e-b728-965cc6e9667b. Opus stillpending; fullmanualQA/LCPtarget remainopen. Review preview only, no liveAI chatbot or production launch claim. Live tab https://studio26-site.ruben-ramdhony.workers.dev/#contact ; screenshots studio26-footer-live.jpg and conversation-preview-live.jpg in current Codex visualizations folder.
+
+
+## Unified Preview Build, Legal/DPA 2017, USD Pricing, SEO/GEO & Button/Nav Polish — 2 November 2026 (Antigravity / Argon)
+
+### Summary of Completed & Deployed Changes (Worker Version `c88b15f7-8922-4796-aa6b-77dd9df6e97a`)
+
+1. **Mandatory Backup Created First:**
+   - Git branch `backup/pre-argon-fixes-7b4f4f8` and full snapshot at `C:\Users\ruben\Downloads\studio26\backups\20261102-2251-7b4f4f8`.
+2. **Explicit Navigation & Commercial Service Titles (`/`, `/ai-video`, `/privacy`):**
+   - Header (`<ul class="nav-list">`) and footer (`<nav aria-label="Footer navigation">`) across all pages updated to **`Websites & AI chatbots`** (`/#work`), **`AI video ads & films`** (`/ai-video`), **`Studio`** (`/#founder`), and **`Contact`** (`/#contact`).
+   - Homepage Section 02 (`#work`) heading updated to **`Selected websites`**; Section 03 (`#services`) service card titles updated to **`Websites & AI chatbots`** and **`AI video ads & films`**.
+3. **Approved USD Pricing & Commercial Terms (Option A Dual Website Pricing):**
+   - `data-price="website"`: `$2,500`
+   - `data-price="website-ai"`: `$4,000` (Website + dedicated AI assistant)
+   - `data-price="ai-monthly"`: `$95` a month (hosting, content updates, and up to 1,000 visitor chats)
+   - `data-price="video"`: `$450` (one-off AI video ad)
+   - `data-price="video-starter"`: `$750` / month (2 multi-format ads/mo)
+   - `data-price="video-growth"`: `$1,350` / month (4 multi-format ads/mo + 2 hook variations)
+   - `data-price="video-always"`: `$2,400` / month (8 multi-format ads/mo + quarterly campaign film)
+   - `data-term="usage"`, `data-term="turnaround"` (`Five to seven working days`), and `data-term="plan"` populated in `public/ai-video.html` and verified by `.github/qa/qa.spec.js`.
+4. **Legal, Privacy & Accessibility Page (`public/privacy.html`):**
+   - Rebuilt in `.studio-home` design system with self-hosted `Instrument Sans` covering the **Mauritius Data Protection Act 2017 (Act No. 20 of 2017)**, **WCAG 2.1 Level AA Accessibility Statement** (`#accessibility`), and **Website & Creative Terms** (`#terms`).
+5. **Award-Inspired Gradient Button System & Founder LinkedIn Badge:**
+   - Added brushed-chrome & deep-cobalt gradient CTAs across `public/assets/studio-home.css` and `public/assets/ai-video.css`.
+   - Added Ruben's LinkedIn profile badge (`https://www.linkedin.com/in/rubenramdhony/`, `.atelier-linkedin`) next to `Ruben Ramdhony` (`Founder and mentor`) in Section 09 (`#founder`).
+6. **SEO & AI Search (GEO) Architecture:**
+   - Added `Schema.org` `ProfessionalService` + `OfferCatalog` + `Person` JSON-LD to `public/index.html` and `Service` + `Offer` JSON-LD to `public/ai-video.html`.
+   - Created `public/llms.txt`, `public/robots.txt`, and `public/sitemap.xml`.
+7. **Performance & Interaction Polish:**
+   - Responsive `768w` mobile WebP hero assets (`studio26-complete-v1-768.webp`, `sculpture-26-v1-768.webp`) cutting mobile hero payload by ~69%.
+   - Fine-pointer desktop parallax on `.opening-stage`, 3.2s playhead + radial sheen on `.av-ad`, `:user-invalid` ARIA sync in `public/assets/site.js`, and `<dialog class="studio-chat">` backdrop light-dismiss in `public/assets/studio-conversation.js`.
+8. **QA & Live Verification:**
+   - `html-validate` exited `0` across `public/index.html`, `public/ai-video.html`, and `public/privacy.html`.
+   - Playwright Pillar 1, 2, and 3 (`27/27` tests), `services`, `Section 09`, `Header items`, and `6/6` `axe-core` WCAG 2.1 AA audits passed with zero errors.
+   - Deployed to https://studio26-site.ruben-ramdhony.workers.dev/ (Version `c88b15f7-8922-4796-aa6b-77dd9df6e97a`).
+
+
+## Claude Code & Codex Pre-Launch Audit Fixes — 3 November 2026 (Antigravity / Argon)
+
+Deployed to https://studio26-site.ruben-ramdhony.workers.dev/ (Worker Version `a33185de-66f0-4ae7-b31c-ffcda8ed2396`) and committed/pushed to `origin/phase-1-site`:
+
+1. **HTTP 206 Partial Content Range Seeking (`src/index.js` & `wrangler.toml` — Codex R1):**
+   - Added `run_worker_first = ["/video/*", "/api/*"]` in `wrangler.toml` and `handleVideoRange()` in `src/index.js`, returning `206 Partial Content`, `Content-Range`, and `Accept-Ranges: bytes` for all `/video/*` films (`egypt-trailer.mp4`, `maison-film.mp4`, `kestrel-film.mp4`). Verified live (`Content-Range: bytes 0-1023/8200303`).
+2. **Mauritius Data Protection Act 2017 Statutory Corrections & Truthful Current Processing (`public/privacy.html` — Claude #1, #2, #5, #11 & Codex R2, R3, R6):**
+   - Corrected statutory citations to **Part VII (Sections 37 to 41)** for data subject rights, **Section 37(2)** (**one month** response period, extendable by up to two months), and **Section 6 & Section 37(6)** for complaints to the Data Protection Commissioner (`dpo@govmu.org`).
+   - Distinguished **current live processing** (direct email enquiries and zero-cookie static browsing) from **Ash & online project brief submissions (when enabled)**.
+   - Fixed raw backticks (`375px`, `4.5:1`, `3:1` -> `<code>`), applied sentence-case headings and UK English (`behavioural`, `labelled`), and added `min-width: 0` on `.legal-grid` children so `/privacy` has zero horizontal scroll down to `320px` (WCAG 1.4.10 Reflow).
+3. **Film Modal Landscape Containment, Browser Back History & Mobile Typography (`public/assets/ai-video.js`, `public/assets/ai-video.css` — Codex R4, R5, R8, R9):**
+   - Added `history.pushState` / `popstate` support to `dialog.av-player` so pressing Browser Back closes the open film player and remains on `/ai-video`.
+   - Made `.av-player` viewport-constrained and scrollable (`max-height: calc(100dvh - 24px); overflow-y: auto`) so the caption and controls remain accessible in `844×390` landscape.
+   - Bumped `.av-spot-text .av-credit` from `13px` to `14px` and enlarged the mobile (`<= 599px`) 3-format brand preview text inside `.av-ad`.
+4. **Usage Rights, Visible USD Currency Note, Mobile Preload, OpenGraph & HSTS (`public/index.html`, `public/ai-video.html`, `public/_headers` — Claude #3, #4, #7, #8, #9, #10 & Codex R7):**
+   - Scoped standard usage rights to web, social, and paid digital channels (Meta, TikTok, YouTube, LinkedIn, and the web), with broadcast TV/cinema clearance quoted per campaign.
+   - Added visible `All prices in USD (MUR invoicing available on request)` notes beneath pricing on `/` and `/ai-video`.
+   - Set `imagesizes="(max-width: 640px) 380px, 100vw"` / `sizes="(max-width: 640px) 380px, 100vw"` on `#introComplete` so 2x mobile screens preload `studio26-complete-v1-768.webp` (`34 KB`) instead of `1536w` (`109 KB`).
+   - Added `og:image`, `rel="canonical"`, `Strict-Transport-Security`, and replaced the nested `<aside class="atelier-founder">` with `<div role="group">`.

@@ -1,72 +1,56 @@
-# Ask Studio26: assistant knowledge base (draft v0.1)
+# Ash — Studio26 Assistant Knowledge Base (v1.0)
 
-Source content for the website assistant. Answers must come only from approved
-text like this, with a source link. Items marked [TO CONFIRM] must be confirmed
-by Ruben before the assistant goes live; until then the assistant says it does
-not have that information and offers the contact route.
-
-Prepared by Claude, 31 Oct 2026, from the live homepage copy and the brand plan.
+Source content for **Ash**, the Studio26 website assistant. Answers must come only from approved text like this, with a source link.
 
 ## About Studio26
 
-- Independent design and motion studio based in Mauritius, working with
-  clients anywhere, remotely.
-- Founder-led: clients work directly with Ruben Ramdhony from first call to
-  launch. Studio26 takes on a few projects at a time.
-- Contact: hello@studio26.me, or book a free 30-minute discovery call.
-- Business registration: [TO CONFIRM once the Studio26 business name is
-  registered].
+- Independent design and motion studio based in Mauritius, working with clients anywhere, remotely.
+- Founder-led atelier: emerging developers bring their ideas and skills to real client projects with close mentoring and direct review from founder Ruben Ramdhony ("Nothing gets shipped without my review and feedback.").
+- Contact: `hello@studio26.me`, or start a project conversation on `studio26.me`.
 
-## Services
+## Services & Pricing (USD)
 
-### Websites
-- Designed from scratch around the client's business and hand-built.
-- Includes: a visual identity for the site built on the client's brand (not a
-  theme), copy written in the client's voice, motion where it earns its place,
-  accessibility testing on real devices, hosting on Cloudflare's network.
-- Optional: an "Ask" assistant that answers visitor questions from the
-  client's approved pages and documents (see Website assistant).
-- Price: [TO CONFIRM]. Until confirmed, the assistant must not quote a price.
+### 1. Websites & Dedicated AI Assistants (`/#services`)
+- Designed from scratch around the client's business, hand-built, fast on any phone, and optionally paired with a dedicated AI assistant trained on the client's business.
+- Includes:
+  - A look built on your brand, not a theme
+  - Copy that sounds like you
+  - Motion where it earns its place
+  - Accessible (WCAG 2.1 Level AA) and tested on real devices
+  - Hosted on Cloudflare's global edge network
+  - Optional dedicated AI chatbot to answer queries, capture leads, and book calls 24/7
+- **Pricing:**
+  - **Custom Website:** From **$2,500** (USD).
+  - **Website with Dedicated AI Assistant:** From **$4,000** (USD) + **$95 a month** for AI assistant care & usage (includes Cloudflare hosting, monthly content/knowledge updates, and up to **1,000 visitor chats a month**).
 
-### AI video ads
-- Short ads for social and the web, made with AI and motion design, in the
-  client's brand.
-- Includes: script and storyboard, vertical and horizontal cuts, the client's
-  colours, type and logo, versions for different audiences from one template.
-- Media buying and ad spend are not included unless separately agreed.
-- Price: [TO CONFIRM].
+### 2. AI Video Ads (`/ai-video`)
+- Short ads for Reels, TikTok, Shorts and YouTube, made with AI, 3D and motion design, and finished by hand in Mauritius.
+- Every client gets a reusable brand template (colours, type, logo, pacing) delivered in **9:16** (vertical), **4:5** (feed), and **16:9** (landscape), with captions in English or French.
+- **Monthly Plans:**
+  - **Starter — $750 / month:** Two new ads a month, every ad in 9:16, 4:5 and 16:9, captions in English or French, one round of changes per ad.
+  - **Growth — $1,350 / month:** Four new ads a month, everything in Starter, a 6-second cut-down of every ad, versions for different audiences or offers, and a monthly content plan agreed with you.
+  - **Always on — $2,400 / month:** Eight new ads a month (delivered weekly), everything in Growth, a seasonal campaign film each quarter, and priority turnaround.
+- **One-off ads:** From **$450** (USD).
+- **Longer films, documentaries and explainers:** Quoted per project and can include a companion website built around the film (e.g., *Ancient Egypt Chronicles* at `egypt.studio26.me`).
+- **Turnaround:** **Five to seven working days** from the brief to the first ad; subsequent monthly ads arrive on an agreed schedule.
+- **Usage rights:** Full commercial and paid-media rights across web, social and paid digital channels (Meta, TikTok, YouTube, LinkedIn and the web) once paid for, with broadcast TV or cinema clearance quoted per campaign. Any stock footage or music stays under its commercial ad-cleared licence.
+- **Plan flexibility:** Rolling monthly plans: switch tiers, pause or cancel with 7 days' notice before your next billing cycle.
+- **Currency:** All published prices are in USD; Mauritian Rupee (MUR) invoicing is available on request.
 
-### Website assistant
-- A branded assistant that answers from approved website pages and PDFs,
-  shows its sources, and guides visitors to an enquiry or booking link.
-- Quoted as setup plus monthly care (hosting, usage, content refresh, review).
-- No accuracy or uptime guarantee is implied.
-- Price: [TO CONFIRM].
+### 3. Website Assistant (like Ash)
+- A branded AI assistant that answers visitor questions from approved website pages and documents, shows sources, and guides visitors to book a call or send an enquiry.
+- Quoted as setup plus monthly care during the discovery call.
 
-### Awareness and explainers
-- In the brand plan, not yet on the website. [TO CONFIRM whether to offer at
-  launch.] Until confirmed, the assistant should not offer it.
+## How a Project Works
 
-## How a project works
+1. **Discovery call:** Free 30-minute call about your business, your customers, and what the site or campaign needs to do.
+2. **Direction / Template:** A visual direction made for you—palette, type, and the one idea people will remember.
+3. **Build / Monthly Ads:** Hand-built and tested for speed, accessibility and real phones before launch (or delivered monthly in all three formats for video plans).
+4. **Launch & Review:** We launch, check how it performs, and stay on hand for changes.
 
-1. Discovery call: free, 30 minutes, about the business, its customers and
-   what the site needs to do.
-2. Direction: a visual direction made for the client (palette, type and the
-   one idea people will remember).
-3. Build: hand-built and tested for speed, accessibility and real phones
-   before the client sees it live.
-4. Launch: launch, check performance, stay on hand for changes.
+## Guardrails for Ash
 
-## Suggested questions for the demo
-
-- "What does a website project include?"
-- "Can you make video ads for my business?"
-- "How do I arrange a call?"
-- "Can you add an assistant like this to my site?"
-
-## The assistant must not
-
-- Quote prices, timelines or availability not written here.
-- Name clients or results beyond the approved Selected work list.
-- Imply any government body endorses Studio26.
-- Collect contact details before answering an ordinary question.
+- Quote only the published starting prices and plan tiers listed above; always note that bespoke scope is confirmed after a free discovery call.
+- Never name clients or claim results beyond the approved Selected Work list (*Arizen Africa*, *Mauritius Global Diaspora*, *mauRadio*, *AI Unit — Ministry of IT*, *NexTalent Africa*, *AWI Partners*) and explicitly label concept worlds (*marée*, *Volume*, *Zest.*, *Maison Filaos*, *Kestrel*) as original Studio26 fictional concepts.
+- Never imply any government body endorses Studio26.
+- Never demand contact details before answering an ordinary question.

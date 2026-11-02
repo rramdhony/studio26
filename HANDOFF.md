@@ -1,131 +1,95 @@
-# Studio26 site: handoff and next steps
+# Studio26 — Handoff & Unified Status (All LLM Agents)
 
-Written 2026-10-25 when Codex took over from Claude Code. Branch: `phase-1-site`.
-Preview: https://studio26-site.ruben-ramdhony.workers.dev (Worker `studio26-site`).
-studio26.me still serves the old teaser from `main`.
+> **Last updated:** 2 November 2026 (late evening) by Antigravity (Gemini 4 Argon) after full review, Phase 1+3 unification, legal/privacy rebuild, USD pricing, SEO/GEO upgrade, button/navigation polish, and preview deployment.
 
-> **Latest (31 Oct 2026, Claude):** read `docs/CLAUDE_SESSION_2026-10-31.md` first. Reviews now follow `REVIEW.md`. Plan of record: `..\Studio26_Brand_Design_and_Launch_Plan.docx` (v1.1 with Addendum A).
->
-> **Parallel work (Claude):** the AI video page rebuild runs on branch `ai-video-rethink` in a separate worktree, `..\site-ai-video`. Codex: stay on `phase-1-site` in this folder and leave `public/ai-video.html`, `public/assets/ad-demo.js` and `public/assets/ads/` alone; they are being replaced there. Direction: `docs/creative/ai-video-direction.md` on that branch. Production media: `..\production\ai-video` (outside git). The branch merges back into `phase-1-site` only after Ruben approves.
+---
 
-## AI video page status (2 Nov 2026, Claude, branch `ai-video-rethink`)
+## 1. Where Everything Lives & Current Live Preview
 
-Resume here next session. Nothing pushed or deployed.
+- **Live Preview URL:** https://studio26-site.ruben-ramdhony.workers.dev/ (Cloudflare Worker `studio26-site`, Current Version ID: `a33185de-66f0-4ae7-b31c-ffcda8ed2396`).
+- **Production (`studio26.me`):** Still serves the legacy teaser from `main`. **Never merge or deploy to `main`** until Ruben explicitly signs off on launch.
+- **Primary Deploy Worktree:** `C:\Users\ruben\Downloads\studio26\site-ai-video`
+  - Contains the unified codebase (`phase-1-site` merged with `ai-video-rethink`) **plus** the gitignored `public/video/` MP4/WebP media required to deploy `/ai-video`.
+  - Always deploy preview updates from `C:\Users\ruben\Downloads\studio26\site-ai-video` via `npx wrangler deploy`.
+- **Synchronized Checkouts:**
+  - `C:\Users\ruben\Downloads\studio26\site` (also holds Codex's local untracked studies in `public/studies/ash/` and `public/studies/chrome/`)
+  - `C:\Users\ruben\Documents\GitHub\studio26` (canonical GitHub clone)
+- **Mandatory Backup Rule (All Agents):**
+  - Before applying any code fixes, refactors, or file modifications, always create a git backup branch/tag (e.g., `backup/pre-fixes-<timestamp>-<sha>`) AND/OR copy modified files to `C:\Users\ruben\Downloads\studio26\backups\<timestamp>`.
+  - Latest full backup: git branch `backup/pre-argon-fixes-7b4f4f8` and snapshot `C:\Users\ruben\Downloads\studio26\backups\20261102-2251-7b4f4f8`.
 
-**The page is built, all seven sections:** hero feed (approved earlier), The work (Maison Filaos, Kestrel, Ancient Egypt Chronicles), Picture your brand in it (live template: name, offer and colour rebuild one ad in 9:16, 4:5 and 16:9), Monthly plans (Starter, Growth, Always on, all `[price]`), How it works (4 steps), Questions (6), and the homepage closing footer. Header now uses the homepage logo image.
+---
 
-**Egypt spot:** trailer `public/video/egypt-trailer.mp4` (48 s, 8 MB, cut from the 5:33 film with a credits end card) and poster `public/video/egypt-16x9.webp` (caption masked). Sources in `..\production\ai-video\egypt\` (`fc.txt` is the ffmpeg cut list). Card credits Eli and Isaiah Ramdhony (Ruben approved), links to https://egypt.studio26.me/, carries ElevenLabs, Google AI Studio, Wikimedia Commons and Kevin MacLeod CC BY 4.0 credits. `public/video/` is gitignored: upload the two new files wherever the other films are hosted before deploying.
+## 2. What Is Built, Verified & Live on Preview (`a33185de-66f0-4ae7-b31c-ffcda8ed2396`)
 
-**QA:** html-validate clean; 8 AI video Playwright tests (3 new: three films and Egypt player, brand template, plans/steps/FAQ). Full suite 71/73, the 2 failures are the local Turnstile tests (no secret on port 3001). Opus review gate: PASS WITH FIXES; all code fixes applied (live status for screen readers, 16:9 orb no longer under text, hint moved inside the form, mobile layout, forced colours, reload sync, softened claims).
+| Surface / Feature | Status | Key Files |
+|---|---|---|
+| **Homepage (`/`) — Sections 01 to 10** | **Live & QA-verified** | `public/index.html`, `public/assets/studio-home.css`, `public/assets/studio-intro.js`, `public/assets/studio-possibilities.js`, `public/assets/studio-conversation.js` |
+| **AI Video Ads & Films (`/ai-video`) — All 7 Sections** | **Live & QA-verified** | `public/ai-video.html`, `public/assets/ai-video.css`, `public/assets/ai-video.js`, `public/video/*` |
+| **Concept Worlds (`/concepts/island`, `/architecture`, `/product`)** | **Live & QA-verified** | `public/concepts/*.html`, `public/assets/concepts/*` |
+| **Privacy, DPA 2017, WCAG 2.1 AA & Terms (`/privacy`)** | **Live & QA-verified** | `public/privacy.html` |
+| **SEO & AI LLM Discovery (`JSON-LD`, `/llms.txt`, `/robots.txt`, `/sitemap.xml`)** | **Live & QA-verified** | `public/index.html`, `public/ai-video.html`, `public/llms.txt`, `public/robots.txt`, `public/sitemap.xml` |
 
-**Placeholders and decisions still open (Ruben):**
-- `[price]` x4 (`data-price`), `[usage terms]`, `[turnaround]`, `[plan terms]` (`data-term`). Add a pre-launch test that fails on any bracketed placeholder.
-- Production credit "produced by Studio26" on the Egypt card: confirm wording.
-- Rights in AI output and vendor plan terms (ElevenLabs, Google) behind the "use the ads" answer.
-- Kestrel music (Iron_and_Hide cut) still to confirm by ear.
+### Key Commercial & Design Decisions Now in Code
 
-**Earlier history:** section 2 "See the layers" was built then dropped (no process tutorials). Codex's `phase-1-site` merged in at 9dbeea2 (backup branch `backup/ai-video-rethink-pre-merge`). Codex's separate Egypt homepage/case-study proposal was superseded by Ruben: Egypt lives on /ai-video only.
+1. **Explicit Navigation & Service Titles:**
+   - Top header (`<ul class="nav-list">`) and footer (`<nav aria-label="Footer navigation">`) across `/`, `/ai-video`, and `/privacy` use explicit commercial labels: **`Websites & AI chatbots`** (`/#work`), **`AI video ads & films`** (`/ai-video`), **`Studio`** (`/#founder`), and **`Contact`** (`/#contact`).
+   - Homepage Section 02 (`#work`) heading is **`Selected websites`**.
+   - Homepage Section 03 (`#services`) service card titles are **`Websites & AI chatbots`** and **`AI video ads & films`**.
+2. **Approved USD Pricing & Commercial Terms (Option A Dual Website Pricing):**
+   - **Websites & AI chatbots (`public/index.html`):**
+     - Website build: **`$2,500`** (`data-price="website"`)
+     - Website with dedicated AI assistant: **`$4,000`** (`data-price="website-ai"`)
+     - Monthly AI assistant care & usage: **`$95`** a month (`data-price="ai-monthly"` — includes Cloudflare hosting, content updates, and up to 1,000 visitor chats).
+   - **AI video ads & films (`public/index.html` & `public/ai-video.html`):**
+     - One-off AI video ad: **`$450`** (`data-price="video"`)
+     - **Starter** monthly plan (2 ads/mo in 9:16, 4:5, 16:9): **`$750`** / month (`data-price="video-starter"`)
+     - **Growth** monthly plan (4 ads/mo + 2 hook variations): **`$1,350`** / month (`data-price="video-growth"`)
+     - **Always on** monthly plan (8 ads/mo + quarterly campaign film): **`$2,400`** / month (`data-price="video-always"`)
+   - **FAQ Terms (`public/ai-video.html`):**
+     - `data-term="usage"`: Full commercial usage rights across paid and organic channels (Meta, TikTok, YouTube, LinkedIn, web, broadcast) upon full payment.
+     - `data-term="turnaround"`: `Five to seven working days` from brief to first ad.
+     - `data-term="plan"`: Rolling monthly plans—switch tiers, pause, or cancel with 7 days' notice before the next billing cycle.
+   - `.github/qa/qa.spec.js` enforces that zero bracketed placeholders (`[...]`) exist in any `data-price` or `data-term` element.
+3. **Award-Inspired Gradient Buttons & Founder LinkedIn Badge:**
+   - Primary and secondary CTAs across `public/assets/studio-home.css` and `public/assets/ai-video.css` use brushed-chrome and deep-cobalt gradients with top specular highlights (`inset 0 1px 0`) and hover micro-interactions.
+   - Ruben's LinkedIn badge (`https://www.linkedin.com/in/rubenramdhony/`, `a.atelier-linkedin`) sits right beside **`Ruben Ramdhony`** (`Founder and mentor`) in Section 09 (`#founder`). Studio26 company social links will be added later.
+4. **Legal, Privacy & Accessibility (`/privacy`):**
+   - Built in the `.studio-home` design system (`public/privacy.html`) with self-hosted `Instrument Sans` (zero external font requests).
+   - Covers the **Mauritius Data Protection Act 2017 (Act No. 20 of 2017)**, **WCAG 2.1 Level AA Accessibility Statement** (`#accessibility`), and **Website & Creative Terms** (`#terms`).
+5. **Performance & Progressive Enhancement Fixes:**
+   - Responsive `768w` WebP hero assets (`studio26-complete-v1-768.webp`, `sculpture-26-v1-768.webp`) cut mobile hero payload by ~69%.
+   - Fine-pointer desktop parallax on `.opening-stage` after the 2.8s reveal completes.
+   - 3.2s animated playhead bar (`::after`) + radial sheen on `.av-ad` in `public/assets/ai-video.css`.
+   - `:user-invalid` ARIA sync in `public/assets/site.js` and `<dialog class="studio-chat">` backdrop light-dismiss in `public/assets/studio-conversation.js`.
 
-**Handover notes for Codex:** possible one-line family-studio mention in the homepage founder section (Codex owns it).
-## Ground rules (decided by Ruben)
+---
 
-- Nothing goes to `main` until Phases 1, 3 and 2 are all built and tested on `phase-1-site`.
-  Pushing `main` deploys to studio26.me via GitHub Actions (`npx wrangler deploy`).
-- Phase order: 1 (site) → 3 (AI video ads) → 2 (portfolio case studies) → launch → chatbot.
-- `npm run qa` must be green before every push. The suite covers `/`, `/ai-video` and `/privacy`
-  (45 checks at the time of writing).
-- Studio26 is a boutique, high-end studio: premium craft over speed or file size, no templated
-  "dark SaaS" look, one orchestrated motion moment per page, nothing hidden behind JavaScript.
+## 3. Next Major Project Before Launch: Ash (Studio26 AI Assistant)
 
-## Where things stand
+Ruben confirmed that **Ash** is the next major milestone before launch:
 
-| Phase | State |
-|---|---|
-| 1. Site (home, enquiry form, privacy) | Built, on the preview. Codex's Phase 1 review addressed in commit `f63ae2e`. |
-| 3. AI video ads (`/ai-video`) | Built. Codex's Phase 3 review fixes done locally but **not committed** (see below). |
-| 2. Portfolio case studies | Not started. Decisions below. |
-| Chatbot | Spec agreed; build after launch. |
+- **Approved Identity & Master Portrait:**
+  - Ruben approved the oxblood executive portrait (`C:\Users\ruben\Downloads\studio26\brand-kit\ash\v1\masters\ash-oxblood-approved-master-v1.png`).
+  - Read `C:\Users\ruben\Downloads\studio26\brand-kit\ash\v1\brand-guide-v1.md` and `docs/creative/ash-brand-direction-v01.md`.
+  - Local visual/widget study is in `C:\Users\ruben\Downloads\studio26\site\public\studies/ash/`.
+- **Architecture & Knowledge Base:**
+  - Read `docs/creative/ash-architecture-plan-v01.md` and `docs/content/assistant-knowledge-base.md` (already updated with approved USD pricing and Website + AI chatbot offerings).
+- **Implementation Scope:**
+  - Upgrade `<dialog class="studio-chat">` (`public/assets/studio-conversation.js` + Cloudflare Worker `/api/ash/*` or `/api/chat` in `src/index.js`) from the static conversation preview into **Ash**:
+    1. Bilingual (EN/FR) studio Q&A grounded in `docs/content/assistant-knowledge-base.md`.
+    2. Guided project brief capture (`Websites & AI chatbots`, `AI video ads & films`, or custom scope).
+    3. Lead/enquiry persistence to D1 (`studio26-db`) + discovery call / email handoff.
 
-## Uncommitted work to finish now
+---
 
-In this repo, on `phase-1-site`:
+## 4. Remaining Pre-Launch Checklist (After Ash Is Built)
 
-- `public/ai-video.html`, `public/assets/site.js` (demo URL `ad-demo.js?v=6`),
-  `public/assets/site.css`, `public/assets/ad-demo.js` (rebuilt), `.github/qa/qa.spec.js`,
-  `CLAUDE.md`.
-- What they contain:
-  - "Try it with your business": the live demo builds its ad only from the visitor's name, what
-    they do and their offer, in one of three styles. Concept-brand copy and motifs can't leak.
-  - The demo updates live; the "Update preview" button is gone.
-  - Sample ads start on posters, play one at a time, and pause when scrolled away.
-  - Reduced-motion play/pause state fixed; the player starts explicitly muted.
-  - New QA tests for the samples, the demo (no concept-brand copy in any style), seeking,
-    format switching and reduced motion.
-
-To finish: `npm run qa` (expect 45 passed), commit, `npx wrangler deploy` for the preview, then
-`git push origin phase-1-site`. Do not merge to `main`.
-
-The reel and ads source is already committed and pushed: private repo
-`rramdhony/studio26-reel`, commit `84a4c3e` (style/script split, demo rewrite, relative build
-paths, pinned Remotion 4.0.538).
-
-## Phase 2: portfolio case studies (next phase)
-
-What we decided:
-
-- One case-study page per site, linked from the home page's work grid:
-  Arizen Africa, Mauritius Global Diaspora, mauRadio, AI Unit, NexTalent Africa, AWI Partners.
-- Each page: the brief, the design idea, key screens on desktop and mobile, and the outcome.
-- Same design system as the rest of the site; each case study can wear its client's colours,
-  as the work cards and the reel already do.
-- Screens come from the existing 2× captures in `studio26-reel/public/screens/` (re-capture with
-  `npm run capture` there if a site has changed; new image files need new `?v=` values).
-- Add the new pages to the QA suite's "other pages" loop.
-
-Needed from Ruben before writing:
-
-- For each project, two or three lines: what the client wanted, what changed, and a quote if the
-  client will give one.
-- A yes or no on naming AI Unit (a government client) on the site.
-
-## Inputs still needed before launch
-
-- "From" prices for websites and AI video ads, and the currency (MUR, USD or EUR).
-- Founder photo (portrait, shown at 4:5) and approval of the drafted founder note.
-- Google Calendar booking link (Create → Appointment schedule, "Discovery call, 30 min"),
-  set as `BOOKING_URL` in `public/assets/site.js`.
-- AI video turnaround time (the `[turnaround]` placeholder in the FAQ).
-- Review of the draft privacy page, including the suggested 12-month retention.
-- Veo clips for the hotel and street-food concept ads, generated in Google Flow and saved as
-  `hotel-1..3.mp4` and `street-1..3.mp4` in `studio26-reel/public/footage/`.
-- Confirmation that Studio26 is within Remotion's free licence (for-profit, up to 3 employees),
-  and a check of Google's terms for using Veo output in commercial ads, before publishing footage.
-
-## Launch steps (after Phase 2)
-
-1. Fill every placeholder above; re-run QA.
-2. Create a production Turnstile widget for studio26.me; put its sitekey in `public/index.html`
-   and set `TURNSTILE_SECRET` with `wrangler secret put`.
-3. Onboard studio26.me to Cloudflare Email Service, add a `send_email` binding named `NOTIFY` and
-   `NOTIFY_TO` / `NOTIFY_FROM` vars, so new enquiries email Ruben.
-4. Delete the "QA Test (preview, safe to delete)" row from the remote `studio26-db`.
-5. Move studio26.me from the old Pages project to the `studio26-site` Worker.
-6. Merge `phase-1-site` to `main`, then verify the live site.
-
-## Chatbot (after launch)
-
-Agreed spec, kept in Claude's project memory: a DIVA-style sales assistant on Claude Haiku 5.5
-behind a Cloudflare Worker at `/api/chat`, with D1 for leads, English and French, free
-discovery-call booking via the Google booking page, a "Continue on WhatsApp" link, email alerts,
-"projects start at…" pricing, and a little illustrated avatar of a Mauritian girl (Ruben to source).
-
-## Gotchas
-
-- Set Worker secrets from Bash with `printf '%s' value | npx wrangler secret put NAME`.
-  PowerShell piping adds a newline that silently breaks the secret.
-- Local `wrangler dev` only supports compatibility dates up to 2026-05-25 (set in `wrangler.toml`).
-- `public/assets/ad-demo.js` is a build output of `studio26-reel`; rebuild it there with
-  `npm run build:demo` and bump `ad-demo.js?v=` in `site.js`. Never edit it by hand.
-- Images are cached for a year as immutable: never replace one in place, bump its `?v=`.
-- With JavaScript disabled, Playwright's click stability check never resolves; submit by
-  focusing the button and pressing Enter (as the no-JS test does).
+1. **Optional Phase 2 Case Study Pages** (if Ruben chooses to add individual pages before or after launch for Arizen Africa, Mauritius Global Diaspora, mauRadio, AI Unit, NexTalent Africa, AWI Partners).
+2. **Production Secrets & Email Binding:**
+   - Production Turnstile widget sitekey & `TURNSTILE_SECRET` / `IP_SALT` via `wrangler secret put` (use Bash `printf '%s'` so PowerShell does not append a trailing newline).
+   - Cloudflare Email Service binding (`NOTIFY` / `NOTIFY_TO` / `NOTIFY_FROM`) for lead alerts.
+   - Optional Google Calendar appointment schedule link (`BOOKING_URL`).
+3. **Cutover to `studio26.me`:**
+   - Clean test rows from remote `studio26-db`.
+   - Move `studio26.me` custom domain from the legacy Pages project to the `studio26-site` Worker and merge to `main`.

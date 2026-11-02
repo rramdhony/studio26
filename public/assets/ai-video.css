@@ -109,7 +109,7 @@ html:has(.av-player[open]) { overflow: hidden; }
 .av-spot-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 26px; }
 .av-visit { display: inline-flex; align-items: center; min-height: 48px; color: #f6f3ee; font-size: 16px; font-weight: 500; text-underline-offset: 5px; }
 .av-visit::after { content: '\2197'; margin-left: 8px; }
-.av-spot-text .av-credit { margin: 22px 0 0; max-width: 62ch; font-size: 13px; line-height: 1.55; color: #a9afbb; }
+.av-spot-text .av-credit { margin: 22px 0 0; max-width: 62ch; font-size: 14px; line-height: 1.55; color: #a9afbb; }
 @media (min-width: 900px) {
   .av-spot-doc {
     grid-column: 1 / -1; display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); gap: clamp(32px, 4vw, 64px); align-items: center;
@@ -156,12 +156,16 @@ html:has(.av-player[open]) { overflow: hidden; }
 .av-format-label { margin: 12px 0 0; font-size: 14px; color: #414b60; }
 .av-ad {
   container-type: inline-size; position: relative; overflow: hidden; display: flex; flex-direction: column; justify-content: flex-end;
-  padding: 8%; border-radius: 14px; background: var(--ad-bg); color: var(--ad-fg);
-  box-shadow: 0 40px 70px -40px rgba(39, 52, 73, 0.6); transition: background-color 0.4s ease, color 0.4s ease;
+  padding: 8%; border-radius: 14px; background: radial-gradient(120% 100% at 15% 10%, rgba(255, 255, 255, 0.14), transparent 58%), var(--ad-bg); color: var(--ad-fg);
+  box-shadow: 0 40px 70px -40px rgba(39, 52, 73, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.22); transition: background-color 0.4s ease, color 0.4s ease;
 }
 .av-ad::before {
   content: ''; position: absolute; top: -18%; right: -34%; width: 82%; aspect-ratio: 1; border-radius: 50%;
-  background: var(--ad-accent); opacity: 0.92;
+  background: radial-gradient(circle at 38% 38%, #fff, var(--ad-accent) 68%); opacity: 0.92;
+}
+.av-ad::after {
+  content: ''; position: absolute; left: 0; right: 0; bottom: 0; height: 3px;
+  background: var(--ad-accent); transform-origin: left center; transform: scaleX(1); opacity: 0.85;
 }
 .av-ad > span { position: relative; }
 .av-f-916 .av-ad { aspect-ratio: 9 / 16; }
@@ -186,6 +190,7 @@ html:has(.av-player[open]) { overflow: hidden; }
 .av-f-169 { --d: 0.24s; }
 @media (prefers-reduced-motion: no-preference) {
   .av-run .av-ad::before { animation: av-orb 3.2s cubic-bezier(0.2, 0.7, 0.2, 1) var(--d, 0s) both; }
+  .av-run .av-ad::after { animation: av-progress 3.2s cubic-bezier(0.22, 0.61, 0.36, 1) var(--d, 0s) both; }
   .av-run .av-ad-tag { animation: av-fade 0.5s var(--d, 0s) both; }
   .av-run .av-ad-name { animation: av-rise 0.9s cubic-bezier(0.2, 0.7, 0.2, 1) calc(var(--d, 0s) + 0.15s) both; }
   .av-run .av-ad-offer { animation: av-rise 0.8s cubic-bezier(0.2, 0.7, 0.2, 1) calc(var(--d, 0s) + 0.45s) both; }
@@ -195,6 +200,7 @@ html:has(.av-player[open]) { overflow: hidden; }
 @keyframes av-pop { from { opacity: 0; transform: scale(0.6); } to { opacity: 1; transform: none; } }
 @keyframes av-fade { from { opacity: 0; } to { opacity: 1; } }
 @keyframes av-orb { from { transform: translate(28%, -28%) scale(0.6); } to { transform: none; } }
+@keyframes av-progress { from { transform: scaleX(0); } to { transform: scaleX(1); } }
 
 /* Monthly plans (homepage service rows) */
 .av-plans-lede { margin: 0 0 40px; max-width: 52ch; font-size: clamp(18px, 1.5vw, 22px); line-height: 1.5; color: #414b60; }
@@ -228,6 +234,76 @@ html:has(.av-player[open]) { overflow: hidden; }
   .av-formats { gap: 20px 16px; }
 }
 @media (max-width: 599px) {
+  .av-formats { gap: 22px 14px; }
   .av-f-916 { grid-row: auto; }
   .av-f-169 { grid-column: 1 / -1; }
+  .av-ad { padding: 9% 8%; }
+  .av-ad-tag, .av-f-169 .av-ad-tag { font-size: max(4.6cqi, 12px); padding: 4px 10px; }
+  .av-ad-name, .av-f-45 .av-ad-name { font-size: max(13cqi, 18px); line-height: 1.02; }
+  .av-ad-offer, .av-f-45 .av-ad-offer { font-size: max(6.5cqi, 13px); line-height: 1.3; margin-top: 6px; }
+  .av-ad-cta, .av-f-169 .av-ad-cta { font-size: max(5cqi, 12px); padding: 6px 12px; margin-top: 10px; }
+  .av-f-169 .av-ad-name { font-size: max(8cqi, 20px); }
+  .av-f-169 .av-ad-offer { font-size: max(4.2cqi, 14px); }
+}
+/* Matching chrome-cobalt gradient button treatment on /ai-video */
+.av-primary {
+  border-radius: 999px;
+  background: linear-gradient(135deg, #151c28 0%, #243452 50%, #3d5687 100%);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.3), 0 14px 28px -10px rgba(21, 28, 40, 0.45);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+}
+.av-primary:hover {
+  background: linear-gradient(135deg, #1e293d 0%, #2f456d 50%, #4d6ba6 100%);
+  transform: translateY(-1px);
+}
+.av-link {
+  padding: 0 20px;
+  border-radius: 999px;
+  text-decoration: none;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.84) 0%, rgba(226, 229, 238, 0.66) 100%);
+  border: 1px solid rgba(71, 92, 137, 0.34);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.92), 0 8px 18px -8px rgba(23, 26, 28, 0.15);
+  transition: transform 0.2s ease, background 0.2s ease, color 0.2s ease;
+}
+.av-link:hover {
+  color: #ffffff;
+  border-color: transparent;
+  background: linear-gradient(135deg, #1d2738 0%, #354c78 100%);
+  transform: translateY(-1px);
+}
+.av-closing-cta {
+  background: linear-gradient(135deg, #151c28 0%, #243452 50%, #3d5687 100%);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.3), inset 0 -1px 0 rgba(10, 14, 22, 0.5), 0 18px 36px -12px rgba(21, 28, 40, 0.5);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+}
+.av-closing-cta:hover {
+  background: linear-gradient(135deg, #1e293d 0%, #2f456d 50%, #4d6ba6 100%);
+  transform: translateY(-2px);
+}
+/* Viewport-contained scrollable film dialog for all aspect ratios including 844x390 landscape */
+.av-player {
+  width: min(1120px, 94vw);
+  max-height: calc(100dvh - 24px);
+  padding: 14px 16px 18px;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  background: #0d1015;
+  border-radius: 12px;
+  overflow-y: auto;
+  box-sizing: border-box;
+}
+.av-player video {
+  max-height: min(64dvh, 640px);
+}
+.av-close {
+  position: static;
+  display: flex;
+  align-items: center;
+  margin: 0 0 10px auto;
+  background: rgba(255, 255, 255, 0.08);
+}
+.av-player-info {
+  position: static;
+  margin-top: 12px;
 }

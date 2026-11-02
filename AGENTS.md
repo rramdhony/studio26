@@ -1,52 +1,17 @@
-# Studio26
+# Studio26 — Agent & Project Guide (`AGENTS.md`)
 
-Pre-launch teaser page for studio26.me. Full-viewport autoplaying video with
-minimal branding overlay. Piano audio, user-unmutable via speaker toggle.
+> **Read `HANDOFF.md`, `CLAUDE.md`, and `docs/BUILD_STATUS.md` first.**
+>
+> All agents (Codex, Claude Code, Antigravity / Gemini 4 Argon) share the canonical Studio26 standards in `C:\Users\ruben\.claude\`:
+> - `C:\Users\ruben\.claude\Studio26_QA_Standard.md`
+> - `C:\Users\ruben\.claude\Studio26_Build_Deploy_Playbook.md`
+> - `C:\Users\ruben\.claude\Studio26_Agent_Orchestration.md`
 
-## Deployment
+## Quick Reference (2 November 2026)
 
-- **Type:** Cloudflare Pages (project name: `studio26`)
-- **Live URL:** https://studio26.me
-- **Pipeline:** push to `main` → GitHub Actions → `wrangler pages deploy` → live in ~60s
-
-## Architecture
-
-Single `index.html` file. No build step, no frameworks, no npm.
-
-### Video
-
-Videos are hosted on **Cloudflare R2** — not in this repo.
-- **Bucket:** `studio26-assets`
-- **Public base URL:** `https://pub-accaa99b083244a1a58f40dfa9cfaa9f.r2.dev/`
-- `studio26-teaser.mp4` — 16:9 landscape, served to desktop (≥ 768px)
-- `studio26-teaser-mobile.mp4` — 9:16 portrait, served to mobile (< 768px)
-
-To swap a video: upload the new file to R2 via Wrangler or the Cloudflare dashboard.
-The HTML references R2 URLs directly — no code change needed if the filename stays the same.
-
-### Video switching
-
-Inline JS at page load checks `window.matchMedia('(max-width: 767px)')` and sets
-the video `src` before buffering starts. No flicker, no framework needed.
-
-### Key CSS rules
-
-- `object-fit: cover` on the video — fills the viewport at any aspect ratio
-- All font sizes and margins use `clamp()` — no separate breakpoints needed
-- Tagline is `left: 50%; transform: translateX(-50%)` on desktop, left-aligned
-  at `24px` on mobile (media query) to prevent right-edge clipping
-
-### Fonts
-
-- **Cormorant Garamond** (logo + tagline) — loaded from Google Fonts
-- **DM Mono** (footer) — loaded from Google Fonts
-
-### Animations
-
-CSS only. Logo fades in at 0.8s, tagline at 1.4s, footer + sound button at 2s.
-
-## What to avoid
-
-- Do not add the video files to this repo — they are large and live on R2
-- Do not add npm/node_modules — this is intentionally zero-dependency
-- Keep `index.html` under 10KB
+1. **Live Preview Worker:** https://studio26-site.ruben-ramdhony.workers.dev/ (`studio26-site`, Version `c88b15f7-8922-4796-aa6b-77dd9df6e97a`).
+2. **Primary Deploy Worktree:** `C:\Users\ruben\Downloads\studio26\site-ai-video` (contains the unified site + gitignored `public/video/` assets). Sync changes across `site-ai-video`, `site`, and `C:\Users\ruben\Documents\GitHub\studio26`.
+3. **Mandatory Backup Rule:** Create a git backup branch/tag or file snapshot in `C:\Users\ruben\Downloads\studio26\backups\<timestamp>` before editing any files.
+4. **Current Status:**
+   - Homepage (`/`), AI Video Ads & Films (`/ai-video`), Concept Worlds (`/concepts/*`), Privacy/DPA 2017/WCAG 2.1 AA (`/privacy`), USD pricing (`data-price` / `data-term`), brushed-chrome & deep-cobalt gradient buttons, Ruben's LinkedIn badge (`#founder`), and SEO/GEO files (`JSON-LD`, `/llms.txt`, `/robots.txt`, `/sitemap.xml`) are **complete, QA-verified, and live on the preview URL**.
+5. **Next Milestone:** Build **Ash** (Studio26's bilingual EN/FR AI assistant) using the approved oxblood portrait (`C:\Users\ruben\Downloads\studio26\brand-kit\ash\v1\brand-guide-v1.md`), architecture plan (`docs/creative/ash-architecture-plan-v01.md`), and knowledge base (`docs/content/assistant-knowledge-base.md`).

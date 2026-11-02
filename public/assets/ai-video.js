@@ -185,33 +185,70 @@
     var dText = dialog.querySelector('.av-player-text');
     var dErr = dialog.querySelector('.av-player-error');
     var opener = null;
-    document.addEventListener('click', function (e) {
-      var b = e.target.closest('[data-film]');
-      if (!b || !films[b.dataset.film]) return;
-      e.preventDefault();
-      var f = films[b.dataset.film];
-      opener = b;
+    var ownsHistory = false;
+
+    function openFilm(key, pushHistory) {
+      var f = films[key];
+      if (!f) return;
       dialog.setAttribute('aria-label', f.name + ' film');
       dName.textContent = f.name;
       dText.textContent = f.text;
       dErr.hidden = true;
       dErr.querySelector('a').href = f.src;
       dv.src = f.src;
-      dialog.showModal();
+      if (pushHistory) {
+        history.pushState(Object.assign({}, history.state, { avFilm: key }), '', location.href);
+        ownsHistory = true;
+      }
+      if (!dialog.open) dialog.showModal();
       refresh();
       var p = dv.play();
       if (p && p.catch) p.catch(function () {});
+    }
+
+    function closeFilm(fromPopstate) {
+      if (dialog.open) dialog.close();
+      if (!fromPopstate && ownsHistory && history.state && history.state.avFilm) {
+        ownsHistory = false;
+        history.back();
+      }
+    }
+
+    document.addEventListener('click', function (e) {
+      var b = e.target.closest('[data-film]');
+      if (!b || !films[b.dataset.film]) return;
+      e.preventDefault();
+      opener = b;
+      openFilm(b.dataset.film, true);
     });
     dv.addEventListener('error', function () { if (dv.getAttribute('src')) dErr.hidden = false; });
-    dialog.querySelector('.av-close').addEventListener('click', function () { dialog.close(); });
-    dialog.addEventListener('click', function (e) { if (e.target === dialog) dialog.close(); });
+    dialog.querySelector('.av-close').addEventListener('click', function () { closeFilm(false); });
+    dialog.addEventListener('cancel', function (e) {
+      e.preventDefault();
+      closeFilm(false);
+    });
+    dialog.addEventListener('click', function (e) { if (e.target === dialog) closeFilm(false); });
     dialog.addEventListener('close', function () {
       dv.pause();
       dv.removeAttribute('src');
       dv.load();
       refresh();
       var back = opener && !opener.closest('[inert]') && opener.offsetParent !== null ? opener : document.getElementById('spots-title');
-      if (back) back.focus();
+      if (back) back.focus({ preventScroll: true });
     });
+    window.addEventListener('popstate', function () {
+      var key = history.state && history.state.avFilm;
+      ownsHistory = Boolean(key);
+      if (key && films[key]) {
+        openFilm(key, false);
+      } else if (dialog.open) {
+        closeFilm(true);
+      }
+    });
+    if (history.state && history.state.avFilm && films[history.state.avFilm]) {
+      opener = document.querySelector('#spots [data-film="' + history.state.avFilm + '"]');
+      ownsHistory = true;
+      openFilm(history.state.avFilm, false);
+    }
   }
 })();

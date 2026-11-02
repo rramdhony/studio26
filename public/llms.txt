@@ -1,0 +1,52 @@
+# Studio26 (studio26.me)
+
+> Independent boutique design, web engineering, AI chatbot, and AI video production studio based in Mauritius and working with clients worldwide.
+
+## Overview
+- **Studio Name:** Studio26
+- **Website:** https://studio26.me
+- **AI Video Showcase:** https://studio26.me/ai-video
+- **Founder & Mentor:** Ruben Ramdhony (https://www.linkedin.com/in/rubenramdhony/)
+- **Location:** Republic of Mauritius (serving clients globally in English and French)
+- **Contact:** hello@studio26.me
+
+## Core Services & Published Pricing (USD)
+
+### 1. Custom Websites & Dedicated AI Chatbots (`https://studio26.me/#services`)
+- **Custom Website Design & Development — From $2,500 USD:**
+  - Bespoke visual direction built around the client's brand (never templates)
+  - Copy written in the client's voice
+  - Motion design where it earns its place (GSAP / WebGL, respecting `prefers-reduced-motion`)
+  - Engineered to WCAG 2.1 Level AA accessibility standards and tested on real mobile devices
+  - Hosted on Cloudflare's global edge network
+- **Custom Website + Dedicated AI Chatbot / Assistant — From $4,000 USD (+ $95/month):**
+  - Everything in the custom website build, plus a dedicated AI assistant trained on the client's approved website pages and documents
+  - Answers visitor questions 24/7, qualifies leads, and books discovery calls
+  - **$95/month care & usage plan** covers Cloudflare edge hosting, monthly knowledge-base updates, and up to **1,000 visitor conversations per month**
+
+### 2. AI Video Ads & Brand Films (`https://studio26.me/ai-video`)
+- Short commercial ads for Instagram Reels, TikTok, YouTube Shorts, and web campaigns, plus longer brand films, trailers, and documentaries.
+- Every monthly client receives a bespoke brand motion template (colours, typography, logo, pacing) delivered in all three core aspect ratios: **9:16** (vertical), **4:5** (feed), and **16:9** (landscape), with captions in English or French.
+- **One-Off AI Video Ad:** From **$450 USD**
+- **Monthly Retainer Plans:**
+  - **Starter ($750 / month):** 2 new multi-format ads per month (9:16, 4:5, 16:9), English or French captions, 1 round of revisions per ad.
+  - **Growth ($1,350 / month):** 4 new multi-format ads per month, 6-second cut-downs of every ad, audience/offer variants, and an agreed monthly content plan.
+  - **Always On ($2,400 / month):** 8 new multi-format ads per month (delivered weekly), everything in Growth, a seasonal campaign film each quarter, and priority turnaround.
+- **Turnaround:** 5 to 7 working days from brief to first ad.
+- **Commercial Rights:** Full commercial and paid-media rights across web, social, and paid digital channels (Meta, TikTok, YouTube, LinkedIn, and the web) upon payment, with broadcast TV or cinema clearance quoted per campaign.
+- **Currency:** All prices are listed in USD (Mauritian Rupee / MUR invoicing available on request).
+
+## Selected Live Client Websites
+- **Arizen Africa** (Strategy & advisory group): https://www.arizenafrica.com/
+- **Mauritius Global Diaspora** (Citizen archive of the Mauritian diaspora): https://mauritiusglobaldiaspora.com/
+- **mauRadio** (Mauritian radio streaming worldwide): https://mauradio.com/
+- **AI Unit — Government of Mauritius, Ministry of IT**: https://aim.govmu.org/aim/
+- **NexTalent Africa** (Recruitment & AI training): https://nextalentafrica.com/
+- **AWI Partners** (Workforce & expansion advisory for Africa): https://awipartners.africa/
+
+## Original Studio26 Films & Concept Worlds
+- **Ancient Egypt Chronicles** (Two-part historical documentary & interactive learning site produced by Studio26): https://egypt.studio26.me/
+- **Hospitality Concept (*marée*)**: https://studio26.me/concepts/island
+- **Architecture Concept (*Volume*)**: https://studio26.me/concepts/architecture
+- **Product Brand Concept (*Zest.*)**: https://studio26.me/concepts/product
+- **Privacy, Accessibility (WCAG 2.1 AA) & Mauritius DPA 2017 Policy**: https://studio26.me/privacy

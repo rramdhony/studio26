@@ -9,6 +9,8 @@
   if (!section || !complete || !sculpture || !button || !window.gsap) return;
   var gsap = window.gsap;
   var motion = window.matchMedia('(prefers-reduced-motion: reduce)');
+  var finePointer = window.matchMedia('(hover: hover) and (pointer: fine)');
+  var stage = section.querySelector('.opening-stage');
   var label = button.querySelector('[data-control-label]');
   var glyph = button.querySelector('.control-glyph');
   var timeline;
@@ -72,7 +74,7 @@
     var ticket = ++generation;
     try {
       if (!complete.complete) await complete.decode();
-      sculpture.src = sculpture.dataset.src;
+      sculpture.src = (window.innerWidth <= 640 && sculpture.dataset.srcMobile) ? sculpture.dataset.srcMobile : sculpture.dataset.src;
       await sculpture.decode();
       frameReady = true;
       if (ticket !== generation || motion.matches) return;
@@ -90,6 +92,33 @@
     syncPlayback();
     setState(section.dataset.introState, true);
   });
+  if (stage) {
+    stage.addEventListener('pointermove', function (e) {
+      if (!finished || motion.matches || !finePointer.matches || e.pointerType === 'touch') return;
+      var rect = stage.getBoundingClientRect();
+      if (!rect.width || !rect.height) return;
+      var nx = (e.clientX - rect.left) / rect.width - 0.5;
+      var ny = (e.clientY - rect.top) / rect.height - 0.5;
+      gsap.to(complete, {
+        x: nx * 10,
+        yPercent: -50 + ny * 1.4,
+        duration: 0.4,
+        ease: 'power2.out',
+        overwrite: 'auto'
+      });
+    });
+    stage.addEventListener('pointerleave', function () {
+      if (!finished || motion.matches) return;
+      gsap.to(complete, {
+        x: 0,
+        yPercent: -50,
+        duration: 0.45,
+        ease: 'power2.out',
+        overwrite: 'auto',
+        onComplete: function () { if (finished) gsap.set(complete, { clearProps: 'all' }); }
+      });
+    });
+  }
   document.addEventListener('visibilitychange', syncPlayback);
   if ('IntersectionObserver' in window) {
     var observer = new IntersectionObserver(function (entries) {
@@ -106,4 +135,3 @@
   else if (motion.addListener) motion.addListener(preferenceChanged);
   prepare();
 })();
-

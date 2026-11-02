@@ -16,7 +16,7 @@ module.exports = defineConfig({
   ],
 
   use: {
-    baseURL: 'http://localhost:3000',
+    baseURL: process.env.BASE_URL || 'http://localhost:3000',
     screenshot: 'only-on-failure',
     video: 'off',
     trace: 'retain-on-failure',

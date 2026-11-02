@@ -3,40 +3,337 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Privacy · Studio26</title>
-  <meta name="description" content="How Studio26 handles the details you send us.">
+  <title>Privacy, accessibility &amp; legal · Studio26</title>
+  <meta name="description" content="How Studio26 protects your personal data under the Mauritius Data Protection Act 2017, our WCAG 2.1 AA accessibility commitment, and website terms.">
   <link rel="icon" type="image/svg+xml" href="/favicon.svg">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;1,300&family=Plus+Jakarta+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="canonical" href="https://studio26.me/privacy">
+  <meta property="og:title" content="Privacy, accessibility &amp; legal · Studio26">
+  <meta property="og:description" content="How Studio26 protects your personal data under the Mauritius Data Protection Act 2017, our WCAG 2.1 AA accessibility commitment, and website terms.">
+  <meta property="og:url" content="https://studio26.me/privacy">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://studio26.me/assets/og.jpg">
+  <link rel="preload" href="/assets/fonts/instrument-sans-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="/assets/site.css">
+  <link rel="stylesheet" href="/assets/studio-home.css">
+  <style>
+    .legal-shell {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: clamp(48px, 7vw, 96px) var(--px) clamp(80px, 10vw, 144px);
+    }
+    .legal-header {
+      padding-bottom: clamp(32px, 5vw, 56px);
+      border-bottom: 1px solid var(--rule);
+      margin-bottom: clamp(40px, 6vw, 72px);
+    }
+    .legal-kicker {
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--blue);
+      margin-bottom: 14px;
+    }
+    .legal-title {
+      font-family: var(--sans);
+      font-size: clamp(34px, 6vw, 76px);
+      font-weight: 500;
+      letter-spacing: -0.04em;
+      line-height: 1.02;
+      margin-bottom: 20px;
+      overflow-wrap: break-word;
+    }
+    .legal-meta {
+      font-size: 16px;
+      color: var(--mid);
+      max-width: 64ch;
+    }
+    .legal-grid {
+      display: grid;
+      grid-template-columns: 240px minmax(0, 1fr);
+      gap: clamp(32px, 5vw, 72px);
+      align-items: start;
+    }
+    .legal-grid > *,
+    .legal-content > *,
+    .legal-section {
+      min-width: 0;
+      overflow-wrap: break-word;
+    }
+    .legal-toc {
+      position: sticky;
+      top: 32px;
+      padding: 20px;
+      background: rgba(255, 255, 255, 0.45);
+      border: 1px solid var(--rule);
+    }
+    .legal-toc-title {
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--mid);
+      margin-bottom: 10px;
+    }
+    .legal-toc ul {
+      display: grid;
+      gap: 4px;
+    }
+    .legal-toc a {
+      display: inline-flex;
+      align-items: center;
+      min-height: 44px;
+      font-size: 15px;
+      font-weight: 500;
+      color: var(--ink);
+      text-decoration: none;
+    }
+    .legal-toc a:hover {
+      color: var(--blue);
+      text-decoration: underline;
+      text-underline-offset: 4px;
+    }
+    .legal-content {
+      display: grid;
+      gap: 48px;
+      max-width: 72ch;
+    }
+    .legal-section {
+      scroll-margin-top: 32px;
+      padding-bottom: 40px;
+      border-bottom: 1px solid var(--rule);
+    }
+    .legal-section:last-child {
+      border-bottom: 0;
+      padding-bottom: 0;
+    }
+    .legal-section h2 {
+      font-family: var(--sans);
+      font-size: clamp(22px, 3vw, 34px);
+      font-weight: 600;
+      letter-spacing: -0.025em;
+      line-height: 1.15;
+      margin-bottom: 16px;
+    }
+    .legal-section h3 {
+      font-family: var(--sans);
+      font-size: 19px;
+      font-weight: 600;
+      margin: 24px 0 10px;
+      color: var(--ink);
+    }
+    .legal-section p {
+      font-size: 16px;
+      line-height: 1.68;
+      color: #2c3035;
+      margin-bottom: 14px;
+    }
+    .legal-section ul {
+      list-style: disc;
+      padding-left: 22px;
+      margin: 12px 0 18px;
+      display: grid;
+      gap: 8px;
+    }
+    .legal-section li {
+      font-size: 16px;
+      line-height: 1.6;
+      color: #2c3035;
+    }
+    .legal-card {
+      padding: 20px 24px;
+      background: rgba(255, 255, 255, 0.55);
+      border-left: 3px solid var(--blue);
+      margin: 18px 0;
+    }
+    .legal-card p:last-child {
+      margin-bottom: 0;
+    }
+    .legal-table-wrap {
+      max-width: 100%;
+      overflow-x: auto;
+      margin: 18px 0;
+      border: 1px solid var(--rule);
+      background: rgba(255, 255, 255, 0.45);
+    }
+    .legal-table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+      font-size: 15px;
+    }
+    .legal-table th,
+    .legal-table td {
+      padding: 12px 16px;
+      border-bottom: 1px solid var(--rule);
+      vertical-align: top;
+    }
+    .legal-table th {
+      font-weight: 600;
+      color: var(--ink);
+      background: rgba(255, 255, 255, 0.6);
+    }
+    .legal-badge {
+      display: inline-flex;
+      align-items: center;
+      padding: 4px 12px;
+      font-size: 14px;
+      font-weight: 600;
+      background: #171a1c;
+      color: #e8e6e2;
+      margin-bottom: 14px;
+    }
+    @media (max-width: 860px) {
+      .legal-grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
+      .legal-toc {
+        position: static;
+      }
+    }
+  </style>
 </head>
-<body>
+<body class="studio-home">
+
 <a class="skip-link" href="#main-content">Skip to main content</a>
-<main id="main-content" class="notice">
-  <a class="wordmark" href="/" aria-label="Studio26 home">studio26</a>
-  <h1 class="section-title">Privacy</h1>
-  <p>Studio26 is a design studio based in Mauritius. This page explains what happens to the details you send us.</p>
 
-  <h2>What we collect</h2>
-  <ul>
-    <li>What you type into the enquiry form: your name, email, company and message.</li>
-    <li>A scrambled (hashed) version of your internet address, used only to stop spam. We cannot turn it back into your address.</li>
-  </ul>
+<header class="site-head site-head-full">
+  <a class="wordmark header-brand" href="/" aria-label="Studio26 home"><img src="/assets/brand/studio26-transparent-v1-360.webp" width="360" height="120" alt="" decoding="async"></a>
+  <nav aria-label="Main navigation">
+    <ul class="nav-list">
+      <li><a href="/#work">Websites &amp; AI chatbots</a></li>
+      <li><a href="/ai-video">AI video ads &amp; films</a></li>
+      <li><a href="/#founder">Studio</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+  <a class="btn btn-ink nav-cta" href="#contact">Start a project</a>
+</header>
 
-  <h2>Why</h2>
-  <p>To reply to your enquiry and talk about your project. We do not sell your details, add you to mailing lists, or share them with anyone except the services that run this site.</p>
+<main id="main-content" class="legal-shell">
+  <header class="legal-header">
+    <p class="legal-kicker">Transparency &amp; standards</p>
+    <h1 class="legal-title">Privacy, accessibility &amp; legal</h1>
+    <p class="legal-meta">Plain-English governance for a modern digital atelier. Aligned with the Mauritius Data Protection Act 2017 (Act No. 20 of 2017), international GDPR principles, and WCAG 2.1 Level AA.</p>
+  </header>
 
-  <h2>Who else is involved</h2>
-  <p>The site runs on Cloudflare, which also checks that form submissions come from a person (Cloudflare Turnstile). Your enquiry is stored in our Cloudflare database.</p>
+  <div class="legal-grid">
+    <nav class="legal-toc" aria-label="On this page">
+      <p class="legal-toc-title">Sections</p>
+      <ul>
+        <li><a href="#controller">1. Data controller</a></li>
+        <li><a href="#collection">2. Data we collect</a></li>
+        <li><a href="#processors">3. Sub-processors</a></li>
+        <li><a href="#rights">4. Your rights (DPA 2017)</a></li>
+        <li><a href="#accessibility">5. Accessibility (WCAG AA)</a></li>
+        <li><a href="#terms">6. Website &amp; creative terms</a></li>
+      </ul>
+    </nav>
 
-  <h2>How long we keep it</h2>
-  <p>We keep enquiries for up to 12 months, unless we start working together.</p>
+    <div class="legal-content">
+      <section class="legal-section" id="controller" aria-labelledby="h-controller">
+        <h2 id="h-controller">1. Who we are &amp; data controller</h2>
+        <p><strong>Studio26</strong> is an independent design, web engineering, and AI motion studio based in the Republic of Mauritius and working with clients worldwide.</p>
+        <div class="legal-card">
+          <p><strong>Data controller:</strong> Studio26 (represented by founder Ruben Ramdhony)<br>
+          <strong>Location:</strong> Republic of Mauritius<br>
+          <strong>Privacy &amp; data protection contact:</strong> <a href="mailto:hello@studio26.me">hello@studio26.me</a><br>
+          <strong>Last updated:</strong> November 2026</p>
+        </div>
+        <p>We process personal data strictly in accordance with the <strong>Mauritius Data Protection Act 2017 (Act No. 20 of 2017)</strong> and, for international visitors in the European Economic Area or United Kingdom, the General Data Protection Regulation (GDPR).</p>
+      </section>
 
-  <h2>Your choices</h2>
-  <p>You can ask to see, correct or delete your details at any time by emailing <a href="mailto:hello@studio26.me">hello@studio26.me</a>.</p>
+      <section class="legal-section" id="collection" aria-labelledby="h-collection">
+        <h2 id="h-collection">2. What data we collect &amp; lawful basis</h2>
+        <p>We believe the best privacy policy is collecting almost nothing in the first place. This website sets <strong>no advertising pixels, no behavioural tracking cookies, and no third-party analytics beacons</strong>.</p>
 
-  <p><a class="btn btn-ink" href="/">Back to studio26.me</a></p>
+        <h3>A. Direct email enquiries (live today)</h3>
+        <p>When you write to us at <a href="mailto:hello@studio26.me">hello@studio26.me</a>, we receive your name, email address, and the project details you choose to share so we can reply to you. The current on-page conversation preview (<code>studio26 / studio assistant</code>) and the interactive brand-template preview on <code>/ai-video</code> run entirely in your browser and send or store no messages.</p>
+
+        <h3>B. Interactive studio assistant (“Ash”) &amp; online project briefs (when enabled)</h3>
+        <p>When our live AI studio assistant (<strong>Ash</strong>) or online project brief submission endpoint is enabled on the site, the following safeguards apply:</p>
+        <ul>
+          <li><strong>Contact &amp; brief details:</strong> We collect your name, email address, optional company name, and project brief only when you explicitly choose to send an enquiry.</li>
+          <li><strong>Lawful basis (DPA 2017 Section 28):</strong> Taking pre-contractual steps at your request prior to entering into a service agreement, and our legitimate interest in replying to prospective clients.</li>
+          <li><strong>Voluntary supply (DPA 2017 Section 23):</strong> Supplying your contact details is voluntary, though without a name, email address, and project note we cannot reply to an enquiry.</li>
+          <li><strong>Anti-spam rate limiting (when submitting an online brief):</strong> We compute a one-way cryptographic hash (<code>SHA-256</code>) of your IP address combined with a private server secret (<code>IP_SALT</code>) and store it alongside your browser’s <code>User-Agent</code> string strictly to cap automated submissions at 5 per hour. We never store your raw IP address in our database.</li>
+        </ul>
+
+        <h3>C. Retention period</h3>
+        <p>Project enquiries that do not proceed to a commercial engagement are reviewed and deleted within <strong>12 months</strong>. Where a project proceeds to a contract, records are retained for the statutory accounting and tax period required under Mauritian law.</p>
+      </section>
+
+      <section class="legal-section" id="processors" aria-labelledby="h-processors">
+        <h2 id="h-processors">3. Infrastructure, sub-processors &amp; cross-border transfers</h2>
+        <p>Under Section 36 of the Mauritius Data Protection Act 2017, personal data may be processed outside Mauritius where necessary to perform steps requested by you and where appropriate security safeguards are in place:</p>
+        <div class="legal-table-wrap">
+          <table class="legal-table">
+            <thead>
+              <tr>
+                <th scope="col">Provider</th>
+                <th scope="col">Purpose</th>
+                <th scope="col">Safeguards</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Cloudflare, Inc.</strong> (Workers &amp; D1)</td>
+                <td>Global edge hosting, media delivery, and encrypted D1 database storage (when online enquiry submission is active).</td>
+                <td>TLS 1.3 in transit, AES-256 encryption at rest, Standard Contractual Clauses (SCCs).</td>
+              </tr>
+              <tr>
+                <td><strong>Cloudflare Turnstile</strong> (when enabled)</td>
+                <td>Privacy-preserving bot verification loaded only when submitting an online enquiry or starting a live assistant session.</td>
+                <td>No ad tracking cookies; evaluates browser integrity signals only.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p>All typography (<code>Instrument Sans</code> and <code>Syne</code>) is self-hosted directly on our origin so your browser never leaks your IP address to third-party font servers.</p>
+      </section>
+
+      <section class="legal-section" id="rights" aria-labelledby="h-rights">
+        <h2 id="h-rights">4. Your rights under the Mauritius Data Protection Act 2017</h2>
+        <p>Under <strong>Part VII (Sections 37 to 41)</strong> of the Mauritius Data Protection Act 2017, you have the right to:</p>
+        <ul>
+          <li><strong>Request access (Section 37)</strong> to a copy of the personal data we hold about you free of charge.</li>
+          <li><strong>Request rectification, erasure, or restriction (Section 39)</strong> of inaccurate, incomplete, or no-longer-needed personal data.</li>
+          <li><strong>Object to processing (Section 40)</strong> in writing at any time, or withdraw consent where processing is based on consent.</li>
+        </ul>
+        <p>To exercise any of these rights, email <a href="mailto:hello@studio26.me">hello@studio26.me</a>. In accordance with <strong>Section 37(2)</strong> of the Act, we respond to all verified requests within <strong>one month</strong> (extendable by up to two further months where necessary, with written notice).</p>
+        <p>If you believe a concern has not been resolved satisfactorily, you have the right under <strong>Section 6 and Section 37(6)</strong> of the Data Protection Act 2017 to lodge a complaint with the <strong>Data Protection Commissioner</strong> at the Mauritius Data Protection Office (5th Floor, SICOM Tower, Wall Street, Ebène Cybercity, Mauritius · <a href="mailto:dpo@govmu.org">dpo@govmu.org</a> · <a href="https://dataprotection.govmu.org" rel="noopener">dataprotection.govmu.org</a>).</p>
+      </section>
+
+      <section class="legal-section" id="accessibility" aria-labelledby="h-accessibility">
+        <span class="legal-badge">WCAG 2.1 Level AA</span>
+        <h2 id="h-accessibility">5. Accessibility statement</h2>
+        <p>At Studio26, accessibility is an engineering standard, not an afterthought. Every page we ship is tested against the <strong>Web Content Accessibility Guidelines (WCAG) 2.1 Level AA</strong> across mobile and desktop viewports.</p>
+        <h3>How we build for everyone</h3>
+        <ul>
+          <li><strong>Keyboard &amp; screen-reader navigation:</strong> Every page includes a skip-to-content link, a logical heading hierarchy with a single <code>&lt;h1&gt;</code>, visible focus indicators, and full keyboard operability for dialogs and concept switchers.</li>
+          <li><strong>Motion control &amp; respect for preferences:</strong> All hero animations and video loops respect <code>prefers-reduced-motion: reduce</code> automatically and provide explicit on-screen <strong>Pause / Play</strong> controls (WCAG 2.2.2).</li>
+          <li><strong>Touch targets &amp; contrast:</strong> Interactive controls meet a minimum <code>44×44px</code> tap target on mobile (<code>375px</code> width) and meet WCAG AA contrast ratios (<code>4.5:1</code> for body copy and <code>3:1</code> for large display type).</li>
+          <li><strong>Progressive enhancement:</strong> Core navigation, portfolio links, and studio contact details remain readable and functional even if JavaScript or WebGL is unavailable.</li>
+        </ul>
+        <p>Spotted an accessibility barrier on any Studio26 page? Email <a href="mailto:hello@studio26.me">hello@studio26.me</a> and we will remediate it promptly.</p>
+      </section>
+
+      <section class="legal-section" id="terms" aria-labelledby="h-terms">
+        <h2 id="h-terms">6. Website &amp; creative terms</h2>
+        <ul>
+          <li><strong>Intellectual property:</strong> Unless otherwise credited, all website code, original layout systems, brand concepts (<em>marée</em>, <em>Volume</em>, <em>Zest.</em>, <em>Maison Filaos</em>, <em>Kestrel</em>), and studio copy on <code>studio26.me</code> are copyright © 2026 Studio26.</li>
+          <li><strong>AI &amp; creative disclosure:</strong> Concept studies and illustrative studio scenes use a combination of original art direction, motion design, and AI-generated imagery or sound, explicitly labelled where they appear.</li>
+          <li><strong>Client deliverables &amp; usage rights:</strong> Commercial website builds and AI video campaigns are governed by the written Statement of Work (SOW) agreed with each client. Upon full payment of project fees, clients receive full commercial and paid-media usage rights across web, social, and paid digital channels (Meta, TikTok, YouTube, LinkedIn, and the web) as set out in their agreement, with broadcast TV or cinema clearance quoted and specified per campaign.</li>
+          <li><strong>Governing law:</strong> These terms and any non-contractual obligations arising from the use of this website are governed by the laws of the <strong>Republic of Mauritius</strong>.</li>
+        </ul>
+      </section>
+    </div>
+  </div>
 </main>
+
+<footer class="closing closing-a" id="contact" aria-labelledby="closing-title"><div class="closing-invitation"><h2 id="closing-title">What shall we<br>make together?</h2><div class="invitation-side"><p>A website with character.<br>A film with a point of view.<br>Let’s start with your idea.</p><button class="talk-trigger" type="button" data-chat hidden><span>Start a<br>conversation</span><span aria-hidden="true">↗</span></button><p class="assistant-preview-note">Try the conversation preview, or email us directly.</p></div></div><div class="closing-info"><div><p>Mauritius.<br>Working everywhere.</p></div><div><p>Write to the studio</p><a href="mailto:hello@studio26.me">hello@studio26.me</a></div><nav aria-label="Footer navigation"><a href="/#work">Websites &amp; AI chatbots</a><a href="/ai-video">AI video ads &amp; films</a><a href="/#founder">Inside the studio</a><a href="/privacy" aria-current="page">Privacy &amp; legal</a></nav></div><div class="closing-logo"><img src="/assets/brand/studio26-transparent-v1-1440.webp" srcset="/assets/brand/studio26-transparent-v1-360.webp 360w, /assets/brand/studio26-transparent-v1-800.webp 800w, /assets/brand/studio26-transparent-v1-1440.webp 1440w" sizes="92vw" width="2172" height="724" alt="Studio26 — chrome and blue sculpted logo" loading="lazy" decoding="async"></div><div class="closing-bottom"><span>© 2026 Studio26</span><a href="#main-content">Back to the top <span aria-hidden="true">↑</span></a></div></footer><dialog class="studio-chat" aria-labelledby="chat-title" aria-describedby="chat-note"><div class="chat-top"><span>studio26 / studio assistant</span><button type="button" class="chat-close" aria-label="Close conversation preview">Close <span aria-hidden="true">×</span></button></div><div class="chat-body"><p class="preview-label" id="chat-note">Conversation preview · no messages are sent</p><h2 id="chat-title">Good ideas start<br>with a hello.</h2><p>What would you like to make?</p><div class="chat-choices"><button type="button" data-intent="A website">A website</button><button type="button" data-intent="An AI video ad">An AI video ad</button><button type="button" data-intent="Something else">Something else</button></div><div class="chat-reply" role="status" aria-live="polite"></div><p class="chat-human">Prefer a person? <a href="mailto:hello@studio26.me">Email Ruben and the team</a></p></div></dialog>
+
+<script src="/assets/site.js" defer></script>
+<script src="/assets/studio-conversation.js" defer></script>
 </body>
 </html>

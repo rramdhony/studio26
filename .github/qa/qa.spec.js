@@ -319,11 +319,19 @@ test.describe('AI video page: feed, spots and film player', () => {
     await expect(doc.locator('h3')).toHaveText('Ancient Egypt Chronicles');
     await expect(doc.locator('.av-visit')).toHaveAttribute('href', 'https://egypt.studio26.me/');
     await expect(doc.locator('.av-credit')).toContainText('CC BY 4.0');
+    const rangeRes = await page.request.get(BASE_URL + '/video/egypt-trailer.mp4', { headers: { Range: 'bytes=0-1023' } });
+    expect(rangeRes.status()).toBe(206);
+    expect(rangeRes.headers()['content-range']).toMatch(/^bytes 0-1023\/\d+$/);
+    await page.setViewportSize({ width: 844, height: 390 });
     await doc.locator('[data-film="egypt"]').click();
     const dialog = page.locator('dialog.av-player');
     await expect(dialog).toHaveAttribute('open', '');
     expect(await dialog.locator('video').getAttribute('src')).toContain('egypt-trailer');
-    await page.keyboard.press('Escape');
+    const box = await dialog.boundingBox();
+    expect(box.y + box.height).toBeLessThanOrEqual(390 + 1);
+    await page.goBack();
+    await expect(dialog).not.toHaveAttribute('open', '');
+    expect(page.url()).toContain('/ai-video');
   });
 
   test('Brand template rebuilds all three formats from the inputs', async ({ page }) => {
@@ -339,6 +347,11 @@ test.describe('AI video page: feed, spots and film player', () => {
   test('Plans, steps and questions are present', async ({ page }) => {
     await page.goto(`${BASE_URL}/ai-video`);
     await expect(page.locator('#plans .service')).toHaveCount(3);
+    await expect(page.locator('#plans [data-price="video-starter"]')).toHaveText('$750');
+    await expect(page.locator('#plans [data-price="video-growth"]')).toHaveText('$1,350');
+    await expect(page.locator('#plans [data-price="video-always"]')).toHaveText('$2,400');
+    await expect(page.locator('.av-plans-note [data-price="video"]')).toHaveText('$450');
+    expect(await page.locator('main').innerText()).not.toMatch(/\[(price|usage terms|turnaround|plan terms)\]/i);
     await expect(page.locator('.process .step')).toHaveCount(4);
     const first = page.locator('.av-faq details').first();
     await first.locator('summary').click();
@@ -363,7 +376,7 @@ for (const path of ['/ai-video', '/privacy', '/concepts/island', '/concepts/arch
     });
 
     test('No horizontal scroll at 375px and 1440px', async ({ page }) => {
-      for (const width of [375, 1440]) {
+      for (const width of [320, 375, 1440]) {
         await page.setViewportSize({ width, height: 900 });
         await page.goto(BASE_URL + path);
         await page.waitForLoadState('networkidle');
@@ -727,8 +740,10 @@ test.describe('Section 03 — services', () => {
           expect(lede.y).toBeGreaterThanOrEqual(title.y + title.height);
         }
       }
-      await expect(page.locator('#services [data-price="website"]')).toHaveText('[price]');
-      await expect(page.locator('#services [data-price="video"]')).toHaveText('[price]');
+      await expect(page.locator('#services [data-price="website"]')).toHaveText('$2,500');
+      await expect(page.locator('#services [data-price="website-ai"]')).toHaveText('$4,000');
+      await expect(page.locator('#services [data-price="ai-monthly"]')).toHaveText('$95');
+      await expect(page.locator('#services [data-price="video"]')).toHaveText('$450');
       await expect(page.locator('#services .service-more a')).toHaveAttribute('href', '/ai-video');
       if (width === 1440 || width === 390) {
         await page.evaluate(() => window.scrollTo(0, document.getElementById('services').offsetTop));

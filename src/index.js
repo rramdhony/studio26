@@ -1,11 +1,81 @@
-// Static assets are matched first; this script only runs for paths with no asset, e.g. /api/*.
+// Static assets are matched first except /video/* (for HTTP 206 Range seeking) and /api/*.
 export default {
   async fetch(request, env, ctx) {
     const url = new URL(request.url);
     if (url.pathname.startsWith('/api/')) return handleApi(request, env, ctx, url);
+    if (url.pathname.startsWith('/video/')) return handleVideoRange(request, env, url);
     return env.ASSETS.fetch(request);
   },
 };
+
+async function handleVideoRange(request, env, url) {
+  if (request.method !== 'GET' && request.method !== 'HEAD') {
+    return new Response(null, { status: 405, headers: { Allow: 'GET, HEAD' } });
+  }
+  const assetReq = new Request(url.toString(), { method: 'GET' });
+  const assetRes = await env.ASSETS.fetch(assetReq);
+  if (!assetRes.ok) return assetRes;
+
+  const buf = await assetRes.arrayBuffer();
+  const total = buf.byteLength;
+  const contentType = assetRes.headers.get('Content-Type') || (url.pathname.endsWith('.mp4') ? 'video/mp4' : 'application/octet-stream');
+  const baseHeaders = {
+    'Content-Type': contentType,
+    'Accept-Ranges': 'bytes',
+    'Cache-Control': 'public, max-age=31536000, immutable',
+    'X-Content-Type-Options': 'nosniff',
+  };
+
+  const rangeHeader = request.headers.get('Range');
+  if (!rangeHeader) {
+    return new Response(request.method === 'HEAD' ? null : buf, {
+      status: 200,
+      headers: { ...baseHeaders, 'Content-Length': String(total) },
+    });
+  }
+
+  const match = /^bytes=(\d*)-(\d*)$/.exec(rangeHeader.trim());
+  if (!match || (match[1] === '' && match[2] === '')) {
+    return new Response(null, {
+      status: 416,
+      headers: { ...baseHeaders, 'Content-Range': `bytes */${total}` },
+    });
+  }
+
+  let start;
+  let end;
+  if (match[1] === '') {
+    const suffix = parseInt(match[2], 10);
+    if (suffix === 0) {
+      return new Response(null, {
+        status: 416,
+        headers: { ...baseHeaders, 'Content-Range': `bytes */${total}` },
+      });
+    }
+    start = Math.max(0, total - suffix);
+    end = total - 1;
+  } else {
+    start = parseInt(match[1], 10);
+    end = match[2] ? Math.min(total - 1, parseInt(match[2], 10)) : total - 1;
+  }
+
+  if (Number.isNaN(start) || Number.isNaN(end) || start >= total || start > end) {
+    return new Response(null, {
+      status: 416,
+      headers: { ...baseHeaders, 'Content-Range': `bytes */${total}` },
+    });
+  }
+
+  const chunk = buf.slice(start, end + 1);
+  return new Response(request.method === 'HEAD' ? null : chunk, {
+    status: 206,
+    headers: {
+      ...baseHeaders,
+      'Content-Range': `bytes ${start}-${end}/${total}`,
+      'Content-Length': String(chunk.byteLength),
+    },
+  });
+}
 
 const SECURITY_HEADERS = {
   'Cache-Control': 'no-store',
