@@ -8,6 +8,36 @@ studio26.me still serves the old teaser from `main`.
 >
 > **Parallel work (Claude):** the AI video page rebuild runs on branch `ai-video-rethink` in a separate worktree, `..\site-ai-video`. Codex: stay on `phase-1-site` in this folder and leave `public/ai-video.html`, `public/assets/ad-demo.js` and `public/assets/ads/` alone; they are being replaced there. Direction: `docs/creative/ai-video-direction.md` on that branch. Production media: `..\production\ai-video` (outside git). The branch merges back into `phase-1-site` only after Ruben approves.
 
+## AI video page status (2 Nov 2026, Claude, branch `ai-video-rethink`)
+
+Resume here next session. Nothing pushed or deployed.
+
+**Done**
+- Section 1 (hero feed + cinema breakouts, Maison Filaos and Kestrel spots, film dialog): committed c64591c, approved by Ruben. 5 Playwright tests under "AI video page".
+- Section 2 "See the layers" built then reverted (ce301a0). Ruben: no process tutorials, we don't give away the recipe.
+- Kestrel now has music: Gemini track `Iron_and_Hide.mp3` (43 to 60 s cut, loudnorm about -14 LUFS). Masters in `..\production\ai-video\masters\kestrel-*-music.mp4`; `public/video/kestrel-film.mp4` remuxed (backup `..\tooling\backups\kestrel-film.pre-music.mp4`). Remotion `Root.tsx` has the `<Audio>` line (not type-checked). Ruben still to confirm the track by ear.
+- Codex's `phase-1-site` (11 commits, to 9dbeea2) merged in cleanly. Backup branch `backup/ai-video-rethink-pre-merge`. QA: 71/73 pass, html-validate clean. The 2 failures are the Turnstile enquiry tests returning 503 on port 3001 because this worktree has no Turnstile secret locally; environment, not code.
+
+**Agreed page plan (sections, in order)**
+1. Hero (done).
+2. Spots: three films, three styles. Maison Filaos (cinematic hotel), Kestrel (kinetic fintech), Ancient Egypt Chronicles (documentary). Dholl Republik dropped.
+3. "Your brand, as an ad": restyle Codex's demo in the homepage look; one brand-locked template shown becoming 9:16, 4:5 and 16:9.
+4. Monthly plans: three retainer tiers with [price] placeholders. Pricing research only when Ruben says go (websites with chatbot, AI video one-off and retainer, Mauritius and international).
+5. How it works: homepage-style 4-step strip.
+6. FAQ: Codex's copy plus retainer questions.
+7. CTA and footer matching the homepage.
+Selling point: a system (one template, many variants each month) for recurring revenue, not one-off ads.
+
+**Egypt spot (next task)**
+- Source: `C:\Users\ruben\Downloads\Ancient_Egypt_Chronicles_Khufu_and_Tutankhamun.mp4` (5:33, 720p25, 98 MB). Companion site egypt.studio26.me (blocks WebFetch; read it with Playwright).
+- Cut a 30 to 45 s trailer with ffmpeg (mask, pyramid, court scene, one narrated line, title), ending on a "Full credits on the film's site" card. Web-compress; do not serve the 98 MB file.
+- Card copy: "Ancient Egypt Chronicles. Documentary series. Researched and written by Eli and Isaiah Ramdhony, produced by Studio26." Actions: Watch the trailer, Visit the film's site.
+- Ruben approved naming his sons. Reflections and quotes stay on the companion site.
+- Credits must stay visible: Kevin MacLeod music (CC BY 4.0), Wikimedia Commons photos, ElevenLabs voices, Google AI Studio illustrations.
+
+**Handover notes for Codex**
+- Possible one-line family-studio mention in the founder section (homepage, Codex owns it).
+
 ## Ground rules (decided by Ruben)
 
 - Nothing goes to `main` until Phases 1, 3 and 2 are all built and tested on `phase-1-site`.
