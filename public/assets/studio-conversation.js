@@ -58,4 +58,10 @@
     if (ownsHistory) open();
     else if (dialog.open) dialog.close();
   });
+  // Reloading an open preview restores the modal without adding another history entry.
+  if (history.state?.studioConversationPreview) {
+    opener = document.querySelector('[data-chat]');
+    ownsHistory = true;
+    open();
+  }
 })();

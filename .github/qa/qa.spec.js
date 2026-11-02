@@ -888,6 +888,8 @@ test.describe('Section 10 — invitation footer and logo', () => {
     await trigger.click();await page.goBack();await expect(dialog).not.toBeVisible();
     await page.goForward();await expect(dialog).toBeVisible();
     await dialog.getByRole('button',{name:'Close conversation preview'}).click();await expect(dialog).not.toBeVisible();
+    await trigger.click();await page.reload();await expect(dialog).toBeVisible();
+    await page.keyboard.press('Escape');await expect(dialog).not.toBeVisible();
     expect(submissions).toEqual([]);
   });
   test('Email remains available without scripts and when the conversation script fails',async({browser})=>{
