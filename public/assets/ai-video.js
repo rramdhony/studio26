@@ -125,8 +125,60 @@
       name: 'Kestrel',
       src: '/video/kestrel-film.mp4',
       text: 'Concept launch film for an invented fintech brand. Kinetic type and motion graphics set to music. No dialogue.'
+    },
+    egypt: {
+      name: 'Ancient Egypt Chronicles',
+      src: '/video/egypt-trailer.mp4',
+      text: 'Trailer for a two-part documentary on Khufu and Tutankhamun, researched and written by Eli and Isaiah Ramdhony. Narrated, with subtitles on screen. The full film and credits are at egypt.studio26.me.'
     }
   };
+
+  // Your brand: one template rebuilt in three formats as the visitor types.
+  // Each run of the animation lasts under five seconds and replays only on input or first view.
+  var formats = document.querySelector('.av-formats');
+  var nameIn = document.getElementById('b-name');
+  var offerIn = document.getElementById('b-offer');
+  if (formats && nameIn && offerIn) {
+    var names = formats.querySelectorAll('.av-ad-name');
+    var offers = formats.querySelectorAll('.av-ad-offer');
+    var timer = null;
+    var setAll = function (list, value) { Array.prototype.forEach.call(list, function (el) { el.textContent = value; }); };
+    var replay = function () {
+      formats.classList.remove('av-run');
+      void formats.offsetWidth;
+      formats.classList.add('av-run');
+    };
+    var status = document.getElementById('brand-status');
+    var radios = document.querySelectorAll('input[name="colour"]');
+    var sync = function () {
+      var name = nameIn.value.trim() || 'Your business';
+      var offer = offerIn.value.trim() || 'Your offer here';
+      setAll(names, name);
+      setAll(offers, offer);
+      Array.prototype.forEach.call(radios, function (r) { if (r.checked) formats.dataset.colour = r.value; });
+      return name + ', ' + offer;
+    };
+    var update = function () {
+      var summary = sync();
+      clearTimeout(timer);
+      timer = setTimeout(function () {
+        replay();
+        if (status) status.textContent = 'Preview updated: ' + summary + ', in ' + formats.dataset.colour + ', in three formats.';
+      }, 450);
+    };
+    nameIn.addEventListener('input', update);
+    offerIn.addEventListener('input', update);
+    Array.prototype.forEach.call(radios, function (r) { r.addEventListener('change', update); });
+    // Browsers may restore field values on reload or back navigation without firing input events.
+    sync();
+    window.addEventListener('pageshow', sync);
+    if ('IntersectionObserver' in window) {
+      var seen = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) { if (e.isIntersecting) { replay(); seen.disconnect(); } });
+      }, { threshold: 0.35 });
+      seen.observe(formats);
+    }
+  }
   if (dialog) {
     var dv = dialog.querySelector('video');
     var dName = dialog.querySelector('.av-player-name');

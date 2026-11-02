@@ -311,6 +311,39 @@ test.describe('AI video page: feed, spots and film player', () => {
     await expect(dialog).not.toHaveAttribute('open', '');
     await expect(trigger).toBeFocused();
   });
+
+  test('The work lists three films, with the Egypt trailer, its site and its credits', async ({ page }) => {
+    await page.goto(`${BASE_URL}/ai-video`);
+    await expect(page.locator('#spots .av-spot')).toHaveCount(3);
+    const doc = page.locator('#spots .av-spot-doc');
+    await expect(doc.locator('h3')).toHaveText('Ancient Egypt Chronicles');
+    await expect(doc.locator('.av-visit')).toHaveAttribute('href', 'https://egypt.studio26.me/');
+    await expect(doc.locator('.av-credit')).toContainText('CC BY 4.0');
+    await doc.locator('[data-film="egypt"]').click();
+    const dialog = page.locator('dialog.av-player');
+    await expect(dialog).toHaveAttribute('open', '');
+    expect(await dialog.locator('video').getAttribute('src')).toContain('egypt-trailer');
+    await page.keyboard.press('Escape');
+  });
+
+  test('Brand template rebuilds all three formats from the inputs', async ({ page }) => {
+    await page.goto(`${BASE_URL}/ai-video`);
+    await page.fill('#b-name', 'Chez Lina');
+    await page.fill('#b-offer', 'Two for one on Fridays');
+    await page.locator('label[for="c-coral"]').click();
+    await expect(page.locator('.av-ad-name')).toHaveText(['Chez Lina', 'Chez Lina', 'Chez Lina']);
+    await expect(page.locator('.av-ad-offer')).toHaveText(['Two for one on Fridays', 'Two for one on Fridays', 'Two for one on Fridays']);
+    await expect(page.locator('.av-formats')).toHaveAttribute('data-colour', 'coral');
+  });
+
+  test('Plans, steps and questions are present', async ({ page }) => {
+    await page.goto(`${BASE_URL}/ai-video`);
+    await expect(page.locator('#plans .service')).toHaveCount(3);
+    await expect(page.locator('.process .step')).toHaveCount(4);
+    const first = page.locator('.av-faq details').first();
+    await first.locator('summary').click();
+    await expect(first).toHaveAttribute('open', '');
+  });
 });
 
 // ─────────────────────────────────────────────

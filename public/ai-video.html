@@ -22,12 +22,12 @@
 <a class="skip-link" href="#main-content">Skip to main content</a>
 
 <header class="site-head site-head-full">
-  <a class="wordmark" href="/" aria-label="Studio26 home">studio26</a>
+  <a class="wordmark header-brand" href="/" aria-label="Studio26 home"><img src="/assets/brand/studio26-transparent-v1-360.webp" width="360" height="120" alt="" decoding="async"></a>
   <nav aria-label="Main navigation">
     <ul class="nav-list">
       <li><a href="/#work">Work</a></li>
       <li><a href="/ai-video" aria-current="page">AI video</a></li>
-      <li><a href="/#studio">Studio</a></li>
+      <li><a href="/#founder">Studio</a></li>
       <li><a href="/#contact">Contact</a></li>
     </ul>
   </nav>
@@ -102,13 +102,14 @@
 
   <section class="av-spots" id="spots" aria-labelledby="spots-title">
     <div class="av-spots-head">
-      <h2 id="spots-title" tabindex="-1">The spots</h2>
-      <p>Concept work for invented brands, made to show the range.</p>
+      <h2 id="spots-title" tabindex="-1">The work</h2>
+      <p>Two concept ads for invented brands, and a documentary series made with two young researchers.</p>
     </div>
     <ul class="av-spot-list">
       <li class="av-spot">
         <img src="/video/maison-16x9.webp" width="1280" height="720" alt="" loading="lazy">
         <div class="av-spot-text">
+          <p class="av-spot-kicker">Concept ad &middot; Invented brand</p>
           <h3>Maison Filaos</h3>
           <p>Boutique hotel. A slow, warm film from five AI shots, cut and typeset by hand.</p>
           <a class="av-watch" href="/video/maison-film.mp4" data-film="maison">Watch the film<span class="sr-only"> Maison Filaos</span> <span class="av-dur">20 s</span></a>
@@ -117,14 +118,27 @@
       <li class="av-spot">
         <img src="/video/kestrel-16x9.webp" width="1280" height="720" alt="" loading="lazy">
         <div class="av-spot-text">
+          <p class="av-spot-kicker">Concept ad &middot; Invented brand</p>
           <h3>Kestrel</h3>
           <p>Fintech launch. Kinetic type and motion design, made in three formats.</p>
           <a class="av-watch" href="/video/kestrel-film.mp4" data-film="kestrel">Watch the film<span class="sr-only"> Kestrel</span> <span class="av-dur">17 s</span></a>
         </div>
       </li>
+      <li class="av-spot av-spot-doc">
+        <img src="/video/egypt-16x9.webp" width="1280" height="720" alt="" loading="lazy">
+        <div class="av-spot-text">
+          <p class="av-spot-kicker">Documentary series &middot; Family project</p>
+          <h3>Ancient Egypt Chronicles</h3>
+          <p>Khufu, the pyramid king, and Tutankhamun, the boy king. Researched and written by Eli and Isaiah Ramdhony, produced by Studio26, with a learning site built around the film.</p>
+          <div class="av-spot-actions">
+            <a class="av-watch" href="/video/egypt-trailer.mp4" data-film="egypt">Watch the trailer<span class="sr-only"> Ancient Egypt Chronicles</span> <span class="av-dur">48 s</span></a>
+            <a class="av-visit" href="https://egypt.studio26.me/">Visit the film&rsquo;s site</a>
+          </div>
+          <p class="av-credit">AI narration by ElevenLabs and AI illustrations from Google AI Studio, with museum photos from Wikimedia Commons. Music by Kevin MacLeod, CC BY 4.0. Full credits on the film&rsquo;s site.</p>
+        </div>
+      </li>
     </ul>
   </section>
-
   <dialog class="av-player" aria-label="Film player">
     <button class="av-close" type="button">Close</button>
     <video controls playsinline preload="none"></video>
@@ -135,14 +149,158 @@
     </div>
   </dialog>
 
+  <section class="av-brand" id="your-brand" aria-labelledby="brand-title">
+    <div class="av-brand-copy">
+      <p class="av-eyebrow">One template, every format</p>
+      <h2 class="av-h2" id="brand-title">Picture your brand in&nbsp;it.</h2>
+      <p class="av-brand-lede">Every client gets a template built on their brand: colours, type, logo and pacing. Each month we make new ads from it, in every shape the platforms ask for.</p>
+      <div class="av-brand-form" role="group" aria-labelledby="brand-title">
+        <p class="av-brand-hint">Type a name and an offer to see one template become three formats.</p>
+        <div class="av-field">
+          <label for="b-name">Business name</label>
+          <input id="b-name" name="name" type="text" maxlength="24" value="Your business" autocomplete="off">
+        </div>
+        <div class="av-field">
+          <label for="b-offer">Your offer</label>
+          <input id="b-offer" name="offer" type="text" maxlength="36" value="New season, now open" autocomplete="off">
+        </div>
+        <fieldset class="av-field av-swatches">
+          <legend>Brand colour</legend>
+          <input type="radio" id="c-lagoon" name="colour" value="lagoon" checked><label for="c-lagoon"><span class="av-swatch av-sw-lagoon"></span>Lagoon</label>
+          <input type="radio" id="c-coral" name="colour" value="coral"><label for="c-coral"><span class="av-swatch av-sw-coral"></span>Coral</label>
+          <input type="radio" id="c-ink" name="colour" value="ink"><label for="c-ink"><span class="av-swatch av-sw-ink"></span>Ink</label>
+          <input type="radio" id="c-gold" name="colour" value="gold"><label for="c-gold"><span class="av-swatch av-sw-gold"></span>Gold</label>
+        </fieldset>
+      </div>
+      <p class="av-note">A simple sketch of the idea. Your real template is designed around your brand.</p>
+      <p class="sr-only" id="brand-status" role="status" aria-live="polite"></p>
+    </div>
+    <ul class="av-formats" data-colour="lagoon">
+      <li class="av-format av-f-916">
+        <div class="av-ad" aria-hidden="true"><span class="av-ad-tag">New</span><span class="av-ad-name">Your business</span><span class="av-ad-offer">New season, now open</span><span class="av-ad-cta">Find out more</span></div>
+        <p class="av-format-label">9:16 &middot; Reels, TikTok, Shorts</p>
+      </li>
+      <li class="av-format av-f-45">
+        <div class="av-ad" aria-hidden="true"><span class="av-ad-tag">New</span><span class="av-ad-name">Your business</span><span class="av-ad-offer">New season, now open</span><span class="av-ad-cta">Find out more</span></div>
+        <p class="av-format-label">4:5 &middot; Instagram and Facebook feed</p>
+      </li>
+      <li class="av-format av-f-169">
+        <div class="av-ad" aria-hidden="true"><span class="av-ad-tag">New</span><span class="av-ad-name">Your business</span><span class="av-ad-offer">New season, now open</span><span class="av-ad-cta">Find out more</span></div>
+        <p class="av-format-label">16:9 &middot; YouTube and the web</p>
+      </li>
+    </ul>
+  </section>
+
+  <section class="services av-plans" id="plans" aria-labelledby="plans-title">
+    <h2 class="section-title" id="plans-title">Monthly plans</h2>
+    <p class="av-plans-lede">A steady stream of ads, made from your own template, so every month starts from your look and stays on brand.</p>
+    <div class="service-grid">
+      <article class="service">
+        <h3 class="service-name">Starter</h3>
+        <p class="service-lede">For a brand that wants to show up every month.</p>
+        <ul class="service-list">
+          <li>Two new ads a month</li>
+          <li>Every ad in 9:16, 4:5 and 16:9</li>
+          <li>Captions in English or French</li>
+          <li>One round of changes per ad</li>
+        </ul>
+        <p class="service-price"><span data-price="video-starter">[price]</span> a month</p>
+      </article>
+      <article class="service">
+        <h3 class="service-name">Growth</h3>
+        <p class="service-lede">For brands running paid campaigns.</p>
+        <ul class="service-list">
+          <li>Four new ads a month</li>
+          <li>Everything in Starter</li>
+          <li>A 6-second cut-down of every ad</li>
+          <li>Versions for different audiences or offers</li>
+          <li>A monthly content plan agreed with you</li>
+        </ul>
+        <p class="service-price"><span data-price="video-growth">[price]</span> a month</p>
+      </article>
+      <article class="service">
+        <h3 class="service-name">Always on</h3>
+        <p class="service-lede">For brands that post every week.</p>
+        <ul class="service-list">
+          <li>Eight new ads a month, delivered weekly</li>
+          <li>Everything in Growth</li>
+          <li>A seasonal campaign film each quarter</li>
+          <li>Priority turnaround</li>
+        </ul>
+        <p class="service-price"><span data-price="video-always">[price]</span> a month</p>
+      </article>
+    </div>
+    <p class="av-plans-note">Prefer a single ad? One-off ads from <span data-price="video">[price]</span>. Longer films, documentaries and explainers are quoted per project.</p>
+  </section>
+
+  <section class="process" aria-labelledby="process-title">
+    <h2 class="section-title" id="process-title">How it works</h2>
+    <ol class="steps">
+      <li class="step">
+        <h3 class="step-name">Brief</h3>
+        <p>A free call about your offer, your audience and where the ads will run.</p>
+      </li>
+      <li class="step">
+        <h3 class="step-name">Your template</h3>
+        <p>We build your look once: colours, type, logo and pacing. Every ad after that starts from it.</p>
+      </li>
+      <li class="step">
+        <h3 class="step-name">Monthly ads</h3>
+        <p>New ads each month in every format, ready to upload, in English or French.</p>
+      </li>
+      <li class="step">
+        <h3 class="step-name">Review</h3>
+        <p>A short check-in on what worked, then the ideas for next month.</p>
+      </li>
+    </ol>
+  </section>
+
+  <section class="av-faq" aria-labelledby="faq-title">
+    <h2 class="section-title" id="faq-title">Questions</h2>
+    <div class="av-faq-list">
+      <details>
+        <summary>Are the ads made with AI?</summary>
+        <p>Partly. We use AI for imagery, voice and motion where it helps, then write, edit, typeset and check each ad by hand. We tell you which shots are AI-generated.</p>
+      </details>
+      <details>
+        <summary>Can I use the ads anywhere?</summary>
+        <p>You can run them on your own channels and in paid campaigns, under the usage terms in your agreement: <span data-term="usage">[usage terms]</span>. Any stock footage or music we use stays under its own licence, which we choose so that ads are allowed.</p>
+      </details>
+      <details>
+        <summary>What do you need from me?</summary>
+        <p>Your logo, your colours if you have them, the offers you want to promote, and any photos or footage you already own.</p>
+      </details>
+      <details>
+        <summary>How long does the first ad take?</summary>
+        <p><span data-term="turnaround">[turnaround]</span> from the brief to the first ad. After that, new ads arrive on an agreed schedule.</p>
+      </details>
+      <details>
+        <summary>Can I change or pause my plan?</summary>
+        <p>Changes and pauses follow the terms in your agreement: <span data-term="plan">[plan terms]</span>.</p>
+      </details>
+      <details>
+        <summary>Do you make longer films?</summary>
+        <p>Yes. Documentaries and explainers are quoted per project and can come with a website built around the film. Ancient Egypt Chronicles shows the format.</p>
+      </details>
+    </div>
+  </section>
 </main>
 
-<footer class="site-foot">
-  <span class="wordmark wordmark-small">studio26</span>
-  <span>Mauritius</span>
-  <a href="mailto:hello@studio26.me">hello@studio26.me</a>
-  <a href="/privacy">Privacy</a>
-  <span>&copy; 2026 Studio26</span>
+<footer class="closing closing-a" id="contact" aria-labelledby="closing-title">
+  <div class="closing-invitation">
+    <h2 id="closing-title">Ready for your<br>first month?</h2>
+    <div class="invitation-side">
+      <p>Tell us about your brand<br>and the offer you want to push.<br>We will come back with an idea.</p>
+      <a class="av-closing-cta" href="mailto:hello@studio26.me?subject=AI%20video%20ads">Email the studio <span aria-hidden="true">&#8599;</span></a>
+    </div>
+  </div>
+  <div class="closing-info">
+    <div><p>Mauritius.<br>Working everywhere.</p></div>
+    <div><p>Write to the studio</p><a href="mailto:hello@studio26.me">hello@studio26.me</a></div>
+    <nav aria-label="Footer navigation"><a href="/#work">Selected work</a><a href="/#founder">Inside the studio</a><a href="/privacy">Privacy</a></nav>
+  </div>
+  <div class="closing-logo"><img src="/assets/brand/studio26-transparent-v1-1440.webp" srcset="/assets/brand/studio26-transparent-v1-360.webp 360w, /assets/brand/studio26-transparent-v1-800.webp 800w, /assets/brand/studio26-transparent-v1-1440.webp 1440w" sizes="92vw" width="2172" height="724" alt="Studio26, chrome and blue sculpted logo" loading="lazy" decoding="async"></div>
+  <div class="closing-bottom"><span>&copy; 2026 Studio26</span><a href="#main-content">Back to the top <span aria-hidden="true">&#8593;</span></a></div>
 </footer>
 
 <script src="/assets/site.js" defer></script>
