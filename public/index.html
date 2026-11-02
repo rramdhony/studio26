@@ -24,7 +24,7 @@
 <a class="skip-link" href="#main-content">Skip to main content</a>
 
 <header class="site-head site-head-full">
-  <a class="wordmark" href="/" aria-label="Studio26 home">studio26</a>
+  <a class="wordmark header-brand" href="/" aria-label="Studio26 home"><img src="/assets/brand/studio26-transparent-v1-360.webp" width="360" height="120" alt="" decoding="async"></a>
   <nav aria-label="Main navigation">
     <ul class="nav-list">
       <li><a href="#work">Work</a></li>
@@ -232,66 +232,14 @@
     </div>
   </section>
 
-  <section class="contact" id="contact" aria-labelledby="contact-title">
-    <div class="contact-intro">
-      <h2 class="contact-title" id="contact-title">Tell us about your project.</h2>
-      <p>We take on a few projects at a time, so each one gets proper attention.</p>
-      <div class="book" id="book">
-        <p class="book-lead">Prefer to talk?</p>
-        <a class="btn btn-paper" href="#contact" data-booking>Book a free discovery call</a>
-        <p class="book-alt">Or email <a href="mailto:hello@studio26.me">hello@studio26.me</a></p>
-      </div>
-    </div>
-
-    <form class="enquiry" id="enquiry" action="/api/enquiry" method="post" novalidate>
-      <div class="field">
-        <label for="f-name">Name</label>
-        <input id="f-name" name="name" type="text" autocomplete="name" required maxlength="120">
-      </div>
-      <div class="field">
-        <label for="f-email">Email</label>
-        <input id="f-email" name="email" type="email" autocomplete="email" required maxlength="200">
-      </div>
-      <div class="field">
-        <label for="f-company">Company <span class="optional">(optional)</span></label>
-        <input id="f-company" name="company" type="text" autocomplete="organization" maxlength="160">
-      </div>
-      <fieldset class="field choices">
-        <legend>What do you need?</legend>
-        <input class="choice-input" type="radio" id="need-website" name="need" value="website" checked><label class="choice" for="need-website">A website</label>
-        <input class="choice-input" type="radio" id="need-video" name="need" value="video"><label class="choice" for="need-video">An AI video ad</label>
-        <input class="choice-input" type="radio" id="need-both" name="need" value="both"><label class="choice" for="need-both">Both</label>
-        <input class="choice-input" type="radio" id="need-unsure" name="need" value="unsure"><label class="choice" for="need-unsure">Not sure yet</label>
-      </fieldset>
-      <div class="field">
-        <label for="f-message">About your project</label>
-        <textarea id="f-message" name="message" rows="5" required maxlength="4000"></textarea>
-      </div>
-      <!-- Turnstile test sitekey (always passes) until the production widget exists. -->
-      <div class="cf-turnstile" data-sitekey="1x00000000000000000000AA" data-theme="dark" data-appearance="interaction-only"></div>
-      <div class="hp" aria-hidden="true">
-        <label for="f-website">Leave this empty</label>
-        <input id="f-website" name="website" type="text" tabindex="-1" autocomplete="off">
-      </div>
-      <button class="btn btn-paper" type="submit">Send enquiry</button>
-      <p class="form-status" id="formStatus" role="status" aria-live="polite"></p>
-      <p class="form-note">We use your details only to reply to you. <a href="/privacy">Privacy</a></p>
-    </form>
-  </section>
-
 </main>
 
-<footer class="site-foot">
-  <span class="wordmark wordmark-small">studio26</span>
-  <span>Mauritius</span>
-  <a href="mailto:hello@studio26.me">hello@studio26.me</a>
-  <a href="/privacy">Privacy</a>
-  <span>&copy; 2026 Studio26</span>
-</footer>
+<footer class="closing closing-a" id="contact" aria-labelledby="closing-title"><div class="closing-invitation"><h2 id="closing-title">What shall we<br>make together?</h2><div class="invitation-side"><p>A website with character.<br>A film with a point of view.<br>Let’s start with your idea.</p><button class="talk-trigger" type="button" data-chat hidden><span>Start a<br>conversation</span><span aria-hidden="true">↗</span></button><p class="assistant-preview-note">Try the conversation preview, or email us directly.</p></div></div><div class="closing-info"><div><p>Mauritius.<br>Working everywhere.</p></div><div><p>Write to the studio</p><a href="mailto:hello@studio26.me">hello@studio26.me</a></div><nav aria-label="Footer navigation"><a href="#work">Selected work</a><a href="#founder">Inside the studio</a><a href="/privacy">Privacy</a></nav></div><div class="closing-logo"><img src="/assets/brand/studio26-transparent-v1-1440.webp" srcset="/assets/brand/studio26-transparent-v1-360.webp 360w, /assets/brand/studio26-transparent-v1-800.webp 800w, /assets/brand/studio26-transparent-v1-1440.webp 1440w" sizes="92vw" width="2172" height="724" alt="Studio26 — chrome and blue sculpted logo" loading="lazy" decoding="async"></div><div class="closing-bottom"><span>© 2026 Studio26</span><a href="#opening">Back to the top <span aria-hidden="true">↑</span></a></div></footer><dialog class="studio-chat" aria-labelledby="chat-title" aria-describedby="chat-note"><div class="chat-top"><span>studio26 / studio assistant</span><button type="button" class="chat-close" aria-label="Close conversation preview">Close <span aria-hidden="true">×</span></button></div><div class="chat-body"><p class="preview-label" id="chat-note">Conversation preview · no messages are sent</p><h2 id="chat-title">Good ideas start<br>with a hello.</h2><p>What would you like to make?</p><div class="chat-choices"><button type="button" data-intent="A website">A website</button><button type="button" data-intent="An AI video ad">An AI video ad</button><button type="button" data-intent="Something else">Something else</button></div><div class="chat-reply" role="status" aria-live="polite"></div><p class="chat-human">Prefer a person? <a href="mailto:hello@studio26.me">Email Ruben and the team</a></p></div></dialog>
 
 <script src="/assets/site.js" defer></script>
 <script src="/assets/vendor/gsap-3.15.0.min.js" defer></script>
 <script src="/assets/studio-intro.js" defer></script>
 <script src="/assets/studio-possibilities.js" defer></script>
+<script src="/assets/studio-conversation.js" defer></script>
 </body>
 </html>

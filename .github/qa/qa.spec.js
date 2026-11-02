@@ -184,7 +184,7 @@ test.describe('Pillar 2 — Mobile Responsiveness', () => {
       for (const width of [1024, 1280, 1440]) {
         await page.setViewportSize({ width, height: 900 });
         await page.goto(BASE_URL + path);
-        const wrapped = await page.$$eval('.site-head a', els =>
+        const wrapped = await page.$$eval('.site-head a:not(.header-brand)', els =>
           els.filter(e => e.getBoundingClientRect().height > 52).map(e => e.textContent.trim()));
         expect(wrapped, `Header items wrapping at ${width}px`).toEqual([]);
         const overflow = await page.$eval('.site-head', h => h.scrollWidth > h.clientWidth + 1);
@@ -226,29 +226,6 @@ test.describe('Enquiry form', () => {
   const post = (request, data, headers = {}) =>
     request.post(`${BASE_URL}/api/enquiry`, { headers: { Origin: BASE_URL, Accept: 'application/json', ...headers }, data });
 
-  test('Empty submit shows inline errors linked to their fields and focuses the first', async ({ page }) => {
-    await page.goto(`${BASE_URL}/#contact`);
-    await page.click('#enquiry button[type="submit"]');
-    await expect(page.locator('#formStatus')).toHaveText('Please check the highlighted fields.');
-    for (const id of ['f-name', 'f-email', 'f-message']) {
-      await expect(page.locator(`#${id}`)).toHaveAttribute('aria-invalid', 'true');
-      await expect(page.locator(`#${id}`)).toHaveAttribute('aria-describedby', `${id}-error`);
-      await expect(page.locator(`#${id}-error`)).toBeVisible();
-    }
-    await expect(page.locator('#f-name')).toBeFocused();
-  });
-
-  test('A valid enquiry passes Turnstile, is stored and confirmed', async ({ page }) => {
-    await page.goto(`${BASE_URL}/#contact`);
-    await page.fill('#f-name', valid.name);
-    await page.fill('#f-email', valid.email);
-    await page.fill('#f-message', valid.message);
-    await page.click('label[for="need-both"]');
-    await page.click('#enquiry button[type="submit"]');
-    await expect(page.locator('#formStatus')).toHaveText(/Thank you/, { timeout: 20000 });
-    await expect(page.locator('#f-name')).toHaveValue('');
-  });
-
   test('API rejects a submission without a Turnstile token', async ({ request }) => {
     const res = await post(request, valid);
     expect(res.status()).toBe(403);
@@ -271,21 +248,11 @@ test.describe('Enquiry form', () => {
     expect(await res.json()).toEqual({ ok: true });
   });
 
-  test('Without JavaScript the form posts and gets a readable reply page', async ({ browser }) => {
-    const context = await browser.newContext({ javaScriptEnabled: false });
-    const page = await context.newPage();
-    await page.goto(`${BASE_URL}/#contact`);
-    await page.fill('#f-name', valid.name);
-    await page.fill('#f-email', valid.email);
-    await page.fill('#f-message', valid.message);
-    // Keyboard submit: with JavaScript disabled, Playwright's click stability check never resolves.
-    await page.locator('#enquiry button[type="submit"]').focus();
-    await page.keyboard.press('Enter');
-    // Turnstile needs JavaScript, so the honest reply is a clear refusal with a way back.
-    await expect(page.locator('h1')).toHaveText('Your enquiry was not sent');
-    await expect(page.getByText('email hello@studio26.me')).toBeVisible();
-    await expect(page.getByRole('link', { name: 'Back to studio26.me' })).toBeVisible();
-    await context.close();
+  test('Legacy API replies honestly in HTML when no Turnstile token is present', async ({ request }) => {
+    const response = await request.post(`${BASE_URL}/api/enquiry`, { headers:{Origin:BASE_URL,Accept:'text/html'}, form:valid });
+    expect(response.status()).toBe(403);
+    expect(await response.text()).toContain('Your enquiry was not sent');
+    expect(await response.text()).toContain('hello@studio26.me');
   });
 });
 
@@ -879,5 +846,59 @@ test.describe('Section 09 — inside the studio', () => {
     await expect(page.locator('#founder figcaption')).toBeVisible();
     await expect(page.locator('#founder .atelier-founder-name')).toHaveText('Ruben Ramdhony');
     await context.close();
+  });
+});
+
+test.describe('Section 10 — invitation footer and logo', () => {
+  test('The logo and invitation stay framed from mobile through large desktop', async ({page}) => {
+    await page.emulateMedia({reducedMotion:'reduce'});
+    await page.goto('/');
+    await expect(page.locator('#enquiry')).toHaveCount(0);
+    await expect(page.locator('.closing h2')).toHaveText('What shall wemake together?');
+    const logo=page.locator('.closing-logo img');
+    await logo.evaluate(img=>img.loading='eager');
+    await expect.poll(()=>logo.evaluate(img=>img.complete&&img.naturalWidth>0)).toBe(true);
+    for(const width of [320,375,390,430,640,641,768,900,901,1024,1440,1920,2560]) {
+      await page.setViewportSize({width,height:1000});
+      const layout=await page.evaluate(()=>({width:document.documentElement.clientWidth,scroll:document.documentElement.scrollWidth,overflows:[...document.querySelectorAll('.closing h2,.closing-info,.closing-logo,.site-head')].filter(el=>el.scrollWidth>el.clientWidth+1).map(el=>el.className)}));
+      expect(layout.scroll).toBeLessThanOrEqual(layout.width+1);expect(layout.overflows).toEqual([]);
+      const box=await logo.boundingBox();expect(box.width/box.height).toBeCloseTo(3,1);
+      expect(box.x).toBeGreaterThanOrEqual(0);expect(box.x+box.width).toBeLessThanOrEqual(width+1);
+      expect(await logo.evaluate(img=>getComputedStyle(img).objectFit)).toBe('contain');
+    }
+    await expect(page.locator('.header-brand')).toHaveAccessibleName('Studio26 home');
+    await expect.poll(()=>page.locator('.header-brand img').evaluate(img=>img.complete&&img.naturalWidth>0)).toBe(true);
+    await expect(page.locator('.closing a[href="mailto:hello@studio26.me"]')).toBeVisible();
+  });
+  test('Conversation preview is honest, keyboard operable and follows browser history', async ({page}) => {
+    const submissions=[];page.on('request',r=>{if(r.method()==='POST')submissions.push(r.url());});
+    await page.goto('/#contact');
+    const trigger=page.getByRole('button',{name:'Start a conversation'});
+    await trigger.focus();await page.keyboard.press('Enter');
+    const dialog=page.getByRole('dialog');await expect(dialog).toBeVisible();
+    await expect(dialog.getByText('Conversation preview · no messages are sent')).toBeVisible();
+    await expect(dialog.getByRole('button',{name:'Close conversation preview'})).toBeFocused();
+    await page.keyboard.press('Shift+Tab');
+    await expect(dialog.getByRole('link',{name:'Email Ruben and the team'})).toBeFocused();
+    await page.keyboard.press('Tab');await expect(dialog.getByRole('button',{name:'Close conversation preview'})).toBeFocused();
+    await dialog.getByRole('button',{name:'A website',exact:true}).click();
+    await expect(dialog.locator('.chat-reply')).toContainText('live assistant is still to be built');
+    const axe=await new AxeBuilder({page}).withTags(['wcag2a','wcag2aa','wcag21aa']).analyze();expect(axe.violations).toEqual([]);
+    await page.keyboard.press('Escape');await expect(dialog).not.toBeVisible();await expect(trigger).toBeFocused();
+    await trigger.click();await page.goBack();await expect(dialog).not.toBeVisible();
+    await page.goForward();await expect(dialog).toBeVisible();
+    await dialog.getByRole('button',{name:'Close conversation preview'}).click();await expect(dialog).not.toBeVisible();
+    expect(submissions).toEqual([]);
+  });
+  test('Email remains available without scripts and when the conversation script fails',async({browser})=>{
+    for(const noJS of [true,false]) {
+      const context=await browser.newContext({javaScriptEnabled:!noJS,viewport:{width:390,height:844}});
+      if(!noJS)await context.route('**/studio-conversation.js',route=>route.abort());
+      const page=await context.newPage();await page.goto('/#contact');
+      await expect(page.locator('.closing a[href="mailto:hello@studio26.me"]')).toBeVisible();
+      await expect(page.locator('[data-chat]')).not.toBeVisible();
+      await expect(page.locator('.closing-logo img')).toHaveAttribute('alt',/Studio26/);
+      await context.close();
+    }
   });
 });
