@@ -1,0 +1,33 @@
+/* Contact form dialog. Builds on the .studio-chat dialog in studio-home.css. */
+.contact-link {
+  display: inline; min-height: 24px; padding: 0; border: 0; background: none; color: inherit;
+  font: inherit; text-decoration: underline; text-underline-offset: 4px; cursor: pointer;
+}
+.closing .contact-link, .chat-human .contact-link { display: inline-flex; align-items: center; min-height: 44px; }
+.contact-link:hover { text-decoration-thickness: 2px; }
+.contact-link:focus-visible { outline: 3px solid currentColor; outline-offset: 3px; }
+.contact-dialog .chat-body { overflow-y: auto; }
+.contact-dialog h2 { margin-bottom: 8px; }
+.cf-lede { margin: 0 0 20px; }
+.contact-form { display: grid; gap: 16px; }
+.cf-field { display: grid; gap: 6px; }
+.cf-field label { font-size: 15px; font-weight: 500; }
+.cf-optional { font-weight: 400; opacity: 0.75; }
+.cf-field input, .cf-field select, .cf-field textarea {
+  width: 100%; min-height: 48px; padding: 10px 14px; border: 1px solid #7d8392; border-radius: 10px;
+  background: #fff; color: #171a1c; font: 400 16px/1.4 var(--sans, sans-serif);
+}
+.cf-field textarea { min-height: 120px; resize: vertical; }
+.cf-field input:focus-visible, .cf-field select:focus-visible, .cf-field textarea:focus-visible { outline: 3px solid #475c89; outline-offset: 2px; }
+.cf-hp { position: absolute; left: -10000px; width: 1px; height: 1px; overflow: hidden; }
+.cf-turnstile:empty { display: none; }
+.cf-send {
+  justify-self: start; min-height: 52px; padding: 0 28px; border: 0; border-radius: 999px;
+  background: #253047; color: #e8e6e2; font: 600 16px/1 var(--sans, sans-serif); cursor: pointer;
+}
+.cf-send:hover { background: #303f5d; }
+.cf-send[aria-disabled="true"] { opacity: 0.6; cursor: progress; }
+.cf-status { margin: 0; font-size: 15px; }
+.cf-status:focus { outline: none; }
+.cf-done-title { font-size: 20px; font-weight: 600; }
+.cf-alt { margin-top: 20px; }

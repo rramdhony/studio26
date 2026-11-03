@@ -1,3 +1,5 @@
+import { EmailMessage } from 'cloudflare:email';
+
 // Static assets are matched first except /video/* (for HTTP 206 Range seeking) and /api/*.
 export default {
   async fetch(request, env, ctx) {
@@ -137,7 +139,7 @@ async function handleEnquiry(request, env, ctx, url) {
   };
 
   // Honeypot: real visitors never see this field. Pretend success so bots learn nothing.
-  if (field('website')) return wantsJson ? json({ ok: true }) : page('Thank you', 'Your enquiry is in, and we will reply by email.');
+  if (field('hp_field')) return wantsJson ? json({ ok: true }) : page('Thank you', 'Your enquiry is in, and we will reply by email.');
 
   if (!enquiry.name || enquiry.name.length > MAX.name) return fail('Please tell us your name.', 422);
   if (!EMAIL_RE.test(enquiry.email) || enquiry.email.length > MAX.email) return fail('Please enter an email address we can reply to.', 422);
@@ -191,21 +193,48 @@ async function hash(value) {
   return [...new Uint8Array(digest)].slice(0, 16).map((b) => b.toString(16).padStart(2, '0')).join('');
 }
 
-// Email alert to Studio26; skipped until the NOTIFY binding is configured (needs studio26.me onboarded to Email Service).
+// Email alert to Studio26 through Cloudflare Email Routing. Skipped until the NOTIFY binding
+// (send_email, to a verified destination) and the NOTIFY_FROM / NOTIFY_TO vars are set.
+function b64(s) {
+  let bin = '';
+  new TextEncoder().encode(s).forEach((b) => { bin += String.fromCharCode(b); });
+  return btoa(bin);
+}
+
+// RFC 2047: keep each encoded word short by encoding the subject in small chunks.
+function mimeWord(s) {
+  const chars = [...s];
+  const words = [];
+  for (let i = 0; i < chars.length; i += 20) words.push(`=?UTF-8?B?${b64(chars.slice(i, i + 20).join(''))}?=`);
+  return words.join('\r\n ');
+}
+
 async function notify(e, env) {
   if (!env.NOTIFY || !env.NOTIFY_TO || !env.NOTIFY_FROM) return;
-  const text = [
+  const oneLine = (s) => String(s).replace(/[\r\n]+/g, ' ');
+  const replyTo = /^[^\s@<>,;"]+@[^\s@<>,;"]+\.[^\s@<>,;"]+$/.test(e.email) ? e.email : '';
+  const body = [
     `Name: ${e.name}`,
     `Email: ${e.email}`,
     `Company: ${e.company || '-'}`,
     `Needs: ${NEEDS[e.need]}`,
     '',
-    e.message,
-  ].join('\n');
-  await env.NOTIFY.send({
-    to: env.NOTIFY_TO,
-    from: env.NOTIFY_FROM,
-    subject: `New enquiry: ${e.name} (${NEEDS[e.need]})`,
-    text,
-  });
+    e.message.replace(/\r\n|\r|\n/g, '\r\n'),
+    '',
+    'Reply to this email to answer the enquiry.',
+  ].join('\r\n');
+  const raw = [
+    `From: Studio26 website <${env.NOTIFY_FROM}>`,
+    `To: ${env.NOTIFY_TO}`,
+    `Subject: ${mimeWord(oneLine(`New enquiry: ${e.name.slice(0, 60)} (${NEEDS[e.need]})`))}`,
+    replyTo ? `Reply-To: ${replyTo}` : null,
+    `Message-ID: <${crypto.randomUUID()}@studio26.me>`,
+    `Date: ${new Date().toUTCString()}`,
+    'MIME-Version: 1.0',
+    'Content-Type: text/plain; charset=utf-8',
+    'Content-Transfer-Encoding: base64',
+    '',
+    b64(body).replace(/.{76}/g, '$&\r\n'),
+  ].filter((line) => line !== null).join('\r\n');
+  await env.NOTIFY.send(new EmailMessage(env.NOTIFY_FROM, env.NOTIFY_TO, raw));
 }

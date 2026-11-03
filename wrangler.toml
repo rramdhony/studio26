@@ -17,3 +17,10 @@ binding = "DB"
 database_name = "studio26-db"
 database_id = "250ea13a-9a9d-4c04-816d-204b7b2eef9c"
 migrations_dir = "migrations"
+
+# Enquiry alerts through Cloudflare Email Routing. NOTIFY_TO is a Worker secret (a verified destination address).
+[[send_email]]
+name = "NOTIFY"
+
+[vars]
+NOTIFY_FROM = "enquiries@studio26.me"

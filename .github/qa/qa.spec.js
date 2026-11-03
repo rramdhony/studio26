@@ -243,7 +243,7 @@ test.describe('Enquiry form', () => {
   });
 
   test('Honeypot submissions get a silent success', async ({ request }) => {
-    const res = await post(request, { ...valid, website: 'http://spam.example' });
+    const res = await post(request, { ...valid, hp_field: 'http://spam.example' });
     expect(res.status()).toBe(200);
     expect(await res.json()).toEqual({ ok: true });
   });
@@ -889,7 +889,7 @@ test.describe('Section 10 — invitation footer and logo', () => {
     }
     await expect(page.locator('.header-brand')).toHaveAccessibleName('Studio26 home');
     await expect.poll(()=>page.locator('.header-brand img').evaluate(img=>img.complete&&img.naturalWidth>0)).toBe(true);
-    await expect(page.locator('.closing a[href="mailto:hello@studio26.me"]')).toBeVisible();
+    await expect(page.locator('.closing [data-contact]')).toBeVisible();
   });
   test('Conversation preview is honest, keyboard operable and follows browser history', async ({page}) => {
     const submissions=[];page.on('request',r=>{if(r.method()==='POST')submissions.push(r.url());});
@@ -900,7 +900,7 @@ test.describe('Section 10 — invitation footer and logo', () => {
     await expect(dialog.getByText('Conversation preview · no messages are sent')).toBeVisible();
     await expect(dialog.getByRole('button',{name:'Close conversation preview'})).toBeFocused();
     await page.keyboard.press('Shift+Tab');
-    await expect(dialog.getByRole('link',{name:'Email Ruben and the team'})).toBeFocused();
+    await expect(dialog.getByRole('button',{name:'Write to Ruben and the team'})).toBeFocused();
     await page.keyboard.press('Tab');await expect(dialog.getByRole('button',{name:'Close conversation preview'})).toBeFocused();
     await dialog.getByRole('button',{name:'A website',exact:true}).click();
     await expect(dialog.locator('.chat-reply')).toContainText('live assistant is still to be built');
@@ -918,10 +918,56 @@ test.describe('Section 10 — invitation footer and logo', () => {
       const context=await browser.newContext({javaScriptEnabled:!noJS,viewport:{width:390,height:844}});
       if(!noJS)await context.route('**/studio-conversation.js',route=>route.abort());
       const page=await context.newPage();await page.goto('/#contact');
-      await expect(page.locator('.closing a[href="mailto:hello@studio26.me"]')).toBeVisible();
+      await expect(page.locator('.closing [data-contact]')).toBeVisible();
       await expect(page.locator('[data-chat]')).not.toBeVisible();
       await expect(page.locator('.closing-logo img')).toHaveAttribute('alt',/Studio26/);
       await context.close();
     }
+  });
+});
+
+// CONTACT FORM: the studio address is never in the page source, and the form is the route in.
+test.describe('Contact form dialog', () => {
+  for (const path of ['/', '/ai-video', '/privacy']) {
+    test(`No studio address in the source of ${path}`, async ({ request }) => {
+      const html = await (await request.get(`${BASE_URL}${path}`)).text();
+      expect(html).not.toContain('hello@studio26.me');
+    });
+  }
+
+  test('Send us a message opens the form, with a hidden honeypot and a reveal for the address', async ({ page }) => {
+    await page.goto(`${BASE_URL}/`);
+    await page.locator('.closing [data-contact]').click();
+    const dialog = page.locator('dialog.contact-dialog');
+    await expect(dialog).toHaveAttribute('open', '');
+    await expect(page.locator('#cf-name')).toBeFocused();
+    await expect(page.locator('#cf-hp')).not.toBeInViewport();
+    for (const id of ['cf-name', 'cf-email', 'cf-need', 'cf-message']) {
+      await expect(page.locator(`label[for="${id}"]`)).toHaveCount(1);
+    }
+    await page.locator('.cf-reveal').click();
+    await expect(dialog.locator('a[href="mailto:hello@studio26.me"]')).toBeVisible();
+    await page.keyboard.press('Escape');
+    await expect(dialog).not.toHaveAttribute('open', '');
+    await expect(page.locator('.closing [data-contact]')).toBeFocused();
+  });
+
+  test('A successful send shows thanks and reopening does not error', async ({ page }) => {
+    const errors = [];
+    page.on('pageerror', (e) => errors.push(e.message));
+    await page.route('**/api/enquiry', (r) => r.fulfill({ status: 200, contentType: 'application/json', body: '{"ok":true}' }));
+    await page.goto(`${BASE_URL}/ai-video`);
+    await page.locator('.av-closing-cta').click();
+    await page.fill('#cf-name', 'Test Person');
+    await page.fill('#cf-email', 'test@example.com');
+    await page.selectOption('#cf-need', 'video');
+    await page.fill('#cf-message', 'Testing the contact form.');
+    // Turnstile cannot issue a token on localhost, so supply the field it would add.
+    await page.evaluate(() => { const f = document.querySelector('.contact-form'); let ins = [...f.querySelectorAll('[name="cf-turnstile-response"]')]; if (!ins.length) { const i = document.createElement('input'); i.type = 'hidden'; i.name = 'cf-turnstile-response'; f.appendChild(i); ins = [i]; } ins.forEach((i) => { i.value = 'test-token'; }); });
+    await page.locator('.cf-send').click();
+    await expect(page.locator('.cf-done-title')).toBeFocused();
+    await page.keyboard.press('Escape');
+    await page.locator('.av-closing-cta').click();
+    expect(errors).toEqual([]);
   });
 });

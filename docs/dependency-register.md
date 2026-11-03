@@ -4,12 +4,14 @@ Required by the brand plan (dependency discipline) and REVIEW.md. Update in the
 same commit that adds, upgrades or removes anything. Licence column marked
 "verify" must be checked against the package or source before launch.
 
-Last updated: 31 Oct 2026 (Claude, from package.json and public/assets).
+Last updated: 3 Nov 2026 (Claude: Turnstile and Email Routing for the contact form).
 
 ## Runtime (shipped to visitors)
 
 | Item | Version | Where | Licence | Status / notes |
 |---|---|---|---|---|
+| Cloudflare Turnstile (api.js, loaded on demand) | hosted v0 | public/assets/contact-form.js, src/index.js | Cloudflare service terms | Added 3 Nov 2026. Widget "Studio26 contact form" (studio26.me, preview host). Script loads only when the contact dialog opens.
+| Cloudflare Email Routing send_email binding (cloudflare:email) | Workers runtime | src/index.js, wrangler.toml | Cloudflare service terms | Added 3 Nov 2026. Emails enquiries to the verified studio inbox; NOTIFY_TO is a Worker secret.
 | GSAP | 3.15.0 | public/assets/vendor/gsap-3.15.0.min.js | GSAP standard licence (verify current terms) | Used by section 01 opening |
 | three.js | 0.187.0 | package.json dependency | MIT | Installed, not yet shipped. Remove if unused at launch |
 | Instrument Sans (variable, latin) | n/a | public/assets/fonts | SIL OFL 1.1 (InstrumentSans-OFL.txt included) | Used site-wide |
