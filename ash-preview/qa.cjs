@@ -84,6 +84,18 @@ async function run() {
     await launch.click();
     await input.waitFor({state:'visible'});
     await page.waitForFunction(() => !document.querySelector('#ash-input').disabled);
+    await ask('who will build my chatbot?');
+    await includes(/Our development team in Mauritius will build your chatbot/);
+    await includes(/Ruben Ramdhony.*personally reviews their work/);
+    assert.equal(await turns.locator('a[href="https://studio26.me/#founder"]').count(),1);
+    await changeLanguage();
+    await clear.click();
+    await ask('Bonjour, qui va développer mon chatbot ?');
+    await includes(/Notre équipe de développement à Maurice créera votre chatbot/);
+    await includes(/Ruben Ramdhony.*vérifie personnellement leur travail/);
+    assert.equal(await turns.locator('a[href="https://studio26.me/#founder"]').count(),1);
+    await changeLanguage();
+    await clear.click();
     await ask('Hi, how much is a website with an AI assistant?');
     await includes(/4,000/);
     await includes(/95/);

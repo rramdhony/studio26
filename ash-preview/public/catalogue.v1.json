@@ -280,6 +280,35 @@
       }
     },
     {
+      "id": "chatbot-builder",
+      "source": "https://studio26.me/#founder",
+      "en": {
+        "text": "Our development team in Mauritius will build your chatbot. Ruben Ramdhony, Studio26’s founder, mentors the developers and personally reviews their work before your chatbot goes live.",
+        "aliases": [
+          "Who will build my chatbot?",
+          "Who builds the chatbot?",
+          "Who will be building my chatbot?",
+          "Who builds your chatbots?",
+          "Who will build our chatbot?",
+          "Who will develop my chatbot?",
+          "Who will build my AI assistant?",
+          "Who's going to build my chatbot?"
+        ]
+      },
+      "fr": {
+        "text": "Notre équipe de développement à Maurice créera votre chatbot. Ruben Ramdhony, le fondateur de Studio26, accompagne les développeurs et vérifie personnellement leur travail avant la mise en ligne de votre chatbot.",
+        "aliases": [
+          "Qui va créer mon chatbot ?",
+          "Qui va développer mon chatbot ?",
+          "Qui développera mon chatbot ?",
+          "Qui crée vos chatbots ?",
+          "Qui va créer notre chatbot ?",
+          "Qui va développer mon assistant IA ?",
+          "Qui s’occupe du développement de mon chatbot ?"
+        ]
+      }
+    },
+    {
       "id": "team",
       "source": "https://studio26.me/#founder",
       "en": {
