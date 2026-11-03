@@ -918,7 +918,13 @@ test.describe('Section 10 — invitation footer and logo', () => {
       const context=await browser.newContext({javaScriptEnabled:!noJS,viewport:{width:390,height:844}});
       if(!noJS)await context.route('**/studio-conversation.js',route=>route.abort());
       const page=await context.newPage();await page.goto('/#contact');
-      await expect(page.locator('.closing [data-contact]')).toBeVisible();
+      if (noJS) {
+        await expect(page.locator('.closing .cf-fallback')).toBeVisible();
+        await expect(page.locator('.closing [data-contact]')).not.toBeVisible();
+      } else {
+        await expect(page.locator('.closing [data-contact]')).toBeVisible();
+        await expect(page.locator('.closing .cf-fallback')).not.toBeVisible();
+      }
       await expect(page.locator('[data-chat]')).not.toBeVisible();
       await expect(page.locator('.closing-logo img')).toHaveAttribute('alt',/Studio26/);
       await context.close();
@@ -955,6 +961,8 @@ test.describe('Contact form dialog', () => {
   test('A successful send shows thanks and reopening does not error', async ({ page }) => {
     const errors = [];
     page.on('pageerror', (e) => errors.push(e.message));
+    // Stand-in for Turnstile, which cannot run on localhost.
+    await page.addInitScript(() => { window.turnstile = { render: () => 'w', reset: () => {} }; });
     await page.route('**/api/enquiry', (r) => r.fulfill({ status: 200, contentType: 'application/json', body: '{"ok":true}' }));
     await page.goto(`${BASE_URL}/ai-video`);
     await page.locator('.av-closing-cta').click();

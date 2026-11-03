@@ -203,10 +203,15 @@ function b64(s) {
 
 // RFC 2047: keep each encoded word short by encoding the subject in small chunks.
 function mimeWord(s) {
-  const chars = [...s];
+  const enc = new TextEncoder();
   const words = [];
-  for (let i = 0; i < chars.length; i += 20) words.push(`=?UTF-8?B?${b64(chars.slice(i, i + 20).join(''))}?=`);
-  return words.join('\r\n ');
+  let chunk = '';
+  for (const ch of s) {
+    if (enc.encode(chunk + ch).length > 45) { words.push(chunk); chunk = ''; }
+    chunk += ch;
+  }
+  if (chunk) words.push(chunk);
+  return words.map((w) => `=?UTF-8?B?${b64(w)}?=`).join('\r\n ');
 }
 
 async function notify(e, env) {

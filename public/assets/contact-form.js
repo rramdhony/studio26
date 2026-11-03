@@ -32,6 +32,7 @@
       <p class="chat-human cf-alt">Prefer your own email app? <button type="button" class="contact-link cf-reveal">Show our address</button></p>
     </div>`;
   document.body.appendChild(dialog);
+  document.documentElement.classList.add('cf-ready');
 
   const form = dialog.querySelector('form');
   const status = dialog.querySelector('.cf-status');
@@ -40,6 +41,8 @@
   let opener = null;
   let widget = null;
   let loading = null;
+  let tsFailed = false;
+  const TS_FAIL = 'The spam check could not load. Please use "Show our address" below instead.';
 
   function loadTurnstile() {
     if (window.turnstile) return Promise.resolve();
@@ -58,9 +61,10 @@
   function renderTurnstile() {
     if (widget !== null || !SITEKEY) return;
     loadTurnstile().then(() => {
-      if (widget === null) widget = window.turnstile.render(box, { sitekey: SITEKEY, theme: 'light', size: 'flexible' });
+      if (widget === null) widget = window.turnstile.render(box, { sitekey: SITEKEY, theme: 'light', size: 'flexible', 'error-callback': () => { tsFailed = true; status.textContent = TS_FAIL; } });
     }).catch(() => {
-      status.textContent = 'The spam check could not load. Please use "Show our address" below instead.';
+      tsFailed = true;
+      status.textContent = TS_FAIL;
     });
   }
 
@@ -89,6 +93,7 @@
     e.preventDefault();
     if (busy || !form.reportValidity()) return;
     const token = form.querySelector('[name="cf-turnstile-response"]');
+    if (SITEKEY && tsFailed) { fail(TS_FAIL); return; }
     if (SITEKEY && (!token || !token.value)) { fail('Please wait a moment while we check this is not an automated message, then send again.'); return; }
     busy = true;
     send.setAttribute('aria-disabled', 'true');

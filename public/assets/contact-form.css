@@ -1,4 +1,7 @@
 /* Contact form dialog. Builds on the .studio-chat dialog in studio-home.css. */
+/* Until the script is ready, standalone triggers stay hidden and the scrambled address shows instead. */
+html:not(.cf-ready) .closing [data-contact], html:not(.cf-ready) .av-closing-cta[data-contact] { display: none; }
+html.cf-ready .cf-fallback { display: none; }
 .contact-link {
   display: inline; min-height: 24px; padding: 0; border: 0; background: none; color: inherit;
   font: inherit; text-decoration: underline; text-underline-offset: 4px; cursor: pointer;
