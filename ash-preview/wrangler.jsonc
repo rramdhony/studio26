@@ -1,0 +1,8 @@
+{
+  "name": "studio26-ash-slice1-preview",
+  "compatibility_date": "2026-11-02",
+  "workers_dev": true,
+  "preview_urls": false,
+  "assets": { "directory": "./public", "not_found_handling": "404-page" },
+  "build": { "command": "node build.mjs", "cwd": "." }
+}

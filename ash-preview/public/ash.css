@@ -1,0 +1,707 @@
+@font-face {
+  font-family: "Instrument Sans";
+  src: url("assets/instrument-sans-latin.woff2") format("woff2");
+  font-weight: 400 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Syne";
+  src: url("assets/syne-latin.woff2") format("woff2");
+  font-weight: 500 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  --oxblood: #612638;
+  --peach: #f6cbb0;
+  --paper: #f7f1ed;
+  --ink: #253047;
+  --focus: #475c89;
+  --rule-on-oxblood: rgb(246 203 176 / 0.45);
+  --rule-on-paper: rgb(37 48 71 / 0.22);
+  --sans: "Instrument Sans", "Segoe UI", system-ui, sans-serif;
+  --display: "Syne", "Instrument Sans", "Segoe UI", sans-serif;
+  color-scheme: light;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+[hidden] {
+  display: none !important;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+html:has(dialog[open]) {
+  overflow: hidden;
+}
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--sans);
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+p,
+h1,
+h2,
+ol,
+figure {
+  margin: 0;
+}
+
+button,
+input {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+/* A paper ring next to the control and a focus-blue ring outside it stay
+   visible on both the oxblood and the paper surfaces. */
+:focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 2px;
+  box-shadow: 0 0 0 2px var(--paper);
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+
+.skip-link {
+  position: absolute;
+  top: 0.5rem;
+  left: 0.5rem;
+  z-index: 10;
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 0.5rem 1rem;
+  background: var(--paper);
+  color: var(--ink);
+  font-weight: 600;
+  transform: translateY(-200%);
+}
+
+.skip-link:focus {
+  transform: none;
+}
+
+/* Cover */
+
+.cover {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  min-height: 100svh;
+  background: var(--oxblood);
+  color: var(--paper);
+}
+
+.cover-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.375rem clamp(1rem, 3vw, 2rem);
+  border-bottom: 1px solid var(--rule-on-oxblood);
+}
+
+.cover-brand {
+  font-family: var(--display);
+  font-size: 1.125rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  color: var(--peach);
+}
+
+.lang-switch {
+  display: inline-flex;
+  flex: none;
+  gap: 0.25rem;
+}
+
+.lang-button {
+  min-width: 44px;
+  min-height: 44px;
+  padding: 0 0.5rem;
+  border: 1px solid var(--rule-on-oxblood);
+  border-radius: 2px;
+  background: transparent;
+  color: var(--paper);
+  font-size: 0.875rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  transition: background-color 160ms ease, color 160ms ease;
+}
+
+.lang-button:hover {
+  border-color: var(--peach);
+}
+
+.lang-button[aria-pressed="true"] {
+  border-color: var(--peach);
+  background: var(--peach);
+  color: var(--oxblood);
+}
+
+.cover-main {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+}
+
+.cover-main:focus {
+  outline: none;
+}
+
+.cover-figure {
+  position: relative;
+  flex: none;
+  height: clamp(10rem, 38svh, 28rem);
+  overflow: hidden;
+}
+
+.cover-portrait {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 22%;
+}
+
+.cover-copy {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.625rem;
+  padding: 1rem clamp(1rem, 3vw, 2rem) 1.25rem;
+}
+
+.cover-title {
+  font-family: var(--display);
+  font-size: clamp(3.5rem, 18vw, 9.5rem);
+  font-weight: 600;
+  line-height: 0.92;
+  letter-spacing: -0.035em;
+  color: var(--peach);
+}
+
+.cover-identity {
+  font-size: 1.0625rem;
+  font-weight: 500;
+  line-height: 1.35;
+}
+
+.cover-identity p[lang="fr"] {
+  color: var(--peach);
+}
+
+.cover-lede {
+  max-width: 34rem;
+}
+
+.cover-noscript {
+  max-width: 34rem;
+  padding: 0.75rem;
+  border: 1px solid var(--peach);
+}
+
+.cover-noscript span {
+  display: block;
+}
+
+.ash-launcher {
+  width: 100%;
+  max-width: 24rem;
+  min-height: 56px;
+  margin-block: 0.25rem;
+  padding: 0.75rem 1.5rem;
+  border: 1px solid var(--peach);
+  border-radius: 2px;
+  background: var(--peach);
+  color: var(--oxblood);
+  font-family: var(--display);
+  font-size: 1.25rem;
+  font-weight: 600;
+  transition: background-color 160ms ease, transform 160ms ease;
+}
+
+.ash-launcher:hover {
+  background: var(--paper);
+  transform: translateY(-1px);
+}
+
+.cover-status:empty {
+  display: none;
+}
+
+.cover-status {
+  max-width: 34rem;
+  padding: 0.5rem 0.75rem;
+  border-left: 3px solid var(--peach);
+  font-weight: 500;
+}
+
+.cover-email {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  column-gap: 0.5rem;
+}
+
+.cover-email a,
+.cover-noscript a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  color: var(--peach);
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+
+.cover-note {
+  max-width: 34rem;
+  font-size: 0.875rem;
+  line-height: 1.45;
+}
+
+@media (min-width: 56rem), (min-width: 36rem) and (max-height: 32rem) {
+  .cover-main {
+    display: grid;
+    grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
+  }
+
+  .cover-figure {
+    height: auto;
+    min-height: 16rem;
+  }
+
+  .cover-copy {
+    justify-content: flex-end;
+    gap: 0.875rem;
+    padding: clamp(1rem, 4vw, 3.5rem);
+  }
+}
+
+@media (min-width: 36rem) and (max-height: 32rem) {
+  .cover-main {
+    grid-template-columns: minmax(0, 0.7fr) minmax(0, 1fr);
+  }
+
+  .cover-copy {
+    justify-content: flex-start;
+    gap: 0.5rem;
+    padding: 0.75rem 1.25rem 1rem;
+  }
+
+  .cover-title {
+    font-size: 3.25rem;
+  }
+}
+
+/* Modal */
+
+.ash-dialog {
+  width: 100%;
+  height: 100vh;
+  height: 100dvh;
+  max-width: none;
+  max-height: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  overscroll-behavior: contain;
+  border: 0;
+  background: var(--paper);
+  color: var(--ink);
+}
+
+.ash-dialog[open] {
+  animation: ash-rise 200ms ease-out 1;
+}
+
+.ash-dialog::backdrop {
+  background: rgb(37 48 71 / 0.68);
+}
+
+@keyframes ash-rise {
+  from {
+    opacity: 0;
+    transform: translateY(0.75rem);
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (min-width: 44rem) and (min-height: 36rem) {
+  .ash-dialog {
+    width: min(42rem, calc(100vw - 3rem));
+    height: min(48rem, calc(100dvh - 3rem));
+    margin: auto;
+    border-radius: 2px;
+  }
+}
+
+.ash-shell {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-rows: auto minmax(0, 1fr) auto auto;
+  height: 100%;
+}
+
+.ash-head {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto auto;
+  align-items: center;
+  column-gap: 0.5rem;
+  row-gap: 0.25rem;
+  padding: 0.5rem 0.75rem;
+  background: var(--oxblood);
+  color: var(--paper);
+}
+
+.ash-avatar {
+  display: block;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+
+.ash-title {
+  min-width: 0;
+  font-family: var(--display);
+  font-size: 1.25rem;
+  font-weight: 600;
+  line-height: 1.15;
+  color: var(--peach);
+}
+
+.ash-close {
+  min-width: 44px;
+  min-height: 44px;
+  padding: 0 0.625rem;
+  border: 1px solid var(--peach);
+  border-radius: 2px;
+  background: transparent;
+  color: var(--paper);
+  font-size: 0.875rem;
+  font-weight: 600;
+  transition: background-color 160ms ease, color 160ms ease;
+}
+
+.ash-close:hover {
+  background: var(--peach);
+  color: var(--oxblood);
+}
+
+.ash-note {
+  grid-column: 1 / -1;
+  font-size: 0.875rem;
+  line-height: 1.35;
+}
+
+.ash-transcript {
+  position: relative;
+  min-height: 0;
+  padding: 1rem 1rem 0.75rem;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scroll-padding-block: 0.75rem;
+  overflow-wrap: anywhere;
+}
+
+/* Inset the ring: the transcript sits flush against its scroll container. */
+.ash-transcript:focus-visible {
+  outline-offset: -3px;
+  box-shadow: none;
+}
+
+.ash-turns {
+  display: flex;
+  flex-direction: column;
+  gap: 0.875rem;
+  padding: 0;
+  list-style: none;
+}
+
+.ash-turn {
+  max-width: 34rem;
+}
+
+.ash-turn-visitor {
+  align-self: flex-end;
+  padding: 0.5rem 0.75rem;
+  background: var(--peach);
+  color: var(--ink);
+}
+
+.ash-turn-ash {
+  align-self: flex-start;
+  padding-left: 0.75rem;
+  border-left: 3px solid var(--oxblood);
+}
+
+.ash-who {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--oxblood);
+}
+
+.ash-turn-visitor .ash-who {
+  color: var(--ink);
+}
+
+.ash-text {
+  white-space: pre-line;
+}
+
+.ash-links {
+  display: flex;
+  flex-wrap: wrap;
+  column-gap: 1rem;
+  margin-top: 0.125rem;
+}
+
+.ash-action {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  color: var(--oxblood);
+  font-size: 0.9375rem;
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+
+.ash-failure {
+  margin-top: 0.875rem;
+  padding: 0.75rem;
+  border: 2px solid var(--oxblood);
+  font-weight: 500;
+}
+
+.ash-failure-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.25rem 1rem;
+  margin-top: 0.25rem;
+}
+
+.ash-topics-wrap {
+  padding: 0.5rem 1rem;
+  border-top: 1px solid var(--rule-on-paper);
+}
+
+.ash-topics-wrap:has(.ash-topics:empty) {
+  display: none;
+}
+
+.ash-topics-label {
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
+.ash-topics {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 0.5rem;
+  margin-inline: -0.5rem;
+  padding: 0.375rem 0.5rem;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scroll-padding-inline: 0.5rem;
+}
+
+.ash-topic {
+  flex: none;
+  min-height: 44px;
+  padding: 0.375rem 0.75rem;
+  border: 1px solid var(--oxblood);
+  border-radius: 2px;
+  background: transparent;
+  color: var(--oxblood);
+  font-size: 0.9375rem;
+  font-weight: 500;
+  transition: background-color 160ms ease;
+}
+
+.ash-topic:hover {
+  background: var(--peach);
+}
+
+@media (min-width: 44rem) and (min-height: 36rem) {
+  .ash-topics {
+    flex-wrap: wrap;
+    overflow-x: visible;
+  }
+}
+
+.ash-form {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 0.25rem 0.5rem;
+  align-items: center;
+  padding: 0.5rem 1rem 0.75rem;
+  border-top: 1px solid var(--rule-on-paper);
+}
+
+.ash-label {
+  grid-column: 1 / -1;
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
+.ash-input {
+  width: 100%;
+  min-height: 44px;
+  padding: 0.5rem 0.75rem;
+  border: 2px solid var(--ink);
+  border-radius: 2px;
+  background: #fff;
+  color: var(--ink);
+  font-size: 1rem;
+}
+
+.ash-input[aria-invalid="true"] {
+  border-color: var(--oxblood);
+}
+
+.ash-input:disabled {
+  border-style: dashed;
+  background: transparent;
+}
+
+.ash-ask {
+  min-width: 44px;
+  min-height: 44px;
+  padding: 0.5rem 1rem;
+  border: 1px solid var(--oxblood);
+  border-radius: 2px;
+  background: var(--oxblood);
+  color: var(--paper);
+  font-weight: 600;
+  transition: background-color 160ms ease;
+}
+
+.ash-ask:hover:not(:disabled) {
+  background: var(--ink);
+}
+
+.ash-ask:disabled {
+  border-style: dashed;
+  background: transparent;
+  color: var(--ink);
+  cursor: not-allowed;
+}
+
+.ash-hint {
+  font-size: 0.875rem;
+  line-height: 1.35;
+}
+
+.ash-secondary {
+  min-width: 44px;
+  min-height: 44px;
+  padding: 0.25rem 0.5rem;
+  border: 0;
+  background: transparent;
+  color: var(--ink);
+  font-size: 0.9375rem;
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+
+.ash-secondary:hover {
+  color: var(--oxblood);
+}
+
+.ash-clear {
+  justify-self: end;
+}
+
+/* Very short screens: scroll the whole modal so the transcript keeps usable
+   room above the composer, including when an on-screen keyboard is open. */
+@media (max-height: 26rem) {
+  .ash-shell {
+    display: block;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+  }
+
+  .ash-transcript {
+    overflow: visible;
+  }
+
+  .ash-transcript:focus-visible {
+    outline-offset: 2px;
+  }
+
+  .ash-note {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
+
+  .ash-launcher:hover {
+    transform: none;
+  }
+}
+
+@media (forced-colors: active) {
+  .lang-button[aria-pressed="true"] {
+    forced-color-adjust: none;
+    border-color: Highlight;
+    background: Highlight;
+    color: HighlightText;
+  }
+
+  .ash-turn-visitor {
+    border: 1px solid CanvasText;
+  }
+
+  :focus-visible {
+    outline-color: Highlight;
+  }
+}

@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, interactive-widget=resizes-content">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; img-src 'self'; font-src 'self'; connect-src 'self'; base-uri 'none'; form-action 'none'">
+    <meta name="referrer" content="no-referrer">
+    <meta name="robots" content="noindex, nofollow">
+    <meta name="theme-color" content="#612638">
+    <meta name="description" content="Preview of Ash, Studio26's AI assistant, in English and French. Aperçu d'Ash, l'assistante IA de Studio26, en anglais et en français.">
+    <title>Ask Ash, Studio26’s AI assistant</title>
+    <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="ash.css">
+    <script type="module" src="ash.js"></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content" data-i18n="skip">Skip to Ash</a>
+
+    <div class="cover">
+      <header class="cover-head" aria-label="Studio26">
+        <p class="cover-brand">Studio26</p>
+        <div class="lang-switch" role="group" aria-label="Language / Langue">
+          <button class="lang-button" type="button" data-lang="en" aria-pressed="true">EN <span class="visually-hidden" lang="en">English</span></button>
+          <button class="lang-button" type="button" data-lang="fr" aria-pressed="false">FR <span class="visually-hidden" lang="fr">Français</span></button>
+        </div>
+      </header>
+
+      <main class="cover-main" id="main-content" tabindex="-1">
+        <figure class="cover-figure">
+          <img
+            class="cover-portrait"
+            src="assets/ash-oxblood-portrait-v1-640.webp"
+            alt="Portrait of Ash, Studio26’s AI assistant. Portrait d’Ash, l’assistante IA de Studio26."
+            width="640"
+            height="1137"
+            decoding="async"
+            fetchpriority="high"
+          >
+        </figure>
+
+        <div class="cover-copy">
+          <h1 class="cover-title">Ash</h1>
+          <div class="cover-identity">
+            <p lang="en">Ash is Studio26’s AI assistant.</p>
+            <p lang="fr">Ash est l’assistante IA de Studio26.</p>
+          </div>
+          <p class="cover-lede" data-i18n="lede">Ask about websites, AI video, pricing and how the studio works.</p>
+
+          <noscript>
+            <p class="cover-noscript">
+              <span lang="en">Ash needs JavaScript to answer. You can write to the studio instead:</span>
+              <span lang="fr">Ash a besoin de JavaScript pour répondre. Vous pouvez écrire au studio :</span>
+              <a href="mailto:hello@studio26.me">hello@studio26.me</a>
+            </p>
+          </noscript>
+
+          <button class="ash-launcher" id="ash-launcher" type="button" aria-haspopup="dialog" hidden data-i18n="launcher">Ask Ash</button>
+
+          <p class="cover-status" id="ash-cover-status" role="status"></p>
+
+          <p class="cover-email">
+            <span data-i18n="preferEmail">Prefer to write?</span>
+            <a href="mailto:hello@studio26.me">hello@studio26.me</a>
+          </p>
+          <p class="cover-note" data-i18n="disclosure">Answers come from a fixed list of published information. What you type stays on this page and is forgotten when you clear or reload.</p>
+        </div>
+      </main>
+    </div>
+
+    <p class="visually-hidden" id="ash-page-status" role="status"></p>
+
+    <dialog class="ash-dialog" id="ash-dialog" aria-labelledby="ash-dialog-title" aria-describedby="ash-dialog-note">
+      <div class="ash-shell">
+        <header class="ash-head" aria-label="Ash">
+          <img class="ash-avatar" src="assets/ash-avatar-round-v1-128.png" alt="" width="128" height="128">
+          <h2 class="ash-title" id="ash-dialog-title" tabindex="-1" data-i18n="dialogTitle">Ask Ash</h2>
+          <div class="lang-switch" role="group" aria-label="Language / Langue">
+            <button class="lang-button" type="button" data-lang="en" aria-pressed="true">EN <span class="visually-hidden" lang="en">English</span></button>
+            <button class="lang-button" type="button" data-lang="fr" aria-pressed="false">FR <span class="visually-hidden" lang="fr">Français</span></button>
+          </div>
+          <button class="ash-close" id="ash-close" type="button" data-i18n="close">Close</button>
+          <p class="ash-note" id="ash-dialog-note" data-i18n="dialogNote">Studio26’s AI assistant. Answers come from the studio’s published pages.</p>
+        </header>
+
+        <section class="ash-transcript" id="ash-transcript" tabindex="0" aria-label="Conversation" data-i18n-aria="transcriptLabel">
+          <ol class="ash-turns" id="ash-turns"></ol>
+          <div class="ash-failure" id="ash-failure" hidden>
+            <p data-i18n="failed">Ash’s answers could not be loaded, so Ash cannot answer right now. Nothing has been sent. You can write to the studio yourself at hello@studio26.me.</p>
+            <p class="ash-failure-actions">
+              <a class="ash-action" href="mailto:hello@studio26.me" data-i18n="emailLink">Email the studio (opens your mail app)</a>
+              <button class="ash-secondary" id="ash-retry" type="button" data-i18n="retry">Try again</button>
+            </p>
+          </div>
+        </section>
+
+        <div class="ash-topics-wrap" role="group" aria-labelledby="ash-topics-label">
+          <p class="ash-topics-label" id="ash-topics-label" data-i18n="topicsLabel">Or choose a topic</p>
+          <div class="ash-topics" id="ash-topics"></div>
+        </div>
+
+        <form class="ash-form" id="ash-form" novalidate>
+          <label class="ash-label" for="ash-input" data-i18n="inputLabel">Your question</label>
+          <input
+            class="ash-input"
+            id="ash-input"
+            required
+            type="text"
+            maxlength="240"
+            autocomplete="off"
+            autocapitalize="sentences"
+            spellcheck="false"
+            enterkeyhint="send"
+            aria-describedby="ash-hint"
+            disabled
+          >
+          <button class="ash-ask" id="ash-ask" type="submit" disabled data-i18n="ask">Ask</button>
+          <p class="ash-hint" id="ash-hint"></p>
+          <button class="ash-secondary ash-clear" id="ash-clear" type="button" data-i18n="clear">Clear chat</button>
+        </form>
+
+        <p class="visually-hidden" id="ash-status" role="status"></p>
+      </div>
+    </dialog>
+  </body>
+</html>
