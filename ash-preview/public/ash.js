@@ -117,6 +117,9 @@ export function normalizeQuery(raw) {
     .normalize('NFD')
     .replace(/\p{M}+/gu, '')
     .replace(/[^\p{L}\p{N}]+/gu, ' ')
+    // “Comment est-ce qu’on…” and “comment est-ce que l’on…” mean “comment on…”.
+    // Accept keyboard variants while keeping the rest of the question intact.
+    .replace(/\bcomment est ce (?:qu ?on|que (?:l ?on|on))\b/gu, 'comment on')
     .trim();
 }
 

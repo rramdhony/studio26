@@ -67,14 +67,19 @@ async function run() {
         ['Vous êtes basés où, merci ?', 'location'],
         ['Hello, I do not need a website but can you fund my business?', 'fallback-unknown'],
         ['Bonjour, combien coûte un site si vous livrez demain ?', 'fallback-commitment'],
+        ['comment est_ce que lón vous contacte?', 'contact'],
+        ['Comment est-ce que l’on vous contacte ?', 'contact'],
+        ['Bonjour, comment est-ce qu’on peut vous contacter ?', 'contact'],
+        ['Comment est-ce que l’on vous contacte si on veut être livré vendredi ?', 'fallback-commitment'],
+        ['Comment est-ce que l’on contacte mon assurance ?', 'fallback-unknown'],
       ];
       for (const [question, id] of probes) {
         if (matchQuestion(question,index).id !== id) misses.push(question);
       }
-      return {tested,misses};
+      return {tested,misses,probes:probes.length};
     });
     assert.deepEqual(corpus.misses, []);
-    results.push(corpus.tested + ' catalogue aliases plus six mixed-phrasing and boundary probes');
+    results.push(corpus.tested + ' catalogue aliases plus ' + corpus.probes + ' mixed-phrasing and boundary probes');
     await screenshot('ash-cover');
     await launch.click();
     await input.waitFor({state:'visible'});
@@ -87,6 +92,11 @@ async function run() {
     await changeLanguage();
     await includes(/4 000/);
     await includes(/1 000/);
+    await clear.click();
+    await ask('comment est_ce que lón vous contacte?');
+    await includes(/Vous pouvez écrire à Ruben et à son équipe à hello@studio26\.me/);
+    assert.equal(await turns.locator('a[href="mailto:hello@studio26.me"]').count(),1);
+    assert.equal(await turns.locator('a[href="https://studio26.me/#contact"]').count(),1);
     await clear.click();
     await ask('Bonjour, combien coûte un site avec un assistant ?');
     await includes(/4 000/);
