@@ -107,6 +107,8 @@ async function run() {
     await dialog.waitFor({state:'visible'});
     await dialog.locator('#ash-close').click();
     await dialog.waitFor({state:'hidden'});
+    // Closing the native dialog also unwinds its browser history entry.
+    await page.waitForFunction(() => !history.state?.ashOpen);
     await page.reload();
     await launch.click();
     await dialog.waitFor({state:'visible'});
