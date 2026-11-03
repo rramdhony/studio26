@@ -16,6 +16,7 @@ const LANGUAGES = ['en', 'fr'];
 const UI = {
   en: {
     pageTitle: 'Ask Ash, Studio26’s AI assistant',
+    portrait: 'Portrait of Ash, Studio26’s AI assistant.',
     skip: 'Skip to Ash',
     lede: 'Ask about websites, AI video, pricing and how the studio works.',
     launcher: 'Ask Ash',
@@ -50,6 +51,7 @@ const UI = {
   },
   fr: {
     pageTitle: 'Demander à Ash, l’assistante IA de Studio26',
+    portrait: 'Portrait d’Ash, l’assistante IA de Studio26.',
     skip: 'Aller à Ash',
     lede: 'Posez vos questions sur les sites web, la vidéo IA, les tarifs et le fonctionnement du studio.',
     launcher: 'Demander à Ash',
@@ -127,6 +129,7 @@ export function buildAliasIndex(answers) {
         const key = normalizeQuery(alias);
         if (!key) continue;
         const entry = index.get(key) ?? { ids: new Set(), lang };
+        if (entry.lang !== lang) entry.lang = null;
         entry.ids.add(answer.id);
         index.set(key, entry);
       }
@@ -168,7 +171,12 @@ export function matchQuestion(raw, index) {
   if (!normalized || String(raw).length > MAX_QUESTION_LENGTH) {
     return { id: FALLBACK_UNKNOWN, lang: null };
   }
-  const entry = index.get(normalized);
+  // Greetings and courtesies may wrap a known whole question in either language.
+  // Never discard a substantive clause to manufacture a match.
+  const core = normalized
+    .replace(/^(?:hello|hi|hey|bonjour|bonsoir|salut|please) /u, '')
+    .replace(/ (?:please|thanks|thank you|merci|s il vous plait)$/u, '');
+  const entry = index.get(normalized) ?? index.get(core);
   if (entry) {
     const id = entry.ids.size === 1 ? [...entry.ids][0] : FALLBACK_AMBIGUOUS;
     return { id, lang: entry.lang };
@@ -373,6 +381,7 @@ function init() {
   function renderLanguage() {
     document.documentElement.lang = state.lang;
     document.title = ui().pageTitle;
+    document.querySelector('.cover-portrait').alt = ui().portrait;
     for (const node of document.querySelectorAll('[data-i18n]')) {
       node.textContent = ui()[node.dataset.i18n];
     }
@@ -398,7 +407,8 @@ function init() {
     state.turns.push(turn);
     if (state.turns.length > MAX_TURNS) state.turns.shift();
     const latest = renderTurns();
-    latest?.scrollIntoView({
+    const response = latest?.nextElementSibling;
+    response?.scrollIntoView({
       block: 'start',
       behavior: reducedMotion.matches ? 'auto' : 'smooth',
     });
@@ -510,7 +520,7 @@ function init() {
     input.value = '';
     setHint('');
     addTurn({ question, questionLang: match.lang ?? state.lang, answerId: match.id });
-    input.focus();
+    input.focus({ preventScroll: true });
   });
 
   input.addEventListener('input', () => {

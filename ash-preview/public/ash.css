@@ -432,6 +432,18 @@ button {
   line-height: 1.35;
 }
 
+@media (max-width: 26rem) {
+  .ash-head {
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    grid-template-areas: "avatar title close" "note note languages";
+  }
+  .ash-head .ash-avatar { grid-area: avatar; }
+  .ash-head .ash-title { grid-area: title; overflow-wrap: anywhere; }
+  .ash-head .ash-close { grid-area: close; justify-self: end; }
+  .ash-head .lang-switch { grid-area: languages; }
+  .ash-head .ash-note { grid-area: note; }
+}
+
 .ash-transcript {
   position: relative;
   min-height: 0;

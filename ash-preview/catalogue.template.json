@@ -23,7 +23,9 @@
           "How much does a chatbot cost?",
           "What does the monthly fee include?",
           "What is included in the monthly fee?",
-          "How many visitor chats are included?"
+          "How many visitor chats are included?",
+          "How much for a website with a chatbot?",
+          "How much for a website with an AI assistant?"
         ]
       },
       "fr": {
@@ -44,7 +46,10 @@
           "Combien coûte un chatbot ?",
           "Que comprend le forfait mensuel ?",
           "Que comprend l'abonnement mensuel ?",
-          "Combien de conversations sont incluses ?"
+          "Combien de conversations sont incluses ?",
+          "Quel est le prix d’un site avec un chatbot ?",
+          "Combien pour un site web avec chatbot ?",
+          "Quel budget pour un site avec un assistant IA ?"
         ]
       }
     },
@@ -63,7 +68,9 @@
           "Website price",
           "Website prices",
           "Website pricing",
-          "Website cost"
+          "Website cost",
+          "What would a website cost?",
+          "What does a custom website cost?"
         ]
       },
       "fr": {
@@ -78,7 +85,9 @@
           "Prix d'un site",
           "Prix d'un site web",
           "Tarif d'un site web",
-          "Tarifs des sites web"
+          "Tarifs des sites web",
+          "Combien pour un site web ?",
+          "Quel budget pour un site web ?"
         ]
       }
     },
@@ -203,7 +212,9 @@
           "How much does a video cost?",
           "How much does a video ad cost?",
           "How much does an AI video ad cost?",
-          "How much are your monthly video plans?"
+          "How much are your monthly video plans?",
+          "How much for a video ad?",
+          "What do your video ads cost?"
         ]
       },
       "fr": {
@@ -222,7 +233,9 @@
           "Combien coûte une vidéo ?",
           "Combien coûte une publicité vidéo ?",
           "Combien coûte une publicité vidéo IA ?",
-          "Combien coûtent vos forfaits vidéo ?"
+          "Combien coûtent vos forfaits vidéo ?",
+          "Combien pour une pub vidéo ?",
+          "Quel est le prix d’une publicité vidéo ?"
         ]
       }
     },
@@ -289,7 +302,9 @@
           "Who founded Studio26?",
           "Who is Ruben?",
           "Who is Ruben Ramdhony?",
-          "Who reviews the work?"
+          "Who reviews the work?",
+          "Who will review my project?",
+          "Who reviews my website before launch?"
         ]
       },
       "fr": {
@@ -312,7 +327,9 @@
           "Qui a fondé Studio26 ?",
           "Qui est Ruben ?",
           "Qui est Ruben Ramdhony ?",
-          "Qui vérifie le travail ?"
+          "Qui vérifie le travail ?",
+          "Qui va vérifier mon projet ?",
+          "Qui valide le travail avant la livraison ?"
         ]
       }
     },
@@ -336,7 +353,10 @@
           "Where is the studio located?",
           "Do you work remotely?",
           "Do you work internationally?",
-          "Do you work worldwide?"
+          "Do you work worldwide?",
+          "Where is your studio based?",
+          "Where is your studio located?",
+          "Are you based in Mauritius?"
         ]
       },
       "fr": {
@@ -359,7 +379,11 @@
           "Où se trouve le studio ?",
           "Travaillez-vous à distance ?",
           "Travaillez-vous à l'international ?",
-          "Travaillez-vous dans le monde entier ?"
+          "Travaillez-vous dans le monde entier ?",
+          "Vous êtes basés où ?",
+          "Vous êtes où ?",
+          "Où se trouve votre studio ?",
+          "Où êtes-vous installés ?"
         ]
       }
     },

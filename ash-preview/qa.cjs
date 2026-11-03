@@ -45,11 +45,41 @@ async function run() {
       await input.press('Enter');
     }
     const includes = async (pattern) => assert.match((await turns.innerText()).replace(/[\u00a0\u202f]/g,' '), pattern);
+    await page.locator('.cover-portrait').evaluate(image => image.decode());
+    const corpus = await page.evaluate(async () => {
+      const { validateCatalogue, matchQuestion } = await import('./ash.js');
+      const data = await (await fetch('./catalogue.v1.json')).json();
+      const { index } = validateCatalogue(data);
+      const misses = [];
+      let tested = 0;
+      for (const answer of data.answers) {
+        for (const language of ['en','fr']) {
+          for (const alias of answer[language].aliases || []) {
+            tested++;
+            if (matchQuestion(alias, index).id !== answer.id) misses.push(alias);
+          }
+        }
+      }
+      const probes = [
+        ['Hey, where is your studio based?', 'location'],
+        ['Bonjour, quel est le prix d’un site avec un chatbot ?', 'website-ai'],
+        ['Who reviews my website before launch, please?', 'team'],
+        ['Vous êtes basés où, merci ?', 'location'],
+        ['Hello, I do not need a website but can you fund my business?', 'fallback-unknown'],
+        ['Bonjour, combien coûte un site si vous livrez demain ?', 'fallback-commitment'],
+      ];
+      for (const [question, id] of probes) {
+        if (matchQuestion(question,index).id !== id) misses.push(question);
+      }
+      return {tested,misses};
+    });
+    assert.deepEqual(corpus.misses, []);
+    results.push(corpus.tested + ' catalogue aliases plus six mixed-phrasing and boundary probes');
     await screenshot('ash-cover');
     await launch.click();
     await input.waitFor({state:'visible'});
     await page.waitForFunction(() => !document.querySelector('#ash-input').disabled);
-    await ask('How much is a website with an AI assistant?');
+    await ask('Hi, how much is a website with an AI assistant?');
     await includes(/4,000/);
     await includes(/95/);
     await includes(/1,000/);
@@ -58,7 +88,7 @@ async function run() {
     await includes(/4 000/);
     await includes(/1 000/);
     await clear.click();
-    await ask('Combien coûte un site avec un assistant ?');
+    await ask('Bonjour, combien coûte un site avec un assistant ?');
     await includes(/4 000/);
     await includes(/95/);
     for (const q of ['Pouvez-vous livrer vendredi ?', 'Can you deliver a website by Friday?', 'I do not want a website. Will you lend me money?', '<img src=x onerror=alert(1)>']) {
@@ -105,6 +135,22 @@ async function run() {
         const g = await geometry();
         assert.ok(g.width <= g.inner && g.dialogOverflow <= 1, JSON.stringify({width,open,g}));
         assert.deepEqual(g.small, [], 'undersized controls at ' + width);
+        if (open) {
+          for (const lang of ['en','fr']) {
+            await dialog.locator('[data-lang="' + lang + '"]').click();
+            const overlap = await dialog.locator('.ash-title').evaluate(el => {
+              const range = document.createRange();
+              range.selectNodeContents(el);
+              const buttons = [...el.parentElement.querySelectorAll('button')].map(b => b.getBoundingClientRect());
+              return [...range.getClientRects()].some(r => buttons.some(b =>
+                r.left < b.right && r.right > b.left && r.top < b.bottom && r.bottom > b.top));
+            });
+            assert.ok(!overlap, 'Title overlaps a control at ' + width + ' in ' + lang);
+            const translated = await geometry();
+            assert.ok(translated.width <= translated.inner && translated.dialogOverflow <= 1);
+            assert.deepEqual(translated.small, []);
+          }
+        }
         if (open && width === 390) await screenshot('ash-mobile');
         if (open) { await page.keyboard.press('Escape'); await dialog.waitFor({state:'hidden'}); }
       }
