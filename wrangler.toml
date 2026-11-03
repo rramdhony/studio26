@@ -1,6 +1,11 @@
 name = "studio26-site"
 main = "src/index.js"
 compatibility_date = "2026-05-25"
+workers_dev = true
+routes = [
+  { pattern = "studio26.me/*", zone_name = "studio26.me" },
+  { pattern = "www.studio26.me/*", zone_name = "studio26.me" }
+]
 
 [assets]
 directory = "./public"
