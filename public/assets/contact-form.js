@@ -61,7 +61,7 @@
   function renderTurnstile() {
     if (widget !== null || !SITEKEY) return;
     loadTurnstile().then(() => {
-      if (widget === null) widget = window.turnstile.render(box, { sitekey: SITEKEY, theme: 'light', size: 'flexible', 'error-callback': () => { tsFailed = true; status.textContent = TS_FAIL; } });
+      if (widget === null) widget = window.turnstile.render(box, { sitekey: SITEKEY, theme: 'light', size: 'flexible', appearance: 'interaction-only', 'error-callback': () => { tsFailed = true; status.textContent = TS_FAIL; } });
     }).catch(() => {
       tsFailed = true;
       status.textContent = TS_FAIL;
