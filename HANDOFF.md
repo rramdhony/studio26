@@ -2,6 +2,20 @@
 
 > **Last updated:** 2 November 2026 (late evening) by Antigravity (Gemini 4 Argon) after full review, Phase 1+3 unification, legal/privacy rebuild, USD pricing, SEO/GEO upgrade, button/navigation polish, and preview deployment.
 
+## 0. Update, 4 November 2026 (Claude): production is now live from `main`
+
+This section overrides anything below that says production serves the teaser or that `main` must not be deployed.
+
+- **studio26.me and www.studio26.me now serve the new site.** `wrangler.toml` routes both to the `studio26-site` Worker, and Ruben approved the launch. A `www` DNS record (proxied) was added on 4 Nov. Pushing to `main` deploys to production through GitHub Actions, so treat every push to `main` as a live release.
+- **Contact form replaces the published email address.** All `mailto:` links and the JSON-LD email were removed. Buttons with `data-contact` open a dialog form (`public/assets/contact-form.js` and `.css`) that posts to `/api/enquiry`. Do not reintroduce `hello@studio26.me` in page source; the dialog reveals it only on request.
+- **Spam protection:** Cloudflare Turnstile (widget "Studio26 contact form", site key in each page's script tag, `appearance: interaction-only`), a honeypot field `hp_field`, a same-origin check, and a salted IP-hash limit of 5 per hour.
+- **Alerts:** each enquiry is stored in D1 (`studio26-db`, table `enquiries`) and emailed from `enquiries@studio26.me` to Ruben's Gmail through the `NOTIFY` send_email binding, with Reply-To set to the visitor. Verified live on 4 Nov (SPF, DKIM and DMARC all pass).
+- **Secrets on the Worker:** `IP_SALT`, `TURNSTILE_SECRET`, `NOTIFY_TO`. Never print or commit them. Local testing uses `.dev.vars` (gitignored) with Cloudflare's test keys.
+- **DMARC** is published (`p=none`, reports to Cloudflare DMARC Management). Email Routing forwards `hello@studio26.me` to Ruben; the catch-all is off.
+- **QA:** `.github/qa/qa.spec.js` has a "Contact form dialog" block; the success test stubs Turnstile. `public/privacy.html` section 2 describes the form, D1, Email Routing and Turnstile; keep it in step with any change to what the form collects.
+- **Known issue:** the GitHub Actions deploy uploads the Worker but then fails on routes ("No access to the specified resource") because the `CLOUDFLARE_API_TOKEN` secret lacks Zone > Workers Routes: Edit on studio26.me. Fix: Ruben adds that permission to the token in Cloudflare. Until then the failure email is expected, and the code itself still deploys.
+- **Before working:** `git pull --ff-only origin main` in this folder. Latest commit at time of writing: `4a107ac`.
+
 ---
 
 ## 1. Where Everything Lives & Current Live Preview
