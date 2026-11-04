@@ -13,7 +13,7 @@ This section overrides anything below that says production serves the teaser or 
 - **Secrets on the Worker:** `IP_SALT`, `TURNSTILE_SECRET`, `NOTIFY_TO`. Never print or commit them. Local testing uses `.dev.vars` (gitignored) with Cloudflare's test keys.
 - **DMARC** is published (`p=none`, reports to Cloudflare DMARC Management). Email Routing forwards `hello@studio26.me` to Ruben; the catch-all is off.
 - **QA:** `.github/qa/qa.spec.js` has a "Contact form dialog" block; the success test stubs Turnstile. `public/privacy.html` section 2 describes the form, D1, Email Routing and Turnstile; keep it in step with any change to what the form collects.
-- **Known issue:** the GitHub Actions deploy uploads the Worker but then fails on routes ("No access to the specified resource") because the `CLOUDFLARE_API_TOKEN` secret lacks Zone > Workers Routes: Edit on studio26.me. Fix: Ruben adds that permission to the token in Cloudflare. Until then the failure email is expected, and the code itself still deploys.
+- **CI deploy:** GitHub Actions deploys every push to `main` to production. The `CLOUDFLARE_API_TOKEN` secret (Cloudflare token "github-pages-deploy") was given Zone > Workers Routes: Edit on 4 Nov, and deploys pass again.
 - **Before working:** `git pull --ff-only origin main` in this folder. Latest commit at time of writing: `4a107ac`.
 
 ---
