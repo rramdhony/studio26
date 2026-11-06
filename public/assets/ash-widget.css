@@ -1,16 +1,23 @@
-/* Scoped Ash Widget + Floating Avatar Launcher + Slice 2 Confirmed Brief Styles */
+/* Studio26 — Ash Floating Assistant Widget & Design System */
 
 .ash-fab,
 .ash-dialog {
-  --oxblood: #612638;
-  --peach: #f6cbb0;
-  --paper: #f7f1ed;
-  --ink: #253047;
-  --focus: #475c89;
-  --rule-on-oxblood: rgb(246 203 176 / 0.45);
-  --rule-on-paper: rgb(37 48 71 / 0.22);
-  --ash-sans: var(--font-sans, "Instrument Sans", "Segoe UI", system-ui, sans-serif);
-  --ash-display: var(--font-display, "Syne", "Instrument Sans", "Segoe UI", sans-serif);
+  --ash-bg: #0e1420;
+  --ash-bg-elevated: #162032;
+  --ash-surface: rgba(255, 255, 255, 0.05);
+  --ash-surface-hover: rgba(255, 255, 255, 0.09);
+  --ash-border: rgba(255, 255, 255, 0.14);
+  --ash-border-light: rgba(255, 255, 255, 0.22);
+  --ash-cobalt: #1A4BFF;
+  --ash-cobalt-glow: rgba(26, 75, 255, 0.28);
+  --ash-peach: #f6cbb0;
+  --ash-text-primary: #ffffff;
+  --ash-text-secondary: rgba(244, 246, 251, 0.78);
+  --ash-text-muted: rgba(244, 246, 251, 0.55);
+  --ash-error: #ff6b6b;
+  --ash-sans: "Plus Jakarta Sans", "Instrument Sans", system-ui, -apple-system, sans-serif;
+  --ash-display: "Instrument Sans", "Plus Jakarta Sans", system-ui, sans-serif;
+  --ash-ease: cubic-bezier(0.16, 1, 0.3, 1);
   font-family: var(--ash-sans);
   box-sizing: border-box;
 }
@@ -27,57 +34,53 @@
   display: none !important;
 }
 
-html:has(dialog.ash-dialog[open]) {
-  overflow: hidden;
-}
-
-html:has(dialog[open]) .ash-fab {
-  display: none !important;
-}
-
 /* Floating Avatar Pill Launcher */
 .ash-fab {
   position: fixed;
-  right: max(1rem, env(safe-area-inset-right));
-  bottom: max(1rem, env(safe-area-inset-bottom));
+  right: max(1.5rem, env(safe-area-inset-right));
+  bottom: max(1.5rem, env(safe-area-inset-bottom));
   z-index: 95;
   display: inline-flex;
   align-items: center;
-  gap: 0.625rem;
-  min-height: 52px;
-  padding: 0.375rem 1.125rem 0.375rem 0.4375rem;
-  border: 1.5px solid var(--peach);
+  gap: 0.75rem;
+  min-height: 54px;
+  padding: 0.375rem 1.25rem 0.375rem 0.4375rem;
   border-radius: 999px;
-  background: linear-gradient(135deg, #6e2b40 0%, #4e1d2c 100%);
-  color: var(--paper);
-  font-family: var(--ash-display);
-  font-size: 0.95rem;
-  font-weight: 600;
-  letter-spacing: 0.01em;
-  box-shadow: 0 10px 28px rgb(16 12 18 / 0.38), 0 2px 6px rgb(16 12 18 / 0.22);
+  background: linear-gradient(135deg, #151c28 0%, #243452 50%, #3d5687 100%);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  color: #f4f6fb;
+  font-size: 15px;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.32),
+    inset 0 -1px 0 rgba(10, 14, 22, 0.5),
+    0 16px 36px -10px rgba(15, 20, 32, 0.55),
+    0 4px 12px rgba(15, 20, 32, 0.3);
   cursor: pointer;
-  transition: transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease;
+  transition: transform 0.2s cubic-bezier(0.2, 0.7, 0.2, 1), box-shadow 0.2s ease, border-color 0.2s ease;
 }
 
 .ash-fab:hover {
   transform: translateY(-2px);
-  border-color: #fff;
-  box-shadow: 0 14px 34px rgb(16 12 18 / 0.46), 0 4px 10px rgb(16 12 18 / 0.26);
+  background: linear-gradient(135deg, #1d2738 0%, #2e4369 50%, #4b68a1 100%);
+  border-color: rgba(255, 255, 255, 0.38);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.4),
+    0 20px 42px -10px rgba(15, 20, 32, 0.65);
 }
 
 .ash-fab:focus-visible,
 .ash-dialog :focus-visible {
-  outline: 3px solid var(--focus);
+  outline: 3px solid #1A4BFF;
   outline-offset: 2px;
-  box-shadow: 0 0 0 2px var(--paper);
 }
 
 .ash-fab-avatar {
   display: block;
-  width: 38px;
-  height: 38px;
+  width: 40px;
+  height: 40px;
   border-radius: 50%;
-  border: 1.5px solid var(--peach);
+  border: 2px solid var(--ash-peach);
+  box-shadow: 0 0 12px rgba(246, 203, 176, 0.35);
   object-fit: cover;
   flex: none;
 }
@@ -86,28 +89,30 @@ html:has(dialog[open]) .ash-fab {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  line-height: 1.15;
+  font-size: 15px;
+  line-height: 1.2;
 }
 
 .ash-fab-title {
   font-family: var(--ash-display);
   font-size: 0.95rem;
   font-weight: 600;
-  color: var(--peach);
+  letter-spacing: -0.01em;
+  color: #ffffff;
 }
 
 .ash-fab-sub {
   font-family: var(--ash-sans);
   font-size: 0.875rem;
   font-weight: 500;
-  color: var(--paper);
+  color: var(--ash-peach);
 }
 
 @media (max-width: 480px) {
   .ash-fab {
-    right: max(0.75rem, env(safe-area-inset-right));
-    bottom: max(0.75rem, env(safe-area-inset-bottom));
-    padding: 0.3125rem 0.9375rem 0.3125rem 0.375rem;
+    right: max(0.875rem, env(safe-area-inset-right));
+    bottom: max(0.875rem, env(safe-area-inset-bottom));
+    padding: 0.3125rem 1rem 0.3125rem 0.375rem;
     min-height: 48px;
   }
   .ash-fab-sub {
@@ -127,22 +132,32 @@ html:has(dialog[open]) .ash-fab {
   border: 0;
 }
 
-/* Modal */
+/* Floating Pop-Up Dialog */
 .ash-dialog {
-  width: 100%;
-  height: 100vh;
-  height: 100dvh;
-  max-width: none;
-  max-height: none;
+  position: fixed;
+  top: auto;
+  left: auto;
+  right: max(1.5rem, env(safe-area-inset-right));
+  bottom: max(1.5rem, env(safe-area-inset-bottom));
   margin: 0;
   padding: 0;
+  width: 420px;
+  max-width: calc(100vw - 2rem);
+  height: 680px;
+  max-height: calc(100dvh - 3rem);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 22px;
+  background: rgba(14, 20, 32, 0.96);
+  color: var(--ash-text-primary);
+  backdrop-filter: blur(28px) saturate(180%);
+  -webkit-backdrop-filter: blur(28px) saturate(180%);
+  box-shadow:
+    0 24px 68px -12px rgba(8, 12, 20, 0.72),
+    0 12px 32px -8px rgba(26, 75, 255, 0.22),
+    inset 0 1px 0 rgba(255, 255, 255, 0.28);
   overflow: hidden;
   overscroll-behavior: contain;
-  border: 0;
-  background: var(--paper);
-  color: var(--ink);
-  font-size: 1rem;
-  line-height: 1.5;
+  z-index: 100;
 }
 
 .ash-dialog p,
@@ -167,34 +182,33 @@ html:has(dialog[open]) .ash-fab {
 }
 
 .ash-dialog[open] {
-  animation: ash-rise 200ms ease-out 1;
+  animation: ash-pop 260ms cubic-bezier(0.16, 1, 0.3, 1) 1;
 }
 
 .ash-dialog::backdrop {
-  background: rgb(37 48 71 / 0.68);
+  background: rgba(10, 14, 22, 0.38);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  animation: ash-fade 240ms ease-out 1;
 }
 
-@keyframes ash-rise {
+@keyframes ash-pop {
   from {
     opacity: 0;
-    transform: translateY(0.75rem);
+    transform: translateY(18px) scale(0.97);
   }
   to {
     opacity: 1;
-    transform: none;
+    transform: translateY(0) scale(1);
   }
 }
 
-@media (min-width: 44rem) and (min-height: 36rem) {
-  .ash-dialog {
-    width: min(42rem, calc(100vw - 3rem));
-    height: min(48rem, calc(100dvh - 3rem));
-    margin: auto;
-    border-radius: 4px;
-    box-shadow: 0 24px 60px rgb(16 12 18 / 0.45);
-  }
+@keyframes ash-fade {
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
 
+/* Shell Layout */
 .ash-shell {
   display: grid;
   grid-template-columns: minmax(0, 1fr);
@@ -202,47 +216,56 @@ html:has(dialog[open]) .ash-fab {
   height: 100%;
 }
 
+/* Header */
 .ash-head {
   display: grid;
   grid-template-columns: auto minmax(0, 1fr) auto auto;
   align-items: center;
-  column-gap: 0.5rem;
-  row-gap: 0.25rem;
-  padding: 0.5rem 0.75rem;
-  background: var(--oxblood);
-  color: var(--paper);
+  column-gap: 0.75rem;
+  row-gap: 0.375rem;
+  padding: 0.875rem 1.125rem 0.75rem;
+  background: linear-gradient(135deg, #121824 0%, #1e2a40 50%, #2b3e64 100%);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.14);
 }
 
 .ash-avatar {
   display: block;
-  width: 40px;
-  height: 40px;
+  width: 42px;
+  height: 42px;
   border-radius: 50%;
+  border: 2px solid var(--ash-peach);
+  box-shadow: 0 0 14px rgba(246, 203, 176, 0.35);
+  object-fit: cover;
+  flex: none;
 }
 
 .ash-title {
   min-width: 0;
   font-family: var(--ash-display);
-  font-size: 1.25rem;
-  font-weight: 600;
-  line-height: 1.15;
-  color: var(--peach);
+  font-size: 1.15rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: #ffffff;
 }
 
 .ash-dialog .lang-switch {
   display: inline-flex;
   flex: none;
   gap: 0.25rem;
+  background: rgba(255, 255, 255, 0.08);
+  padding: 2px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
 }
 
 .ash-dialog .lang-button {
   min-width: 44px;
   min-height: 44px;
-  padding: 0 0.5rem;
-  border: 1px solid var(--rule-on-oxblood);
-  border-radius: 2px;
+  padding: 0 0.625rem;
+  border: 0;
+  border-radius: 999px;
   background: transparent;
-  color: var(--paper);
+  color: var(--ash-text-secondary);
   font-size: 0.875rem;
   font-weight: 600;
   letter-spacing: 0.04em;
@@ -250,37 +273,39 @@ html:has(dialog[open]) .ash-fab {
 }
 
 .ash-dialog .lang-button:hover {
-  border-color: var(--peach);
+  color: #ffffff;
 }
 
 .ash-dialog .lang-button[aria-pressed="true"] {
-  border-color: var(--peach);
-  background: var(--peach);
-  color: var(--oxblood);
+  background: var(--ash-peach);
+  color: #101622;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
 }
 
 .ash-close {
   min-width: 44px;
   min-height: 44px;
-  padding: 0 0.625rem;
-  border: 1px solid var(--peach);
-  border-radius: 2px;
-  background: transparent;
-  color: var(--paper);
+  padding: 0 0.75rem;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.06);
+  color: #f4f6fb;
   font-size: 0.875rem;
   font-weight: 600;
-  transition: background-color 160ms ease, color 160ms ease;
+  transition: background-color 160ms ease, color 160ms ease, border-color 160ms ease;
 }
 
 .ash-close:hover {
-  background: var(--peach);
-  color: var(--oxblood);
+  background: rgba(255, 255, 255, 0.16);
+  border-color: rgba(255, 255, 255, 0.35);
+  color: #ffffff;
 }
 
 .ash-note {
   grid-column: 1 / -1;
   font-size: 0.875rem;
   line-height: 1.35;
+  color: var(--ash-text-secondary);
 }
 
 @media (max-width: 26rem) {
@@ -295,14 +320,19 @@ html:has(dialog[open]) .ash-fab {
   .ash-head .ash-note { grid-area: note; }
 }
 
+/* Transcript Stream */
 .ash-transcript {
   position: relative;
   min-height: 0;
-  padding: 1rem 1rem 0.75rem;
+  padding: 1rem 1.125rem 0.875rem;
   overflow-y: auto;
   overscroll-behavior: contain;
   scroll-padding-block: 0.75rem;
   overflow-wrap: anywhere;
+  background:
+    radial-gradient(circle at 90% 10%, rgba(26, 75, 255, 0.08) 0%, transparent 60%),
+    radial-gradient(circle at 10% 90%, rgba(246, 203, 176, 0.05) 0%, transparent 60%),
+    #0c121c;
 }
 
 .ash-transcript:focus-visible {
@@ -313,39 +343,52 @@ html:has(dialog[open]) .ash-fab {
 .ash-turns {
   display: flex;
   flex-direction: column;
-  gap: 0.875rem;
+  gap: 1rem;
   padding: 0;
   list-style: none;
 }
 
 .ash-turn {
-  max-width: 34rem;
+  max-width: 88%;
 }
 
+/* Visitor Speech Bubble */
 .ash-turn-visitor {
   align-self: flex-end;
-  padding: 0.5rem 0.75rem;
-  background: var(--peach);
-  color: var(--ink);
+  padding: 0.6875rem 1rem;
+  background: linear-gradient(135deg, #243452 0%, #1c2840 100%);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 18px 18px 4px 18px;
+  color: #ffffff;
+  box-shadow: 0 6px 18px -4px rgba(10, 14, 22, 0.45);
 }
 
+/* Ash Speech Bubble */
 .ash-turn-ash {
   align-self: flex-start;
-  padding-left: 0.75rem;
-  border-left: 3px solid var(--oxblood);
+  padding: 0.75rem 1rem 0.75rem 1.125rem;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  border-left: 3px solid #1A4BFF;
+  border-radius: 4px 18px 18px 18px;
+  color: #f4f6fb;
+  box-shadow: 0 4px 16px -4px rgba(0, 0, 0, 0.3);
 }
 
 .ash-who {
   font-size: 0.875rem;
   font-weight: 600;
-  color: var(--oxblood);
+  color: var(--ash-peach);
+  margin-bottom: 0.25rem;
 }
 
 .ash-turn-visitor .ash-who {
-  color: var(--ink);
+  color: rgba(255, 255, 255, 0.75);
 }
 
 .ash-text {
+  font-size: 0.9375rem;
+  line-height: 1.5;
   white-space: pre-line;
 }
 
@@ -353,8 +396,8 @@ html:has(dialog[open]) .ash-fab {
   display: flex;
   flex-wrap: wrap;
   column-gap: 1rem;
-  row-gap: 0.25rem;
-  margin-top: 0.25rem;
+  row-gap: 0.375rem;
+  margin-top: 0.5rem;
 }
 
 .ash-action {
@@ -364,30 +407,45 @@ html:has(dialog[open]) .ash-fab {
   padding: 0;
   border: 0;
   background: transparent;
-  color: var(--oxblood);
+  color: var(--ash-peach);
   font-size: 0.9375rem;
   font-weight: 600;
   text-decoration: underline;
   text-underline-offset: 0.2em;
 }
 
+.ash-action:hover {
+  color: #ffffff;
+}
+
 .ash-action-btn {
-  padding: 0.25rem 0.625rem;
-  border: 1px solid var(--oxblood);
-  border-radius: 2px;
-  background: var(--oxblood);
-  color: var(--paper);
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 0 0.875rem;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 999px;
+  background: linear-gradient(135deg, #151c28 0%, #243452 50%, #3d5687 100%);
+  color: #ffffff;
+  font-size: 0.875rem;
+  font-weight: 600;
   text-decoration: none;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.25);
+  transition: transform 160ms ease, background 160ms ease;
 }
 
 .ash-action-btn:hover {
-  background: var(--ink);
+  transform: translateY(-1px);
+  background: linear-gradient(135deg, #1d2738 0%, #2e4369 50%, #4b68a1 100%);
 }
 
 .ash-failure {
-  margin-top: 0.875rem;
-  padding: 0.75rem;
-  border: 2px solid var(--oxblood);
+  margin-top: 1rem;
+  padding: 0.875rem 1rem;
+  border: 1px solid rgba(255, 107, 107, 0.4);
+  border-radius: 12px;
+  background: rgba(255, 107, 107, 0.08);
+  color: #f4f6fb;
   font-weight: 500;
 }
 
@@ -395,47 +453,52 @@ html:has(dialog[open]) .ash-fab {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: 0.25rem 1rem;
-  margin-top: 0.25rem;
+  gap: 0.5rem 1rem;
+  margin-top: 0.5rem;
 }
 
-/* Slice 2: In-Chat Project Brief Builder & Review Card */
+/* Slice 2: In-Chat Project Brief Builder Card */
 .ash-brief-panel {
   margin-top: 1rem;
-  padding: 1rem;
-  border: 2px solid var(--oxblood);
-  border-radius: 2px;
-  background: #fff;
-  color: var(--ink);
+  padding: 1.125rem;
+  border: 1px solid rgba(246, 203, 176, 0.35);
+  border-radius: 16px;
+  background: linear-gradient(180deg, rgba(22, 32, 50, 0.95) 0%, rgba(16, 24, 38, 0.95) 100%);
+  color: #f4f6fb;
+  box-shadow: 0 12px 32px -8px rgba(0, 0, 0, 0.5);
 }
 
 .ash-brief-title {
   font-family: var(--ash-display);
-  font-size: 1.125rem;
-  font-weight: 600;
-  color: var(--oxblood);
+  font-size: 1.15rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: var(--ash-peach);
   margin-bottom: 0.25rem;
 }
 
 .ash-brief-lede {
   font-size: 0.875rem;
-  margin-bottom: 0.75rem;
+  line-height: 1.4;
+  color: var(--ash-text-secondary);
+  margin-bottom: 0.875rem;
 }
 
 .ash-brief-fields {
   display: grid;
-  gap: 0.625rem;
+  gap: 0.75rem;
 }
 
 .ash-brief-field {
   display: flex;
   flex-direction: column;
-  gap: 0.25rem;
+  gap: 0.3125rem;
 }
 
 .ash-brief-field label {
   font-size: 0.875rem;
   font-weight: 600;
+  color: #f4f6fb;
 }
 
 .ash-brief-field input,
@@ -443,12 +506,35 @@ html:has(dialog[open]) .ash-fab {
 .ash-brief-field textarea {
   width: 100%;
   min-height: 44px;
-  padding: 0.5rem 0.625rem;
-  border: 1.5px solid var(--ink);
-  border-radius: 2px;
-  background: #fff;
-  color: var(--ink);
-  font-size: 1rem;
+  padding: 0.625rem 0.875rem;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.05);
+  color: #ffffff;
+  font-size: 0.9375rem;
+  transition: border-color 160ms ease, box-shadow 160ms ease;
+}
+
+.ash-brief-field select {
+  appearance: none;
+  background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%23ffffff' viewBox='0 0 16 16'%3E%3Cpath d='M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.75rem center;
+  background-size: 12px;
+  padding-right: 2rem;
+}
+
+.ash-brief-field select option {
+  background: #151c28;
+  color: #ffffff;
+}
+
+.ash-brief-field input:focus,
+.ash-brief-field select:focus,
+.ash-brief-field textarea:focus {
+  outline: none;
+  border-color: #1A4BFF;
+  box-shadow: 0 0 0 3px rgba(26, 75, 255, 0.25);
 }
 
 .ash-brief-field textarea {
@@ -457,30 +543,31 @@ html:has(dialog[open]) .ash-fab {
 }
 
 .ash-brief-field [aria-invalid="true"] {
-  border-color: #9e1b32;
+  border-color: var(--ash-error);
 }
 
 .ash-field-error {
   font-size: 0.875rem;
   font-weight: 600;
-  color: #9e1b32;
+  color: var(--ash-error);
 }
 
 .ash-brief-actions {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: 0.5rem 0.75rem;
-  margin-top: 0.875rem;
+  gap: 0.625rem 0.875rem;
+  margin-top: 1rem;
 }
 
 .ash-brief-summary {
   display: grid;
-  gap: 0.5rem;
-  padding: 0.75rem;
-  border: 1px solid var(--rule-on-paper);
-  background: var(--paper);
-  margin-bottom: 0.75rem;
+  gap: 0.625rem;
+  padding: 0.875rem 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.03);
+  margin-bottom: 0.875rem;
 }
 
 .ash-brief-summary div {
@@ -492,30 +579,35 @@ html:has(dialog[open]) .ash-fab {
   font-size: 0.875rem;
   font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.04em;
-  color: var(--oxblood);
+  letter-spacing: 0.05em;
+  color: var(--ash-peach);
 }
 
 .ash-brief-summary dd {
   font-size: 0.9375rem;
+  color: #ffffff;
   white-space: pre-line;
   overflow-wrap: anywhere;
 }
 
 .ash-brief-privacy {
   font-size: 0.875rem;
-  margin-bottom: 0.5rem;
+  line-height: 1.4;
+  color: var(--ash-text-secondary);
+  margin-bottom: 0.625rem;
 }
 
 .ash-brief-privacy a {
-  color: var(--oxblood);
+  color: var(--ash-peach);
   font-weight: 600;
   text-decoration: underline;
 }
 
+/* Topic Carousel */
 .ash-topics-wrap {
-  padding: 0.5rem 1rem;
-  border-top: 1px solid var(--rule-on-paper);
+  padding: 0.625rem 1.125rem 0.75rem;
+  background: rgba(14, 20, 32, 0.95);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .ash-topics-wrap:has(.ash-topics:empty) {
@@ -525,105 +617,123 @@ html:has(dialog[open]) .ash-fab {
 .ash-topics-label {
   font-size: 0.875rem;
   font-weight: 600;
+  color: var(--ash-text-secondary);
+  margin-bottom: 0.375rem;
 }
 
 .ash-topics {
   display: flex;
   flex-wrap: nowrap;
   gap: 0.5rem;
-  margin-inline: -0.5rem;
-  padding: 0.375rem 0.5rem;
+  margin-inline: -0.25rem;
+  padding: 0.25rem;
   overflow-x: auto;
   overscroll-behavior-x: contain;
   scroll-padding-inline: 0.5rem;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.2) transparent;
 }
 
 .ash-topic {
   flex: none;
   min-height: 44px;
-  padding: 0.375rem 0.75rem;
-  border: 1px solid var(--oxblood);
-  border-radius: 2px;
-  background: transparent;
-  color: var(--oxblood);
+  padding: 0.375rem 0.875rem;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.06);
+  color: #f4f6fb;
   font-size: 0.9375rem;
   font-weight: 500;
-  transition: background-color 160ms ease;
+  letter-spacing: -0.01em;
+  transition: transform 160ms ease, background 160ms ease, border-color 160ms ease;
 }
 
 .ash-topic:hover {
-  background: var(--peach);
+  transform: translateY(-1px);
+  background: linear-gradient(135deg, rgba(26, 75, 255, 0.32) 0%, rgba(43, 62, 100, 0.6) 100%);
+  border-color: rgba(255, 255, 255, 0.35);
+  color: #ffffff;
 }
 
-@media (min-width: 44rem) and (min-height: 36rem) {
-  .ash-topics {
-    flex-wrap: wrap;
-    overflow-x: visible;
-  }
-}
-
+/* Composer Form */
 .ash-form {
   display: grid;
   grid-template-columns: minmax(0, 1fr) auto;
-  gap: 0.25rem 0.5rem;
+  gap: 0.375rem 0.625rem;
   align-items: center;
-  padding: 0.5rem 1rem 0.75rem;
-  border-top: 1px solid var(--rule-on-paper);
+  padding: 0.75rem 1.125rem 0.875rem;
+  background: #090e16;
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
 }
 
 .ash-label {
   grid-column: 1 / -1;
   font-size: 0.875rem;
   font-weight: 600;
+  color: var(--ash-text-secondary);
 }
 
 .ash-input {
   width: 100%;
   min-height: 44px;
-  padding: 0.5rem 0.75rem;
-  border: 2px solid var(--ink);
-  border-radius: 2px;
-  background: #fff;
-  color: var(--ink);
-  font-size: 1rem;
+  padding: 0.5rem 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.06);
+  color: #ffffff;
+  font-size: 0.95rem;
+  transition: border-color 160ms ease, box-shadow 160ms ease;
+}
+
+.ash-input:focus {
+  outline: none;
+  border-color: #1A4BFF;
+  box-shadow: 0 0 0 3px rgba(26, 75, 255, 0.25);
 }
 
 .ash-input[aria-invalid="true"] {
-  border-color: var(--oxblood);
+  border-color: var(--ash-error);
 }
 
 .ash-input:disabled {
   border-style: dashed;
+  opacity: 0.6;
   background: transparent;
 }
 
 .ash-ask {
   min-width: 44px;
   min-height: 44px;
-  padding: 0.5rem 1rem;
-  border: 1px solid var(--oxblood);
-  border-radius: 2px;
-  background: var(--oxblood);
-  color: var(--paper);
+  padding: 0.5rem 1.25rem;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 999px;
+  background: linear-gradient(135deg, #1A4BFF 0%, #283e66 100%);
+  color: #ffffff;
+  font-size: 0.9375rem;
   font-weight: 600;
-  transition: background-color 160ms ease;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.3), 0 4px 12px rgba(26, 75, 255, 0.35);
+  transition: transform 160ms ease, background 160ms ease, box-shadow 160ms ease;
 }
 
 .ash-ask:hover:not(:disabled) {
-  background: var(--ink);
+  transform: translateY(-1px);
+  background: linear-gradient(135deg, #2f5dff 0%, #345084 100%);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4), 0 6px 18px rgba(26, 75, 255, 0.45);
 }
 
 .ash-ask:disabled {
   border-style: dashed;
-  background: transparent;
-  color: var(--ink);
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--ash-text-muted);
   cursor: not-allowed;
+  box-shadow: none;
 }
 
 .ash-hint {
   grid-column: 1 / -1;
   font-size: 0.875rem;
   line-height: 1.35;
+  color: var(--ash-error);
 }
 
 .ash-composer-actions {
@@ -641,18 +751,37 @@ html:has(dialog[open]) .ash-fab {
   padding: 0.25rem 0.5rem;
   border: 0;
   background: transparent;
-  color: var(--ink);
+  color: var(--ash-peach);
   font-size: 0.9375rem;
   font-weight: 600;
   text-decoration: underline;
-  text-underline-offset: 0.2em;
+  text-underline-offset: 0.25em;
+  transition: color 160ms ease;
 }
 
 .ash-secondary:hover {
-  color: var(--oxblood);
+  color: #ffffff;
 }
 
-@media (max-height: 26rem) {
+/* Mobile & Small Breakpoints */
+@media (max-width: 640px) {
+  .ash-dialog {
+    top: auto;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    max-width: 100vw;
+    height: min(92dvh, 720px);
+    max-height: 92dvh;
+    border-radius: 24px 24px 0 0;
+    border-right: 0;
+    border-left: 0;
+    border-bottom: 0;
+  }
+}
+
+@media (max-height: 30rem) {
   .ash-shell {
     display: block;
     overflow-y: auto;
@@ -677,7 +806,9 @@ html:has(dialog[open]) .ash-fab {
     transition: none !important;
     scroll-behavior: auto !important;
   }
-  .ash-fab:hover {
+  .ash-fab:hover,
+  .ash-ask:hover,
+  .ash-topic:hover {
     transform: none;
   }
 }
