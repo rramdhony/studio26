@@ -40,28 +40,13 @@
   const box = dialog.querySelector('.cf-turnstile');
   let opener = null;
   let widget = null;
-  let loading = null;
   let tsFailed = false;
   const TS_FAIL = 'The spam check could not load. Please use "Show our address" below instead.';
 
-  function loadTurnstile() {
-    if (window.turnstile) return Promise.resolve();
-    if (!loading) {
-      loading = new Promise((resolve, reject) => {
-        const s = document.createElement('script');
-        s.src = 'https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit';
-        s.async = true;
-        s.onload = resolve;
-        s.onerror = () => { loading = null; reject(); };
-        document.head.appendChild(s);
-      });
-    }
-    return loading;
-  }
   function renderTurnstile() {
     if (widget !== null || !SITEKEY) return;
-    loadTurnstile().then(() => {
-      if (widget === null) widget = window.turnstile.render(box, { sitekey: SITEKEY, theme: 'light', size: 'flexible', appearance: 'interaction-only', 'error-callback': () => { tsFailed = true; status.textContent = TS_FAIL; } });
+    import('./turnstile.js').then(({ loadTurnstile }) => loadTurnstile()).then(() => {
+      if (widget === null) widget = window.turnstile.render(box, { sitekey: SITEKEY, action: 'contact_form', theme: 'light', size: 'flexible', appearance: 'interaction-only', 'error-callback': () => { tsFailed = true; status.textContent = TS_FAIL; } });
     }).catch(() => {
       tsFailed = true;
       status.textContent = TS_FAIL;

@@ -891,24 +891,19 @@ test.describe('Section 10 — invitation footer and logo', () => {
     await expect.poll(()=>page.locator('.header-brand img').evaluate(img=>img.complete&&img.naturalWidth>0)).toBe(true);
     await expect(page.locator('.closing [data-contact]')).toBeVisible();
   });
-  test('Conversation preview is honest, keyboard operable and follows browser history', async ({page}) => {
+  test('Ash dialog is honest, keyboard operable and follows browser history', async ({page}) => {
     const submissions=[];page.on('request',r=>{if(r.method()==='POST')submissions.push(r.url());});
     await page.goto('/#contact');
     const trigger=page.getByRole('button',{name:'Start a conversation'});
     await trigger.focus();await page.keyboard.press('Enter');
-    const dialog=page.getByRole('dialog');await expect(dialog).toBeVisible();
-    await expect(dialog.getByText('Conversation preview · no messages are sent')).toBeVisible();
-    await expect(dialog.getByRole('button',{name:'Close conversation preview'})).toBeFocused();
-    await page.keyboard.press('Shift+Tab');
-    await expect(dialog.getByRole('button',{name:'Write to Ruben and the team'})).toBeFocused();
-    await page.keyboard.press('Tab');await expect(dialog.getByRole('button',{name:'Close conversation preview'})).toBeFocused();
-    await dialog.getByRole('button',{name:'A website',exact:true}).click();
-    await expect(dialog.locator('.chat-reply')).toContainText('live assistant is still to be built');
+    const dialog=page.locator('#ash-dialog');await expect(dialog).toBeVisible();
+    await expect(dialog.getByText('Ask Ash')).toBeVisible();
+    await expect(dialog.getByRole('button',{name:'Close'})).toBeVisible();
     const axe=await new AxeBuilder({page}).withTags(['wcag2a','wcag2aa','wcag21aa']).analyze();expect(axe.violations).toEqual([]);
     await page.keyboard.press('Escape');await expect(dialog).not.toBeVisible();await expect(trigger).toBeFocused();
     await trigger.click();await page.goBack();await expect(dialog).not.toBeVisible();
     await page.goForward();await expect(dialog).toBeVisible();
-    await dialog.getByRole('button',{name:'Close conversation preview'}).click();await expect(dialog).not.toBeVisible();
+    await dialog.getByRole('button',{name:'Close'}).click();await expect(dialog).not.toBeVisible();
     await trigger.click();await page.reload();await expect(dialog).toBeVisible();
     await page.keyboard.press('Escape');await expect(dialog).not.toBeVisible();
     expect(submissions).toEqual([]);
@@ -916,7 +911,7 @@ test.describe('Section 10 — invitation footer and logo', () => {
   test('Email remains available without scripts and when the conversation script fails',async({browser})=>{
     for(const noJS of [true,false]) {
       const context=await browser.newContext({javaScriptEnabled:!noJS,viewport:{width:390,height:844}});
-      if(!noJS)await context.route('**/studio-conversation.js',route=>route.abort());
+      if(!noJS)await context.route('**/ash-widget.js',route=>route.abort());
       const page=await context.newPage();await page.goto('/#contact');
       if (noJS) {
         await expect(page.locator('.closing .cf-fallback')).toBeVisible();

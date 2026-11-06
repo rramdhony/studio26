@@ -1,0 +1,1719 @@
+{
+  "version": 1,
+  "answers": [
+    {
+      "id": "website-ai",
+      "source": "https://studio26.me/#services",
+      "en": {
+        "label": "Website with AI assistant",
+        "text": "Yes. Studio26 designs and develops custom AI chatbots and assistants (like Ash) trained on your business. A website with a dedicated AI assistant starts from US$4,000, plus US$95 per month. The monthly fee includes hosting, content updates and up to 1,000 visitor chats per month. We can also build an AI assistant for an existing website. Custom scope is confirmed on discovery. All prices are in USD, with MUR invoicing on request.",
+        "aliases": [
+          "How much is a website with an AI assistant?",
+          "How much is a website with an assistant?",
+          "How much is a website with a chatbot?",
+          "How much does a website with an AI assistant cost?",
+          "How much does a website with a chatbot cost?",
+          "What does a website with an AI assistant cost?",
+          "What is the price of a website with an AI assistant?",
+          "Website with AI assistant",
+          "Website with AI assistant price",
+          "Website with chatbot price",
+          "How much is an AI assistant?",
+          "How much is a chatbot?",
+          "How much does a chatbot cost?",
+          "What does the monthly fee include?",
+          "What is included in the monthly fee?",
+          "How many visitor chats are included?",
+          "How much for a website with a chatbot?",
+          "How much for a website with an AI assistant?",
+          "How much is a site with a chatbot?",
+          "How much is a site with an AI assistant?",
+          "Price for website and chatbot",
+          "Price for website with AI chatbot",
+          "Cost of website with AI chatbot",
+          "How much for a website and chatbot?",
+          "How much for a site and AI assistant?",
+          "Website + AI chatbot price",
+          "Website and chatbot package price",
+          "How much to build a website with an AI chatbot?",
+          "What do you charge for a website with a chatbot?",
+          "How much is the $4,000 package?",
+          "What do I get for $4,000?",
+          "What is included in the $4,000 website?",
+          "What is the difference between the $2,500 and $4,000 website?",
+          "Difference between $2,500 and $4,000 website",
+          "Difference between website and website with chatbot",
+          "Should I get a website with or without a chatbot?",
+          "Website with or without chatbot",
+          "I need a website with a chatbot",
+          "I want a website with an AI assistant",
+          "We need a website and a chatbot",
+          "Do you build websites with AI chatbots?",
+          "Do you make websites with chatbots?",
+          "Can you build a website with a chatbot?",
+          "Can you build a website with an AI assistant?",
+          "How much are websites with chatbots?",
+          "Chatbot website price",
+          "AI website price",
+          "Chatbot",
+          "Chatbots",
+          "Assistant",
+          "AI assistant",
+          "AI chatbot",
+          "AI chatbots",
+          "Do you offer AI chatbot development?",
+          "Do you offer chatbot development?",
+          "Do you build AI chatbots?",
+          "Do you create AI chatbots?",
+          "Do you develop AI chatbots?",
+          "Do you make chatbots?",
+          "Do you build AI assistants?",
+          "Can you build a chatbot for my business?",
+          "Can you create an AI assistant for my website?",
+          "AI chatbot development",
+          "Chatbot development",
+          "Custom AI chatbot"
+        ]
+      },
+      "fr": {
+        "label": "Site avec assistant IA",
+        "text": "Oui. Studio26 conçoit et développe des chatbots et assistants IA sur mesure (comme Ash) entraînés sur votre activité. Un site avec un assistant IA dédié est proposé à partir de 4 000 USD, plus 95 USD par mois. Le forfait mensuel comprend l’hébergement, les mises à jour de contenu et jusqu’à 1 000 conversations de visiteurs par mois. Nous pouvons aussi créer un assistant IA pour un site existant. Le périmètre sur mesure est confirmé lors de la phase de découverte. Tous les prix sont en USD, avec facturation en MUR sur demande.",
+        "aliases": [
+          "Combien coûte un site avec un assistant ?",
+          "Combien coûte un site avec un assistant IA ?",
+          "Combien coûte un site web avec un assistant ?",
+          "Combien coûte un site web avec un assistant IA ?",
+          "Combien coûte un site avec un chatbot ?",
+          "Combien coûte un site web avec un chatbot ?",
+          "Quel est le prix d'un site avec un assistant IA ?",
+          "Quel est le prix d'un site web avec un assistant IA ?",
+          "Site avec assistant IA",
+          "Prix d'un site avec assistant IA",
+          "Combien coûte un assistant IA ?",
+          "Combien coûte un chatbot ?",
+          "Que comprend le forfait mensuel ?",
+          "Que comprend l'abonnement mensuel ?",
+          "Combien de conversations sont incluses ?",
+          "Quel est le prix d’un site avec un chatbot ?",
+          "Combien pour un site web avec chatbot ?",
+          "Quel budget pour un site avec un assistant IA ?",
+          "Combien pour un site avec assistant IA ?",
+          "Combien pour un site avec chatbot ?",
+          "Tarif site web avec chatbot",
+          "Tarif site avec assistant IA",
+          "Prix site internet avec chatbot",
+          "Combien coûte un site internet avec un chatbot ?",
+          "Combien coûte un site internet avec un assistant IA ?",
+          "Quel est le tarif d'un site avec chatbot ?",
+          "Combien vous prenez pour un site avec chatbot ?",
+          "C'est combien un site avec un chatbot ?",
+          "C'est combien un site web avec assistant IA ?",
+          "Que comprend l'offre à 4 000 USD ?",
+          "Qu'est-ce qui est inclus pour 4 000 $ ?",
+          "Quelle est la différence entre le site à 2 500 $ et celui à 4 000 $ ?",
+          "Différence entre site seul et site avec chatbot",
+          "J'ai besoin d'un site avec un chatbot",
+          "Je veux un site web avec un assistant IA",
+          "Faites-vous des sites avec chatbot ?",
+          "Pouvez-vous créer un site avec un assistant IA ?",
+          "Combien coûtent les sites avec chatbot ?",
+          "Prix site avec chatbot",
+          "Assistant IA",
+          "Chatbot IA",
+          "Chatbots IA",
+          "Proposez-vous le développement de chatbots IA ?",
+          "Proposez-vous la création de chatbots ?",
+          "Développez-vous des chatbots IA ?",
+          "Créez-vous des chatbots IA ?",
+          "Faites-vous des chatbots ?",
+          "Créez-vous des assistants IA ?",
+          "Pouvez-vous créer un chatbot pour mon entreprise ?",
+          "Développement de chatbot IA",
+          "Création de chatbot"
+        ]
+      }
+    },
+    {
+      "id": "website",
+      "source": "https://studio26.me/#services",
+      "en": {
+        "label": "Website pricing",
+        "text": "Yes. Studio26 designs and hand-builds custom websites for businesses from scratch. Every site is fast on mobile, WCAG 2.1 AA accessible and hosted on Cloudflare’s global edge network. Custom websites start from US$2,500, or from US$4,000 with a dedicated AI assistant (+ US$95 per month). Custom scope is confirmed on discovery. All prices are in USD, with MUR invoicing on request.",
+        "aliases": [
+          "How much is a website?",
+          "How much does a website cost?",
+          "How much for a website?",
+          "What does a website cost?",
+          "What is the price of a website?",
+          "Website price",
+          "Website prices",
+          "Website pricing",
+          "Website cost",
+          "What would a website cost?",
+          "What does a custom website cost?",
+          "How much is a custom website?",
+          "How much is a site?",
+          "How much does a site cost?",
+          "How much to build a website?",
+          "How much to design a website?",
+          "What do you charge for a website?",
+          "Cost of a website",
+          "Website build price",
+          "Website starting price",
+          "How much is a website without a chatbot?",
+          "How much is a standalone website?",
+          "What is your starting price for a website?",
+          "What do I get for $2,500?",
+          "What is included for $2,500?",
+          "How much are your websites?",
+          "How much do your websites cost?",
+          "How much is a website in Mauritius?",
+          "I need a website",
+          "I want a new website",
+          "We need a new website",
+          "I need a website, how much is it?",
+          "Can you build a website for my business?",
+          "Can you design a website for us?",
+          "New website price",
+          "Custom website cost",
+          "Website",
+          "Websites",
+          "Do you create websites for businesses?",
+          "Do you build websites for businesses?",
+          "Do you make websites for businesses?",
+          "Do you design websites for businesses?",
+          "Do you create websites?",
+          "Do you build websites?",
+          "Do you design websites?",
+          "Do you offer website design?",
+          "Do you offer web development?",
+          "Do you offer website development?",
+          "Can you create a website for my business?",
+          "Can you build a website for my company?",
+          "Website development",
+          "Web design",
+          "Business websites",
+          "Websites for businesses"
+        ]
+      },
+      "fr": {
+        "label": "Tarifs des sites web",
+        "text": "Oui. Studio26 conçoit et développe de zéro des sites web sur mesure pour les entreprises. Chaque site est rapide sur mobile, conforme WCAG 2.1 AA et hébergé sur le réseau mondial Cloudflare. Les sites web sur mesure sont proposés à partir de 2 500 USD, ou à partir de 4 000 USD avec un assistant IA dédié (+ 95 USD par mois). Le périmètre sur mesure est confirmé lors de la phase de découverte. Tous les prix sont en USD, avec facturation en MUR sur demande.",
+        "aliases": [
+          "Combien coûte un site ?",
+          "Combien coûte un site web ?",
+          "Combien coûte un site internet ?",
+          "Quel est le prix d'un site ?",
+          "Quel est le prix d'un site web ?",
+          "Prix d'un site",
+          "Prix d'un site web",
+          "Tarif d'un site web",
+          "Tarifs des sites web",
+          "Combien pour un site web ?",
+          "Quel budget pour un site web ?",
+          "Combien pour un site ?",
+          "Combien pour un site internet ?",
+          "Quel est le prix d'un site internet ?",
+          "Quel est le tarif d'un site ?",
+          "Quel est le tarif d'un site internet ?",
+          "Tarif site web",
+          "Tarif site internet",
+          "Prix site internet",
+          "C'est combien un site web ?",
+          "C'est combien un site internet ?",
+          "Combien coûte la création d'un site web ?",
+          "Combien coûte un site sans chatbot ?",
+          "Combien vous prenez pour un site web ?",
+          "Que comprend le site à 2 500 USD ?",
+          "Qu'est-ce qui est inclus pour 2 500 $ ?",
+          "Combien coûtent vos sites web ?",
+          "Combien coûte un site web à Maurice ?",
+          "Combien coûte un site internet à l'île Maurice ?",
+          "J'ai besoin d'un site web",
+          "Je veux créer un site internet",
+          "On cherche à faire un site web",
+          "J'ai besoin d'un site web, combien ça coûte ?",
+          "Pouvez-vous créer un site pour mon entreprise ?",
+          "Coût d'un site sur mesure",
+          "Site",
+          "Sites",
+          "Site web",
+          "Sites web",
+          "Site internet",
+          "Sites internet",
+          "Créez-vous des sites web pour les entreprises ?",
+          "Faites-vous des sites web pour les entreprises ?",
+          "Développez-vous des sites web pour les entreprises ?",
+          "Créez-vous des sites web ?",
+          "Créez-vous des sites internet ?",
+          "Proposez-vous la création de sites web ?",
+          "Proposez-vous le développement de sites web ?",
+          "Création de site web",
+          "Développement web",
+          "Sites web pour entreprises"
+        ]
+      }
+    },
+    {
+      "id": "pricing",
+      "source": "https://studio26.me/#services",
+      "en": {
+        "label": "All pricing",
+        "text": "Websites start from US$2,500. A website with a dedicated AI assistant starts from US$4,000, plus US$95 per month. One-off AI video ads start from US$450, and monthly video plans start at US$750 per month. Custom scope is confirmed on discovery. All prices are in USD, with MUR invoicing on request.",
+        "aliases": [
+          "Pricing",
+          "Price",
+          "Prices",
+          "Rates",
+          "Cost",
+          "Costs",
+          "All pricing",
+          "What is your pricing?",
+          "What are your prices?",
+          "What are your rates?",
+          "How much do you charge?",
+          "How much does it cost?",
+          "How much do you cost?",
+          "Rate card",
+          "Price list",
+          "Full price list",
+          "All your prices",
+          "What is your rate card?",
+          "Can you share your pricing?",
+          "Can I see your prices?",
+          "What are all your prices?",
+          "How much are your services?",
+          "What do your services cost?",
+          "Give me your prices"
+        ]
+      },
+      "fr": {
+        "label": "Tous les tarifs",
+        "text": "Les sites web sont proposés à partir de 2 500 USD. Un site avec un assistant IA dédié est proposé à partir de 4 000 USD, plus 95 USD par mois. Les publicités vidéo IA ponctuelles sont proposées à partir de 450 USD, et les forfaits vidéo mensuels à partir de 750 USD par mois. Le périmètre sur mesure est confirmé lors de la phase de découverte. Tous les prix sont en USD, avec facturation en MUR sur demande.",
+        "aliases": [
+          "Tarifs",
+          "Tarif",
+          "Prix",
+          "Coût",
+          "Coûts",
+          "Tous les tarifs",
+          "Quels sont vos tarifs ?",
+          "Quels sont vos prix ?",
+          "Combien ça coûte ?",
+          "Combien coûtent vos services ?",
+          "Combien facturez-vous ?",
+          "Grille tarifaire",
+          "Liste des prix",
+          "Tous vos prix",
+          "Tous vos tarifs",
+          "Quels sont tous vos tarifs ?",
+          "C'est combien vos services ?",
+          "Combien coûtent vos prestations ?",
+          "Pouvez-vous me donner vos tarifs ?",
+          "Quels sont vos tarifs complets ?"
+        ]
+      }
+    },
+    {
+      "id": "currency",
+      "source": "https://studio26.me/#services",
+      "en": {
+        "text": "All prices are in USD. MUR invoicing is available on request.",
+        "aliases": [
+          "What currency are your prices in?",
+          "Which currency do you use?",
+          "Are your prices in USD?",
+          "Can you invoice in MUR?",
+          "Can you invoice in rupees?",
+          "Do you invoice in MUR?",
+          "Do you invoice in rupees?",
+          "Currency",
+          "Can I pay in MUR?",
+          "Can I pay in rupees?",
+          "Can I pay in Mauritian rupees?",
+          "Do you accept MUR?",
+          "Do you accept Mauritian rupees?",
+          "Can you bill in MUR?",
+          "Can you quote in rupees?",
+          "Are prices in US dollars?",
+          "Are your rates in USD?",
+          "Can Mauritian clients pay in rupees?"
+        ]
+      },
+      "fr": {
+        "text": "Tous les prix sont en USD. La facturation en MUR est possible sur demande.",
+        "aliases": [
+          "Dans quelle devise sont vos prix ?",
+          "Quelle devise utilisez-vous ?",
+          "Vos prix sont-ils en USD ?",
+          "Pouvez-vous facturer en MUR ?",
+          "Pouvez-vous facturer en roupies ?",
+          "Facturez-vous en roupies ?",
+          "Devise",
+          "Puis-je payer en MUR ?",
+          "Puis-je payer en roupies ?",
+          "Puis-je payer en roupies mauriciennes ?",
+          "Acceptez-vous les roupies ?",
+          "Est-ce qu'on peut payer en roupies ?",
+          "Est-ce qu'on peut payer en MUR ?",
+          "Facturez-vous en MUR ?",
+          "Vos tarifs sont-ils en dollars ?",
+          "Vos prix sont en dollars ou en roupies ?"
+        ]
+      }
+    },
+    {
+      "id": "services",
+      "source": "https://studio26.me/#services",
+      "en": {
+        "label": "Services",
+        "text": "Studio26 designs and builds custom websites, websites with a dedicated AI assistant, and AI video ads and films.",
+        "aliases": [
+          "Services",
+          "Your services",
+          "What services do you offer?",
+          "What services do you provide?",
+          "What are your services?",
+          "What do you offer?",
+          "What do you do?",
+          "What does Studio26 do?",
+          "What can you build?",
+          "What can you do for my business?",
+          "What kind of work do you do?",
+          "What does the studio do?",
+          "What do you specialize in?",
+          "What do you specialise in?",
+          "Do you build websites and make videos?",
+          "Do you make websites?"
+        ]
+      },
+      "fr": {
+        "label": "Services",
+        "text": "Studio26 conçoit et réalise des sites web sur mesure, des sites avec un assistant IA dédié, ainsi que des publicités et des films vidéo IA.",
+        "aliases": [
+          "Vos services",
+          "Quels services proposez-vous ?",
+          "Quels sont vos services ?",
+          "Que proposez-vous ?",
+          "Que faites-vous ?",
+          "Que fait Studio26 ?",
+          "Que pouvez-vous réaliser ?",
+          "Que fait le studio ?",
+          "Quelles sont vos prestations ?",
+          "Dans quoi êtes-vous spécialisés ?",
+          "Faites-vous des sites web et des vidéos ?",
+          "Faites-vous des sites internet ?",
+          "Qu'est-ce que vous proposez ?",
+          "Qu'est-ce que vous faites ?"
+        ]
+      }
+    },
+    {
+      "id": "ai-video",
+      "source": "https://studio26.me/ai-video#av-title",
+      "en": {
+        "label": "AI video ads & films",
+        "text": "Yes. Studio26 creates AI video ads and brand films by combining generative AI, 3D and motion design, finished by hand in Mauritius. Every ad is delivered in 9:16 (Reels, TikTok, Shorts), 4:5 (feeds) and 16:9 (YouTube and web) with English or French captions. One-off ads start from US$450, monthly plans are US$750, US$1,350 and US$2,400 per month, and longer films or documentaries are quoted per project.",
+        "aliases": [
+          "Video",
+          "Videos",
+          "AI video",
+          "AI videos",
+          "Ads",
+          "Video ads",
+          "AI video ads",
+          "AI video ads and films",
+          "Tell me about AI videos",
+          "Tell me about your AI videos",
+          "What about AI videos?",
+          "Do you make AI videos?",
+          "Do you create AI videos?",
+          "Do you offer AI videos?",
+          "Do you offer AI video production?",
+          "Do you produce AI videos?",
+          "Do you make video ads?",
+          "Do you create video ads for businesses?",
+          "What kind of AI videos do you make?",
+          "What is your AI video service?",
+          "How do your AI videos work?"
+        ]
+      },
+      "fr": {
+        "label": "Publicités et films vidéo IA",
+        "text": "Oui. Studio26 réalise des publicités vidéo IA et des films de marque en associant IA générative, 3D et motion design, avec des finitions à la main à l’île Maurice. Chaque publicité est livrée en 9:16 (Reels, TikTok, Shorts), 4:5 (fils sociaux) et 16:9 (YouTube et web) avec sous-titres en français ou en anglais. Les publicités ponctuelles débutent à 450 USD, les forfaits mensuels sont à 750, 1 350 et 2 400 USD par mois, et les films longs font l’objet d’un devis par projet.",
+        "aliases": [
+          "Vidéo",
+          "Vidéos",
+          "Vidéo IA",
+          "Vidéos IA",
+          "Publicités",
+          "Publicités vidéo",
+          "Publicités vidéo IA",
+          "Pub vidéo",
+          "Pubs vidéo",
+          "Parlez-moi des vidéos IA",
+          "Parlez-moi de vos vidéos IA",
+          "Et pour les vidéos IA ?",
+          "Faites-vous des vidéos IA ?",
+          "Créez-vous des vidéos IA ?",
+          "Proposez-vous des vidéos IA ?",
+          "Produisez-vous des vidéos IA ?",
+          "Faites-vous des publicités vidéo ?",
+          "Quel type de vidéos IA faites-vous ?",
+          "En quoi consiste votre service vidéo IA ?"
+        ]
+      }
+    },
+    {
+      "id": "video-rates",
+      "source": "https://studio26.me/ai-video#plans",
+      "en": {
+        "label": "Video rates",
+        "text": "One-off AI video ads start from US$450. Monthly plans are Starter at US$750 per month, Growth at US$1,350 per month and Always on at US$2,400 per month. Longer films are quoted per project. All prices are in USD, with MUR invoicing on request.",
+        "aliases": [
+          "Video rates",
+          "Video rate",
+          "Video prices",
+          "Video pricing",
+          "Video plans",
+          "Monthly video plans",
+          "What are your video rates?",
+          "What are your video prices?",
+          "What are your video plans?",
+          "How much is a video?",
+          "How much is a video ad?",
+          "How much is an AI video ad?",
+          "How much does a video cost?",
+          "How much does a video ad cost?",
+          "How much does an AI video ad cost?",
+          "How much are your monthly video plans?",
+          "How much for a video ad?",
+          "What do your video ads cost?",
+          "AI video pricing",
+          "AI video prices",
+          "AI video rates",
+          "AI video ad price",
+          "AI video ad pricing",
+          "How much are AI videos?",
+          "How much are your video ads?",
+          "How much do AI video ads cost?",
+          "Cost of AI video ads",
+          "Price of AI video ads",
+          "How much for AI video ads?",
+          "How much is a monthly video plan?",
+          "I need video ads",
+          "We need AI video ads",
+          "Do you make TikTok and Reels ads?",
+          "Do you make social media video ads?",
+          "How much are TikTok and Reels ads?",
+          "How much for social media video ads?",
+          "Social video ads pricing",
+          "Monthly video subscription price"
+        ]
+      },
+      "fr": {
+        "label": "Tarifs vidéo",
+        "text": "Les publicités vidéo IA ponctuelles sont proposées à partir de 450 USD. Les forfaits mensuels sont Starter à 750 USD par mois, Growth à 1 350 USD par mois et Always on à 2 400 USD par mois. Les films plus longs font l’objet d’un devis par projet. Tous les prix sont en USD, avec facturation en MUR sur demande.",
+        "aliases": [
+          "Tarifs vidéo",
+          "Tarif vidéo",
+          "Prix vidéo",
+          "Prix des vidéos",
+          "Forfaits vidéo",
+          "Forfaits vidéo mensuels",
+          "Quels sont vos tarifs vidéo ?",
+          "Quels sont vos prix pour la vidéo ?",
+          "Quels sont vos forfaits vidéo ?",
+          "Combien coûte une vidéo ?",
+          "Combien coûte une publicité vidéo ?",
+          "Combien coûte une publicité vidéo IA ?",
+          "Combien coûtent vos forfaits vidéo ?",
+          "Combien pour une pub vidéo ?",
+          "Quel est le prix d’une publicité vidéo ?",
+          "Tarifs vidéo IA",
+          "Prix vidéo IA",
+          "Tarif pub vidéo",
+          "Prix pub vidéo",
+          "Combien coûte une vidéo IA ?",
+          "Combien coûtent les vidéos IA ?",
+          "Combien coûte une pub vidéo ?",
+          "C'est combien une vidéo IA ?",
+          "C'est combien une pub vidéo ?",
+          "Quel budget pour des vidéos IA ?",
+          "Quel est le tarif des publicités vidéo ?",
+          "J'ai besoin de publicités vidéo",
+          "Faites-vous des pubs pour TikTok et Reels ?",
+          "Faites-vous des vidéos pour les réseaux sociaux ?",
+          "Combien coûtent des pubs TikTok ou Reels ?",
+          "Tarif vidéo réseaux sociaux",
+          "Prix abonnement vidéo mensuel"
+        ]
+      }
+    },
+    {
+      "id": "video-rights",
+      "source": "https://studio26.me/ai-video#faq-title",
+      "en": {
+        "label": "Video usage rights",
+        "text": "Once paid, video work includes commercial rights for web, social and paid digital use. TV or cinema clearance is quoted per campaign. Any stock material remains subject to its own licence.",
+        "aliases": [
+          "Usage rights",
+          "Video usage rights",
+          "Video rights",
+          "What are the usage rights?",
+          "What are the video usage rights?",
+          "What usage rights do I get?",
+          "What rights do I get for the video?",
+          "Who owns the video?",
+          "Can I use the video on social media?",
+          "Can I use the video in paid ads?",
+          "Can I use the video on TV?",
+          "Can I use the video in cinema?",
+          "Do I own the video?",
+          "Do I own the usage rights?",
+          "Commercial rights",
+          "Broadcast rights",
+          "TV rights",
+          "Cinema rights",
+          "Paid media rights",
+          "Can I run the video as a paid ad?",
+          "Can I use the ads on Meta and TikTok?",
+          "Can I use the video on YouTube and LinkedIn?",
+          "Are the videos cleared for commercial use?",
+          "Rights"
+        ]
+      },
+      "fr": {
+        "label": "Droits d’utilisation vidéo",
+        "text": "Une fois le paiement effectué, les vidéos sont accompagnées de droits commerciaux pour le web, les réseaux sociaux et la publicité numérique payante. L’autorisation pour la télévision ou le cinéma fait l’objet d’un devis par campagne. Tout contenu de banque d’images reste soumis à sa propre licence.",
+        "aliases": [
+          "Droits d'utilisation",
+          "Droits d'utilisation vidéo",
+          "Droits d'utilisation des vidéos",
+          "Droits vidéo",
+          "Quels sont les droits d'utilisation ?",
+          "Quels sont les droits d'utilisation des vidéos ?",
+          "Quels droits ai-je sur la vidéo ?",
+          "À qui appartient la vidéo ?",
+          "Puis-je utiliser la vidéo sur les réseaux sociaux ?",
+          "Puis-je utiliser la vidéo dans des publicités payantes ?",
+          "Puis-je utiliser la vidéo à la télévision ?",
+          "Puis-je utiliser la vidéo au cinéma ?",
+          "Suis-je propriétaire de la vidéo ?",
+          "Droits commerciaux",
+          "Droits de diffusion",
+          "Droits TV",
+          "Droits télévision",
+          "Droits cinéma",
+          "Puis-je diffuser la vidéo en publicité payante ?",
+          "Puis-je utiliser la vidéo sur TikTok et Instagram ?",
+          "Puis-je utiliser la vidéo sur YouTube et LinkedIn ?",
+          "Les vidéos incluent-elles les droits commerciaux ?",
+          "Droits"
+        ]
+      }
+    },
+    {
+      "id": "chatbot-builder",
+      "source": "https://studio26.me/#founder",
+      "en": {
+        "text": "Our development team in Mauritius will build your chatbot. Ruben Ramdhony, Studio26’s founder, mentors the developers and personally reviews their work before your chatbot goes live.",
+        "aliases": [
+          "Who will build my chatbot?",
+          "Who builds the chatbot?",
+          "Who will be building my chatbot?",
+          "Who builds your chatbots?",
+          "Who will build our chatbot?",
+          "Who will develop my chatbot?",
+          "Who will build my AI assistant?",
+          "Who's going to build my chatbot?",
+          "Who builds my website?",
+          "Who will build my website?",
+          "Who develops the website?",
+          "Who develops the chatbot?",
+          "Do juniors work on my project unsupervised?",
+          "Is the team supervised?",
+          "Does Ruben review every project?",
+          "How does the atelier model work?"
+        ]
+      },
+      "fr": {
+        "text": "Notre équipe de développement à Maurice créera votre chatbot. Ruben Ramdhony, le fondateur de Studio26, accompagne les développeurs et vérifie personnellement leur travail avant la mise en ligne de votre chatbot.",
+        "aliases": [
+          "Qui va créer mon chatbot ?",
+          "Qui va développer mon chatbot ?",
+          "Qui développera mon chatbot ?",
+          "Qui crée vos chatbots ?",
+          "Qui va créer notre chatbot ?",
+          "Qui va développer mon assistant IA ?",
+          "Qui s’occupe du développement de mon chatbot ?",
+          "Qui va créer mon site ?",
+          "Qui va développer mon site web ?",
+          "Qui construit le site ?",
+          "Est-ce que des juniors travaillent seuls sur mon projet ?",
+          "L'équipe est-elle supervisée ?",
+          "Est-ce que Ruben vérifie chaque projet ?",
+          "Comment fonctionne le modèle d'atelier ?"
+        ]
+      }
+    },
+    {
+      "id": "team",
+      "source": "https://studio26.me/#founder",
+      "en": {
+        "label": "The team",
+        "text": "Studio26 is led by its founder, Ruben Ramdhony, who mentors emerging developers and reviews every delivery. The studio is based in Mauritius and works remotely worldwide.",
+        "aliases": [
+          "Team",
+          "The team",
+          "Your team",
+          "Founder",
+          "Who is on the team?",
+          "Who is on your team?",
+          "Who is your team?",
+          "Tell me about the team",
+          "Tell me about your team",
+          "Who works at Studio26?",
+          "Who runs Studio26?",
+          "Who is behind Studio26?",
+          "Who is the founder?",
+          "Who founded Studio26?",
+          "Who is Ruben?",
+          "Who is Ruben Ramdhony?",
+          "Who reviews the work?",
+          "Who will review my project?",
+          "Who reviews my website before launch?",
+          "Ruben",
+          "Ruben Ramdhony",
+          "About the founder",
+          "Tell me about Ruben",
+          "Tell me about Ruben Ramdhony",
+          "Who is the owner?",
+          "Who leads the studio?",
+          "Who is in charge of Studio26?",
+          "Ruben LinkedIn",
+          "What is Ruben's LinkedIn?",
+          "Founder LinkedIn",
+          "Who is the founder of Studio26?"
+        ]
+      },
+      "fr": {
+        "label": "L’équipe",
+        "text": "Studio26 est dirigé par son fondateur, Ruben Ramdhony, qui accompagne de jeunes développeurs et vérifie chaque livraison. Le studio est basé à l’île Maurice et travaille à distance dans le monde entier.",
+        "aliases": [
+          "Équipe",
+          "L'équipe",
+          "Votre équipe",
+          "Fondateur",
+          "Qui fait partie de l'équipe ?",
+          "Quelle est votre équipe ?",
+          "Qui est dans l'équipe ?",
+          "Parlez-moi de l'équipe",
+          "Parlez-moi de votre équipe",
+          "Qui travaille chez Studio26 ?",
+          "Qui dirige Studio26 ?",
+          "Qui est derrière Studio26 ?",
+          "Qui est le fondateur ?",
+          "Qui a fondé Studio26 ?",
+          "Qui est Ruben ?",
+          "Qui est Ruben Ramdhony ?",
+          "Qui vérifie le travail ?",
+          "Qui va vérifier mon projet ?",
+          "Qui valide le travail avant la livraison ?",
+          "Ruben",
+          "Ruben Ramdhony",
+          "À propos du fondateur",
+          "Parlez-moi de Ruben",
+          "Parlez-moi de Ruben Ramdhony",
+          "Qui dirige le studio ?",
+          "Qui est à la tête de Studio26 ?",
+          "LinkedIn de Ruben",
+          "Quel est le LinkedIn de Ruben ?",
+          "Qui est le fondateur de Studio26 ?"
+        ]
+      }
+    },
+    {
+      "id": "location",
+      "source": "https://studio26.me/#founder",
+      "en": {
+        "label": "Studio location",
+        "text": "Studio26 is based in Mauritius and works remotely worldwide.",
+        "aliases": [
+          "Location",
+          "Studio location",
+          "Your location",
+          "Where are you?",
+          "Where are you based?",
+          "Where are you located?",
+          "Where is Studio26?",
+          "Where is Studio26 based?",
+          "Where is the studio?",
+          "Where is the studio based?",
+          "Where is the studio located?",
+          "Do you work remotely?",
+          "Do you work internationally?",
+          "Do you work worldwide?",
+          "Where is your studio based?",
+          "Where is your studio located?",
+          "Are you based in Mauritius?",
+          "Which country are you in?",
+          "What country are you based in?",
+          "Are you in Mauritius?",
+          "Are you a Mauritian studio?",
+          "Can you work with clients outside Mauritius?",
+          "Can you work with overseas clients?",
+          "Do you work with clients abroad?",
+          "Where is the location of Studio26?",
+          "What is the location of Studio26?",
+          "Where is the location of the studio?",
+          "Location of Studio26",
+          "Studio26 location",
+          "Where is Studio26 located?",
+          "Where are your offices?",
+          "Where is your office located?",
+          "Where do you operate from?",
+          "What is your address?",
+          "Where can I find Studio26?"
+        ]
+      },
+      "fr": {
+        "label": "Où est le studio",
+        "text": "Studio26 est basé à l’île Maurice et travaille à distance dans le monde entier.",
+        "aliases": [
+          "Localisation",
+          "Emplacement du studio",
+          "Où est le studio",
+          "Où êtes-vous ?",
+          "Où êtes-vous basé ?",
+          "Où êtes-vous basés ?",
+          "Où êtes-vous situé ?",
+          "Où êtes-vous situés ?",
+          "Où est Studio26 ?",
+          "Où est situé Studio26 ?",
+          "Où est basé Studio26 ?",
+          "Où se trouve Studio26 ?",
+          "Où est le studio ?",
+          "Où se trouve le studio ?",
+          "Travaillez-vous à distance ?",
+          "Travaillez-vous à l'international ?",
+          "Travaillez-vous dans le monde entier ?",
+          "Vous êtes basés où ?",
+          "Vous êtes où ?",
+          "Où se trouve votre studio ?",
+          "Où êtes-vous installés ?",
+          "Dans quel pays êtes-vous ?",
+          "Êtes-vous à Maurice ?",
+          "Êtes-vous basés à l'île Maurice ?",
+          "Êtes-vous un studio mauricien ?",
+          "Travaillez-vous avec des clients hors de Maurice ?",
+          "Travaillez-vous avec des clients à l'étranger ?",
+          "Quelle est la localisation de Studio26 ?",
+          "Où se situe Studio26 ?",
+          "Localisation de Studio26",
+          "Où sont vos bureaux ?",
+          "Où est situé votre bureau ?",
+          "Quelle est votre adresse ?",
+          "Depuis où travaillez-vous ?"
+        ]
+      }
+    },
+    {
+      "id": "about",
+      "source": "https://studio26.me/#founder",
+      "en": {
+        "text": "Studio26 is a boutique design, development and AI motion studio based in Mauritius, led by its founder, Ruben Ramdhony.",
+        "aliases": [
+          "About",
+          "About Studio26",
+          "About the studio",
+          "About you",
+          "What is Studio26?",
+          "Who is Studio26?",
+          "Who are you as a studio?",
+          "Tell me about Studio26",
+          "Tell me about the studio"
+        ]
+      },
+      "fr": {
+        "text": "Studio26 est un studio boutique de design, de développement et de motion design IA basé à l’île Maurice, dirigé par son fondateur, Ruben Ramdhony.",
+        "aliases": [
+          "À propos",
+          "À propos de Studio26",
+          "À propos du studio",
+          "Qu'est-ce que Studio26 ?",
+          "Qui est Studio26 ?",
+          "Parlez-moi de Studio26",
+          "Parlez-moi du studio",
+          "Présentez le studio"
+        ]
+      }
+    },
+    {
+      "id": "process",
+      "source": "https://studio26.me/#process-title",
+      "en": {
+        "label": "How we work",
+        "text": "We start by discussing your business and goals. Then we agree a visual direction, build and test the work, and review it together after launch.",
+        "aliases": [
+          "Process",
+          "Your process",
+          "How we work",
+          "How do you work?",
+          "How does it work?",
+          "How does the process work?",
+          "What is your process?",
+          "What is the process?",
+          "How do we get started?",
+          "How do I get started?",
+          "How does a project work?",
+          "What are the steps of a project?",
+          "How do we work together?",
+          "What happens after I contact you?",
+          "How does the discovery call work?",
+          "Is the discovery call free?"
+        ]
+      },
+      "fr": {
+        "label": "Notre méthode",
+        "text": "Tout commence par un échange sur votre activité et vos objectifs. Nous convenons ensuite d’une direction visuelle, réalisons et testons le projet, puis faisons le point ensemble après le lancement.",
+        "aliases": [
+          "Processus",
+          "Votre processus",
+          "Méthode",
+          "Votre méthode",
+          "Notre méthode",
+          "Comment travaillez-vous ?",
+          "Comment ça marche ?",
+          "Comment ça fonctionne ?",
+          "Quel est votre processus ?",
+          "Quelle est votre méthode ?",
+          "Comment commencer ?",
+          "Comment démarrer un projet ?",
+          "Comment se déroule un projet ?",
+          "Quelles sont les étapes d'un projet ?",
+          "Comment travaille-t-on ensemble ?",
+          "Que se passe-t-il après le premier contact ?",
+          "Comment se passe l'appel de découverte ?",
+          "L'appel de découverte est-il gratuit ?"
+        ]
+      }
+    },
+    {
+      "id": "concepts",
+      "source": "https://studio26.me/#studio",
+      "en": {
+        "label": "Concept worlds",
+        "text": "Studio26 shows fictional concept worlds and spec films (including marée, Volume, Zest., Maison Filaos and Kestrel) to demonstrate our design, motion and AI filmmaking range. They are original studio concepts, not client projects.",
+        "aliases": [
+          "Concepts",
+          "Concept worlds",
+          "Concept experiences",
+          "What are the concepts?",
+          "What are the concept worlds?",
+          "What are the concept experiences?",
+          "Are the concepts real clients?",
+          "Are the concepts client projects?",
+          "Are the concepts real?",
+          "Tell me about the concepts",
+          "Is maree a real client?",
+          "Is Volume a real client?",
+          "Is Zest a real client?",
+          "Is Maison Filaos a real client?",
+          "Is Kestrel a real client?",
+          "Are Maison Filaos and Kestrel real brands?",
+          "What are maree, Volume and Zest?",
+          "What are Maison Filaos and Kestrel?",
+          "Are Maison Filaos and Kestrel real clients?",
+          "Are maree, Volume and Zest real clients?",
+          "Are your concept worlds real clients?",
+          "Are the films on the video page client work?"
+        ]
+      },
+      "fr": {
+        "label": "Univers conceptuels",
+        "text": "Studio26 présente des univers conceptuels et des films de démonstration fictifs (notamment marée, Volume, Zest., Maison Filaos et Kestrel) pour illustrer notre savoir-faire en design, motion et vidéo IA. Ce sont des créations originales du studio et non des projets clients.",
+        "aliases": [
+          "Concepts",
+          "Univers conceptuels",
+          "Expériences conceptuelles",
+          "Que sont les concepts ?",
+          "Que sont les univers conceptuels ?",
+          "Que sont les expériences conceptuelles ?",
+          "Les concepts sont-ils de vrais clients ?",
+          "Les concepts sont-ils des projets clients ?",
+          "Les concepts sont-ils réels ?",
+          "Parlez-moi des concepts",
+          "Est-ce que marée est un vrai client ?",
+          "Est-ce que Volume est un vrai client ?",
+          "Est-ce que Zest est un vrai client ?",
+          "Est-ce que Maison Filaos est un vrai client ?",
+          "Est-ce que Kestrel est un vrai client ?",
+          "Que sont marée, Volume et Zest ?",
+          "Que sont Maison Filaos et Kestrel ?",
+          "Maison Filaos et Kestrel sont-ils de vrais clients ?",
+          "Marée, Volume et Zest sont-ils de vrais clients ?",
+          "Les films présentés sont-ils des projets clients ?"
+        ]
+      }
+    },
+    {
+      "id": "ash",
+      "source": "https://studio26.me/privacy#collection",
+      "en": {
+        "text": "I’m Ash, Studio26’s AI assistant. I can help you explore the studio, compare services and check published prices. What would you like to make?",
+        "aliases": [
+          "Hello",
+          "Hi",
+          "Hey",
+          "Help",
+          "Who are you?",
+          "What are you?",
+          "Who is Ash?",
+          "What is Ash?",
+          "Are you a bot?",
+          "Are you a robot?",
+          "Are you an AI?",
+          "Are you a person?",
+          "Are you human?",
+          "Are you real?",
+          "What can you do?",
+          "What can I ask?",
+          "What can I ask you?"
+        ]
+      },
+      "fr": {
+        "text": "Je suis Ash, l’assistante IA de Studio26. Je peux vous présenter le studio, comparer nos services et vous renseigner sur les tarifs publiés. Quel projet avez-vous en tête ?",
+        "aliases": [
+          "Bonjour",
+          "Salut",
+          "Bonsoir",
+          "Aide",
+          "Qui êtes-vous ?",
+          "Qui es-tu ?",
+          "Qu'êtes-vous ?",
+          "Qui est Ash ?",
+          "Qu'est-ce qu'Ash ?",
+          "Êtes-vous un robot ?",
+          "Es-tu un robot ?",
+          "Êtes-vous une IA ?",
+          "Êtes-vous une personne ?",
+          "Êtes-vous humain ?",
+          "Que pouvez-vous faire ?",
+          "Que puis-je vous demander ?"
+        ]
+      }
+    },
+    {
+      "id": "contact",
+      "source": "https://studio26.me/#contact",
+      "handoff": true,
+      "en": {
+        "text": "You can reach Ruben and the team directly at hello@studio26.me to tell us about your project.",
+        "aliases": [
+          "Contact",
+          "Email",
+          "Contact details",
+          "How can I contact you?",
+          "How do I contact you?",
+          "How can I reach you?",
+          "What is your email?",
+          "What is your email address?",
+          "Can I talk to a person?",
+          "Can I talk to a human?",
+          "Can I speak to someone?",
+          "Can I speak to Ruben?",
+          "How do I get in touch?",
+          "How can I get in touch?",
+          "How do I reach Ruben?",
+          "How can I email you?",
+          "Where do I send my brief?",
+          "How do I start a project?",
+          "How can I contact your team?",
+          "How do I contact your team?",
+          "How can I contact the team?",
+          "How do I contact the team?",
+          "How can I reach your team?",
+          "How do I reach your team?",
+          "How can I contact Studio26?",
+          "How do I contact Studio26?",
+          "How can I contact Ruben?",
+          "How do I contact Ruben?"
+        ]
+      },
+      "fr": {
+        "text": "Vous pouvez écrire à Ruben et à son équipe à hello@studio26.me pour nous parler de votre projet.",
+        "aliases": [
+          "Coordonnées",
+          "Comment vous contacter ?",
+          "Comment on vous contacte ?",
+          "Comment on peut vous contacter ?",
+          "Comment peut-on vous contacter ?",
+          "Comment contacter le studio ?",
+          "Comment on vous joint ?",
+          "Comment prendre contact avec vous ?",
+          "Comment puis-je vous contacter ?",
+          "Comment vous joindre ?",
+          "Quel est votre email ?",
+          "Quelle est votre adresse e-mail ?",
+          "Puis-je parler à une personne ?",
+          "Puis-je parler à un humain ?",
+          "Puis-je parler à quelqu'un ?",
+          "Puis-je parler à Ruben ?",
+          "Comment entrer en contact ?",
+          "Comment joindre Ruben ?",
+          "Comment vous envoyer un email ?",
+          "Où envoyer mon brief ?",
+          "Comment lancer un projet avec vous ?",
+          "Comment contacter votre équipe ?",
+          "Comment puis-je contacter votre équipe ?",
+          "Comment joindre votre équipe ?",
+          "Comment contacter l'équipe ?",
+          "Comment contacter Ruben ?"
+        ]
+      }
+    },
+    {
+      "id": "website-ai-monthly",
+      "source": "https://studio26.me/#services",
+      "en": {
+        "text": "The US$95 per month AI assistant fee covers Cloudflare edge hosting, monthly content and knowledge base updates, and up to 1,000 visitor chats per month. If you prefer, we can also connect your own AI API keys at cost.",
+        "aliases": [
+          "What is the $95 per month for?",
+          "What is the $95 monthly fee for?",
+          "What does $95 a month cover?",
+          "What does the $95 monthly fee include?",
+          "Why is there a monthly fee for the chatbot?",
+          "What happens if I exceed 1,000 chats?",
+          "What if I get more than 1,000 visitor chats a month?",
+          "Can I use my own API keys for the chatbot?",
+          "Can we use our own OpenAI or Anthropic keys?",
+          "Who pays for the AI token usage?",
+          "Chatbot monthly cost",
+          "AI assistant monthly fee",
+          "Monthly fee",
+          "Chatbot monthly fee",
+          "$95 a month",
+          "$95 per month",
+          "What is the $95 a month?",
+          "What is the monthly cost for the chatbot?",
+          "How much is the chatbot per month?",
+          "How much is monthly maintenance for the chatbot?",
+          "Are there monthly costs for the website or chatbot?",
+          "Are there ongoing monthly fees?",
+          "Do I pay for OpenAI tokens?",
+          "Own API keys",
+          "1,000 chats per month"
+        ]
+      },
+      "fr": {
+        "text": "Le forfait mensuel de 95 USD pour l’assistant IA couvre l’hébergement Cloudflare, les mises à jour mensuelles de contenu et de base de connaissances, ainsi que jusqu’à 1 000 conversations de visiteurs par mois. Si vous préférez, nous pouvons aussi connecter vos propres clés API au coût réel.",
+        "aliases": [
+          "À quoi correspondent les 95 USD par mois ?",
+          "Que couvrent les 95 USD par mois ?",
+          "Pourquoi y a-t-il un abonnement mensuel pour le chatbot ?",
+          "Que se passe-t-il au-delà de 1 000 conversations ?",
+          "Et si je dépasse 1 000 conversations par mois ?",
+          "Puis-je utiliser mes propres clés API ?",
+          "Qui paie les coûts d'utilisation de l'IA ?",
+          "Coût mensuel du chatbot",
+          "Forfait mensuel assistant IA",
+          "Frais mensuels",
+          "Abonnement mensuel chatbot",
+          "95 $ par mois",
+          "95 USD par mois",
+          "C'est quoi les 95 $ par mois ?",
+          "Quel est le coût mensuel du chatbot ?",
+          "Combien coûte le chatbot par mois ?",
+          "Y a-t-il des frais mensuels ?",
+          "Y a-t-il un abonnement mensuel ?",
+          "Clés API personnelles",
+          "1 000 conversations par mois"
+        ]
+      }
+    },
+    {
+      "id": "chatbot-standalone",
+      "source": "https://studio26.me/#services",
+      "en": {
+        "text": "Yes. If you already have a website, we can design and train a dedicated AI assistant like Ash for your existing site, quoted as setup plus monthly care on discovery.",
+        "aliases": [
+          "Can you add a chatbot to my existing website?",
+          "Can I get just the AI chatbot without a new website?",
+          "Can you build an AI assistant for my current website?",
+          "Can you build a chatbot like Ash for my site?",
+          "I already have a website, can you add an AI assistant?",
+          "Do I have to buy a new website to get a chatbot?",
+          "Standalone chatbot",
+          "Chatbot for existing website",
+          "Can I add a chatbot to my existing website?",
+          "Can I add an AI assistant to my existing website?",
+          "Can you add an AI chatbot to my existing website?",
+          "Can I add a chatbot to my current website?"
+        ]
+      },
+      "fr": {
+        "text": "Oui. Si vous avez déjà un site web, nous pouvons concevoir et entraîner un assistant IA dédié comme Ash pour votre site actuel, chiffré sous forme de mise en place et de suivi mensuel lors de la phase de découverte.",
+        "aliases": [
+          "Pouvez-vous ajouter un chatbot à mon site existant ?",
+          "Puis-je avoir uniquement le chatbot sans refaire mon site ?",
+          "Pouvez-vous créer un assistant comme Ash pour mon site ?",
+          "J'ai déjà un site web, pouvez-vous ajouter un assistant IA ?",
+          "Chatbot pour un site existant",
+          "Assistant IA pour mon site actuel",
+          "Puis-je ajouter un chatbot à mon site existant ?",
+          "Puis-je ajouter un assistant IA à mon site existant ?",
+          "Pouvez-vous intégrer un chatbot sur mon site actuel ?"
+        ]
+      }
+    },
+    {
+      "id": "website-custom",
+      "source": "https://studio26.me/#services",
+      "en": {
+        "text": "Every Studio26 website is designed from scratch around your brand and hand-built, never from a generic WordPress or Wix theme. Sites are hosted on Cloudflare’s global edge network, tested on real phones, and built to WCAG 2.1 Level AA accessibility standards.",
+        "aliases": [
+          "Do you use WordPress?",
+          "Do you use Wix or Squarespace?",
+          "Do you use templates?",
+          "Do you use pre-made themes?",
+          "Are your websites custom built?",
+          "Are your websites hand-coded?",
+          "Where are your websites hosted?",
+          "What hosting do you use?",
+          "Do you host on Cloudflare?",
+          "What is included in a website build?",
+          "What comes with a custom website?",
+          "Are your websites fast on mobile?",
+          "Do you use WordPress or templates?",
+          "Do you use WordPress or Wix?",
+          "Do you build on WordPress?",
+          "Do you build with templates?",
+          "Are your sites custom coded?",
+          "Are your websites built from scratch?"
+        ]
+      },
+      "fr": {
+        "text": "Chaque site Studio26 est conçu sur mesure autour de votre marque et développé à la main, sans thème WordPress ou Wix générique. Les sites sont hébergés sur le réseau mondial Cloudflare, testés sur de vrais téléphones et conformes aux normes d’accessibilité WCAG 2.1 AA.",
+        "aliases": [
+          "Utilisez-vous WordPress ?",
+          "Utilisez-vous Wix ou des templates ?",
+          "Utilisez-vous des thèmes préconçus ?",
+          "Vos sites sont-ils faits sur mesure ?",
+          "Où sont hébergés vos sites web ?",
+          "Quel hébergement utilisez-vous ?",
+          "Hébergez-vous sur Cloudflare ?",
+          "Que comprend la création d'un site web ?",
+          "Qu'est-ce qui est inclus dans un site web ?",
+          "Vos sites sont-ils rapides sur mobile ?",
+          "Utilisez-vous WordPress ou des templates ?",
+          "Faites-vous des sites sous WordPress ?",
+          "Vos sites sont-ils codés sur mesure ?",
+          "Construisez-vous les sites de zéro ?"
+        ]
+      }
+    },
+    {
+      "id": "languages",
+      "source": "https://studio26.me/#services",
+      "en": {
+        "text": "Yes. Studio26 works in both English and French across custom websites, AI assistants like Ash, and AI video ad captions.",
+        "aliases": [
+          "Do you work in French?",
+          "Do you work in English and French?",
+          "Do you speak French?",
+          "Can you build a bilingual website?",
+          "Can my chatbot speak French and English?",
+          "Do you offer captions in French?",
+          "What languages do you support?",
+          "Which languages do you work in?",
+          "Do you work in both English and French?",
+          "Can you build websites in English and French?",
+          "Are your services available in French and English?"
+        ]
+      },
+      "fr": {
+        "text": "Oui. Studio26 travaille en français et en anglais pour la création de sites web, les assistants IA comme Ash et les sous-titres de publicités vidéo IA.",
+        "aliases": [
+          "Travaillez-vous en français ?",
+          "Travaillez-vous en français et en anglais ?",
+          "Parlez-vous français ?",
+          "Pouvez-vous créer un site bilingue ?",
+          "Mon chatbot peut-il parler français et anglais ?",
+          "Proposez-vous des sous-titres en français ?",
+          "Quelles langues proposez-vous ?",
+          "Dans quelles langues travaillez-vous ?",
+          "Travaillez-vous en anglais et en français ?",
+          "Faites-vous des sites en français et en anglais ?",
+          "Vos services sont-ils disponibles en français et en anglais ?"
+        ]
+      }
+    },
+    {
+      "id": "video-plans-compare",
+      "source": "https://studio26.me/ai-video#plans",
+      "en": {
+        "text": "Starter (US$750/month) delivers 2 new ads a month in 9:16, 4:5 and 16:9 with EN/FR captions and one revision round. Growth (US$1,350/month) delivers 4 ads a month plus 6-second cut-downs, audience variants and a monthly content plan. Always on (US$2,400/month) delivers 8 ads a month weekly, a quarterly campaign film and priority turnaround.",
+        "aliases": [
+          "What is the difference between Starter, Growth and Always on?",
+          "Compare your video plans",
+          "Which video plan should I choose?",
+          "What is included in the Starter video plan?",
+          "What is included in the Growth video plan?",
+          "What is included in the Always on video plan?",
+          "What do the monthly video plans include?",
+          "How many videos do I get per month?",
+          "How many ads are in each monthly plan?",
+          "What is a 6-second cut-down?",
+          "Starter plan",
+          "Growth plan",
+          "Always on plan",
+          "Starter vs Growth",
+          "Starter vs Growth vs Always on",
+          "What is the $750 plan?",
+          "What is the $1,350 plan?",
+          "What is the $2,400 plan?",
+          "What do I get for $750 a month?",
+          "What do I get for $1,350 a month?",
+          "What do I get for $2,400 a month?"
+        ]
+      },
+      "fr": {
+        "text": "Le forfait Starter (750 USD/mois) comprend 2 publicités par mois en 9:16, 4:5 et 16:9 avec sous-titres FR/EN et un tour de retouches. Growth (1 350 USD/mois) comprend 4 publicités par mois, des versions courtes de 6 secondes, des déclinaisons d’audience et un plan éditorial mensuel. Always on (2 400 USD/mois) comprend 8 publicités par mois livrées chaque semaine, un film de campagne trimestriel et une priorité de production.",
+        "aliases": [
+          "Quelle est la différence entre Starter, Growth et Always on ?",
+          "Comparez vos forfaits vidéo",
+          "Quel forfait vidéo choisir ?",
+          "Que comprend le forfait Starter ?",
+          "Que comprend le forfait Growth ?",
+          "Que comprend le forfait Always on ?",
+          "Que comprennent les forfaits vidéo mensuels ?",
+          "Combien de vidéos ai-je par mois ?",
+          "Combien de publicités sont incluses par mois ?",
+          "Forfait Starter",
+          "Forfait Growth",
+          "Forfait Always on",
+          "Starter vs Growth",
+          "C'est quoi le forfait à 750 $ ?",
+          "C'est quoi le forfait à 1 350 $ ?",
+          "C'est quoi le forfait à 2 400 $ ?",
+          "Que comprend le forfait à 750 USD par mois ?",
+          "Que comprend le forfait à 1 350 USD par mois ?",
+          "Que comprend le forfait à 2 400 USD par mois ?"
+        ]
+      }
+    },
+    {
+      "id": "video-one-off",
+      "source": "https://studio26.me/ai-video#plans",
+      "en": {
+        "text": "Yes. You can commission a single one-off AI video ad starting from US$450 without a monthly plan, delivered with your brand styling in 9:16, 4:5 and 16:9.",
+        "aliases": [
+          "Can I order just one video?",
+          "Can I buy a single video ad?",
+          "Do I need a monthly subscription for video?",
+          "How much is a single video ad?",
+          "How much is a one-off video?",
+          "How much is a one-off video ad?",
+          "One-off video price",
+          "Single video ad price",
+          "Can I test with one video first?",
+          "One-off video",
+          "Single video",
+          "What do I get for $450?",
+          "What is the $450 video ad?",
+          "Can I order 1 video ad?",
+          "Just one video ad"
+        ]
+      },
+      "fr": {
+        "text": "Oui. Vous pouvez commander une publicité vidéo IA ponctuelle à partir de 450 USD sans abonnement mensuel, livrée aux couleurs de votre marque aux formats 9:16, 4:5 et 16:9.",
+        "aliases": [
+          "Puis-je commander une seule vidéo ?",
+          "Puis-je acheter une seule publicité vidéo ?",
+          "Faut-il obligatoirement un abonnement mensuel pour une vidéo ?",
+          "Combien coûte une vidéo unique ?",
+          "Combien coûte une vidéo ponctuelle ?",
+          "Prix d'une vidéo ponctuelle",
+          "Puis-je tester avec une seule vidéo ?",
+          "Vidéo ponctuelle",
+          "Une seule vidéo",
+          "C'est quoi la pub à 450 $ ?",
+          "Que comprend la vidéo à 450 USD ?",
+          "Commander une seule pub vidéo"
+        ]
+      }
+    },
+    {
+      "id": "video-films",
+      "source": "https://studio26.me/ai-video#spots",
+      "en": {
+        "text": "Beyond short social ads, Studio26 produces longer AI brand films, documentaries and explainers, and can pair a film with its own interactive companion website, like our Ancient Egypt Chronicles project (egypt.studio26.me). Longer films are quoted per project.",
+        "aliases": [
+          "Do you make longer films or documentaries?",
+          "How much is a brand film?",
+          "How much is an AI documentary?",
+          "Do you make explainer videos?",
+          "What is Ancient Egypt Chronicles?",
+          "Tell me about the Egypt documentary",
+          "Can you build a website for a film?",
+          "Longer AI films",
+          "Brand films"
+        ]
+      },
+      "fr": {
+        "text": "Au-delà des formats courts pour les réseaux sociaux, Studio26 réalise des films de marque, des documentaires et des vidéos explicatives en IA, et peut accompagner un film de son propre site interactif dédié, comme notre projet Ancient Egypt Chronicles (egypt.studio26.me). Les films longs font l’objet d’un devis par projet.",
+        "aliases": [
+          "Faites-vous des films plus longs ou des documentaires ?",
+          "Combien coûte un film de marque ?",
+          "Combien coûte un documentaire IA ?",
+          "Faites-vous des vidéos explicatives ?",
+          "Qu'est-ce qu'Ancient Egypt Chronicles ?",
+          "Parlez-moi du documentaire sur l'Égypte",
+          "Films de marque",
+          "Films longs en IA"
+        ]
+      }
+    },
+    {
+      "id": "video-formats",
+      "source": "https://studio26.me/ai-video#your-brand",
+      "en": {
+        "text": "Every AI video ad is delivered in all three core formats: 9:16 vertical (Reels, TikTok, Shorts), 4:5 portrait (Instagram, Facebook and LinkedIn feeds) and 16:9 landscape (YouTube and web), with captions in English or French.",
+        "aliases": [
+          "What video formats do I get?",
+          "What aspect ratios are included?",
+          "Do I get vertical and horizontal versions?",
+          "Are the videos made for TikTok and Reels?",
+          "Are captions included in the videos?",
+          "What sizes do the video ads come in?",
+          "9:16 4:5 16:9",
+          "Video aspect ratios",
+          "Video formats",
+          "What video formats are included?",
+          "Which video formats are included?",
+          "What formats do the videos come in?",
+          "What aspect ratios do I get?",
+          "Do you deliver vertical and landscape videos?"
+        ]
+      },
+      "fr": {
+        "text": "Chaque publicité vidéo IA est livrée dans les trois formats principaux : 9:16 vertical (Reels, TikTok, Shorts), 4:5 portrait (fils Instagram, Facebook et LinkedIn) et 16:9 paysage (YouTube et web), avec sous-titres en français ou en anglais.",
+        "aliases": [
+          "Quels formats vidéo sont inclus ?",
+          "Quels sont les formats livrés ?",
+          "Ai-je les versions verticales et horizontales ?",
+          "Les vidéos sont-elles adaptées à TikTok et Reels ?",
+          "Les sous-titres sont-ils inclus dans les vidéos ?",
+          "Formats vidéo",
+          "Quels sont les formats vidéo inclus ?",
+          "Dans quels formats livrez-vous les vidéos ?",
+          "Fournissez-vous les formats vertical et horizontal ?"
+        ]
+      }
+    },
+    {
+      "id": "video-template",
+      "source": "https://studio26.me/ai-video#your-brand",
+      "en": {
+        "text": "Before producing your ads, we create a reusable brand template that locks in your colours, typography, logo placement and pacing so every video across 9:16, 4:5 and 16:9 looks unmistakably like your brand.",
+        "aliases": [
+          "What is the reusable brand template?",
+          "How do you keep videos on brand?",
+          "Will the video match my brand colours and logo?",
+          "What is the brand template on the video page?",
+          "Reusable brand template"
+        ]
+      },
+      "fr": {
+        "text": "Avant de produire vos publicités, nous créons un gabarit de marque réutilisable qui fixe vos couleurs, votre typographie, votre logo et votre rythme afin que chaque vidéo en 9:16, 4:5 et 16:9 soit immédiatement reconnaissable.",
+        "aliases": [
+          "Qu'est-ce que le gabarit de marque réutilisable ?",
+          "Comment gardez-vous les vidéos fidèles à ma marque ?",
+          "La vidéo respectera-t-elle ma charte graphique ?",
+          "Gabarit de marque"
+        ]
+      }
+    },
+    {
+      "id": "video-turnaround",
+      "source": "https://studio26.me/ai-video#faq-title",
+      "en": {
+        "text": "Standard turnaround for AI video ads is five to seven working days from the brief to your first ad. Subsequent monthly ads arrive on an agreed schedule. If you have a specific launch date in mind, email Ruben and the team to check availability.",
+        "aliases": [
+          "How long does a video take?",
+          "How long does a video ad take?",
+          "What is the turnaround time for a video ad?",
+          "What is the video turnaround time?",
+          "How fast can I get my first video ad?",
+          "How many days to make a video ad?",
+          "Video turnaround",
+          "Video turnaround time",
+          "Turnaround",
+          "Turnaround time",
+          "Delivery time for video",
+          "How fast are video ads delivered?",
+          "5 to 7 working days",
+          "How quickly can I get a video ad?"
+        ]
+      },
+      "fr": {
+        "text": "Le délai habituel pour une publicité vidéo IA est de cinq à sept jours ouvrés entre le brief et la première vidéo. Les vidéos mensuelles suivantes sont livrées selon un calendrier convenu ensemble.",
+        "aliases": [
+          "Combien de temps faut-il pour une vidéo ?",
+          "Combien de temps faut-il pour une pub vidéo ?",
+          "Quel est le délai pour une publicité vidéo ?",
+          "Quel est le délai de livraison d'une vidéo ?",
+          "En combien de jours livrez-vous la première vidéo ?",
+          "Délai vidéo",
+          "Délai de livraison vidéo",
+          "Temps de production d'une vidéo",
+          "En combien de temps livrez-vous une pub vidéo ?",
+          "Rapidité de livraison vidéo"
+        ]
+      }
+    },
+    {
+      "id": "video-revisions",
+      "source": "https://studio26.me/ai-video#plans",
+      "en": {
+        "text": "Every AI video ad includes one round of changes so we can refine pacing, copy or visuals with you before final delivery.",
+        "aliases": [
+          "How many revisions are included?",
+          "Are revisions included in the video plans?",
+          "Can I request changes to my video?",
+          "How many rounds of changes do I get?",
+          "Video revisions"
+        ]
+      },
+      "fr": {
+        "text": "Chaque publicité vidéo IA comprend un tour de modifications afin d’ajuster le rythme, le texte ou les visuels avec vous avant la livraison finale.",
+        "aliases": [
+          "Combien de retouches sont incluses ?",
+          "Les modifications sont-elles incluses dans les forfaits vidéo ?",
+          "Puis-je demander des modifications sur ma vidéo ?",
+          "Combien de tours de révision ai-je ?",
+          "Retouches vidéo"
+        ]
+      }
+    },
+    {
+      "id": "video-flexibility",
+      "source": "https://studio26.me/ai-video#faq-title",
+      "en": {
+        "text": "All monthly video plans are rolling monthly plans. You can switch tiers, pause or cancel with 7 days’ notice before your next billing cycle.",
+        "aliases": [
+          "Can I cancel my video plan?",
+          "Can I pause my monthly video plan?",
+          "Can I switch video tiers?",
+          "Am I locked into a long contract for video?",
+          "Is there a minimum commitment on monthly video plans?",
+          "How do I cancel or pause a video plan?",
+          "Can I cancel my monthly video plan?",
+          "Can I cancel my monthly video plan anytime?",
+          "Can I cancel my video plan anytime?",
+          "Can I pause or cancel my video plan?",
+          "Is there a lock-in contract for video?"
+        ]
+      },
+      "fr": {
+        "text": "Tous les forfaits vidéo mensuels sont sans engagement de durée fixe : vous pouvez changer de formule, mettre en pause ou résilier avec un préavis de 7 jours avant votre prochaine échéance mensuelle.",
+        "aliases": [
+          "Puis-je résilier mon forfait vidéo ?",
+          "Puis-je mettre mon abonnement vidéo en pause ?",
+          "Puis-je changer de formule vidéo ?",
+          "Y a-t-il un engagement de durée sur les forfaits vidéo ?",
+          "Comment annuler ou suspendre un forfait vidéo ?",
+          "Puis-je résilier mon forfait vidéo à tout moment ?",
+          "Puis-je annuler mon abonnement vidéo quand je veux ?",
+          "Est-ce sans engagement ?",
+          "Les forfaits vidéo sont-ils sans engagement ?"
+        ]
+      }
+    },
+    {
+      "id": "video-craft",
+      "source": "https://studio26.me/ai-video#spots",
+      "en": {
+        "text": "We combine generative AI with 3D and motion design, then edit, colour-grade and caption every cut by hand in Mauritius so the work feels crafted rather than generic.",
+        "aliases": [
+          "Do AI videos look fake or robotic?",
+          "How do you make your AI videos?",
+          "Are your videos purely AI generated?",
+          "Do you edit the videos by hand?",
+          "How do you ensure video quality?"
+        ]
+      },
+      "fr": {
+        "text": "Nous associons l’IA générative à la 3D et au motion design, puis réalisons le montage, l’étalonnage et le sous-titrage à la main à Maurice pour garantir un rendu soigné et non générique.",
+        "aliases": [
+          "Les vidéos IA ont-elles un rendu artificiel ?",
+          "Comment réalisez-vous vos vidéos IA ?",
+          "Vos vidéos sont-elles entièrement générées par IA ?",
+          "Montez-vous les vidéos à la main ?"
+        ]
+      }
+    },
+    {
+      "id": "work-clients",
+      "source": "https://studio26.me/#work",
+      "en": {
+        "label": "Client work",
+        "text": "Selected commissioned websites built by Studio26 include Arizen Africa, Mauritius Global Diaspora, mauRadio, the AI Unit (Ministry of IT), NexTalent Africa and AWI Partners.",
+        "aliases": [
+          "Client work",
+          "Selected work",
+          "Portfolio",
+          "Your portfolio",
+          "Past clients",
+          "Who are your clients?",
+          "What clients have you worked with?",
+          "Can I see examples of your work?",
+          "Can I see websites you have built?",
+          "What real websites have you built?",
+          "Who are your past clients?",
+          "What are your past projects?",
+          "Show me your portfolio",
+          "Examples of your work",
+          "Which companies have you worked with?",
+          "Have you built real client websites?"
+        ]
+      },
+      "fr": {
+        "label": "Réalisations clients",
+        "text": "Parmi les sites réalisés par Studio26 figurent Arizen Africa, Mauritius Global Diaspora, mauRadio, l’AI Unit (Ministry of IT), NexTalent Africa et AWI Partners.",
+        "aliases": [
+          "Réalisations clients",
+          "Réalisations",
+          "Portfolio",
+          "Votre portfolio",
+          "Vos clients",
+          "Qui sont vos clients ?",
+          "Avec quels clients avez-vous travaillé ?",
+          "Puis-je voir des exemples de vos réalisations ?",
+          "Quels sites avez-vous réalisés ?",
+          "Qui sont vos anciens clients ?",
+          "Quels sont vos projets clients ?",
+          "Montrez-moi votre portfolio",
+          "Exemples de réalisations",
+          "Pour quelles entreprises avez-vous travaillé ?"
+        ]
+      }
+    },
+    {
+      "id": "privacy-data",
+      "source": "https://studio26.me/privacy#collection",
+      "en": {
+        "text": "Studio26 does not use advertising pixels, cross-site trackers or third-party analytics cookies. In this preview, what you type stays in your browser and is cleared when you reload. Studio26 complies with the Mauritius Data Protection Act 2017.",
+        "aliases": [
+          "Privacy",
+          "Privacy policy",
+          "Is this chat private?",
+          "Do you store my messages?",
+          "Do you use cookies or trackers?",
+          "How do you handle my personal data?",
+          "Are you compliant with the Data Protection Act?",
+          "Data protection"
+        ]
+      },
+      "fr": {
+        "text": "Studio26 n’utilise aucun pixel publicitaire, traceur inter-sites ni cookie d’analyse tiers. Dans cet aperçu, ce que vous saisissez reste dans votre navigateur et s’efface au rechargement. Studio26 respecte le Data Protection Act 2017 de l’île Maurice.",
+        "aliases": [
+          "Confidentialité",
+          "Politique de confidentialité",
+          "Cette discussion est-elle privée ?",
+          "Enregistrez-vous mes messages ?",
+          "Utilisez-vous des cookies ou des traceurs ?",
+          "Comment protégez-vous mes données personnelles ?",
+          "Protection des données"
+        ]
+      }
+    },
+    {
+      "id": "accessibility",
+      "source": "https://studio26.me/privacy#accessibility",
+      "en": {
+        "text": "Studio26 builds and tests every page to WCAG 2.1 Level AA standards, including full keyboard navigation, 4.5:1 colour contrast, reduced-motion support and responsive layouts down to 320px.",
+        "aliases": [
+          "Accessibility",
+          "Are your websites accessible?",
+          "Do you follow WCAG 2.1 AA?",
+          "What accessibility standards do you follow?",
+          "WCAG"
+        ]
+      },
+      "fr": {
+        "text": "Studio26 conçoit et teste chaque page selon la norme WCAG 2.1 niveau AA, avec navigation complète au clavier, contraste de 4,5:1, respect de la réduction des animations et affichage adapté jusqu’à 320px.",
+        "aliases": [
+          "Accessibilité",
+          "Vos sites sont-ils accessibles ?",
+          "Respectez-vous la norme WCAG 2.1 AA ?",
+          "Quelles normes d'accessibilité suivez-vous ?"
+        ]
+      }
+    },
+    {
+      "id": "fallback-unknown",
+      "source": "https://studio26.me/#services",
+      "handoff": true,
+      "en": {
+        "text": "I don’t have a published answer for that yet. Try one of the topics below or email Ruben and the team."
+      },
+      "fr": {
+        "text": "Je n’ai pas encore de réponse publiée à cette question. Choisissez un sujet ci-dessous ou écrivez à Ruben et à son équipe."
+      }
+    },
+    {
+      "id": "fallback-ambiguous",
+      "source": "https://studio26.me/#services",
+      "handoff": true,
+      "en": {
+        "text": "That could cover more than one topic, so I won’t guess which you mean. Please ask one specific question at a time or choose a topic. You can also write to the studio yourself at hello@studio26.me. Nothing has been sent from this chat.",
+        "aliases": [
+          "AI"
+        ]
+      },
+      "fr": {
+        "text": "Cela peut concerner plusieurs sujets et je préfère ne pas deviner lequel. Merci de poser une seule question précise à la fois ou de choisir un sujet. Vous pouvez aussi écrire vous-même au studio à hello@studio26.me. Rien n’a été envoyé depuis cette discussion.",
+        "aliases": [
+          "IA"
+        ]
+      }
+    },
+    {
+      "id": "fallback-commitment",
+      "source": "https://studio26.me/#process-title",
+      "handoff": true,
+      "en": {
+        "text": "Ruben and the team can check dates, availability and project terms with you. Email them with your brief and the date you have in mind.",
+        "aliases": [
+          "Can you deliver a website by Friday?",
+          "Can you deliver by Friday?",
+          "Can you guarantee a deadline?",
+          "When can you start?",
+          "How long does a website take?",
+          "Are you available?",
+          "Can you start next week?",
+          "Can I book a call?",
+          "Can you sign a contract?"
+        ]
+      },
+      "fr": {
+        "text": "Ruben et l’équipe pourront vous confirmer leurs disponibilités et les conditions du projet. Écrivez-leur en précisant votre idée et la date souhaitée.",
+        "aliases": [
+          "Pouvez-vous livrer vendredi ?",
+          "Pouvez-vous livrer un site vendredi ?",
+          "Pouvez-vous livrer un site d'ici vendredi ?",
+          "Pouvez-vous garantir un délai ?",
+          "Quand pouvez-vous commencer ?",
+          "Combien de temps faut-il pour un site ?",
+          "Êtes-vous disponible ?",
+          "Êtes-vous disponibles ?",
+          "Pouvez-vous commencer la semaine prochaine ?",
+          "Puis-je réserver un appel ?",
+          "Pouvez-vous signer un contrat ?"
+        ]
+      }
+    }
+  ]
+}

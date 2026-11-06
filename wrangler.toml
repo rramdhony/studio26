@@ -1,11 +1,7 @@
-name = "studio26-site"
+name = "studio26-site-ash-preview"
 main = "src/index.js"
 compatibility_date = "2026-05-25"
 workers_dev = true
-routes = [
-  { pattern = "studio26.me/*", zone_name = "studio26.me" },
-  { pattern = "www.studio26.me/*", zone_name = "studio26.me" }
-]
 
 [assets]
 directory = "./public"
@@ -14,13 +10,21 @@ run_worker_first = ["/video/*", "/api/*"]
 
 [[d1_databases]]
 binding = "DB"
-database_name = "studio26-db"
-database_id = "250ea13a-9a9d-4c04-816d-204b7b2eef9c"
+database_name = "studio26-ash-preview-db"
+database_id = "34f6de8d-6f40-4a12-b964-edb8086d5f4e"
 migrations_dir = "migrations"
 
-# Enquiry alerts through Cloudflare Email Routing. NOTIFY_TO is a Worker secret (a verified destination address).
 [[send_email]]
 name = "NOTIFY"
 
 [vars]
 NOTIFY_FROM = "enquiries@studio26.me"
+ENQUIRY_GLOBAL_PER_HOUR = "50"
+
+[[ratelimits]]
+name = "ENQUIRY_GATE"
+namespace_id = "260261105"
+simple = { limit = 15, period = 60 }
+
+[triggers]
+crons = ["*/5 * * * *"]

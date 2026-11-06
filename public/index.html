@@ -18,6 +18,7 @@
   <link rel="preload" href="/assets/fonts/instrument-sans-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="/assets/site.css">
   <link rel="stylesheet" href="/assets/studio-home.css">
+  <link rel="stylesheet" href="/assets/ash-widget.css">
   <link rel="preload" href="/assets/fonts/syne-latin.woff2" as="font" type="font/woff2" crossorigin>
 
   <script type="application/ld+json">
@@ -302,13 +303,70 @@
 
 </main>
 
-<footer class="closing closing-a" id="contact" aria-labelledby="closing-title"><div class="closing-invitation"><h2 id="closing-title">What shall we<br>make together?</h2><div class="invitation-side"><p>A website with character.<br>A film with a point of view.<br>Let’s start with your idea.</p><button class="talk-trigger" type="button" data-chat hidden><span>Start a<br>conversation</span><span aria-hidden="true">↗</span></button><p class="assistant-preview-note">Try the conversation preview, or send us a message.</p></div></div><div class="closing-info"><div><p>Mauritius.<br>Working everywhere.</p></div><div><p>Write to the studio</p><button type="button" class="contact-link" data-contact>Send us a message</button><p class="cf-fallback">hello [at] studio26 [dot] me</p></div><nav aria-label="Footer navigation"><a href="#work">Websites &amp; AI chatbots</a><a href="/ai-video">AI video ads &amp; films</a><a href="#founder">Inside the studio</a><a href="/privacy">Privacy &amp; legal</a></nav></div><div class="closing-logo"><img src="/assets/brand/studio26-transparent-v1-1440.webp" srcset="/assets/brand/studio26-transparent-v1-360.webp 360w, /assets/brand/studio26-transparent-v1-800.webp 800w, /assets/brand/studio26-transparent-v1-1440.webp 1440w" sizes="92vw" width="2172" height="724" alt="Studio26 — chrome and blue sculpted logo" loading="lazy" decoding="async"></div><div class="closing-bottom"><span>© 2026 Studio26</span><a href="#opening">Back to the top <span aria-hidden="true">↑</span></a></div></footer><dialog class="studio-chat" aria-labelledby="chat-title" aria-describedby="chat-note"><div class="chat-top"><span>studio26 / studio assistant</span><button type="button" class="chat-close" aria-label="Close conversation preview">Close <span aria-hidden="true">×</span></button></div><div class="chat-body"><p class="preview-label" id="chat-note">Conversation preview · no messages are sent</p><h2 id="chat-title">Good ideas start<br>with a hello.</h2><p>What would you like to make?</p><div class="chat-choices"><button type="button" data-intent="A website">A website</button><button type="button" data-intent="An AI video ad">An AI video ad</button><button type="button" data-intent="Something else">Something else</button></div><div class="chat-reply" role="status" aria-live="polite"></div><p class="chat-human">Prefer a person? <button type="button" class="contact-link" data-contact>Write to Ruben and the team</button></p></div></dialog>
+<footer class="closing closing-a" id="contact" aria-labelledby="closing-title"><div class="closing-invitation"><h2 id="closing-title">What shall we<br>make together?</h2><div class="invitation-side"><p>A website with character.<br>A film with a point of view.<br>Let’s start with your idea.</p><button class="talk-trigger" type="button" data-chat hidden><span>Start a<br>conversation</span><span aria-hidden="true">↗</span></button><p class="assistant-preview-note">Ask Ash in English or French, or send us a message.</p></div></div><div class="closing-info"><div><p>Mauritius.<br>Working everywhere.</p></div><div><p>Write to the studio</p><button type="button" class="contact-link" data-contact>Send us a message</button><p class="cf-fallback">hello [at] studio26 [dot] me</p></div><nav aria-label="Footer navigation"><a href="#work">Websites &amp; AI chatbots</a><a href="/ai-video">AI video ads &amp; films</a><a href="#founder">Inside the studio</a><a href="/privacy">Privacy &amp; legal</a></nav></div><div class="closing-logo"><img src="/assets/brand/studio26-transparent-v1-1440.webp" srcset="/assets/brand/studio26-transparent-v1-360.webp 360w, /assets/brand/studio26-transparent-v1-800.webp 800w, /assets/brand/studio26-transparent-v1-1440.webp 1440w" sizes="92vw" width="2172" height="724" alt="Studio26 — chrome and blue sculpted logo" loading="lazy" decoding="async"></div><div class="closing-bottom"><span>© 2026 Studio26</span><a href="#opening">Back to the top <span aria-hidden="true">↑</span></a></div></footer><button class="ash-fab" id="ash-launcher" type="button" aria-haspopup="dialog" hidden>
+  <img class="ash-fab-avatar" src="/assets/ash-avatar-round-v1-128.png" alt="" width="38" height="38">
+  <span class="ash-fab-text">
+    <span class="ash-fab-title" data-ash-i18n="fabTitle">Ask Ash</span>
+    <span class="ash-fab-sub" data-ash-i18n="fabSub">AI studio assistant</span>
+  </span>
+</button>
+<p class="ash-visually-hidden" id="ash-page-status" role="status"></p>
+<dialog class="ash-dialog" id="ash-dialog" aria-labelledby="ash-dialog-title" aria-describedby="ash-dialog-note">
+  <div class="ash-shell">
+    <header class="ash-head" aria-label="Ash">
+      <img class="ash-avatar" src="/assets/ash-avatar-round-v1-128.png" alt="" width="40" height="40">
+      <h2 class="ash-title" id="ash-dialog-title" tabindex="-1" data-i18n="dialogTitle">Ask Ash</h2>
+      <div class="lang-switch" role="group" aria-label="Language / Langue">
+        <button class="lang-button" type="button" data-lang="en" aria-pressed="true" lang="en" aria-label="English">EN</button>
+        <button class="lang-button" type="button" data-lang="fr" aria-pressed="false" lang="fr" aria-label="Français">FR</button>
+      </div>
+      <button class="ash-close" id="ash-close" type="button" data-i18n="close">Close</button>
+      <p class="ash-note" id="ash-dialog-note" data-i18n="dialogNote">Studio26’s AI assistant. Answers come from the studio’s published pages.</p>
+    </header>
+    <section class="ash-transcript" id="ash-transcript" tabindex="0" aria-label="Conversation" data-i18n-aria="transcriptLabel">
+      <ol class="ash-turns" id="ash-turns"></ol>
+      <div class="ash-brief-panel" id="ash-brief-panel" hidden></div>
+      <div class="ash-failure" id="ash-failure" hidden>
+        <p data-i18n="failed">Ash’s answers could not be loaded right now. You can send a project brief or write to Ruben and the team.</p>
+        <p class="ash-failure-actions">
+          <button class="ash-action" type="button" data-contact data-i18n="emailLink">Send us a message</button>
+          <button class="ash-secondary" id="ash-retry" type="button" data-i18n="retry">Try again</button>
+        </p>
+      </div>
+    </section>
+    <div class="ash-topics-wrap" role="group" aria-labelledby="ash-topics-label">
+      <p class="ash-topics-label" id="ash-topics-label" data-i18n="topicsLabel">Or choose a topic</p>
+      <div class="ash-topics" id="ash-topics"></div>
+    </div>
+    <form class="ash-form" id="ash-form" novalidate>
+      <label class="ash-label" for="ash-input" data-i18n="inputLabel">Your question (required)</label>
+      <input
+        class="ash-input"
+        id="ash-input"
+        name="question"
+        type="text"
+        maxlength="240"
+        autocomplete="off"
+        required
+        aria-describedby="ash-hint"
+        disabled
+      >
+      <button class="ash-ask" id="ash-ask" type="submit" disabled data-i18n="ask">Ask</button>
+      <p class="ash-hint" id="ash-hint"></p>
+      <div class="ash-composer-actions">
+        <button class="ash-secondary" type="button" data-ash-brief-open="true" data-i18n="briefOpen">Send a project brief</button>
+        <button class="ash-secondary ash-clear" id="ash-clear" type="button" data-i18n="clear">Clear chat</button>
+      </div>
+    </form>
+    <p class="ash-visually-hidden" id="ash-status" role="status"></p>
+  </div>
+</dialog>
 
 <script src="/assets/site.js" defer></script>
 <script src="/assets/vendor/gsap-3.15.0.min.js" defer></script>
 <script src="/assets/studio-intro.js" defer></script>
 <script src="/assets/studio-possibilities.js" defer></script>
-<script src="/assets/studio-conversation.js" defer></script>
+<script type="module" src="/assets/ash-widget.js"></script>
 <script src="/assets/contact-form.js" data-sitekey="0x4AAAAAAFxfS00WUBcBqypr" defer></script>
 </body>
 </html>

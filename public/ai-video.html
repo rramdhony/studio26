@@ -18,6 +18,7 @@
   <link rel="stylesheet" href="/assets/site.css">
   <link rel="stylesheet" href="/assets/studio-home.css">
   <link rel="stylesheet" href="/assets/ai-video.css">
+  <link rel="stylesheet" href="/assets/ash-widget.css">
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -349,11 +350,70 @@
   <div class="closing-logo"><img src="/assets/brand/studio26-transparent-v1-1440.webp" srcset="/assets/brand/studio26-transparent-v1-360.webp 360w, /assets/brand/studio26-transparent-v1-800.webp 800w, /assets/brand/studio26-transparent-v1-1440.webp 1440w" sizes="92vw" width="2172" height="724" alt="Studio26, chrome and blue sculpted logo" loading="lazy" decoding="async"></div>
   <div class="closing-bottom"><span>&copy; 2026 Studio26</span><a href="#main-content">Back to the top <span aria-hidden="true">&#8593;</span></a></div>
 </footer>
+<button class="ash-fab" id="ash-launcher" type="button" aria-haspopup="dialog" hidden>
+  <img class="ash-fab-avatar" src="/assets/ash-avatar-round-v1-128.png" alt="" width="38" height="38">
+  <span class="ash-fab-text">
+    <span class="ash-fab-title" data-ash-i18n="fabTitle">Ask Ash</span>
+    <span class="ash-fab-sub" data-ash-i18n="fabSub">AI studio assistant</span>
+  </span>
+</button>
+<p class="ash-visually-hidden" id="ash-page-status" role="status"></p>
+<dialog class="ash-dialog" id="ash-dialog" aria-labelledby="ash-dialog-title" aria-describedby="ash-dialog-note">
+  <div class="ash-shell">
+    <header class="ash-head" aria-label="Ash">
+      <img class="ash-avatar" src="/assets/ash-avatar-round-v1-128.png" alt="" width="40" height="40">
+      <h2 class="ash-title" id="ash-dialog-title" tabindex="-1" data-i18n="dialogTitle">Ask Ash</h2>
+      <div class="lang-switch" role="group" aria-label="Language / Langue">
+        <button class="lang-button" type="button" data-lang="en" aria-pressed="true" lang="en" aria-label="English">EN</button>
+        <button class="lang-button" type="button" data-lang="fr" aria-pressed="false" lang="fr" aria-label="Français">FR</button>
+      </div>
+      <button class="ash-close" id="ash-close" type="button" data-i18n="close">Close</button>
+      <p class="ash-note" id="ash-dialog-note" data-i18n="dialogNote">Studio26’s AI assistant. Answers come from the studio’s published pages.</p>
+    </header>
+    <section class="ash-transcript" id="ash-transcript" tabindex="0" aria-label="Conversation" data-i18n-aria="transcriptLabel">
+      <ol class="ash-turns" id="ash-turns"></ol>
+      <div class="ash-brief-panel" id="ash-brief-panel" hidden></div>
+      <div class="ash-failure" id="ash-failure" hidden>
+        <p data-i18n="failed">Ash’s answers could not be loaded right now. You can send a project brief or write to Ruben and the team.</p>
+        <p class="ash-failure-actions">
+          <button class="ash-action" type="button" data-contact data-i18n="emailLink">Send us a message</button>
+          <button class="ash-secondary" id="ash-retry" type="button" data-i18n="retry">Try again</button>
+        </p>
+      </div>
+    </section>
+    <div class="ash-topics-wrap" role="group" aria-labelledby="ash-topics-label">
+      <p class="ash-topics-label" id="ash-topics-label" data-i18n="topicsLabel">Or choose a topic</p>
+      <div class="ash-topics" id="ash-topics"></div>
+    </div>
+    <form class="ash-form" id="ash-form" novalidate>
+      <label class="ash-label" for="ash-input" data-i18n="inputLabel">Your question (required)</label>
+      <input
+        class="ash-input"
+        id="ash-input"
+        name="question"
+        type="text"
+        maxlength="240"
+        autocomplete="off"
+        required
+        aria-describedby="ash-hint"
+        disabled
+      >
+      <button class="ash-ask" id="ash-ask" type="submit" disabled data-i18n="ask">Ask</button>
+      <p class="ash-hint" id="ash-hint"></p>
+      <div class="ash-composer-actions">
+        <button class="ash-secondary" type="button" data-ash-brief-open="true" data-i18n="briefOpen">Send a project brief</button>
+        <button class="ash-secondary ash-clear" id="ash-clear" type="button" data-i18n="clear">Clear chat</button>
+      </div>
+    </form>
+    <p class="ash-visually-hidden" id="ash-status" role="status"></p>
+  </div>
+</dialog>
 
 <script src="/assets/site.js" defer></script>
 <script src="/assets/vendor/gsap-3.15.0.min.js" defer></script>
 <script src="/assets/vendor/ScrollTrigger-3.15.0.min.js" defer></script>
 <script src="/assets/ai-video.js" defer></script>
+<script type="module" src="/assets/ash-widget.js"></script>
 <script src="/assets/contact-form.js" data-sitekey="0x4AAAAAAFxfS00WUBcBqypr" defer></script>
 </body>
 </html>
