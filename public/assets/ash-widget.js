@@ -41,7 +41,7 @@ const UI = {
     dialogNote: 'Studio26’s AI assistant. Answers come from the studio’s published pages.',
     transcriptLabel: 'Conversation',
     intro:
-      'Hi, I’m Ash. What would you like to make? Ask me about our websites, AI assistants, AI video ads or prices, or send a project brief to Ruben and the team.',
+      'Hi, I’m Ash. Ask me about our websites, AI assistants, AI video ads or prices, or send a project brief to Ruben and the team.',
     you: 'You',
     ash: 'Ash',
     topicsLabel: 'Or choose a topic',
@@ -96,7 +96,7 @@ const UI = {
     dialogNote: 'L’assistante IA de Studio26. Les réponses proviennent des pages publiées par le studio.',
     transcriptLabel: 'Conversation',
     intro:
-      'Bonjour, je suis Ash. Quel projet avez-vous en tête ? Posez-moi vos questions sur nos sites web, assistants IA, vidéos IA et tarifs, ou envoyez un brief à Ruben et à son équipe.',
+      'Bonjour, je suis Ash. Posez-moi vos questions sur nos sites web, assistants IA, vidéos IA et tarifs, ou envoyez un brief à Ruben et à son équipe.',
     you: 'Vous',
     ash: 'Ash',
     topicsLabel: 'Ou choisissez un sujet',

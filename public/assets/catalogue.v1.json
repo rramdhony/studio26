@@ -961,7 +961,7 @@
       "id": "ash",
       "source": "https://studio26.me/privacy#collection",
       "en": {
-        "text": "I’m Ash, Studio26’s AI assistant. I can help you explore the studio, compare services and check published prices. What would you like to make?",
+        "text": "I’m Ash, Studio26’s AI assistant. I can help you explore the studio, compare services and check published prices.",
         "aliases": [
           "Hello",
           "Hi",
@@ -983,7 +983,7 @@
         ]
       },
       "fr": {
-        "text": "Je suis Ash, l’assistante IA de Studio26. Je peux vous présenter le studio, comparer nos services et vous renseigner sur les tarifs publiés. Quel projet avez-vous en tête ?",
+        "text": "Je suis Ash, l’assistante IA de Studio26. Je peux vous présenter le studio, comparer nos services et vous renseigner sur les tarifs publiés.",
         "aliases": [
           "Bonjour",
           "Salut",
