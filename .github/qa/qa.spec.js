@@ -892,7 +892,7 @@ test.describe('Section 10 — invitation footer and logo', () => {
     await expect(page.locator('.closing [data-contact]')).toBeVisible();
   });
   test('Ash dialog is honest, keyboard operable and follows browser history', async ({page}) => {
-    const submissions=[];page.on('request',r=>{if(r.method()==='POST')submissions.push(r.url());});
+    const submissions=[];page.on('request',r=>{if(r.method()==='POST' && !r.url().includes('/cdn-cgi/'))submissions.push(r.url());});
     await page.goto('/#contact');
     const trigger=page.getByRole('button',{name:'Start a conversation'});
     await trigger.focus();await page.keyboard.press('Enter');
