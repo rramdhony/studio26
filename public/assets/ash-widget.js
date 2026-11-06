@@ -1033,6 +1033,13 @@ function init() {
     }
   });
 
+  topicsEl.addEventListener('wheel', (event) => {
+    if (Math.abs(event.deltaY) > Math.abs(event.deltaX)) {
+      topicsEl.scrollLeft += event.deltaY;
+      event.preventDefault();
+    }
+  }, { passive: false });
+
   topicsEl.addEventListener('click', (event) => {
     const button = event.target.closest('[data-answer-id]');
     if (!button || state.availability !== 'ready') return;
