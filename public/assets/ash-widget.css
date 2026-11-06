@@ -743,6 +743,45 @@
   align-items: center;
   justify-content: space-between;
   gap: 0.5rem;
+  padding-top: 0.25rem;
+}
+
+.ash-composer-actions .ash-action-btn,
+.ash-composer-actions .ash-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: 0 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 999px;
+  background: linear-gradient(135deg, #151c28 0%, #243452 50%, #3d5687 100%);
+  color: #ffffff;
+  font-size: 0.875rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  text-decoration: none;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.25),
+    0 2px 6px rgba(10, 14, 22, 0.4);
+  cursor: pointer;
+  transition: transform 160ms cubic-bezier(0.2, 0.7, 0.2, 1), background 160ms ease, border-color 160ms ease, box-shadow 160ms ease;
+}
+
+.ash-composer-actions .ash-action-btn:hover,
+.ash-composer-actions .ash-secondary:hover {
+  transform: translateY(-1px);
+  background: linear-gradient(135deg, #1d2738 0%, #2e4369 50%, #4b68a1 100%);
+  border-color: rgba(255, 255, 255, 0.35);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.35),
+    0 4px 12px rgba(10, 14, 22, 0.5);
+  color: #ffffff;
+}
+
+.ash-composer-actions .ash-action-btn:active,
+.ash-composer-actions .ash-secondary:active {
+  transform: translateY(0);
 }
 
 .ash-secondary {
@@ -808,7 +847,8 @@
   }
   .ash-fab:hover,
   .ash-ask:hover,
-  .ash-topic:hover {
+  .ash-topic:hover,
+  .ash-action-btn:hover {
     transform: none;
   }
 }

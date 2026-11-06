@@ -567,7 +567,7 @@ function init() {
   }
 
   function renderTurns() {
-    const nodes = [ashTurn(ui().intro, [briefTriggerButton()])];
+    const nodes = [ashTurn(ui().intro, [])];
     let latestVisitorNode = null;
     if (state.catalogue) {
       for (const turn of state.turns) {
