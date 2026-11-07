@@ -1,5 +1,9 @@
 # Studio26 build status
 
+## Homepage compact-logo opening, 7 November 2026
+
+Ruben approved replacing the oversized static homepage artwork with the finite particle reveal and compact settled wordmark. Branch `codex/homepage-logo-reveal` now integrates the study into the actual public homepage; earlier study-only status below is historical. Claude Sonnet CLI review approved the final fixes. Release evidence and manual QA limits: `docs/reviews/homepage-opening-code-review-2026-11-07.md`. The existing footer, enquiry flow, Ash and discovery content remain in place. Academy is still future work. Merge/deploy is authorized after the final checks pass.
+
 ## Academy opening study, 7 November 2026
 
 Branch `codex/academy-hero-study` contains an isolated comparison of an original particle bloom on Academy and a finite transition into the existing Studio26 wordmark. Reference: Lewis Zhang's live particle-flower hero. Study URL `http://127.0.0.1:3001/`; run `node scripts/serve-academy-study.mjs`. Six focused tests and HTML/JS validation passed. Notes and remaining graphics/manual QA: `docs/creative/academy-hero-reference-study.md`. No public assets, production deployment or main-page motion changes are included. Academy page build follows the visual placement decision.

@@ -1,5 +1,9 @@
 # Studio26 — Handoff & Unified Status (All LLM Agents)
 
+## 7 November 2026: production homepage opening release
+
+Ruben approved replacing the oversized static homepage artwork with the finite particle reveal and compact settled wordmark. Branch `codex/homepage-logo-reveal` now integrates the study into the actual public homepage; earlier study-only status below is historical. Claude Sonnet CLI review approved the final fixes. Release evidence and manual QA limits: `docs/reviews/homepage-opening-code-review-2026-11-07.md`. The existing footer, enquiry flow, Ash and discovery content remain in place. Academy is still future work. Merge/deploy is authorized after the final checks pass.
+
 ## 7 November 2026: Academy opening study
 
 Current work starts on `codex/academy-hero-study` from released `40bf0b8`, backed by `backup/pre-academy-20261107-40bf0b8`. Ruben asked to study the Lewis Zhang hero before deciding between an Academy opening and a pre-logo animation. Reverse-engineering notes and scope: `docs/creative/academy-hero-reference-study.md`. An original local comparison lives in `experiments/academy-hero/`, served by `node scripts/serve-academy-study.mjs` at `http://127.0.0.1:3001/`. Six focused motion/mobile/accessibility/fallback tests passed. No production page or Academy registration flow is implemented by this study. The existing homepage reveal remains unchanged. Recommended first placement is Academy, pending visual review.

@@ -14,10 +14,11 @@
   <meta property="og:type" content="website">
   <meta property="og:image" content="https://studio26.me/assets/og.jpg">
 
-  <link rel="preload" href="/assets/brand/studio26-complete-v1.webp" imagesrcset="/assets/brand/studio26-complete-v1-768.webp 768w, /assets/brand/studio26-complete-v1.webp 1536w" imagesizes="(max-width: 640px) 380px, 100vw" as="image" fetchpriority="high">
+  <link rel="preload" href="/assets/brand/studio26-transparent-v1-800.webp" imagesrcset="/assets/brand/studio26-transparent-v1-360.webp 360w, /assets/brand/studio26-transparent-v1-800.webp 800w" imagesizes="(max-width: 750px) 360px, 560px" as="image" fetchpriority="high">
   <link rel="preload" href="/assets/fonts/instrument-sans-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="/assets/site.css">
   <link rel="stylesheet" href="/assets/studio-home.css">
+  <link rel="stylesheet" href="/assets/studio-opening.css">
   <link rel="stylesheet" href="/assets/ash-widget.css">
   <link rel="preload" href="/assets/fonts/syne-latin.woff2" as="font" type="font/woff2" crossorigin>
 
@@ -139,21 +140,18 @@
 
 <main id="main-content">
 
-  <section class="opening" id="opening" aria-labelledby="hero-title" data-intro-state="static">
+  <section class="opening opening-particles" id="opening" aria-labelledby="hero-title" data-intro-state="complete">
     <div class="opening-topline"><p>Websites, AI chatbots &amp; motion studio</p><p>Mauritius. Working everywhere.</p></div>
+    <canvas id="introCanvas" aria-hidden="true"></canvas>
     <div class="opening-heading">
-      <h1 id="hero-title">A presence <br>worth feeling.</h1>
-      <p>Custom websites, integrated AI chatbots<br>and AI video ads. Made in Mauritius.</p>
+      <h1 id="hero-title">A presence<br>worth feeling.</h1>
+      <p>Custom websites &amp; AI assistants.<br>AI video ads &amp; brand films.</p>
+      <div class="opening-actions"><a class="opening-work" href="#work">Explore the work</a><a class="opening-project" href="#contact">Start a project <span aria-hidden="true">↗</span></a></div>
     </div>
-    <div class="opening-stage" role="img" aria-label="The Studio26 wordmark sculpted in brushed chrome and cobalt blue">
-      <img class="opening-mark" id="introComplete" src="/assets/brand/studio26-complete-v1.webp" srcset="/assets/brand/studio26-complete-v1-768.webp 768w, /assets/brand/studio26-complete-v1.webp 1536w" sizes="(max-width: 640px) 380px, 100vw" width="1536" height="1024" alt="" role="presentation" fetchpriority="high">
-      <img class="opening-sculpture" id="introSculpture" src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" width="1536" height="1024" alt="" role="presentation" hidden data-src="/assets/brand/sculpture-26-v1.webp" data-src-mobile="/assets/brand/sculpture-26-v1-768.webp">
+    <div class="opening-stage" role="img" aria-label="Studio26 in sculpted chrome and cobalt blue">
+      <img id="introComplete" src="/assets/brand/studio26-transparent-v1-800.webp" srcset="/assets/brand/studio26-transparent-v1-360.webp 360w, /assets/brand/studio26-transparent-v1-800.webp 800w" sizes="(max-width: 750px) 360px, 560px" width="800" height="267" alt="" role="presentation" fetchpriority="high">
     </div>
-    <div class="opening-bottom">
-      <p class="opening-summary">We shape the way your business <br>looks, moves and meets the world.</p>
-      <div class="opening-actions"><a class="opening-project" href="#contact">Start a project<span aria-hidden="true">↗</span></a><a class="opening-work" href="#work">Explore the work<span aria-hidden="true">↓</span></a></div>
-      <button class="opening-control" id="introToggle" type="button" hidden><span class="control-glyph" aria-hidden="true">Ⅱ</span><span data-control-label>Pause opening</span></button>
-    </div>
+    <div class="opening-bottom"><p class="opening-summary">We shape the way your business<br> looks, moves and meets the world.</p><button class="opening-control" id="introToggle" type="button" hidden><span class="control-glyph" aria-hidden="true">↻</span><span data-control-label>Replay opening</span></button></div>
     <p class="visually-hidden" id="introStatus" role="status" aria-live="polite"></p>
   </section>
 
@@ -409,7 +407,7 @@
 
 <script src="/assets/site.js" defer></script>
 <script src="/assets/vendor/gsap-3.15.0.min.js" defer></script>
-<script src="/assets/studio-intro.js" defer></script>
+<script src="/assets/studio-opening.js" defer></script>
 <script src="/assets/studio-possibilities.js" defer></script>
 <script type="module" src="/assets/ash-widget.js"></script>
 <script src="/assets/contact-form.js" data-sitekey="0x4AAAAAAFxfS00WUBcBqypr" defer></script>
