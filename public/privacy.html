@@ -248,16 +248,16 @@
         <h2 id="h-collection">2. What data we collect &amp; lawful basis</h2>
         <p>We believe the best privacy policy is collecting almost nothing in the first place. This website sets <strong>no advertising pixels, no behavioural tracking cookies, and no third-party analytics beacons</strong>.</p>
 
-        <h3>A. Enquiries through our contact form</h3>
-      <p>When you send a message through our <button type="button" class="contact-link" data-contact>contact form</button>, we collect your name, your email address, an optional company name, what you need and your message. We also keep the spam-protection details described below.</p>
-      <ul>
-        <li><strong>Where it goes:</strong> your enquiry is stored in our Cloudflare D1 database and emailed to the studio inbox through Cloudflare Email Routing, so we can reply to you.</li>
-        <li><strong>Lawful basis (DPA 2017 Section 28):</strong> taking pre-contractual steps at your request before entering into a service agreement, and our legitimate interest in replying to prospective clients.</li>
-        <li><strong>Voluntary supply (DPA 2017 Section 23):</strong> supplying your details is voluntary, though without a name, an email address and a project note we cannot reply to an enquiry.</li>
-        <li><strong>Spam protection:</strong> Cloudflare Turnstile checks that the form is not being filled in by an automated program. It loads only when you open the form. We also store a one-way cryptographic hash (<code>SHA-256</code>) of your IP address combined with a private server secret, alongside your browser&rsquo;s <code>User-Agent</code> string, strictly to cap submissions at 5 per hour. We never store your raw IP address.</li>
-      </ul>
-      <h3>B. Previews that send nothing</h3>
-      <p>The conversation preview (<code>studio26 / studio assistant</code>) and the interactive brand-template preview on <code>/ai-video</code> run entirely in your browser and send or store no messages. If we launch a live AI studio assistant, we will update this notice before it goes live.</p>
+        <h3>A. Enquiries and project briefs (contact form &amp; Ash assistant)</h3>
+        <p>When you send a message through our <button type="button" class="contact-link" data-contact>contact form</button> or submit a project brief through our studio assistant (Ash), we collect your name, your email address, an optional company name, what you need, and your message or project brief. We also record the enquiry source (contact form or Ash brief) and the spam-protection details described below.</p>
+        <ul>
+          <li><strong>Where it goes:</strong> your enquiry or brief is stored in our Cloudflare D1 database and delivered to the studio inbox through Cloudflare Email Routing, so we can review your scope and reply to you.</li>
+          <li><strong>Lawful basis (DPA 2017 Section 28):</strong> taking pre-contractual steps at your request before entering into a service agreement (Section 28(1)(b) of the Mauritius Data Protection Act 2017), and our legitimate interest in replying to prospective clients.</li>
+          <li><strong>Voluntary supply (DPA 2017 Section 23):</strong> supplying your details is voluntary, though without a name, an email address, and a project note or brief we cannot reply to an enquiry.</li>
+          <li><strong>Spam protection:</strong> Cloudflare Turnstile checks that submissions are not automated. It loads only when you open the contact form or submit a project brief in Ash. We also store a one-way cryptographic hash (<code>SHA-256</code>) of your IP address combined with a private server secret, alongside your browser&rsquo;s <code>User-Agent</code> string, strictly to cap submissions at 5 per hour. We never store your raw IP address.</li>
+        </ul>
+        <h3>B. Conversational questions and interactive previews</h3>
+        <p>The interactive brand-template preview on <code>/ai-video</code> and conversational questions asked to our studio assistant (Ash) run entirely in your browser. Ash matches questions locally against our curated, published catalogue stored on the site. Conversational queries are not recorded on our servers, not stored in our database, and not sent to any external language model or third-party AI provider at this time. Only when you explicitly submit a project brief via the &ldquo;Send a project brief&rdquo; form within Ash are your contact details and brief submitted, as described in Section 2A above.</p>
       <h3>C. Retention period</h3>
         <p>Project enquiries that do not proceed to a commercial engagement are reviewed and deleted within <strong>12 months</strong>. Where a project proceeds to a contract, records are retained for the statutory accounting and tax period required under Mauritian law.</p>
       </section>
@@ -277,12 +277,12 @@
             <tbody>
               <tr>
                 <td><strong>Cloudflare, Inc.</strong> (Workers, D1 &amp; Email Routing)</td>
-                <td>Global edge hosting, media delivery, encrypted D1 database storage of enquiries, and delivery of enquiry emails to the studio inbox.</td>
+                <td>Global edge hosting, media delivery, encrypted D1 database storage of enquiries and project briefs, and delivery of enquiry emails to the studio inbox.</td>
                 <td>TLS 1.3 in transit, AES-256 encryption at rest, Standard Contractual Clauses (SCCs).</td>
               </tr>
               <tr>
                 <td><strong>Cloudflare Turnstile</strong></td>
-                <td>Privacy-preserving bot verification, loaded only when you open the contact form.</td>
+                <td>Privacy-preserving bot verification, loaded only when you open the contact form or submit a project brief in Ash.</td>
                 <td>No ad tracking cookies; evaluates browser integrity signals only.</td>
               </tr>
             </tbody>

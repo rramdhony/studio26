@@ -3,12 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Studio26 · Custom Websites, AI Chatbots &amp; AI Video Ads</title>
+  <title>Studio26 | Websites, AI Chatbots &amp; Video in Mauritius</title>
   <meta name="description" content="Studio26 is a boutique design and motion studio in Mauritius working worldwide. We design and build custom websites with dedicated AI chatbots, and AI video ads &amp; brand films.">
   <link rel="icon" type="image/svg+xml" href="/favicon.svg">
   <link rel="canonical" href="https://studio26.me/">
 
-  <meta property="og:title" content="Studio26 · Custom Websites, AI Chatbots &amp; AI Video Ads">
+  <meta property="og:title" content="Studio26 | Websites, AI Chatbots &amp; Video in Mauritius">
   <meta property="og:description" content="Custom websites with dedicated AI assistants. AI video ads and brand films with a point of view.">
   <meta property="og:url" content="https://studio26.me">
   <meta property="og:type" content="website">
@@ -22,57 +22,101 @@
   <link rel="preload" href="/assets/fonts/syne-latin.woff2" as="font" type="font/woff2" crossorigin>
 
   <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "ProfessionalService",
-    "name": "Studio26",
-    "url": "https://studio26.me",
-    "description": "Independent boutique design, web engineering, AI chatbot, and AI video production studio based in Mauritius and working worldwide.",
-    "address": {
-      "@type": "PostalAddress",
-      "addressCountry": "MU"
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "ProfessionalService",
+      "name": "Studio26",
+      "url": "https://studio26.me/",
+      "description": "Independent boutique design, web engineering, AI chatbot, and AI video production studio based in Mauritius and working worldwide.",
+      "address": {
+        "@type": "PostalAddress",
+        "addressCountry": "MU"
+      },
+      "areaServed": "Worldwide",
+      "founder": {
+        "@id": "https://studio26.me/#founder"
+      },
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Websites, AI Chatbots & AI Video Services",
+        "itemListElement": [
+          {
+            "@type": "Offer",
+            "name": "Custom Website Design & Build",
+            "description": "Hand-built custom website on Cloudflare's global edge network, built with attention to speed and accessibility.",
+            "priceCurrency": "USD",
+            "priceSpecification": {
+              "@type": "PriceSpecification",
+              "minPrice": "2500",
+              "priceCurrency": "USD"
+            },
+            "url": "https://studio26.me/websites-ai-chatbots"
+          },
+          {
+            "@type": "Offer",
+            "name": "Custom Website with Dedicated AI Chatbot",
+            "description": "Bespoke website with a dedicated assistant grounded in approved business information to answer questions and capture enquiries. Booking integrations depend on scope. Care and usage costs $95/month for up to 1,000 visitor chats.",
+            "priceCurrency": "USD",
+            "priceSpecification": {
+              "@type": "PriceSpecification",
+              "minPrice": "4000",
+              "priceCurrency": "USD"
+            },
+            "url": "https://studio26.me/websites-ai-chatbots"
+          },
+          {
+            "@type": "Offer",
+            "name": "AI Video Ads & Brand Films",
+            "description": "Short-form AI video ads and brand films delivered in 9:16, 4:5, and 16:9 formats. One-off ads from $450 USD; monthly plans from $750 to $2,400 USD.",
+            "priceCurrency": "USD",
+            "url": "https://studio26.me/ai-video",
+            "priceSpecification": {
+              "@type": "PriceSpecification",
+              "minPrice": "450",
+              "priceCurrency": "USD"
+            }
+          }
+        ]
+      },
+      "@id": "https://studio26.me/#organization",
+      "logo": "https://studio26.me/assets/brand/studio26-transparent-v1-800.webp"
     },
-    "areaServed": "Worldwide",
-    "founder": {
+    {
       "@type": "Person",
       "name": "Ruben Ramdhony",
       "jobTitle": "Founder and Mentor",
       "sameAs": [
         "https://www.linkedin.com/in/rubenramdhony/"
-      ]
+      ],
+      "@id": "https://studio26.me/#founder",
+      "url": "https://studio26.me/#founder"
     },
-    "sameAs": [
-      "https://www.linkedin.com/in/rubenramdhony/"
-    ],
-    "hasOfferCatalog": {
-      "@type": "OfferCatalog",
-      "name": "Websites, AI Chatbots & AI Video Services",
-      "itemListElement": [
-        {
-          "@type": "Offer",
-          "name": "Custom Website Design & Build",
-          "description": "Hand-built custom website on Cloudflare's global edge network, tested for speed and WCAG 2.1 AA accessibility.",
-          "price": "2500",
-          "priceCurrency": "USD"
-        },
-        {
-          "@type": "Offer",
-          "name": "Custom Website with Dedicated AI Chatbot",
-          "description": "Bespoke website paired with a dedicated AI assistant trained on your business to answer visitor queries, capture leads, and book calls ($95/month care & usage for up to 1,000 visitor chats).",
-          "price": "4000",
-          "priceCurrency": "USD"
-        },
-        {
-          "@type": "Offer",
-          "name": "AI Video Ads & Brand Films",
-          "description": "Short-form AI video ads and brand films delivered in 9:16, 4:5, and 16:9 formats. One-off ads from $450 USD; monthly plans from $750 to $2,400 USD.",
-          "price": "450",
-          "priceCurrency": "USD",
-          "url": "https://studio26.me/ai-video"
-        }
-      ]
+    {
+      "@type": "WebSite",
+      "@id": "https://studio26.me/#website",
+      "url": "https://studio26.me/",
+      "name": "Studio26",
+      "publisher": {
+        "@id": "https://studio26.me/#organization"
+      }
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://studio26.me/#webpage",
+      "url": "https://studio26.me/",
+      "name": "Studio26: Websites, AI Chatbots & AI Video in Mauritius",
+      "isPartOf": {
+        "@id": "https://studio26.me/#website"
+      },
+      "about": {
+        "@id": "https://studio26.me/#organization"
+      },
+      "inLanguage": "en"
     }
-  }
+  ]
+}
   </script>
   <link rel="stylesheet" href="/assets/contact-form.css">
 </head>
@@ -80,7 +124,7 @@
 
 <a class="skip-link" href="#main-content">Skip to main content</a>
 
-<header class="site-head site-head-full">
+<header class="site-head site-head-full" aria-label="Studio26">
   <a class="wordmark header-brand" href="/" aria-label="Studio26 home"><img src="/assets/brand/studio26-transparent-v1-360.webp" width="360" height="120" alt="" decoding="async"></a>
   <nav aria-label="Main navigation">
     <ul class="nav-list">
@@ -99,7 +143,7 @@
     <div class="opening-topline"><p>Websites, AI chatbots &amp; motion studio</p><p>Mauritius. Working everywhere.</p></div>
     <div class="opening-heading">
       <h1 id="hero-title">A presence <br>worth feeling.</h1>
-      <p>Custom websites &amp; AI chatbots.<br>AI video ads &amp; brand films.</p>
+      <p>Custom websites, integrated AI chatbots<br>and AI video ads. Made in Mauritius.</p>
     </div>
     <div class="opening-stage" role="img" aria-label="The Studio26 wordmark sculpted in brushed chrome and cobalt blue">
       <img class="opening-mark" id="introComplete" src="/assets/brand/studio26-complete-v1.webp" srcset="/assets/brand/studio26-complete-v1-768.webp 768w, /assets/brand/studio26-complete-v1.webp 1536w" sizes="(max-width: 640px) 380px, 100vw" width="1536" height="1024" alt="" role="presentation" fetchpriority="high">
@@ -114,11 +158,11 @@
   </section>
 
   <section class="services" id="services" aria-labelledby="services-title">
-    <h2 class="section-title" id="services-title">What we make</h2>
+    <h2 class="section-title" id="services-title">Custom websites, AI chatbots &amp; video</h2>
     <div class="service-grid">
       <article class="service">
         <h3 class="service-name">Websites &amp; AI chatbots</h3>
-        <p class="service-lede">Designed from scratch around your business, hand-built for any phone, and paired with a dedicated AI assistant trained on your business.</p>
+        <p class="service-lede">Studio26 designs custom websites and integrated AI assistants for businesses in Mauritius and worldwide. Bring your website, visitor enquiries and AI video campaigns together with one studio.</p>
         <ul class="service-list">
           <li>A look built on your brand, not a theme</li>
           <li>Copy that sounds like you</li>
@@ -129,6 +173,7 @@
         </ul>
         <p class="service-price">Website from <span data-price="website">$2,500</span> &middot; With dedicated AI assistant from <span data-price="website-ai">$4,000</span></p>
         <p class="service-subprice">AI assistant care &amp; usage: <span data-price="ai-monthly">$95</span> a month (includes hosting, content updates and up to 1,000 visitor chats). All prices in USD (MUR invoicing available on request).</p>
+        <p class="service-more"><a class="btn-link" href="/websites-ai-chatbots">Website &amp; chatbot scope, pricing and questions <span aria-hidden="true">→</span></a></p>
       </article>
       <article class="service">
         <h3 class="service-name">AI video ads &amp; films</h3>
@@ -307,7 +352,7 @@
   <img class="ash-fab-avatar" src="/assets/ash-avatar-round-v1-128.png" alt="" width="38" height="38">
   <span class="ash-fab-text">
     <span class="ash-fab-title" data-ash-i18n="fabTitle">Ask Ash</span>
-    <span class="ash-fab-sub" data-ash-i18n="fabSub">AI studio assistant</span>
+    <span class="ash-fab-sub" data-ash-i18n="fabSub">Studio assistant</span>
   </span>
 </button>
 <p class="ash-visually-hidden" id="ash-page-status" role="status"></p>
@@ -321,7 +366,7 @@
         <button class="lang-button" type="button" data-lang="fr" aria-pressed="false" lang="fr" aria-label="Français">FR</button>
       </div>
       <button class="ash-close" id="ash-close" type="button" data-i18n="close">Close</button>
-      <p class="ash-note" id="ash-dialog-note" data-i18n="dialogNote">Studio26’s AI assistant. Answers come from the studio’s published pages.</p>
+      <p class="ash-note" id="ash-dialog-note" data-i18n="dialogNote">Studio26 assistant. Answers come from the studio’s published pages.</p>
     </header>
     <section class="ash-transcript" id="ash-transcript" tabindex="0" aria-label="Conversation" data-i18n-aria="transcriptLabel">
       <ol class="ash-turns" id="ash-turns"></ol>
@@ -336,7 +381,7 @@
     </section>
     <div class="ash-topics-wrap" role="group" aria-labelledby="ash-topics-label">
       <p class="ash-topics-label" id="ash-topics-label" data-i18n="topicsLabel">Or choose a topic</p>
-      <div class="ash-topics" id="ash-topics" tabindex="0" role="region" aria-labelledby="ash-topics-label"></div>
+      <section class="ash-topics" id="ash-topics" tabindex="0" aria-labelledby="ash-topics-label"></section>
     </div>
     <form class="ash-form" id="ash-form" novalidate>
       <label class="ash-label" for="ash-input" data-i18n="inputLabel">Your question (required)</label>

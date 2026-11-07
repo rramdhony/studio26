@@ -1,6 +1,14 @@
 # Studio26 — Handoff & Unified Status (All LLM Agents)
 
-> **Last updated:** 2 November 2026 (late evening) by Antigravity (Gemini 4 Argon) after full review, Phase 1+3 unification, legal/privacy rebuild, USD pricing, SEO/GEO upgrade, button/navigation polish, and preview deployment.
+## 7 November 2026: reviewed Ash A/B and SEO release
+
+Ruben authorized fixes, a PR, merge and production publication in this chat. The release branch is `codex/ash-seo-release-fixes`. The reviewed bundle includes Ash A/B, the website/chatbot service guide and discovery files. Review fixes preserve excluded-service questions as safe fallbacks, retain commitment handoffs for mixed cancellation/deadline requests, validate all catalogue anchors, publish the approved delivery/payment/search facts, and add a hostname-scoped noindex header for the isolated Ash preview. See `docs/SEO_AI_DISCOVERY_VALIDATION.md` for verification and remaining manual QA limits. No Academy page or LLM fallback is part of this release.
+
+## 7 November 2026: SEO and AI discovery, local changes
+
+Codex reviewed the supplied fix.pdf and current search guidance. Added a website/chatbot service guide, clearer homepage service positioning, consistent entity/price markup, and corrected robots/llms/sitemap files. Plan: `docs/SEO_AI_DISCOVERY_PLAN.md`. Validation and release boundaries: `docs/SEO_AI_DISCOVERY_VALIDATION.md`. Existing unpublished Ash/privacy changes were preserved. This work is not deployed; alternate checkouts differ and must be reconciled before release. No full-site QA sign-off or claim of AI recommendation gains.
+
+> **Last updated:** 7 November 2026 by Antigravity (Gemini 4 Argon) after Release A Trust & Compliance hotfix, Ash live production launch, DPA 2017 privacy alignment, address scraper protection, and honest labelling.
 
 ## 0. Update, 4 November 2026 (Claude): production is now live from `main`
 
@@ -21,7 +29,7 @@ This section overrides anything below that says production serves the teaser or 
 ## 1. Where Everything Lives & Current Live Preview
 
 - **Live Preview URL:** https://studio26-site.ruben-ramdhony.workers.dev/ (Cloudflare Worker `studio26-site`, Current Version ID: `a33185de-66f0-4ae7-b31c-ffcda8ed2396`).
-- **Production (`studio26.me`):** Still serves the legacy teaser from `main`. **Never merge or deploy to `main`** until Ruben explicitly signs off on launch.
+- **Production (`studio26.me` and `www.studio26.me`):** Live on Cloudflare Worker `studio26-site` and D1 `studio26-db`. Every push to `main` deploys to production.
 - **Primary Deploy Worktree:** `C:\Users\ruben\Downloads\studio26\site-ai-video`
   - Contains the unified codebase (`phase-1-site` merged with `ai-video-rethink`) **plus** the gitignored `public/video/` MP4/WebP media required to deploy `/ai-video`.
   - Always deploy preview updates from `C:\Users\ruben\Downloads\studio26\site-ai-video` via `npx wrangler deploy`.

@@ -8,20 +8,20 @@
 - **AI Video Showcase:** https://studio26.me/ai-video
 - **Founder & Mentor:** Ruben Ramdhony (https://www.linkedin.com/in/rubenramdhony/)
 - **Location:** Republic of Mauritius (serving clients globally in English and French)
-- **Contact:** hello@studio26.me
+- **Contact:** https://studio26.me/#contact (project enquiry form)
 
 ## Core Services & Published Pricing (USD)
 
-### 1. Custom Websites & Dedicated AI Chatbots (`https://studio26.me/#services`)
+### 1. Custom Websites & Dedicated AI Chatbots (https://studio26.me/websites-ai-chatbots)
 - **Custom Website Design & Development — From $2,500 USD:**
   - Bespoke visual direction built around the client's brand (never templates)
   - Copy written in the client's voice
   - Motion design where it earns its place (GSAP / WebGL, respecting `prefers-reduced-motion`)
-  - Engineered to WCAG 2.1 Level AA accessibility standards and tested on real mobile devices
+  - Built with attention to accessibility; see the accessibility statement for scope and limitations
   - Hosted on Cloudflare's global edge network
 - **Custom Website + Dedicated AI Chatbot / Assistant — From $4,000 USD (+ $95/month):**
   - Everything in the custom website build, plus a dedicated AI assistant trained on the client's approved website pages and documents
-  - Answers visitor questions 24/7, qualifies leads, and books discovery calls
+  - Answers visitor questions and captures enquiries; booking integrations depend on the agreed scope
   - **$95/month care & usage plan** covers Cloudflare edge hosting, monthly knowledge-base updates, and up to **1,000 visitor conversations per month**
 
 ### 2. AI Video Ads & Brand Films (`https://studio26.me/ai-video`)
@@ -36,7 +36,7 @@
 - **Commercial Rights:** Full commercial and paid-media rights across web, social, and paid digital channels (Meta, TikTok, YouTube, LinkedIn, and the web) upon payment, with broadcast TV or cinema clearance quoted per campaign.
 - **Currency:** All prices are listed in USD (Mauritian Rupee / MUR invoicing available on request).
 
-## Selected Live Client Websites
+## Selected Websites
 - **Arizen Africa** (Strategy & advisory group): https://www.arizenafrica.com/
 - **Mauritius Global Diaspora** (Citizen archive of the Mauritian diaspora): https://mauritiusglobaldiaspora.com/
 - **mauRadio** (Mauritian radio streaming worldwide): https://mauradio.com/
@@ -45,8 +45,20 @@
 - **AWI Partners** (Workforce & expansion advisory for Africa): https://awipartners.africa/
 
 ## Original Studio26 Films & Concept Worlds
+
+Concept worlds are fictional creative explorations, not client results. They are intentionally excluded from search indexing.
 - **Ancient Egypt Chronicles** (Two-part historical documentary & interactive learning site produced by Studio26): https://egypt.studio26.me/
 - **Hospitality Concept (*marée*)**: https://studio26.me/concepts/island
 - **Architecture Concept (*Volume*)**: https://studio26.me/concepts/architecture
 - **Product Brand Concept (*Zest.*)**: https://studio26.me/concepts/product
 - **Privacy, Accessibility (WCAG 2.1 AA) & Mauritius DPA 2017 Policy**: https://studio26.me/privacy
+
+## Current site assistant
+Ash uses curated approved answers and guided project briefs in English and French. It is not a live generative model. Client AI assistants are scoped separately.
+
+## Key pages
+- [Website and chatbot scope, pricing and questions](https://studio26.me/websites-ai-chatbots)
+- [AI video ads, films and monthly plans](https://studio26.me/ai-video)
+- [Studio and founder](https://studio26.me/#founder)
+
+This optional summary mirrors public information. It is not a ranking signal or a guarantee of recommendations.

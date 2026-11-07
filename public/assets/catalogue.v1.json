@@ -6,7 +6,7 @@
       "source": "https://studio26.me/#services",
       "en": {
         "label": "Website with AI assistant",
-        "text": "Yes. Studio26 designs and develops custom AI chatbots and assistants (like Ash) trained on your business. A website with a dedicated AI assistant starts from US$4,000, plus US$95 per month. The monthly fee includes hosting, content updates and up to 1,000 visitor chats per month. We can also build an AI assistant for an existing website. Custom scope is confirmed on discovery. All prices are in USD, with MUR invoicing on request.",
+        "text": "Yes. Studio26 designs and develops custom AI chatbots and assistants trained on your business. A website with a dedicated AI assistant starts from US$4,000, plus US$95 per month. The monthly fee includes hosting, content updates and up to 1,000 visitor chats per month. We can also build an AI assistant for an existing website. Custom scope is confirmed on discovery. All prices are in USD, with MUR invoicing on request.",
         "aliases": [
           "How much is a website with an AI assistant?",
           "How much is a website with an assistant?",
@@ -77,7 +77,7 @@
       },
       "fr": {
         "label": "Site avec assistant IA",
-        "text": "Oui. Studio26 conçoit et développe des chatbots et assistants IA sur mesure (comme Ash) entraînés sur votre activité. Un site avec un assistant IA dédié est proposé à partir de 4 000 USD, plus 95 USD par mois. Le forfait mensuel comprend l’hébergement, les mises à jour de contenu et jusqu’à 1 000 conversations de visiteurs par mois. Nous pouvons aussi créer un assistant IA pour un site existant. Le périmètre sur mesure est confirmé lors de la phase de découverte. Tous les prix sont en USD, avec facturation en MUR sur demande.",
+        "text": "Oui. Studio26 conçoit et développe des chatbots et assistants IA sur mesure entraînés sur votre activité. Un site avec un assistant IA dédié est proposé à partir de 4 000 USD, plus 95 USD par mois. Le forfait mensuel comprend l’hébergement, les mises à jour de contenu et jusqu’à 1 000 conversations de visiteurs par mois. Nous pouvons aussi créer un assistant IA pour un site existant. Le périmètre sur mesure est confirmé lors de la phase de découverte. Tous les prix sont en USD, avec facturation en MUR sur demande.",
         "aliases": [
           "Combien coûte un site avec un assistant ?",
           "Combien coûte un site avec un assistant IA ?",
@@ -738,7 +738,7 @@
       "source": "https://studio26.me/#founder",
       "en": {
         "label": "Studio location",
-        "text": "Studio26 is based in Mauritius and works remotely worldwide.",
+        "text": "Studio26 is based in Mauritius and works with clients both locally in Mauritius and internationally. All prices on the website are in USD, with Mauritian Rupee (MUR) invoicing available on request.",
         "aliases": [
           "Location",
           "Studio location",
@@ -774,12 +774,15 @@
           "Where is your office located?",
           "Where do you operate from?",
           "What is your address?",
-          "Where can I find Studio26?"
+          "Where can I find Studio26?",
+          "Do you work with clients outside Mauritius?",
+          "Do you work with international clients?",
+          "Do you work with clients in Europe or the US?"
         ]
       },
       "fr": {
         "label": "Où est le studio",
-        "text": "Studio26 est basé à l’île Maurice et travaille à distance dans le monde entier.",
+        "text": "Studio26 est basé à Maurice et accompagne des clients aussi bien à l’île Maurice qu’à l’international. Tous les prix affichés sur le site sont en USD, avec facturation en roupies mauriciennes (MUR) disponible sur demande.",
         "aliases": [
           "Localisation",
           "Emplacement du studio",
@@ -814,7 +817,9 @@
           "Où sont vos bureaux ?",
           "Où est situé votre bureau ?",
           "Quelle est votre adresse ?",
-          "Depuis où travaillez-vous ?"
+          "Depuis où travaillez-vous ?",
+          "Pouvez-vous travailler avec des clients hors de Maurice ?",
+          "Travaillez-vous avec des clients internationaux ?"
         ]
       }
     },
@@ -1009,7 +1014,7 @@
       "source": "https://studio26.me/#contact",
       "handoff": true,
       "en": {
-        "text": "You can reach Ruben and the team directly at hello@studio26.me to tell us about your project.",
+        "text": "You can send a project brief using the button below, or reveal our email address to write to Ruben and the team directly.",
         "aliases": [
           "Contact",
           "Email",
@@ -1042,7 +1047,7 @@
         ]
       },
       "fr": {
-        "text": "Vous pouvez écrire à Ruben et à son équipe à hello@studio26.me pour nous parler de votre projet.",
+        "text": "Vous pouvez envoyer un brief de projet avec le bouton ci-dessous, ou afficher notre adresse e-mail pour écrire directement à Ruben et à son équipe.",
         "aliases": [
           "Coordonnées",
           "Comment vous contacter ?",
@@ -1103,7 +1108,14 @@
           "Are there ongoing monthly fees?",
           "Do I pay for OpenAI tokens?",
           "Own API keys",
-          "1,000 chats per month"
+          "1,000 chats per month",
+          "What is the $95 for?",
+          "What is $95 for?",
+          "What does the monthly fee cover?",
+          "What does the $95 cover?",
+          "What is covered by the $95?",
+          "$95",
+          "What is included in the $95 per month?"
         ]
       },
       "fr": {
@@ -1128,7 +1140,13 @@
           "Y a-t-il des frais mensuels ?",
           "Y a-t-il un abonnement mensuel ?",
           "Clés API personnelles",
-          "1 000 conversations par mois"
+          "1 000 conversations par mois",
+          "À quoi servent les 95 $ ?",
+          "C'est quoi les 95 $ ?",
+          "Que couvre le forfait mensuel ?",
+          "Que comprennent les frais mensuels ?",
+          "95 $",
+          "À quoi correspondent les 95 $ ?"
         ]
       }
     },
@@ -1136,7 +1154,7 @@
       "id": "chatbot-standalone",
       "source": "https://studio26.me/#services",
       "en": {
-        "text": "Yes. If you already have a website, we can design and train a dedicated AI assistant like Ash for your existing site, quoted as setup plus monthly care on discovery.",
+        "text": "Yes. If you already have a website, we can design and train a dedicated AI assistant for your existing site, quoted as setup plus monthly care on discovery.",
         "aliases": [
           "Can you add a chatbot to my existing website?",
           "Can I get just the AI chatbot without a new website?",
@@ -1153,7 +1171,7 @@
         ]
       },
       "fr": {
-        "text": "Oui. Si vous avez déjà un site web, nous pouvons concevoir et entraîner un assistant IA dédié comme Ash pour votre site actuel, chiffré sous forme de mise en place et de suivi mensuel lors de la phase de découverte.",
+        "text": "Oui. Si vous avez déjà un site web, nous pouvons concevoir et entraîner un assistant IA dédié pour votre site actuel, chiffré sous forme de mise en place et de suivi mensuel lors de la phase de découverte.",
         "aliases": [
           "Pouvez-vous ajouter un chatbot à mon site existant ?",
           "Puis-je avoir uniquement le chatbot sans refaire mon site ?",
@@ -1171,7 +1189,7 @@
       "id": "website-custom",
       "source": "https://studio26.me/#services",
       "en": {
-        "text": "Every Studio26 website is designed from scratch around your brand and hand-built, never from a generic WordPress or Wix theme. Sites are hosted on Cloudflare’s global edge network, tested on real phones, and built to WCAG 2.1 Level AA accessibility standards.",
+        "text": "Every Studio26 website is designed from scratch around your brand and hand-built, never from a generic WordPress, Wix or Shopify template. Sites are hosted on Cloudflare’s global edge network (ongoing hosting is also included in the US$95 per month AI assistant care plan), tested on real phones, and built to WCAG 2.1 Level AA accessibility standards.",
         "aliases": [
           "Do you use WordPress?",
           "Do you use Wix or Squarespace?",
@@ -1190,11 +1208,21 @@
           "Do you build on WordPress?",
           "Do you build with templates?",
           "Are your sites custom coded?",
-          "Are your websites built from scratch?"
+          "Are your websites built from scratch?",
+          "Do you offer hosting?",
+          "Do you provide hosting?",
+          "Is hosting included?",
+          "Do you include web hosting?",
+          "How does hosting work?",
+          "Do you build WordPress stores?",
+          "Do you build Wix stores?",
+          "What tech do you use?",
+          "What technology do you use?",
+          "What tech stack do you use?"
         ]
       },
       "fr": {
-        "text": "Chaque site Studio26 est conçu sur mesure autour de votre marque et développé à la main, sans thème WordPress ou Wix générique. Les sites sont hébergés sur le réseau mondial Cloudflare, testés sur de vrais téléphones et conformes aux normes d’accessibilité WCAG 2.1 AA.",
+        "text": "Chaque site Studio26 est conçu sur mesure autour de votre marque et développé à la main, sans thème WordPress, Wix ou Shopify générique. Les sites sont hébergés sur le réseau mondial Cloudflare (l’hébergement continu est également inclus dans le forfait mensuel de 95 USD pour l’assistant IA), testés sur de vrais téléphones et conformes aux normes d’accessibilité WCAG 2.1 AA.",
         "aliases": [
           "Utilisez-vous WordPress ?",
           "Utilisez-vous Wix ou des templates ?",
@@ -1209,7 +1237,12 @@
           "Utilisez-vous WordPress ou des templates ?",
           "Faites-vous des sites sous WordPress ?",
           "Vos sites sont-ils codés sur mesure ?",
-          "Construisez-vous les sites de zéro ?"
+          "Construisez-vous les sites de zéro ?",
+          "Proposez-vous l'hébergement ?",
+          "L'hébergement est-il inclus ?",
+          "Faites-vous l'hébergement web ?",
+          "Quelle technologie utilisez-vous ?",
+          "Quelles technologies utilisez-vous ?"
         ]
       }
     },
@@ -1217,7 +1250,7 @@
       "id": "languages",
       "source": "https://studio26.me/#services",
       "en": {
-        "text": "Yes. Studio26 works in both English and French across custom websites, AI assistants like Ash, and AI video ad captions.",
+        "text": "Yes. Studio26 works in both English and French across custom websites, dedicated studio assistants, and AI video ad captions.",
         "aliases": [
           "Do you work in French?",
           "Do you work in English and French?",
@@ -1233,7 +1266,7 @@
         ]
       },
       "fr": {
-        "text": "Oui. Studio26 travaille en français et en anglais pour la création de sites web, les assistants IA comme Ash et les sous-titres de publicités vidéo IA.",
+        "text": "Oui. Studio26 travaille en français et en anglais pour la création de sites web, les assistants de studio dédiés et les sous-titres de publicités vidéo IA.",
         "aliases": [
           "Travaillez-vous en français ?",
           "Travaillez-vous en français et en anglais ?",
@@ -1439,7 +1472,7 @@
       "id": "video-turnaround",
       "source": "https://studio26.me/ai-video#faq-title",
       "en": {
-        "text": "Standard turnaround for AI video ads is five to seven working days from the brief to your first ad. Subsequent monthly ads arrive on an agreed schedule. If you have a specific launch date in mind, email Ruben and the team to check availability.",
+        "text": "Standard turnaround for AI video ads is five to seven working days from the brief to your first ad. Subsequent monthly ads arrive on an agreed schedule. If you have a specific launch date in mind, send a project brief or reveal our address below to check availability.",
         "aliases": [
           "How long does a video take?",
           "How long does a video ad take?",
@@ -1454,11 +1487,18 @@
           "Delivery time for video",
           "How fast are video ads delivered?",
           "5 to 7 working days",
-          "How quickly can I get a video ad?"
+          "How quickly can I get a video ad?",
+          "How long does an AI video take?",
+          "How long does an AI video ad take?",
+          "How fast can you deliver a video?",
+          "How fast can you deliver a video ad?",
+          "How fast can you deliver an AI video?",
+          "What is the delivery time for an AI video?",
+          "What are your turnaround times?"
         ]
       },
       "fr": {
-        "text": "Le délai habituel pour une publicité vidéo IA est de cinq à sept jours ouvrés entre le brief et la première vidéo. Les vidéos mensuelles suivantes sont livrées selon un calendrier convenu ensemble.",
+        "text": "Le délai habituel pour une publicité vidéo IA est de cinq à sept jours ouvrés entre le brief et la première vidéo. Les vidéos mensuelles suivantes sont livrées selon un calendrier convenu ensemble. Si vous visez une date précise, envoyez un brief ou affichez notre adresse ci-dessous.",
         "aliases": [
           "Combien de temps faut-il pour une vidéo ?",
           "Combien de temps faut-il pour une pub vidéo ?",
@@ -1469,7 +1509,12 @@
           "Délai de livraison vidéo",
           "Temps de production d'une vidéo",
           "En combien de temps livrez-vous une pub vidéo ?",
-          "Rapidité de livraison vidéo"
+          "Rapidité de livraison vidéo",
+          "Quels sont vos délais ?",
+          "Quels sont vos délais pour une vidéo ?",
+          "Combien de temps prend une vidéo IA ?",
+          "En combien de temps livrez-vous une vidéo ?",
+          "Quel est le délai pour une vidéo IA ?"
         ]
       }
     },
@@ -1653,14 +1698,230 @@
       }
     },
     {
+      "id": "ash-about",
+      "source": "https://studio26.me/privacy#collection",
+      "en": {
+        "text": "I’m Ash, Studio26’s studio assistant. Right now I match your questions directly in your browser against curated answers from Studio26’s published pages, without sending your chat to an external language model like ChatGPT or Claude. To share a project with Ruben and the team, use Send a project brief below.",
+        "aliases": [
+          "Are you a real AI?",
+          "Are you an AI?",
+          "Are you a bot?",
+          "Are you a human or a bot?",
+          "Do you use ChatGPT or Claude for Ash?",
+          "What model does Ash use?",
+          "How does Ash work?",
+          "Is Ash powered by ChatGPT?",
+          "Is Ash powered by Claude?",
+          "Who is Ash?",
+          "What is Ash?"
+        ]
+      },
+      "fr": {
+        "text": "Je suis Ash, l’assistante du studio Studio26. Actuellement, je réponds directement dans votre navigateur à partir des réponses validées issues des pages publiées par Studio26, sans envoyer vos messages à un modèle externe comme ChatGPT ou Claude. Pour présenter un projet à Ruben et à l’équipe, utilisez le bouton Envoyer un brief ci-dessous.",
+        "aliases": [
+          "Es-tu une vraie IA ?",
+          "Êtes-vous une vraie IA ?",
+          "Es-tu un robot ?",
+          "Utilisez-vous ChatGPT ou Claude pour Ash ?",
+          "Quel modèle utilise Ash ?",
+          "Comment fonctionne Ash ?",
+          "Qui est Ash ?",
+          "Qu'est-ce qu'Ash ?"
+        ]
+      }
+    },
+    {
+      "id": "payment-terms",
+      "source": "https://studio26.me/websites-ai-chatbots#payments",
+      "en": {
+        "text": "Standard project payment terms are 50% upfront deposit to book and start your project, and 50% upon final delivery before launch. Monthly care plans (such as the US$95 per month AI assistant plan or monthly AI video plans) are billed monthly. All prices are in USD, with Mauritian Rupee (MUR) invoicing available on request.",
+        "aliases": [
+          "What are your payment terms?",
+          "What are the payment terms?",
+          "What are the payment terms? Deposit or 100% upfront?",
+          "Do you require a deposit?",
+          "How much is the deposit?",
+          "How do payments work?",
+          "When do we pay?",
+          "Do I pay upfront?",
+          "Is it 50% upfront?",
+          "Payment schedule",
+          "Payment terms",
+          "Deposit terms"
+        ]
+      },
+      "fr": {
+        "text": "Nos conditions de paiement habituelles sont de 50 % d’acompte au démarrage du projet et 50 % à la livraison finale avant la mise en ligne. Les forfaits mensuels (comme l’abonnement assistant IA à 95 USD par mois ou les formules vidéo mensuelles) sont facturés chaque mois. Tous les tarifs sont en USD, avec facturation en roupies mauriciennes (MUR) sur demande.",
+        "aliases": [
+          "Quelles sont vos conditions de paiement ?",
+          "Quelles sont les modalités de paiement ?",
+          "Demandez-vous un acompte ?",
+          "Quel est le montant de l'acompte ?",
+          "Comment fonctionne le paiement ?",
+          "Quand faut-il payer ?",
+          "Paiement en plusieurs fois ?",
+          "Conditions de règlement",
+          "Modalités de paiement",
+          "Acompte projet"
+        ]
+      }
+    },
+    {
+      "id": "website-turnaround",
+      "source": "https://studio26.me/websites-ai-chatbots#delivery",
+      "en": {
+        "text": "As a standard guide, a custom Studio26 website typically takes two to four weeks from brief to launch, depending on page count, content readiness and custom features (standard guide, not a fixed booking). Larger web applications, e-commerce builds or dedicated AI assistant integrations are scheduled with you on discovery. Send a project brief below if you have a target launch date.",
+        "aliases": [
+          "How long does a website take?",
+          "How long does a website take to build?",
+          "How fast can you build a website?",
+          "What is the turnaround time for a website?",
+          "Website turnaround time",
+          "Website delivery time",
+          "How many weeks does a website take?",
+          "How long to build a custom website?",
+          "How long does it take to make a website?"
+        ]
+      },
+      "fr": {
+        "text": "À titre indicatif, la création d’un site web sur mesure Studio26 prend généralement deux à quatre semaines entre le brief et la mise en ligne, selon le nombre de pages, les contenus et les fonctionnalités (délai indicatif, sans réservation fixe). Les projets e-commerce, applications sur mesure ou intégrations d’assistant IA sont planifiés ensemble lors de la découverte. Envoyez un brief ci-dessous si vous visez une date précise.",
+        "aliases": [
+          "Combien de temps prend la création d'un site web ?",
+          "Quel est le délai pour créer un site web ?",
+          "Combien de temps pour faire un site internet ?",
+          "Délai de réalisation d'un site web",
+          "Délai de livraison site web",
+          "En combien de semaines livrez-vous un site web ?",
+          "Combien de temps faut-il pour créer un site ?"
+        ]
+      }
+    },
+    {
+      "id": "ecommerce",
+      "source": "https://studio26.me/#services",
+      "en": {
+        "text": "Yes. Studio26 designs and builds custom online stores and e-commerce experiences tailored to your business, including product catalogues, checkout flows, payment gateway integration and Shopify or custom storefronts. Custom websites start from US$2,500 and e-commerce scope is confirmed on discovery. Use Send a project brief below to tell Ruben and the team what you are selling.",
+        "aliases": [
+          "Can you build me a Shopify store?",
+          "Do you build Shopify stores?",
+          "Do you use Shopify?",
+          "Do you build e-commerce websites?",
+          "Do you build ecommerce websites?",
+          "Can you build an online store?",
+          "Do you make online shops?",
+          "How much is an e-commerce website?",
+          "Can you integrate online payments?",
+          "E-commerce website",
+          "Online store development"
+        ]
+      },
+      "fr": {
+        "text": "Oui. Studio26 conçoit et développe des boutiques en ligne et des sites e-commerce sur mesure adaptés à votre activité, incluant catalogues produits, parcours de commande, intégration de paiement et boutiques Shopify ou sur mesure. Nos sites démarrent à 2 500 USD et le périmètre e-commerce est défini lors de la découverte. Utilisez Envoyer un brief ci-dessous pour nous décrire votre projet.",
+        "aliases": [
+          "Pouvez-vous créer une boutique Shopify ?",
+          "Utilisez-vous Shopify ?",
+          "Créez-vous des sites e-commerce ?",
+          "Faites-vous des boutiques en ligne ?",
+          "Pouvez-vous créer un site marchand ?",
+          "Combien coûte un site e-commerce ?",
+          "Création de boutique en ligne",
+          "Site e-commerce sur mesure"
+        ]
+      }
+    },
+    {
+      "id": "seo-geo",
+      "source": "https://studio26.me/websites-ai-chatbots#search",
+      "en": {
+        "text": "Studio26 builds websites with technical SEO foundations: semantic HTML, descriptive metadata, canonical URLs, a sitemap and appropriate structured data. Ongoing SEO, content strategy and search campaigns are scoped separately. An optional llms.txt summary is not a Google ranking signal, and no ranking or AI recommendation is guaranteed. Send a project brief below to discuss your goals.",
+        "aliases": [
+          "Do you do SEO?",
+          "Do you offer SEO?",
+          "Do you do SEO and Google Ads?",
+          "Is SEO included?",
+          "Is SEO included in the website?",
+          "Do you do GEO or AI search optimisation?",
+          "Can you help my website rank on Google?",
+          "Search engine optimisation",
+          "SEO services"
+        ]
+      },
+      "fr": {
+        "text": "Studio26 intègre les bases du référencement technique : HTML sémantique, métadonnées descriptives, URL canoniques, sitemap et données structurées adaptées. Le suivi SEO, les contenus et les campagnes de visibilité sont définis séparément. Le résumé facultatif llms.txt ne constitue pas un signal de classement Google. Aucun classement ni recommandation par une IA ne sont garantis. Envoyez un brief pour discuter de vos objectifs.",
+        "aliases": [
+          "Faites-vous du SEO ?",
+          "Proposez-vous du référencement naturel ?",
+          "Le SEO est-il inclus ?",
+          "Faites-vous du SEO et Google Ads ?",
+          "Pouvez-vous améliorer mon référencement sur Google ?",
+          "Référencement naturel SEO",
+          "Optimisation moteurs de recherche"
+        ]
+      }
+    },
+    {
+      "id": "branding-logo",
+      "source": "https://studio26.me/#services",
+      "en": {
+        "text": "Yes. As a full-service creative studio, Studio26 handles logo design, visual identity, typography, colour systems and brand guidelines alongside your website or AI video production so your brand looks cohesive across every touchpoint. Send a project brief below to tell us what you need.",
+        "aliases": [
+          "Do you do logo design?",
+          "Do you design logos?",
+          "Do you design logos and brand identity?",
+          "Do you offer branding?",
+          "Can you create a brand identity?",
+          "Can you design a logo for my business?",
+          "Logo and branding",
+          "Brand identity design"
+        ]
+      },
+      "fr": {
+        "text": "Oui. En tant que studio créatif complet, Studio26 réalise la création de logo, l’identité visuelle, la typographie, la palette de couleurs et la charte graphique en complément de votre site web ou de vos vidéos IA pour garantir une image cohérente. Envoyez un brief ci-dessous pour nous présenter votre besoin.",
+        "aliases": [
+          "Faites-vous la création de logo ?",
+          "Créez-vous des logos ?",
+          "Faites-vous le branding et l'identité visuelle ?",
+          "Pouvez-vous créer une charte graphique ?",
+          "Création de logo et identité visuelle",
+          "Design de logo"
+        ]
+      }
+    },
+    {
+      "id": "mobile-apps",
+      "source": "https://studio26.me/#services",
+      "en": {
+        "text": "Yes. Every Studio26 website is engineered mobile-first for phones and tablets, and we also scope and build custom web applications and mobile apps (iOS and Android) tailored to your business workflow. Send a project brief below and Ruben and the team will scope the right build for you.",
+        "aliases": [
+          "Do you build mobile apps?",
+          "Do you make mobile apps?",
+          "Can you build an iOS or Android app?",
+          "Do you develop web apps?",
+          "Can you build a custom app?",
+          "Mobile app development",
+          "iOS and Android apps"
+        ]
+      },
+      "fr": {
+        "text": "Oui. Chaque site Studio26 est conçu en priorité pour mobile et tablette, et nous développons également des applications web et des applications mobiles (iOS et Android) sur mesure adaptées à votre activité. Envoyez un brief ci-dessous pour que Ruben et l’équipe définissent le périmètre avec vous.",
+        "aliases": [
+          "Développez-vous des applications mobiles ?",
+          "Faites-vous des applications mobiles ?",
+          "Pouvez-vous créer une application iOS ou Android ?",
+          "Créez-vous des applications web sur mesure ?",
+          "Création d'application mobile"
+        ]
+      }
+    },
+    {
       "id": "fallback-unknown",
       "source": "https://studio26.me/#services",
       "handoff": true,
       "en": {
-        "text": "I don’t have a published answer for that yet. Try one of the topics below or email Ruben and the team."
+        "text": "I don’t have a published answer for that yet. As a quick guide, custom websites start from US$2,500, websites with a dedicated AI assistant from US$4,000 (+ US$95/month), and AI video ads from US$450. Choose a topic below, use Send a project brief, or click Show our address to ask Ruben and the team."
       },
       "fr": {
-        "text": "Je n’ai pas encore de réponse publiée à cette question. Choisissez un sujet ci-dessous ou écrivez à Ruben et à son équipe."
+        "text": "Je n’ai pas encore de réponse publiée à cette question. À titre de repère, nos sites web sur mesure démarrent à 2 500 USD, les sites avec assistant IA dédié à 4 000 USD (+ 95 USD/mois) et les publicités vidéo IA à 450 USD. Choisissez un sujet ci-dessous, utilisez Envoyer un brief ou cliquez sur Afficher notre adresse."
       }
     },
     {
@@ -1668,13 +1929,13 @@
       "source": "https://studio26.me/#services",
       "handoff": true,
       "en": {
-        "text": "That could cover more than one topic, so I won’t guess which you mean. Please ask one specific question at a time or choose a topic. You can also write to the studio yourself at hello@studio26.me. Nothing has been sent from this chat.",
+        "text": "That could cover more than one topic, so I won’t guess which you mean. Please ask one specific question at a time or choose a topic below (websites from US$2,500, AI assistants from US$4,000, or AI video ads from US$450). You can also use Send a project brief or click Show our address below. Nothing has been sent from this chat.",
         "aliases": [
           "AI"
         ]
       },
       "fr": {
-        "text": "Cela peut concerner plusieurs sujets et je préfère ne pas deviner lequel. Merci de poser une seule question précise à la fois ou de choisir un sujet. Vous pouvez aussi écrire vous-même au studio à hello@studio26.me. Rien n’a été envoyé depuis cette discussion.",
+        "text": "Cela peut concerner plusieurs sujets et je préfère ne pas deviner lequel. Merci de poser une seule question précise à la fois ou de choisir un sujet ci-dessous (sites web dès 2 500 USD, assistants IA dès 4 000 USD ou vidéos IA dès 450 USD). Vous pouvez aussi utiliser Envoyer un brief ou cliquer sur Afficher notre adresse ci-dessous. Rien n’a été envoyé depuis cette discussion.",
         "aliases": [
           "IA"
         ]
@@ -1685,7 +1946,7 @@
       "source": "https://studio26.me/#process-title",
       "handoff": true,
       "en": {
-        "text": "Ruben and the team can check dates, availability and project terms with you. Email them with your brief and the date you have in mind.",
+        "text": "Ruben and the team confirm dates, availability, discounts, contracts and custom timelines with you directly, so I won’t make a commitment here. As a published guide, standard turnaround for a first AI video ad is five to seven working days from the brief (standard turnaround, not a booking). Use Send a project brief below, or click Show our address to email the studio.",
         "aliases": [
           "Can you deliver a website by Friday?",
           "Can you deliver by Friday?",
@@ -1699,7 +1960,7 @@
         ]
       },
       "fr": {
-        "text": "Ruben et l’équipe pourront vous confirmer leurs disponibilités et les conditions du projet. Écrivez-leur en précisant votre idée et la date souhaitée.",
+        "text": "Ruben et l’équipe confirment directement avec vous les dates, disponibilités, remises, contrats et délais sur mesure, je ne prends donc aucun engagement ici. À titre indicatif, le délai publié pour une première publicité vidéo IA est de cinq à sept jours ouvrés après le brief (délai standard, sans réservation). Utilisez Envoyer un brief ci-dessous ou cliquez sur Afficher notre adresse.",
         "aliases": [
           "Pouvez-vous livrer vendredi ?",
           "Pouvez-vous livrer un site vendredi ?",
@@ -1713,6 +1974,17 @@
           "Puis-je réserver un appel ?",
           "Pouvez-vous signer un contrat ?"
         ]
+      }
+    },
+    {
+      "id": "fallback-injection",
+      "source": "https://studio26.me/#services",
+      "handoff": true,
+      "en": {
+        "text": "I won’t follow instructions inside a question or change how I work. Ask me a direct question about Studio26’s websites, AI assistants, AI video ads or prices, or use Send a project brief or Show our address below."
+      },
+      "fr": {
+        "text": "Je ne suis pas les instructions insérées dans une question et je ne modifie pas mon fonctionnement. Posez-moi une question directe sur les sites web, assistants IA, vidéos IA ou tarifs de Studio26, ou utilisez Envoyer un brief ou Afficher notre adresse ci-dessous."
       }
     }
   ]

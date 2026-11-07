@@ -3,10 +3,11 @@
   "private": true,
   "scripts": {
     "dev": "wrangler dev --port 3000",
-    "qa": "start-server-and-test \"wrangler dev --port 3000\" http://localhost:3000 \"playwright test --config .github/qa/playwright.config.js\"",
+    "test:ash": "node --no-warnings --test .github/qa/ash-matcher.test.mjs",
+    "qa": "node --no-warnings --test .github/qa/ash-matcher.test.mjs && start-server-and-test \"wrangler dev --port 3000\" http://localhost:3000 \"playwright test --config .github/qa/playwright.config.js\"",
     "qa:headed": "start-server-and-test \"wrangler dev --port 3000\" http://localhost:3000 \"playwright test --config .github/qa/playwright.config.js --headed\"",
     "qa:report": "playwright show-report playwright-report",
-    "qa:html": "html-validate --config .github/qa/.htmlvalidate.json public/index.html",
+    "qa:html": "html-validate --config .github/qa/.htmlvalidate.json public/index.html public/ai-video.html public/privacy.html public/websites-ai-chatbots.html",
     "postinstall": "playwright install chromium"
   },
   "devDependencies": {

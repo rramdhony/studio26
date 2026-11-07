@@ -672,7 +672,7 @@ test.describe('Section 02 — selected work', () => {
   test('Every project link works with keyboard focus and has a visible focus indicator', async ({ page }) => {
     await page.goto('/');
     const links = page.locator('#work .work-link');
-    await page.locator('#services .service-more a').focus();
+    await page.locator('#services .service-more a').last().focus();
     await page.keyboard.press('Tab');
     for (let i = 0; i < 6; i++) {
       const link = links.nth(i);
@@ -744,7 +744,9 @@ test.describe('Section 03 — services', () => {
       await expect(page.locator('#services [data-price="website-ai"]')).toHaveText('$4,000');
       await expect(page.locator('#services [data-price="ai-monthly"]')).toHaveText('$95');
       await expect(page.locator('#services [data-price="video"]')).toHaveText('$450');
-      await expect(page.locator('#services .service-more a')).toHaveAttribute('href', '/ai-video');
+      await expect(page.locator('#services .service-more a')).toHaveCount(2);
+      await expect(page.locator('#services .service-more a').first()).toHaveAttribute('href', '/websites-ai-chatbots');
+      await expect(page.locator('#services .service-more a').last()).toHaveAttribute('href', '/ai-video');
       if (width === 1440 || width === 390) {
         await page.evaluate(() => window.scrollTo(0, document.getElementById('services').offsetTop));
         await page.screenshot({ path: `qa-screenshots/section-03-${width}.png` });

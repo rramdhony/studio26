@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Custom Websites &amp; AI Chatbots in Mauritius | Studio26</title>
+  <meta name="description" content="Custom websites from $2,500 USD, or websites with an AI assistant from $4,000. Explore scope, monthly care and real work from Studio26 in Mauritius.">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="canonical" href="https://studio26.me/websites-ai-chatbots">
+  <meta property="og:title" content="Custom Websites &amp; AI Chatbots in Mauritius | Studio26">
+  <meta property="og:description" content="Custom websites from $2,500 USD, or websites with an AI assistant from $4,000. Explore scope, monthly care and real work from Studio26 in Mauritius.">
+  <meta property="og:url" content="https://studio26.me/websites-ai-chatbots">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://studio26.me/assets/og.jpg">
+  <link rel="preload" href="/assets/fonts/instrument-sans-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="/assets/site.css">
+  <link rel="stylesheet" href="/assets/studio-home.css">
+  <style>
+    .legal-shell {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: clamp(48px, 7vw, 96px) var(--px) clamp(80px, 10vw, 144px);
+    }
+    .legal-header {
+      padding-bottom: clamp(32px, 5vw, 56px);
+      border-bottom: 1px solid var(--rule);
+      margin-bottom: clamp(40px, 6vw, 72px);
+    }
+    .legal-kicker {
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--blue);
+      margin-bottom: 14px;
+    }
+    .legal-title {
+      font-family: var(--sans);
+      font-size: clamp(34px, 6vw, 76px);
+      font-weight: 500;
+      letter-spacing: -0.04em;
+      line-height: 1.02;
+      margin-bottom: 20px;
+      overflow-wrap: break-word;
+    }
+    .legal-meta {
+      font-size: 16px;
+      color: var(--mid);
+      max-width: 64ch;
+    }
+    .legal-grid {
+      display: grid;
+      grid-template-columns: 240px minmax(0, 1fr);
+      gap: clamp(32px, 5vw, 72px);
+      align-items: start;
+    }
+    .legal-grid > *,
+    .legal-content > *,
+    .legal-section {
+      min-width: 0;
+      overflow-wrap: break-word;
+    }
+    .legal-toc {
+      position: sticky;
+      top: 32px;
+      padding: 20px;
+      background: rgba(255, 255, 255, 0.45);
+      border: 1px solid var(--rule);
+    }
+    .legal-toc-title {
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--mid);
+      margin-bottom: 10px;
+    }
+    .legal-toc ul {
+      display: grid;
+      gap: 4px;
+    }
+    .legal-toc a {
+      display: inline-flex;
+      align-items: center;
+      min-height: 44px;
+      font-size: 15px;
+      font-weight: 500;
+      color: var(--ink);
+      text-decoration: none;
+    }
+    .legal-toc a:hover {
+      color: var(--blue);
+      text-decoration: underline;
+      text-underline-offset: 4px;
+    }
+    .legal-content {
+      display: grid;
+      gap: 48px;
+      max-width: 72ch;
+    }
+    .legal-section {
+      scroll-margin-top: 32px;
+      padding-bottom: 40px;
+      border-bottom: 1px solid var(--rule);
+    }
+    .legal-section:last-child {
+      border-bottom: 0;
+      padding-bottom: 0;
+    }
+    .legal-section h2 {
+      font-family: var(--sans);
+      font-size: clamp(22px, 3vw, 34px);
+      font-weight: 600;
+      letter-spacing: -0.025em;
+      line-height: 1.15;
+      margin-bottom: 16px;
+    }
+    .legal-section h3 {
+      font-family: var(--sans);
+      font-size: 19px;
+      font-weight: 600;
+      margin: 24px 0 10px;
+      color: var(--ink);
+    }
+    .legal-section p {
+      font-size: 16px;
+      line-height: 1.68;
+      color: #2c3035;
+      margin-bottom: 14px;
+    }
+    .legal-section ul {
+      list-style: disc;
+      padding-left: 22px;
+      margin: 12px 0 18px;
+      display: grid;
+      gap: 8px;
+    }
+    .legal-section li {
+      font-size: 16px;
+      line-height: 1.6;
+      color: #2c3035;
+    }
+    .legal-card {
+      padding: 20px 24px;
+      background: rgba(255, 255, 255, 0.55);
+      border-left: 3px solid var(--blue);
+      margin: 18px 0;
+    }
+    .legal-card p:last-child {
+      margin-bottom: 0;
+    }
+    .legal-table-wrap {
+      max-width: 100%;
+      overflow-x: auto;
+      margin: 18px 0;
+      border: 1px solid var(--rule);
+      background: rgba(255, 255, 255, 0.45);
+    }
+    .legal-table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+      font-size: 15px;
+    }
+    .legal-table th,
+    .legal-table td {
+      padding: 12px 16px;
+      border-bottom: 1px solid var(--rule);
+      vertical-align: top;
+    }
+    .legal-table th {
+      font-weight: 600;
+      color: var(--ink);
+      background: rgba(255, 255, 255, 0.6);
+    }
+    .legal-badge {
+      display: inline-flex;
+      align-items: center;
+      padding: 4px 12px;
+      font-size: 14px;
+      font-weight: 600;
+      background: #171a1c;
+      color: #e8e6e2;
+      margin-bottom: 14px;
+    }
+    @media (max-width: 860px) {
+      .legal-grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
+      .legal-toc {
+        position: static;
+      }
+    }
+  .legal-section a { text-decoration: underline; text-underline-offset: 3px; }
+  </style>
+  <link rel="stylesheet" href="/assets/contact-form.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "@id": "https://studio26.me/websites-ai-chatbots#service",
+  "url": "https://studio26.me/websites-ai-chatbots",
+  "name": "Custom websites and AI chatbots",
+  "provider": {
+    "@id": "https://studio26.me/#organization",
+    "@type": "Organization",
+    "name": "Studio26",
+    "url": "https://studio26.me/"
+  },
+  "areaServed": "Worldwide",
+  "offers": [
+    {
+      "@type": "Offer",
+      "name": "Custom Website Design & Build",
+      "description": "Hand-built custom website on Cloudflare's global edge network, built with attention to speed and accessibility.",
+      "priceCurrency": "USD",
+      "priceSpecification": {
+        "@type": "PriceSpecification",
+        "minPrice": "2500",
+        "priceCurrency": "USD"
+      },
+      "url": "https://studio26.me/websites-ai-chatbots"
+    },
+    {
+      "@type": "Offer",
+      "name": "Custom Website with Dedicated AI Chatbot",
+      "description": "Bespoke website with a dedicated assistant grounded in approved business information to answer questions and capture enquiries. Booking integrations depend on scope. Care and usage costs $95/month for up to 1,000 visitor chats.",
+      "priceCurrency": "USD",
+      "priceSpecification": {
+        "@type": "PriceSpecification",
+        "minPrice": "4000",
+        "priceCurrency": "USD"
+      },
+      "url": "https://studio26.me/websites-ai-chatbots"
+    }
+  ]
+}
+  </script>
+</head>
+<body class="studio-home">
+
+<a class="skip-link" href="#main-content">Skip to main content</a>
+
+<header class="site-head site-head-full">
+  <a class="wordmark header-brand" href="/" aria-label="Studio26 home"><img src="/assets/brand/studio26-transparent-v1-360.webp" width="360" height="120" alt="" decoding="async"></a>
+  <nav aria-label="Main navigation">
+    <ul class="nav-list">
+      <li><a href="/websites-ai-chatbots" aria-current="page">Websites &amp; AI chatbots</a></li>
+      <li><a href="/ai-video">AI video ads &amp; films</a></li>
+      <li><a href="/#founder">Studio</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+  <a class="btn btn-ink nav-cta" href="#contact">Start a project</a>
+</header>
+
+<main id="main-content" class="legal-shell"><header class="legal-header"><p class="legal-kicker">Websites &amp; AI assistants</p><h1 class="legal-title">Custom websites &amp; AI chatbots in Mauritius.</h1><p class="legal-meta">Studio26 brings custom website design, integrated AI assistants and AI video production together for businesses in Mauritius and worldwide.</p></header><div class="legal-grid"><nav class="legal-toc" aria-label="On this page"><ul><li><a href="#scope">What does Studio26 build?</a></li><li><a href="#pricing">How much does a website with an AI chatbot cost?</a></li><li><a href="#delivery">Website delivery guide</a></li><li><a href="#payments">Payment terms</a></li><li><a href="#search">SEO foundations</a></li><li><a href="#assistant">What can the assistant do?</a></li><li><a href="#work">See the work and meet the studio</a></li><li><a href="#brief">What should I include in a project brief?</a></li></ul></nav><div class="legal-content"><section class="legal-section" id="scope" aria-labelledby="scope-title"><h2 id="scope-title">What does Studio26 build?</h2><p>We design and build custom websites around your brand, with copy, responsive layouts and motion where it serves the experience. You can commission a website on its own or add a dedicated AI assistant for visitor questions and lead capture.</p><p>Need campaign creative as well? Our <a href="/ai-video">AI video ads and brand films</a> bring your colours, typography and message into social and web campaigns. Website, assistant and video work can be discussed in one project brief.</p><ul><li>Visual direction and website copy tailored to your business.</li><li>Layouts built for phones and larger screens, with attention to accessibility.</li><li>Hosting on Cloudflare's global network.</li><li>An optional assistant grounded in your approved business information.</li></ul></section><section class="legal-section" id="pricing" aria-labelledby="pricing-title"><h2 id="pricing-title">How much does a website with an AI chatbot cost?</h2><p>A custom Studio26 website starts at <strong>$2,500 USD</strong>. A website with a dedicated AI assistant starts at <strong>$4,000 USD</strong>, plus <strong>$95 per month</strong> for assistant care and usage.</p><p>The monthly plan includes hosting, content updates and up to 1,000 visitor chats. These are starting prices; the final scope is confirmed in your proposal. MUR invoicing is available on request.</p><p>Tell us about your pages, content, languages and any booking or business systems you want to connect so we can confirm what your project needs.</p></section>
+<section class="legal-section" id="delivery" aria-labelledby="delivery-title">
+<h2 id="delivery-title">How long does a website take?</h2>
+<p>As a standard guide, a custom Studio26 website typically takes two to four weeks from brief to launch, depending on page count, content readiness and custom features. This is a guide, not a fixed booking. E-commerce, larger applications and dedicated AI assistant integrations are scheduled during discovery.</p>
+</section>
+<section class="legal-section" id="payments" aria-labelledby="payments-title">
+<h2 id="payments-title">What are the payment terms?</h2>
+<p>Standard project terms are a 50% upfront deposit to book and start the project, with the remaining 50% due on final delivery before launch. Assistant care and monthly video plans are billed monthly. Your proposal confirms the scope, schedule and applicable terms.</p>
+</section>
+<section class="legal-section" id="search" aria-labelledby="search-title">
+<h2 id="search-title">Is SEO included?</h2>
+<p>Technical SEO foundations include semantic HTML, descriptive page metadata, canonical URLs, a sitemap and appropriate structured data. We can scope ongoing SEO, content strategy and search visibility campaigns separately.</p>
+<p>An optional llms.txt file provides a concise site summary. It is not a Google ranking signal. Search rankings, AI recommendations and traffic outcomes cannot be guaranteed.</p>
+</section>
+<section class="legal-section" id="assistant" aria-labelledby="assistant-title"><h2 id="assistant-title">What can the assistant do?</h2><p>A dedicated assistant can answer questions about your business and help capture enquiries. Booking and other integrations depend on the agreed project scope. Its answers need approved source material and ongoing updates when your services or prices change.</p><h3>Can you add an assistant to an existing website?</h3><p>Yes. Studio26 can also build an assistant for an existing website. The integration and price are confirmed after discovery.</p><h3>Is Ash a demonstration of a live generative AI model?</h3><p>Ash, the assistant on our homepage, currently uses approved answers and guided project briefs in English and French. It is a curated site assistant, not a live generative model. A client assistant is scoped separately around the client's needs.</p><p>See our <a href="/privacy">privacy notice</a> for how this website handles enquiries.</p></section><section class="legal-section" id="work" aria-labelledby="work-title"><h2 id="work-title">See the work and meet the studio</h2><p>Explore our <a href="/#work">selected websites</a>, including Arizen Africa, Mauritius Global Diaspora and mauRadio. The portfolio links to the live websites so you can explore the experiences yourself.</p><p>Studio26 is based in Mauritius and works worldwide. Founder <a href="/#founder">Ruben Ramdhony</a> mentors the team and reviews the work. Our concept worlds are clearly labelled fictional creative explorations; they are not client results.</p></section><section class="legal-section" id="brief" aria-labelledby="brief-title"><h2 id="brief-title">What should I include in a project brief?</h2><p>Share your business, audience, existing website if you have one, desired launch date and budget range. For an assistant, include the questions customers ask most often and the information it should use. For video, tell us where the ads will run.</p><p>We will discuss the scope and next steps with you. You can also <a href="/#contact">ask Ash in English or French</a> on the homepage.</p><button type="button" class="btn btn-ink" data-contact>Discuss your project</button></section></div></div></main><footer class="closing closing-a" id="contact" aria-labelledby="closing-title"><div class="closing-invitation"><h2 id="closing-title">What shall we<br>make together?</h2><div class="invitation-side"><p>A website with character.<br>A film with a point of view.<br>Let’s start with your idea.</p><p class="assistant-preview-note">Send us a message about your project.</p></div></div><div class="closing-info"><div><p>Mauritius.<br>Working everywhere.</p></div><div><p>Write to the studio</p><button type="button" class="contact-link" data-contact>Send us a message</button><p class="cf-fallback">hello [at] studio26 [dot] me</p></div><nav aria-label="Footer navigation"><a href="/websites-ai-chatbots">Websites &amp; AI chatbots</a><a href="/ai-video">AI video ads &amp; films</a><a href="/#founder">Inside the studio</a><a href="/privacy">Privacy &amp; legal</a></nav></div><div class="closing-logo"><img src="/assets/brand/studio26-transparent-v1-1440.webp" srcset="/assets/brand/studio26-transparent-v1-360.webp 360w, /assets/brand/studio26-transparent-v1-800.webp 800w, /assets/brand/studio26-transparent-v1-1440.webp 1440w" sizes="92vw" width="2172" height="724" alt="Studio26 — chrome and blue sculpted logo" loading="lazy" decoding="async"></div><div class="closing-bottom"><span>© 2026 Studio26</span><a href="#main-content">Back to the top <span aria-hidden="true">↑</span></a></div></footer>
+<script src="/assets/contact-form.js" data-sitekey="0x4AAAAAAFxfS00WUBcBqypr" defer></script>
+</body>
+</html>

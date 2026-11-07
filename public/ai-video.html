@@ -20,48 +20,66 @@
   <link rel="stylesheet" href="/assets/ai-video.css">
   <link rel="stylesheet" href="/assets/ash-widget.css">
   <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "Service",
-    "serviceType": "AI Video Ads, Social Reels & Brand Film Production",
-    "provider": {
-      "@type": "ProfessionalService",
-      "name": "Studio26",
-      "url": "https://studio26.me",
-      "founder": {
-        "@type": "Person",
-        "name": "Ruben Ramdhony",
-        "sameAs": "https://www.linkedin.com/in/rubenramdhony/"
+{
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "serviceType": "AI Video Ads, Social Reels & Brand Film Production",
+  "provider": {
+    "@id": "https://studio26.me/#organization",
+    "@type": "Organization",
+    "name": "Studio26",
+    "url": "https://studio26.me/"
+  },
+  "areaServed": "Worldwide",
+  "offers": [
+    {
+      "@type": "Offer",
+      "name": "One-off AI Video Ad",
+      "priceCurrency": "USD",
+      "priceSpecification": {
+        "@type": "PriceSpecification",
+        "minPrice": "450",
+        "priceCurrency": "USD"
       }
     },
-    "areaServed": "Worldwide",
-    "offers": [
-      {
-        "@type": "Offer",
-        "name": "One-off AI Video Ad",
-        "price": "450",
-        "priceCurrency": "USD"
-      },
-      {
-        "@type": "Offer",
-        "name": "Starter Monthly Plan (2 multi-format ads/month)",
+    {
+      "@type": "Offer",
+      "name": "Starter Monthly Plan (2 multi-format ads/month)",
+      "priceCurrency": "USD",
+      "priceSpecification": {
+        "@type": "UnitPriceSpecification",
         "price": "750",
-        "priceCurrency": "USD"
-      },
-      {
-        "@type": "Offer",
-        "name": "Growth Monthly Plan (4 multi-format ads/month + 6s cut-downs)",
-        "price": "1350",
-        "priceCurrency": "USD"
-      },
-      {
-        "@type": "Offer",
-        "name": "Always On Monthly Plan (8 multi-format ads/month + quarterly campaign film)",
-        "price": "2400",
-        "priceCurrency": "USD"
+        "priceCurrency": "USD",
+        "unitText": "month"
       }
-    ]
-  }
+    },
+    {
+      "@type": "Offer",
+      "name": "Growth Monthly Plan (4 multi-format ads/month + 6s cut-downs)",
+      "priceCurrency": "USD",
+      "priceSpecification": {
+        "@type": "UnitPriceSpecification",
+        "price": "1350",
+        "priceCurrency": "USD",
+        "unitText": "month"
+      }
+    },
+    {
+      "@type": "Offer",
+      "name": "Always On Monthly Plan (8 multi-format ads/month + quarterly campaign film)",
+      "priceCurrency": "USD",
+      "priceSpecification": {
+        "@type": "UnitPriceSpecification",
+        "price": "2400",
+        "priceCurrency": "USD",
+        "unitText": "month"
+      }
+    }
+  ],
+  "@id": "https://studio26.me/ai-video#service",
+  "url": "https://studio26.me/ai-video",
+  "name": "AI video ads and brand films"
+}
   </script>
   <link rel="stylesheet" href="/assets/contact-form.css">
 </head>
@@ -69,7 +87,7 @@
 
 <a class="skip-link" href="#main-content">Skip to main content</a>
 
-<header class="site-head site-head-full">
+<header class="site-head site-head-full" aria-label="Studio26">
   <a class="wordmark header-brand" href="/" aria-label="Studio26 home"><img src="/assets/brand/studio26-transparent-v1-360.webp" width="360" height="120" alt="" decoding="async"></a>
   <nav aria-label="Main navigation">
     <ul class="nav-list">
@@ -89,7 +107,7 @@
       <div class="av-copy">
         <p class="av-eyebrow">AI video ads &amp; films</p>
         <h1 class="av-title" id="av-title">Ads that stop the&nbsp;scroll.</h1>
-        <p class="av-sub">Short films for Reels, TikTok, Shorts and YouTube. Made with AI, 3D and motion design, finished by hand in Mauritius.</p>
+        <p class="av-sub">Studio26 creates AI video ads and brand films in Mauritius for businesses worldwide. Short films for Reels, TikTok, Shorts and YouTube, made with AI, 3D and motion design and finished by hand.</p>
         <div class="av-actions">
           <a class="btn av-primary" href="#spots">See the work</a>
           <a class="av-link" href="/#contact">Start a project</a>
@@ -354,7 +372,7 @@
   <img class="ash-fab-avatar" src="/assets/ash-avatar-round-v1-128.png" alt="" width="38" height="38">
   <span class="ash-fab-text">
     <span class="ash-fab-title" data-ash-i18n="fabTitle">Ask Ash</span>
-    <span class="ash-fab-sub" data-ash-i18n="fabSub">AI studio assistant</span>
+    <span class="ash-fab-sub" data-ash-i18n="fabSub">Studio assistant</span>
   </span>
 </button>
 <p class="ash-visually-hidden" id="ash-page-status" role="status"></p>
@@ -368,7 +386,7 @@
         <button class="lang-button" type="button" data-lang="fr" aria-pressed="false" lang="fr" aria-label="Français">FR</button>
       </div>
       <button class="ash-close" id="ash-close" type="button" data-i18n="close">Close</button>
-      <p class="ash-note" id="ash-dialog-note" data-i18n="dialogNote">Studio26’s AI assistant. Answers come from the studio’s published pages.</p>
+      <p class="ash-note" id="ash-dialog-note" data-i18n="dialogNote">Studio26 assistant. Answers come from the studio’s published pages.</p>
     </header>
     <section class="ash-transcript" id="ash-transcript" tabindex="0" aria-label="Conversation" data-i18n-aria="transcriptLabel">
       <ol class="ash-turns" id="ash-turns"></ol>
@@ -383,7 +401,7 @@
     </section>
     <div class="ash-topics-wrap" role="group" aria-labelledby="ash-topics-label">
       <p class="ash-topics-label" id="ash-topics-label" data-i18n="topicsLabel">Or choose a topic</p>
-      <div class="ash-topics" id="ash-topics" tabindex="0" role="region" aria-labelledby="ash-topics-label"></div>
+      <section class="ash-topics" id="ash-topics" tabindex="0" aria-labelledby="ash-topics-label"></section>
     </div>
     <form class="ash-form" id="ash-form" novalidate>
       <label class="ash-label" for="ash-input" data-i18n="inputLabel">Your question (required)</label>
