@@ -23,6 +23,9 @@
   - Everything in the custom website build, plus a dedicated AI assistant trained on the client's approved website pages and documents
   - Answers visitor questions and captures enquiries; booking integrations depend on the agreed scope
   - **$95/month care & usage plan** covers Cloudflare edge hosting, monthly knowledge-base updates, and up to **1,000 visitor conversations per month**
+- **Website Turnaround Guide:** Typically 2 to 4 weeks from brief to launch for standard custom websites (standard guide, not a fixed booking); e-commerce, web apps, and AI assistant builds are scheduled during discovery.
+- **Payment Terms:** 50% upfront deposit to book and start the project, and 50% upon final delivery before launch. Monthly care and video plans are billed monthly.
+- **Full-Service Digital Scope:** Custom e-commerce and online stores (Shopify or bespoke storefronts), logo design and brand identity systems, technical SEO foundations (with ongoing SEO and search campaigns scoped separately), and custom web and iOS/Android mobile applications.
 
 ### 2. AI Video Ads & Brand Films (`https://studio26.me/ai-video`)
 - Short commercial ads for Instagram Reels, TikTok, YouTube Shorts, and web campaigns, plus longer brand films, trailers, and documentaries.

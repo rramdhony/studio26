@@ -452,3 +452,38 @@ describe('B7: Single Source of Truth for Prices Across Site & Ash', () => {
     assert.ok(webHtml.includes(`$${PUBLISHED_PRICES.aiMonthly}`), 'websites-ai-chatbots.html has $95');
   });
 });
+
+describe('SEO: www.studio26.me 301 canonical redirect & open-redirect protection', () => {
+  const workerSrc = fs
+    .readFileSync(path.join(ROOT, 'src/index.js'), 'utf8')
+    .replace(/^import\s+\{\s*EmailMessage\s*\}\s+from\s+'cloudflare:email';/m, 'const EmailMessage = class {};')
+    .replace(/export\s+default\s+\{/, 'return {');
+  const worker = new Function(workerSrc)();
+
+  test('redirects www.studio26.me path and query string to https://studio26.me via real worker.fetch()', async () => {
+    const res = await worker.fetch(new Request('https://www.studio26.me/websites-ai-chatbots?ref=search'), {}, {});
+    assert.equal(res.status, 301);
+    assert.equal(res.headers.get('Location'), 'https://studio26.me/websites-ai-chatbots?ref=search');
+  });
+
+  test('prevents protocol-relative //evil.com open redirect on www.studio26.me via real worker.fetch()', async () => {
+    const res = await worker.fetch(new Request('https://www.studio26.me//evil.com/x?a=1'), {}, {});
+    assert.equal(res.status, 301);
+    assert.equal(res.headers.get('Location'), 'https://studio26.me/evil.com/x?a=1');
+  });
+
+  test('falls through to env.ASSETS.fetch for apex studio26.me requests', async () => {
+    let called = false;
+    const env = {
+      ASSETS: {
+        fetch: async (req) => {
+          called = new URL(req.url).hostname === 'studio26.me';
+          return new Response('ok', { status: 200 });
+        },
+      },
+    };
+    const res = await worker.fetch(new Request('https://studio26.me/websites-ai-chatbots'), env, {});
+    assert.equal(res.status, 200);
+    assert.equal(called, true);
+  });
+});
