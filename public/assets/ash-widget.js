@@ -1,10 +1,9 @@
 import { loadTurnstile } from './turnstile.js';
 
-// Ash bilingual preview. Runs entirely in the page: no model calls, storage,
-// analytics or submission. The only request is for the static catalogue.
+// Ash bilingual studio assistant. Runs locally in the browser against a static catalogue.
+// No external model calls or analytics. Project briefs are submitted securely to /api/enquiry.
 
-const EMAIL = 'hello@studio26.me';
-const MAILTO = `mailto:${EMAIL}`;
+const address = () => ['hello', 'studio26.me'].join(String.fromCharCode(64));
 const CATALOGUE_URL = new URL('./catalogue.v1.json', import.meta.url).href;
 const FETCH_TIMEOUT_MS = 8000;
 const MAX_QUESTION_LENGTH = 240;
@@ -13,9 +12,20 @@ const MAX_TURNS = 60;
 export const FALLBACK_UNKNOWN = 'fallback-unknown';
 export const FALLBACK_AMBIGUOUS = 'fallback-ambiguous';
 export const FALLBACK_COMMITMENT = 'fallback-commitment';
+export const FALLBACK_INJECTION = 'fallback-injection';
 const LANGUAGES = ['en', 'fr'];
 
-const NEEDS_LABELS = {
+export const PUBLISHED_PRICES = Object.freeze({
+  website: 2500,
+  websiteAi: 4000,
+  aiMonthly: 95,
+  videoOneOff: 450,
+  videoStarter: 750,
+  videoGrowth: 1350,
+  videoAlways: 2400,
+});
+
+export const NEEDS_LABELS = {
   en: {
     website: 'A custom website (from US$2,500)',
     'website-ai': 'Website + dedicated AI assistant (from US$4,000 + US$95/mo)',
@@ -35,10 +45,10 @@ const NEEDS_LABELS = {
 const UI = {
   en: {
     fabTitle: 'Ask Ash',
-    fabSub: 'AI studio assistant',
+    fabSub: 'Studio assistant',
     dialogTitle: 'Ask Ash',
     close: 'Close',
-    dialogNote: 'Studio26’s AI assistant. Answers come from the studio’s published pages.',
+    dialogNote: 'Studio26 assistant. Answers come from the studio’s published pages.',
     transcriptLabel: 'Conversation',
     intro:
       'Hi, I’m Ash. Ask me about our websites, AI assistants, AI video ads or prices, or send a project brief to Ruben and the team.',
@@ -52,9 +62,10 @@ const UI = {
     loading: 'Loading Ash’s answers.',
     ready: 'Ash is ready.',
     failed:
-      'Ash’s answers could not be loaded right now. You can send a project brief or write to hello@studio26.me.',
+      'Ash’s answers could not be loaded right now. You can send a project brief or use our contact form.',
     unsupported:
-      'This browser cannot open Ash’s conversation window. You can write to hello@studio26.me.',
+      'This browser cannot open Ash’s conversation window. You can reach Ruben and the team via our contact form.',
+    emailReveal: 'Show our address',
     emailLink: 'Email the studio (opens your mail app)',
     briefOpen: 'Send a project brief',
     briefTitle: 'Send a project brief to Ruben',
@@ -78,7 +89,7 @@ const UI = {
     errEmail: 'Please enter a valid email address.',
     errNeed: 'Please choose what you need.',
     errMessage: 'Please tell us a little about your project.',
-    errSend: 'We could not send your brief right now. Please try again or email hello@studio26.me.',
+    errSend: 'We could not send your brief right now. Please try again or use our contact form.',
     sentTurnVisitor: 'Sent project brief',
     sentTurnAsh:
       'Thank you, {name}. Your project brief ({need}) has been sent to Ruben and the team. We will reply to {email} by email.',
@@ -90,10 +101,10 @@ const UI = {
   },
   fr: {
     fabTitle: 'Demander à Ash',
-    fabSub: 'Assistante IA du studio',
+    fabSub: 'Assistante du studio',
     dialogTitle: 'Demander à Ash',
     close: 'Fermer',
-    dialogNote: 'L’assistante IA de Studio26. Les réponses proviennent des pages publiées par le studio.',
+    dialogNote: 'L’assistante de Studio26. Les réponses proviennent des pages publiées par le studio.',
     transcriptLabel: 'Conversation',
     intro:
       'Bonjour, je suis Ash. Posez-moi vos questions sur nos sites web, assistants IA, vidéos IA et tarifs, ou envoyez un brief à Ruben et à son équipe.',
@@ -107,9 +118,10 @@ const UI = {
     loading: 'Chargement des réponses d’Ash.',
     ready: 'Ash est prête.',
     failed:
-      'Les réponses d’Ash n’ont pas pu être chargées pour le moment. Vous pouvez envoyer un brief ou écrire à hello@studio26.me.',
+      'Les réponses d’Ash n’ont pas pu être chargées pour le moment. Vous pouvez envoyer un brief ou utiliser notre formulaire de contact.',
     unsupported:
-      'Ce navigateur ne peut pas ouvrir la fenêtre de conversation d’Ash. Vous pouvez écrire à hello@studio26.me.',
+      'Ce navigateur ne peut pas ouvrir la fenêtre de conversation d’Ash. Vous pouvez contacter Ruben et l’équipe via notre formulaire de contact.',
+    emailReveal: 'Afficher notre adresse',
     emailLink: 'Écrire au studio (ouvre votre messagerie)',
     briefOpen: 'Envoyer un brief',
     briefTitle: 'Envoyer un brief à Ruben',
@@ -133,7 +145,7 @@ const UI = {
     errEmail: 'Veuillez saisir une adresse e-mail valide.',
     errNeed: 'Veuillez choisir ce dont vous avez besoin.',
     errMessage: 'Veuillez décrire brièvement votre projet.',
-    errSend: 'Votre brief n’a pas pu être envoyé pour le moment. Veuillez réessayer ou écrire à hello@studio26.me.',
+    errSend: 'Votre brief n’a pas pu être envoyé pour le moment. Veuillez réessayer ou utiliser notre formulaire de contact.',
     sentTurnVisitor: 'Brief de projet envoyé',
     sentTurnAsh:
       'Merci, {name}. Votre brief ({need}) a bien été transmis à Ruben et à son équipe. Nous vous répondrons par e-mail à {email}.',
@@ -147,10 +159,14 @@ const UI = {
 
 // Whole-token signals only. These choose which safe fallback is shown when no
 // curated alias matched; they can never produce a substantive answer.
+const INJECTION_SIGNAL =
+  /\b(?:ignore (?:all |any |previous |prior |above |your )*(?:instructions?|prompts?|rules?|system|directions?)|disregard (?:all |any |previous |prior |your )*(?:instructions?|prompts?|rules?)|system prompt|developer mode|jailbreak|dan mode|pretend (?:you are|to be)|act as (?:a |an )?(?!studio)|you are now|forget (?:everything|all|your|previous)|override (?:instructions?|rules?|system)|reveal (?:your |the )?(?:prompt|instructions?)|print (?:your |the )?(?:prompt|instructions?)|repeat after me|new instructions?|ignorer? (?:les |toutes les |vos |tes )*(?:instructions?|regles?|consignes?)|oublie(?:r|z)? (?:les |toutes les |vos |tes )*(?:instructions?|regles?|consignes?)|prompt systeme|mode developpeur|tu es maintenant|vous etes maintenant|agis comme|fais semblant)\b/u;
+const STRICT_COMMITMENT_SIGNAL =
+  /\b(?:deadlines?|guarantee[ds]?|promise[ds]?|commit(?:ment)?|availability|available|free to start|booking|book|reserve|discounts?|cheaper|bargain|negotiate|refunds?|contracts?|nda|sla|today|tomorrow|tonight|asap|urgently?|monday|tuesday|wednesday|thursday|friday|saturday|sunday|weekend|january|february|march|april|june|july|august|september|october|november|december|(?:next|this) (?:week|month)|when can you|can you start|echeances?|garantir|garanties?|garantissez|promettre|promesses?|engagement|engager|disponibles?|disponibilites?|reserver|reservations?|remises?|reductions?|rabais|negocier|remboursements?|contrats?|aujourd hui|demain|urgence|urgent|lundi|mardi|mercredi|jeudi|vendredi|samedi|dimanche|janvier|fevrier|mars|avril|mai|juin|juillet|aout|septembre|octobre|novembre|decembre|semaine prochaine|mois prochain|cette semaine|ce mois|quand pouvez vous|pouvez vous commencer)\b/u;
 const COMMITMENT_SIGNAL =
   /\b(?:deadlines?|deliver(?:ed|y)?|guarantee[ds]?|promise|commit(?:ment)?|availability|available|booking|book|reserve|discount|refund|contract|timeline|turnaround|echeance|delais?|livrer|livrez|livrerez|livraison|garantir|garantie|garantissez|promettre|promesse|engagement|engager|disponibles?|disponibilite|reserver|reservation|remise|reduction|remboursement|contrat)\b/u;
 const TIMING_SIGNAL =
-  /\b(?:today|tomorrow|tonight|asap|urgently?|monday|tuesday|wednesday|thursday|friday|saturday|sunday|weekend|january|february|march|april|june|july|august|september|october|november|december|when|how long|(?:next|this) (?:week|month)|aujourd hui|demain|urgence|lundi|mardi|mercredi|jeudi|vendredi|samedi|dimanche|janvier|fevrier|mars|avril|mai|juin|juillet|aout|septembre|octobre|novembre|decembre|quand|combien de temps|semaine prochaine|mois prochain|cette semaine|ce mois)\b/u;
+  /\b(?:today|tomorrow|tonight|asap|urgently?|monday|tuesday|wednesday|thursday|friday|saturday|sunday|weekend|january|february|march|april|june|july|august|september|october|november|december|when|how long|how fast|how quickly|(?:next|this) (?:week|month)|aujourd hui|demain|urgence|lundi|mardi|mercredi|jeudi|vendredi|samedi|dimanche|janvier|fevrier|mars|avril|mai|juin|juillet|aout|septembre|octobre|novembre|decembre|quand|combien de temps|en combien de temps|semaine prochaine|mois prochain|cette semaine|ce mois)\b/u;
 const PROJECT_SIGNAL =
   /\b(?:studio26|project|projet|brief|websites?|site web|sites web|chatbots?|ai assistants?|assistants? ia|video|videos|film|films|launch|lancement|mise en ligne)\b/u;
 const SEGMENT_SPLIT = /[?!.;:,…\n]+|(?:^|\s)(?:and|et)(?:\s|$)/u;
@@ -203,6 +219,19 @@ export function buildAliasIndex(answers) {
   return index;
 }
 
+function hasInjectionSignal(normalized) {
+  return INJECTION_SIGNAL.test(normalized);
+}
+
+function hasStrictCommitmentSignal(q) {
+  // Exempt the informational phrase, never the rest of a mixed question.
+  const remaining = q
+    .replace(/\bsans engagement\b/gu, ' ')
+    .replace(/\bavailable in (?:english|french|both languages)\b/gu, ' ')
+    .replace(/\bdisponibles? en (?:francais|anglais)\b/gu, ' ');
+  return STRICT_COMMITMENT_SIGNAL.test(remaining);
+}
+
 function hasCommitmentSignal(normalized) {
   return COMMITMENT_SIGNAL.test(normalized) ||
     (TIMING_SIGNAL.test(normalized) && PROJECT_SIGNAL.test(normalized));
@@ -234,7 +263,7 @@ function isMultipleIntent(raw, index) {
 const NEGATION_OR_OOS =
   /\b(?:no|not|dont|do not|never|without|instead|lend|loan|fund|money|bank|insurance|assurance|crypto|bitcoin|job|jobs|hiring|internship|stage|emploi|recrutement|ne|pas|jamais|aucun|sans)\b/u;
 const FR_SIGNAL =
-  /\b(?:le|la|les|un|une|des|du|vous|votre|vos|quel|quelle|quels|quelles|combien|ou|qui|que|quoi|est|sont|faites|creez|proposez|pouvez|puis|site|sites|tarif|tarifs|prix|video|videos|entreprise|entreprises|maurice|roupies|francais|confidentialite|accessibilite|delai|forfait|forfaits|droits|equipe)\b/u;
+  /\b(?:le|la|les|un|une|des|du|vous|votre|vos|quel|quelle|quels|quelles|combien|ou|qui|que|quoi|est|sont|faites|creez|proposez|pouvez|puis|site|sites|tarif|tarifs|prix|video|videos|entreprise|entreprises|maurice|roupies|francais|confidentialite|accessibilite|delai|delais|forfait|forfaits|droits|equipe)\b/u;
 const EN_SIGNAL =
   /\b(?:the|do|you|your|what|where|who|how|can|are|is|for|with|website|websites|chatbot|chatbots|video|videos|price|prices|pricing|cost|costs|business|businesses|company|companies|location|located|based|offer|create|build|make|develop)\b/u;
 
@@ -253,7 +282,8 @@ function detectLang(q) {
  * Never fires on negated, out-of-scope or commitment-bearing queries.
  */
 function matchIntent(q) {
-  if (NEGATION_OR_OOS.test(q)) return null;
+  const scoped = q.replace(/\b(?:sans engagement|without (?:a |any |generic )?(?:templates?|themes?)|sans (?:theme|themes|modele|modeles))\b/gu, ' ');
+  if (NEGATION_OR_OOS.test(scoped)) return null;
   const lang = detectLang(q);
   const hasPrice =
     /\b(?:price|prices|pricing|cost|costs|rate|rates|how much|charge|fee|fees|budget|tarif|tarifs|prix|cout|coute|coutent|combien|facturez)\b/u.test(q);
@@ -264,12 +294,19 @@ function matchIntent(q) {
   const hasWebsite =
     /\b(?:website|websites|web design|web development|webpage|site|sites|site web|sites web|site internet|sites internet)\b/u.test(q);
 
-  if (/\b(?:contact|email|reach|talk to|speak to|write to|get in touch|contacter|joindre|ecrire|parler a|coordonnees|courriel)\b/u.test(q)) {
+  if (
+    /\b(?:chatgpt|claude|openai|anthropic|gpt|llm|real ai|a bot|a robot|human or|who is ash|what is ash|how does ash work|what model|vraie? ia|un robot|qui est ash|qu est ce qu ash|comment fonctionne ash|quel modele)\b/u.test(q) ||
+    (/\b(?:ash|are you|es tu|etes vous)\b/u.test(q) && /\b(?:ai|ia|bot|robot|human|humain|model|modele)\b/u.test(q) && !hasChatbot && !hasWebsite && !hasVideo && !hasPrice)
+  ) {
+    return { id: 'ash-about', lang };
+  }
+  if (/\b(?:contact|email|reach|talk to|speak to|write to|get in touch|send a brief|send a project brief|project brief|contacter|joindre|ecrire|parler a|coordonnees|courriel|envoyer un brief|brief de projet)\b/u.test(q)) {
     return { id: 'contact', lang };
   }
   if (
-    /\b(?:where|location|located|based|country|office|offices|address|headquarters|situated|ou|localisation|situe|situes|base|bases|adresse|bureau|bureaux|pays)\b/u.test(q) &&
-    /\b(?:studio26|studio|you|your|team|company|office|offices|location|localisation|vous|votre|equipe|bureau|bureaux)\b/u.test(q)
+    (/\b(?:where|location|located|based|country|office|offices|address|headquarters|situated|localisation|situe|situes|base|bases|adresse|bureau|bureaux|pays|ou etes|ou est|ou se trouve)\b/u.test(q) &&
+      /\b(?:studio26|studio|you|your|team|company|office|offices|location|localisation|vous|votre|equipe|bureau|bureaux)\b/u.test(q)) ||
+    /\b(?:outside mauritius|abroad|overseas|remotely|worldwide|internationally|hors de maurice|a l etranger|a distance|monde entier|international|internationaux)\b/u.test(q)
   ) {
     return { id: 'location', lang };
   }
@@ -325,7 +362,7 @@ function matchIntent(q) {
     if (/\b(?:cancel|cancellation|pause|switch|rolling|lock in|minimum|resilier|resiliation|annuler|suspendre|sans engagement)\b/u.test(q)) {
       return { id: 'video-flexibility', lang };
     }
-    if (/\b(?:turnaround|how fast|how quickly|working days|5 to 7|five to seven|combien de jours|en combien de temps|rapidement)\b/u.test(q)) {
+    if (/\b(?:turnaround|timeline|how long|how fast|how quickly|how many days|working days|delivery time|deliver|delivered|delivery|5 to 7|five to seven|delai|delais|combien de temps|combien de jours|en combien de temps|temps de production|livraison|livrer|livrez|rapidement)\b/u.test(q)) {
       return { id: 'video-turnaround', lang };
     }
     if (/\b(?:starter|growth|always on|compare|difference|tier|tiers|750|1350|1 350|2400|2 400|comparer|formule|formules)\b/u.test(q)) {
@@ -334,13 +371,20 @@ function matchIntent(q) {
     if (/\b(?:oneoff|one off|single|just one|1 video|450|ponctuel|ponctuelle|une seule|unique)\b/u.test(q)) {
       return { id: 'video-one-off', lang };
     }
-    if (/\b(?:documentary|documentaries|longer|long film|brand film|explainer|egypt|ancient egypt|chronicles|documentaire|film long|film de marque|explicative|egypte)\b/u.test(q)) {
+    if (/\b(?:documentary|documentaries|longer|long film|brand film|brand films|explainer|egypt|ancient egypt|chronicles|documentaires?|films? longs?|plus longs?|films? de marque|explicative|egypte)\b/u.test(q)) {
       return { id: 'video-films', lang };
     }
     if (/\b(?:fake|robotic|generic|3d|hand|craft|quality|artificiel|robotique|qualite|montage)\b/u.test(q)) {
       return { id: 'video-craft', lang };
     }
     return { id: hasPrice ? 'video-rates' : 'ai-video', lang };
+  }
+
+  if (
+    !hasVideo &&
+    /\b(?:95|monthly fee|monthly cost|monthly care|monthly maintenance|what does the monthly|1000|1 000|api key|api keys|token|tokens|frais mensuels|cout mensuel|forfait mensuel|abonnement mensuel|cle api|cles api)\b/u.test(q)
+  ) {
+    return { id: 'website-ai-monthly', lang };
   }
 
   if (hasChatbot) {
@@ -353,15 +397,63 @@ function matchIntent(q) {
     return { id: 'website-ai', lang };
   }
 
+  if (
+    /\b(?:payment terms?|payment schedule|deposit|deposits|upfront|50 upfront|installments?|instalments?|milestones?|when do (?:we|i) pay|how do payments? work|conditions? de paiement|modalites? de paiement|conditions? de reglement|acomptes?|payer d avance|paiement en plusieurs fois|quand faut il payer|comment fonctionne le paiement)\b/u.test(q)
+  ) {
+    return { id: 'payment-terms', lang };
+  }
+
+  if (
+    !hasVideo &&
+    /\b(?:shopify|e commerce|ecommerce|woocommerce|online stores?|online shops?|webshops?|shopping carts?|boutiques? en ligne|sites? marchands?|sites? e commerce|boutiques? shopify)\b/u.test(q)
+  ) {
+    return { id: 'ecommerce', lang };
+  }
+
+  if (
+    !hasVideo &&
+    !hasChatbot &&
+    /\b(?:seo|geo|search engine|google ads|google ranking|rank on google|referencement|moteurs? de recherche)\b/u.test(q)
+  ) {
+    return { id: 'seo-geo', lang };
+  }
+
+  if (
+    !hasVideo &&
+    !hasChatbot &&
+    /\b(?:logos?|logo design|brand identity|visual identity|rebranding|brand guidelines?|style guides?|identite visuelle|chartes? graphiques?|creation de logo|design de logo)\b/u.test(q)
+  ) {
+    return { id: 'branding-logo', lang };
+  }
+
+  if (
+    !hasVideo &&
+    !hasChatbot &&
+    /\b(?:mobile apps?|ios|android|native apps?|web apps?|web applications?|applications? mobiles?|applications? web|appli mobile)\b/u.test(q)
+  ) {
+    return { id: 'mobile-apps', lang };
+  }
+
+  if (
+    !hasVideo &&
+    !hasChatbot &&
+    /\b(?:wordpress|wix|squarespace|webflow|template|templates|theme|themes|scratch|hand built|hand coded|cloudflare|hosting|hosted|web host|what tech|which tech|tech stack|technologies|heberge|hebergement|heberger|quelle technologie|quelles technologies)\b/u.test(q)
+  ) {
+    return { id: 'website-custom', lang };
+  }
+
   if (hasWebsite) {
-    if (/\b(?:wordpress|wix|squarespace|shopify|webflow|template|templates|theme|themes|scratch|hand built|hand coded|cloudflare|hosting|hosted|heberge|hebergement|zero)\b/u.test(q)) {
-      return { id: 'website-custom', lang };
+    if (/\b(?:turnaround|timeline|how long|how fast|how quickly|how many days|how many weeks|working days|delivery time|deliver|delivered|delivery|delai|delais|combien de temps|combien de jours|combien de semaines|en combien de temps|temps de production|livraison|livrer|livrez)\b/u.test(q)) {
+      return { id: 'website-turnaround', lang };
     }
     return { id: 'website', lang };
   }
 
   if (/\b(?:process|how do you work|how does it work|steps|get started|start a project|discovery call|processus|methode|comment travaillez|comment ca marche|etapes|commencer|demarrer|appel de decouverte)\b/u.test(q)) {
     return { id: 'process', lang };
+  }
+  if (hasPrice && /\b(?:services?|prestations?|offer|proposez|studio26|your|vos)\b/u.test(q)) {
+    return { id: 'pricing', lang };
   }
   if (/\b(?:service|services|what do you offer|what do you do|what can you build|specialize|specialise|prestation|prestations|que proposez vous|que faites vous)\b/u.test(q)) {
     return { id: 'services', lang };
@@ -377,6 +469,9 @@ export function matchQuestion(raw, index) {
   if (!normalized || String(raw).length > MAX_QUESTION_LENGTH) {
     return { id: FALLBACK_UNKNOWN, lang: null };
   }
+  if (hasInjectionSignal(normalized)) {
+    return { id: FALLBACK_INJECTION, lang: detectLang(normalized) };
+  }
   // Greetings and courtesies may wrap a known whole question in either language.
   // Never discard a substantive clause to manufacture a match.
   const core = normalized
@@ -388,10 +483,11 @@ export function matchQuestion(raw, index) {
     const id = entry.ids.size === 1 ? [...entry.ids][0] : FALLBACK_AMBIGUOUS;
     return { id, lang: entry.lang };
   }
-  if (hasCommitmentSignal(normalized)) return { id: FALLBACK_COMMITMENT, lang: null };
   if (isMultipleIntent(raw, index)) return { id: FALLBACK_AMBIGUOUS, lang: null };
+  if (hasStrictCommitmentSignal(normalized)) return { id: FALLBACK_COMMITMENT, lang: null };
   const intent = matchIntent(core);
   if (intent) return intent;
+  if (hasCommitmentSignal(normalized)) return { id: FALLBACK_COMMITMENT, lang: null };
   return { id: FALLBACK_UNKNOWN, lang: null };
 }
 
@@ -435,7 +531,7 @@ export function validateCatalogue(data) {
     }
     answers.set(answer.id, answer);
   }
-  for (const id of [FALLBACK_UNKNOWN, FALLBACK_AMBIGUOUS, FALLBACK_COMMITMENT]) {
+  for (const id of [FALLBACK_UNKNOWN, FALLBACK_AMBIGUOUS, FALLBACK_COMMITMENT, FALLBACK_INJECTION]) {
     if (!answers.has(id)) throw new Error('Catalogue fallback is missing');
   }
   return {
@@ -497,10 +593,17 @@ function init() {
     return node;
   }
 
-  function emailLink() {
-    const link = element('a', 'ash-action', ui().emailLink);
-    link.href = MAILTO;
-    return link;
+  function emailRevealButton() {
+    const btn = element('button', 'ash-action ash-reveal', ui().emailReveal);
+    btn.type = 'button';
+    btn.addEventListener('click', (e) => {
+      const email = address();
+      const a = element('a', 'ash-action', email);
+      a.href = 'mailto:' + email;
+      e.currentTarget.replaceWith(a);
+      a.focus();
+    });
+    return btn;
   }
 
   function briefTriggerButton() {
@@ -560,7 +663,7 @@ function init() {
     const answer = state.catalogue.answers.get(id);
     const links = [];
     if (answer.handoff || id === 'contact') {
-      links.push(briefTriggerButton(), emailLink());
+      links.push(briefTriggerButton(), emailRevealButton());
     }
     if (!id.startsWith('fallback-')) links.push(sourceLink(answer.source));
     return ashTurn(answer[state.lang].text, links);

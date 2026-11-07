@@ -15,8 +15,8 @@ Core commercial offerings:
 
 - **Runtime:** Cloudflare Worker with static assets (`wrangler.toml`, Worker name `studio26-site`) + D1 database (`studio26-db`).
 - **Live Preview URL:** https://studio26-site.ruben-ramdhony.workers.dev/ (Version `c88b15f7-8922-4796-aa6b-77dd9df6e97a`).
-- **Production URL:** https://studio26.me (still serves the legacy teaser from `main` until final launch cutover—do **not** push or merge to `main` without Ruben's explicit approval).
-- **Primary Deploy Worktree:** `C:\Users\ruben\Downloads\studio26\site-ai-video` (contains the gitignored `public/video/` MP4/WebP media required for `/ai-video`). Keep `C:\Users\ruben\Downloads\studio26\site` and `C:\Users\ruben\Documents\GitHub\studio26` synced.
+- **Production URL:** https://studio26.me and https://www.studio26.me (live on Cloudflare Worker `studio26-site` and D1 database `studio26-db`). Every push to `main` deploys to production via GitHub Actions.
+- **Synchronized Checkouts:** `C:\Users\ruben\Documents\GitHub\studio26` (canonical GitHub repo) and `C:\Users\ruben\Downloads\studio26\site`. Always create a restorable backup before editing files.
 
 ## 3. Codebase Architecture
 
@@ -26,7 +26,8 @@ Core commercial offerings:
 - `public/privacy.html` — Privacy Notice (Mauritius Data Protection Act 2017), WCAG 2.1 Level AA Accessibility Statement (`#accessibility`), and Website & Creative Terms (`#terms`).
 - `public/llms.txt`, `public/robots.txt`, `public/sitemap.xml` — AI search (GEO) and crawler discovery files.
 - `public/assets/studio-home.css` & `public/assets/ai-video.css` — Canonical design system styles (Instrument Sans 400–700 + Syne 500–600 self-hosted WOFF2, warm paper `#e8e6e2`, ink `#171a1c` / `#253047`, studio blue `#475c89`, brushed-chrome and deep-cobalt gradient CTAs).
-- `src/index.js` — Cloudflare Worker handling static assets and `/api/enquiry` (and upcoming `/api/ash/*` endpoints for the **Ash** AI assistant).
+- `src/index.js` — Cloudflare Worker handling static assets and `/api/enquiry` (capturing contact form enquiries and Ash project briefs into D1 and emailing the studio).
+- `public/assets/ash-widget.js`, `ash-widget.css`, `catalogue.v1.json` — Ash studio assistant (bilingual deterministic in-page Q&A, click-to-reveal address protection, and interactive project brief submission).
 - `.github/qa/qa.spec.js` & `.github/qa/playwright.config.js` — Playwright + `axe-core` + `html-validate` QA harness (`BASE_URL` env override supported).
 
 ## 4. QA & Technical Guardrails

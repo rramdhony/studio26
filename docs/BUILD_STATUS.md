@@ -1,4 +1,12 @@
 # Studio26 build status
+
+## 7 November 2026: release review fixes
+
+Ruben authorized a PR, merge and production publication of the reviewed Ash A/B + SEO bundle. Branch `codex/ash-seo-release-fixes` fixes excluded-service pricing matches, mixed commitment requests and broken answer sources. The service guide now publishes approved delivery, payment and technical SEO scope. Preview-only noindex protection is restricted to the isolated Ash hostname. Matcher/source checks: 225 passed; four-page HTML validation passed. Final browser/deployment evidence is in `docs/SEO_AI_DISCOVERY_VALIDATION.md`. Academy and a model fallback remain separate future work.
+
+## 7 November 2026: local SEO and AI discovery improvement
+
+Added `/websites-ai-chatbots`, linked from home and sitemap, with truthful service scope and Ash distinction. Updated business/person/site schema, starting/monthly price semantics and crawl/AI-summary files. Full plan and remaining owner tasks: `docs/SEO_AI_DISCOVERY_PLAN.md`. Validation: 79/81 initial main checks, then all 18 focused regressions passed after updating two outdated link selectors; all 3 new discovery checks and changed-page HTML validation passed. Production, manual full-site QA and alternate-checkout reconciliation remain open. See `docs/SEO_AI_DISCOVERY_VALIDATION.md` for exact scope.
 Current approved direction: Ruben selected softened study B. Instrument Sans500 is the main headline font and remains body/navigation/form type; Syne remains the other display type. Peach opening, soft periwinkle/lavender/peach services, muted-blue accents, warm process gradient and softened navy enquiry. Earlier section notes below describe the implementation history. Ruben explicitly chose to retain the current opening timing after seeing the 2.9s LCP result; the 2.5s target remains open. This is not a full-site QA/launch sign-off.
 
 ## Section 01 cinematic opening

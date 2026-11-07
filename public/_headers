@@ -20,6 +20,10 @@
 /*.svg
   Cache-Control: public, max-age=86400
 
+# Isolated review host only. Production pages remain indexable.
+https://studio26-site-ash-preview.ruben-ramdhony.workers.dev/*
+  X-Robots-Tag: noindex, nofollow
+
 # Security (Studio26 hardening, June 2026)
 /*
   Strict-Transport-Security: max-age=31536000; includeSubDomains; preload

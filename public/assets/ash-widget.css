@@ -1,4 +1,4 @@
-/* Studio26 — Ash Floating Assistant Widget & Design System */
+/* Studio26: Ash Floating Assistant Widget & Design System */
 
 .ash-fab,
 .ash-dialog {
@@ -303,7 +303,7 @@
 
 .ash-note {
   grid-column: 1 / -1;
-  font-size: 0.8125rem;
+  font-size: 0.875rem;
   line-height: 1.25;
   color: var(--ash-text-secondary);
 }
@@ -630,7 +630,7 @@
 }
 
 .ash-topics-label {
-  font-size: 0.75rem;
+  font-size: 0.875rem;
   font-weight: 600;
   letter-spacing: 0.04em;
   text-transform: uppercase;
@@ -683,7 +683,7 @@
   border-radius: 999px;
   background: rgba(255, 255, 255, 0.06);
   color: #f4f6fb;
-  font-size: 0.8125rem;
+  font-size: 0.875rem;
   font-weight: 500;
   letter-spacing: -0.01em;
   transition: transform 160ms ease, background 160ms ease, border-color 160ms ease;
@@ -709,7 +709,7 @@
 
 .ash-label {
   grid-column: 1 / -1;
-  font-size: 0.8125rem;
+  font-size: 0.875rem;
   font-weight: 600;
   color: var(--ash-text-secondary);
 }
