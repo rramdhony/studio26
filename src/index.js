@@ -436,6 +436,10 @@ async function handleAshQuestion(request, env, url) {
 
 export default {
   async scheduled(_event, env) {
+    // Enforce the published 12-month retention of the Ash question log.
+    try {
+      await env.DB.prepare("DELETE FROM ash_questions WHERE created_at < datetime('now', '-12 months')").run();
+    } catch {}
     if (!env.NOTIFY || !env.NOTIFY_TO || !env.NOTIFY_FROM) return;
     const { results } = await env.DB.prepare(
       "SELECT id FROM enquiries WHERE notify_attempts < 5 AND notification_status IN ('pending', 'failed', 'sending') AND (notify_after IS NULL OR notify_after <= datetime('now')) ORDER BY id LIMIT 20"

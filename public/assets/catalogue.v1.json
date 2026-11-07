@@ -1649,7 +1649,7 @@
       "id": "privacy-data",
       "source": "https://studio26.me/privacy#collection",
       "en": {
-        "text": "Studio26 does not use advertising pixels, cross-site trackers or third-party analytics cookies. When you ask Ash a question, we record an anonymous question log (your question with any email or phone number redacted, matched topic, language, 2-letter country code and a salted SHA-256 IP hash, never your raw IP address) to improve our service guide. Studio26 complies with the Mauritius Data Protection Act 2017.",
+        "text": "Studio26 does not use advertising pixels, cross-site trackers or third-party analytics cookies. When you ask Ash a question, we record a pseudonymised question log (your question with any email or phone number redacted, matched topic, language, 2-letter country code and a salted SHA-256 IP hash, never your raw IP address) to improve our service guide. Studio26 complies with the Mauritius Data Protection Act 2017.",
         "aliases": [
           "Privacy",
           "Privacy policy",
@@ -1662,7 +1662,7 @@
         ]
       },
       "fr": {
-        "text": "Studio26 n’utilise aucun pixel publicitaire, traceur inter-sites ni cookie d’analyse tiers. Lorsque vous posez une question à Ash, nous enregistrons un journal anonyme (votre question après masquage d’éventuels e-mails ou numéros, le sujet associé, la langue, le code pays à 2 lettres et un hachage SHA-256 salé de l’IP, sans jamais stocker votre adresse IP brute) afin d’améliorer notre guide de services. Studio26 respecte le Data Protection Act 2017 de l’île Maurice.",
+        "text": "Studio26 n’utilise aucun pixel publicitaire, traceur inter-sites ni cookie d’analyse tiers. Lorsque vous posez une question à Ash, nous enregistrons un journal pseudonymisé (votre question après masquage d’éventuels e-mails ou numéros, le sujet associé, la langue, le code pays à 2 lettres et un hachage SHA-256 salé de l’IP, sans jamais stocker votre adresse IP brute) afin d’améliorer notre guide de services. Studio26 respecte le Data Protection Act 2017 de l’île Maurice.",
         "aliases": [
           "Confidentialité",
           "Politique de confidentialité",

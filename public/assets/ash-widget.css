@@ -893,3 +893,6 @@
     transform: none;
   }
 }
+
+.ash-note { margin: 6px 0 0; font-size: 14px; line-height: 1.4; opacity: .85; }
+.ash-note a { color: inherit; text-decoration: underline; }
