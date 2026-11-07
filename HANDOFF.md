@@ -1,12 +1,20 @@
 # Studio26 — Handoff & Unified Status (All LLM Agents)
 
+## 7 November 2026: SWOT conversion upgrades, footer WhatsApp & first-party click/visitor telemetry
+
+- **Reframed `#founder` Senior Positioning (Item A):** Updated `public/index.html` (`#founder`), `public/websites-ai-chatbots.html` (`#work`), `public/llms.txt`, and `public/assets/catalogue.v1.json` (`team`, `chatbot-builder`) so Studio26 leads with founder Ruben Ramdhony's architectural and creative direction (`Founder & Creative Director`) and personal sign-off on every build rather than "emerging developers".
+- **Global E-Commerce & Payment Options (Item B):** Updated `public/index.html`, `public/websites-ai-chatbots.html`, `public/llms.txt`, and `public/assets/catalogue.v1.json` (`ecommerce`) to highlight custom online stores, checkout flows, and online payment integration tailored to the client's market.
+- **4-Point Studio Commitments / Risk-Reversal (Item C):** Added the 4-point Studio Commitments strip (`.service-commitments`) to `public/index.html` (`#services`) and `public/websites-ai-chatbots.html` (`#payments`): Fixed written quote after free 30-min discovery call; 50% upfront / 50% on delivery; 100% client ownership of code, domain, and video masters; and one-business-day reply in EN/FR.
+- **Footer WhatsApp CTA (Item D):** Added `Chat on WhatsApp` (`https://wa.me/23054549763`) to the footer across `public/index.html`, `public/websites-ai-chatbots.html`, `public/ai-video.html`, and `public/privacy.html` (leaving Ash without WhatsApp as requested).
+- **First-Party Edge Click & Visitor Telemetry (`migrations/0005_site_events.sql`, `GET /api/event`):** Logs `page_view`, `whatsapp_click`, `ash_open`, `contact_open`, `portfolio_click`, `linkedin_click`, and `cta_click` to D1 `site_events` with 2-letter Cloudflare country code and salted `SHA-256` `ip_hash` (12-month auto-retention in `scheduled()`), plus a built-in `window.gtag` bridge if Google Analytics 4 is loaded. Inspect anytime via `npm run site:stats` and `npm run site:clicks`.
+
 ## 7 November 2026: Ash market-demand question telemetry (Option A), technical SEO Phase 1 & workers.dev removal
 
 - **Pseudonymised Ash Question Logger (`POST /api/ash-question` -> D1 `ash_questions`, Migration `0004_ash_questions.sql`):**
   - Ruben approved Option A market-demand logging so Studio26 can see what prospective clients ask Ash across `/`, `/websites-ai-chatbots`, and `/ai-video` even when they do not submit a project brief.
   - `public/assets/ash-widget.js` sends a non-blocking `POST /api/ash-question` beacon on typed questions (`source = 'typed'`) and topic clicks (`source = 'topic'`), and pre-fills the visitor's last typed question into the in-dialog project brief textarea when they click **Send a project brief**.
   - `src/index.js` validates same-origin (`Origin === url.origin`), scrubs any accidental email addresses or phone numbers via `redactPii()`, extracts the 2-letter ISO country code from Cloudflare's edge (`request.cf.country` / `CF-IPCountry`), computes the salted `SHA-256` `ip_hash` (`rateLimitNetwork(ip) + env.IP_SALT`, never storing raw IP addresses), enforces hourly per-visitor (60/hr) and global (600/hr) D1 rate limits, and inserts into `ash_questions`.
-  - Disclosed transparently in `public/privacy.html` (Sections 2B and 2C, under Section 28(1)(f) of the Mauritius Data Protection Act 2017 with 12-month retention) and in `public/assets/catalogue.v1.json` (`privacy-data` and `fallback-ambiguous`).
+  - Disclosed transparently in `public/privacy.html` (Sections 2B and 2C, under Section 28(1)(b)(vii) of the Mauritius Data Protection Act 2017 with 12-month retention) and in `public/assets/catalogue.v1.json` (`privacy-data` and `fallback-ambiguous`).
   - Run `npm run ash:questions` to inspect the latest 50 visitor questions by country and visitor hash, or `npm run ash:enquiries` to inspect submitted project briefs.
 - **Technical SEO Phase 1 & `.workers.dev` Removal (`9934ff0`, reviewed & `APPROVE`d by Claude Sonnet 5.5 CLI):**
   - Deleted temporary Worker `studio26-site-ash-preview`, set `workers_dev = false` and `run_worker_first = true` in `wrangler.toml`, and removed obsolete `.workers.dev` rules from `public/_headers`.
