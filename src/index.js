@@ -1,6 +1,6 @@
 import { EmailMessage } from 'cloudflare:email';
 
-// Static assets are matched first except /video/* (for HTTP 206 Range seeking) and /api/*.
+// Worker runs first to enforce canonical www -> apex 301 redirects, /api/* endpoints, and /video/* HTTP 206 Range seeking before falling back to static assets.
 export default {
   async scheduled(_event, env) {
     if (!env.NOTIFY || !env.NOTIFY_TO || !env.NOTIFY_FROM) return;
@@ -11,6 +11,18 @@ export default {
   },
   async fetch(request, env, ctx) {
     const url = new URL(request.url);
+    if (url.hostname === 'www.studio26.me' && (request.method === 'GET' || request.method === 'HEAD')) {
+      const target = new URL('https://studio26.me');
+      target.pathname = '/' + url.pathname.replace(/^\/+/, '');
+      target.search = url.search;
+      return new Response(null, {
+        status: 301,
+        headers: {
+          Location: target.toString(),
+          'Cache-Control': 'public, max-age=3600',
+        },
+      });
+    }
     if (url.pathname.startsWith('/api/')) return handleApi(request, env, ctx, url);
     if (url.pathname.startsWith('/video/')) return handleVideoRange(request, env, url);
     return env.ASSETS.fetch(request);

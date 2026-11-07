@@ -7,14 +7,24 @@
   <meta name="description" content="Custom websites from $2,500 USD, or websites with an AI assistant from $4,000. Explore scope, monthly care and real work from Studio26 in Mauritius.">
   <link rel="icon" type="image/svg+xml" href="/favicon.svg">
   <link rel="canonical" href="https://studio26.me/websites-ai-chatbots">
+  <meta property="og:site_name" content="Studio26">
+  <meta property="og:locale" content="en_GB">
   <meta property="og:title" content="Custom Websites &amp; AI Chatbots in Mauritius | Studio26">
   <meta property="og:description" content="Custom websites from $2,500 USD, or websites with an AI assistant from $4,000. Explore scope, monthly care and real work from Studio26 in Mauritius.">
   <meta property="og:url" content="https://studio26.me/websites-ai-chatbots">
   <meta property="og:type" content="website">
-  <meta property="og:image" content="https://studio26.me/assets/og.jpg">
+  <meta property="og:image" content="https://studio26.me/assets/brand/studio26-complete-v1.webp">
+  <meta property="og:image:width" content="1536">
+  <meta property="og:image:height" content="1024">
+  <meta property="og:image:alt" content="The Studio26 wordmark sculpted in brushed chrome and cobalt blue">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Custom Websites &amp; AI Chatbots in Mauritius | Studio26">
+  <meta name="twitter:description" content="Custom websites from $2,500 USD, or websites with an AI assistant from $4,000. Explore scope, monthly care and real work from Studio26 in Mauritius.">
+  <meta name="twitter:image" content="https://studio26.me/assets/brand/studio26-complete-v1.webp">
   <link rel="preload" href="/assets/fonts/instrument-sans-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="/assets/site.css">
   <link rel="stylesheet" href="/assets/studio-home.css">
+  <link rel="stylesheet" href="/assets/ash-widget.css">
   <style>
     .legal-shell {
       max-width: 1200px;
@@ -197,41 +207,80 @@
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "Service",
-  "@id": "https://studio26.me/websites-ai-chatbots#service",
-  "url": "https://studio26.me/websites-ai-chatbots",
-  "name": "Custom websites and AI chatbots",
-  "provider": {
-    "@id": "https://studio26.me/#organization",
-    "@type": "Organization",
-    "name": "Studio26",
-    "url": "https://studio26.me/"
-  },
-  "areaServed": "Worldwide",
-  "offers": [
+  "@graph": [
     {
-      "@type": "Offer",
-      "name": "Custom Website Design & Build",
-      "description": "Hand-built custom website on Cloudflare's global edge network, built with attention to speed and accessibility.",
-      "priceCurrency": "USD",
-      "priceSpecification": {
-        "@type": "PriceSpecification",
-        "minPrice": "2500",
-        "priceCurrency": "USD"
+      "@type": "Service",
+      "@id": "https://studio26.me/websites-ai-chatbots#service",
+      "url": "https://studio26.me/websites-ai-chatbots",
+      "name": "Custom websites and AI chatbots",
+      "serviceType": "Custom Website Design, E-Commerce, Brand Identity, Web & Mobile Apps, and Dedicated AI Chatbots",
+      "provider": {
+        "@id": "https://studio26.me/#organization",
+        "@type": "Organization",
+        "name": "Studio26",
+        "url": "https://studio26.me/"
       },
-      "url": "https://studio26.me/websites-ai-chatbots"
+      "areaServed": "Worldwide",
+      "offers": [
+        {
+          "@type": "Offer",
+          "name": "Custom Website Design & Build",
+          "description": "Hand-built custom website on Cloudflare's global edge network, built with attention to speed and accessibility.",
+          "priceCurrency": "USD",
+          "priceSpecification": {
+            "@type": "PriceSpecification",
+            "minPrice": "2500",
+            "priceCurrency": "USD"
+          },
+          "url": "https://studio26.me/websites-ai-chatbots"
+        },
+        {
+          "@type": "Offer",
+          "name": "Custom Website with Dedicated AI Chatbot",
+          "description": "Bespoke website with a dedicated assistant grounded in approved business information to answer questions and capture enquiries. Booking integrations depend on scope. Care and usage costs $95/month for up to 1,000 visitor chats.",
+          "priceCurrency": "USD",
+          "priceSpecification": {
+            "@type": "PriceSpecification",
+            "minPrice": "4000",
+            "priceCurrency": "USD"
+          },
+          "url": "https://studio26.me/websites-ai-chatbots"
+        }
+      ]
     },
     {
-      "@type": "Offer",
-      "name": "Custom Website with Dedicated AI Chatbot",
-      "description": "Bespoke website with a dedicated assistant grounded in approved business information to answer questions and capture enquiries. Booking integrations depend on scope. Care and usage costs $95/month for up to 1,000 visitor chats.",
-      "priceCurrency": "USD",
-      "priceSpecification": {
-        "@type": "PriceSpecification",
-        "minPrice": "4000",
-        "priceCurrency": "USD"
+      "@type": "WebPage",
+      "@id": "https://studio26.me/websites-ai-chatbots#webpage",
+      "url": "https://studio26.me/websites-ai-chatbots",
+      "name": "Custom Websites & AI Chatbots in Mauritius | Studio26",
+      "isPartOf": {
+        "@id": "https://studio26.me/#website"
       },
-      "url": "https://studio26.me/websites-ai-chatbots"
+      "about": {
+        "@id": "https://studio26.me/websites-ai-chatbots#service"
+      },
+      "breadcrumb": {
+        "@id": "https://studio26.me/websites-ai-chatbots#breadcrumb"
+      },
+      "inLanguage": "en"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://studio26.me/websites-ai-chatbots#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://studio26.me/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Custom Websites & AI Chatbots",
+          "item": "https://studio26.me/websites-ai-chatbots"
+        }
+      ]
     }
   ]
 }
@@ -241,7 +290,7 @@
 
 <a class="skip-link" href="#main-content">Skip to main content</a>
 
-<header class="site-head site-head-full">
+<header class="site-head site-head-full" aria-label="Studio26">
   <a class="wordmark header-brand" href="/" aria-label="Studio26 home"><img src="/assets/brand/studio26-transparent-v1-360.webp" width="360" height="120" alt="" decoding="async"></a>
   <nav aria-label="Main navigation">
     <ul class="nav-list">
@@ -254,7 +303,7 @@
   <a class="btn btn-ink nav-cta" href="#contact">Start a project</a>
 </header>
 
-<main id="main-content" class="legal-shell"><header class="legal-header"><p class="legal-kicker">Websites &amp; AI assistants</p><h1 class="legal-title">Custom websites &amp; AI chatbots in Mauritius.</h1><p class="legal-meta">Studio26 brings custom website design, integrated AI assistants and AI video production together for businesses in Mauritius and worldwide.</p></header><div class="legal-grid"><nav class="legal-toc" aria-label="On this page"><ul><li><a href="#scope">What does Studio26 build?</a></li><li><a href="#pricing">How much does a website with an AI chatbot cost?</a></li><li><a href="#delivery">Website delivery guide</a></li><li><a href="#payments">Payment terms</a></li><li><a href="#search">SEO foundations</a></li><li><a href="#assistant">What can the assistant do?</a></li><li><a href="#work">See the work and meet the studio</a></li><li><a href="#brief">What should I include in a project brief?</a></li></ul></nav><div class="legal-content"><section class="legal-section" id="scope" aria-labelledby="scope-title"><h2 id="scope-title">What does Studio26 build?</h2><p>We design and build custom websites around your brand, with copy, responsive layouts and motion where it serves the experience. You can commission a website on its own or add a dedicated AI assistant for visitor questions and lead capture.</p><p>Need campaign creative as well? Our <a href="/ai-video">AI video ads and brand films</a> bring your colours, typography and message into social and web campaigns. Website, assistant and video work can be discussed in one project brief.</p><ul><li>Visual direction and website copy tailored to your business.</li><li>Layouts built for phones and larger screens, with attention to accessibility.</li><li>Hosting on Cloudflare's global network.</li><li>An optional assistant grounded in your approved business information.</li></ul></section><section class="legal-section" id="pricing" aria-labelledby="pricing-title"><h2 id="pricing-title">How much does a website with an AI chatbot cost?</h2><p>A custom Studio26 website starts at <strong>$2,500 USD</strong>. A website with a dedicated AI assistant starts at <strong>$4,000 USD</strong>, plus <strong>$95 per month</strong> for assistant care and usage.</p><p>The monthly plan includes hosting, content updates and up to 1,000 visitor chats. These are starting prices; the final scope is confirmed in your proposal. MUR invoicing is available on request.</p><p>Tell us about your pages, content, languages and any booking or business systems you want to connect so we can confirm what your project needs.</p></section>
+<main id="main-content" class="legal-shell"><header class="legal-header"><p class="legal-kicker">Websites &amp; AI assistants</p><h1 class="legal-title">Custom websites &amp; AI chatbots in Mauritius.</h1><p class="legal-meta">Studio26 brings custom website design, integrated AI assistants and AI video production together for businesses in Mauritius and worldwide.</p></header><div class="legal-grid"><nav class="legal-toc" aria-label="On this page"><ul><li><a href="#scope">What does Studio26 build?</a></li><li><a href="#pricing">How much does a website with an AI chatbot cost?</a></li><li><a href="#delivery">How long does a website take?</a></li><li><a href="#payments">What are the payment terms?</a></li><li><a href="#search">Is SEO included?</a></li><li><a href="#assistant">What can the assistant do?</a></li><li><a href="#work">See the work and meet the studio</a></li><li><a href="#brief">What should I include in a project brief?</a></li></ul></nav><div class="legal-content"><section class="legal-section" id="scope" aria-labelledby="scope-title"><h2 id="scope-title">What does Studio26 build?</h2><p>We design and build custom websites around your brand, with copy, responsive layouts and motion where it serves the experience. You can commission a website on its own or add a dedicated AI assistant for visitor questions and lead capture.</p><p>Need campaign creative as well? Our <a href="/ai-video">AI video ads and brand films</a> bring your colours, typography and message into social and web campaigns. Website, assistant and video work can be discussed in one project brief.</p><ul><li>Visual direction and website copy tailored to your business.</li><li>Layouts built for phones and larger screens, with attention to accessibility.</li><li>Hosting on Cloudflare's global network.</li><li>An optional assistant grounded in your approved business information.</li><li>Custom e-commerce and online stores (including Shopify or bespoke storefronts, product catalogues and payment gateways, scoped per project).</li><li>Full-service logo design, visual identity, typography and brand guidelines alongside your digital build (quoted on discovery).</li><li>Custom web applications and iOS/Android mobile app projects scoped and quoted around your workflow.</li></ul></section><section class="legal-section" id="pricing" aria-labelledby="pricing-title"><h2 id="pricing-title">How much does a website with an AI chatbot cost?</h2><p>A custom Studio26 website starts at <strong>$2,500 USD</strong>. A website with a dedicated AI assistant starts at <strong>$4,000 USD</strong>, plus <strong>$95 per month</strong> for assistant care and usage.</p><p>The monthly plan includes hosting, content updates and up to 1,000 visitor chats. These are starting prices; the final scope is confirmed in your proposal. MUR invoicing is available on request.</p><p>Tell us about your pages, content, languages and any booking or business systems you want to connect so we can confirm what your project needs.</p></section>
 <section class="legal-section" id="delivery" aria-labelledby="delivery-title">
 <h2 id="delivery-title">How long does a website take?</h2>
 <p>As a standard guide, a custom Studio26 website typically takes two to four weeks from brief to launch, depending on page count, content readiness and custom features. This is a guide, not a fixed booking. E-commerce, larger applications and dedicated AI assistant integrations are scheduled during discovery.</p>
@@ -268,7 +317,66 @@
 <p>Technical SEO foundations include semantic HTML, descriptive page metadata, canonical URLs, a sitemap and appropriate structured data. We can scope ongoing SEO, content strategy and search visibility campaigns separately.</p>
 <p>An optional llms.txt file provides a concise site summary. It is not a Google ranking signal. Search rankings, AI recommendations and traffic outcomes cannot be guaranteed.</p>
 </section>
-<section class="legal-section" id="assistant" aria-labelledby="assistant-title"><h2 id="assistant-title">What can the assistant do?</h2><p>A dedicated assistant can answer questions about your business and help capture enquiries. Booking and other integrations depend on the agreed project scope. Its answers need approved source material and ongoing updates when your services or prices change.</p><h3>Can you add an assistant to an existing website?</h3><p>Yes. Studio26 can also build an assistant for an existing website. The integration and price are confirmed after discovery.</p><h3>Is Ash a demonstration of a live generative AI model?</h3><p>Ash, the assistant on our homepage, currently uses approved answers and guided project briefs in English and French. It is a curated site assistant, not a live generative model. A client assistant is scoped separately around the client's needs.</p><p>See our <a href="/privacy">privacy notice</a> for how this website handles enquiries.</p></section><section class="legal-section" id="work" aria-labelledby="work-title"><h2 id="work-title">See the work and meet the studio</h2><p>Explore our <a href="/#work">selected websites</a>, including Arizen Africa, Mauritius Global Diaspora and mauRadio. The portfolio links to the live websites so you can explore the experiences yourself.</p><p>Studio26 is based in Mauritius and works worldwide. Founder <a href="/#founder">Ruben Ramdhony</a> mentors the team and reviews the work. Our concept worlds are clearly labelled fictional creative explorations; they are not client results.</p></section><section class="legal-section" id="brief" aria-labelledby="brief-title"><h2 id="brief-title">What should I include in a project brief?</h2><p>Share your business, audience, existing website if you have one, desired launch date and budget range. For an assistant, include the questions customers ask most often and the information it should use. For video, tell us where the ads will run.</p><p>We will discuss the scope and next steps with you. You can also <a href="/#contact">ask Ash in English or French</a> on the homepage.</p><button type="button" class="btn btn-ink" data-contact>Discuss your project</button></section></div></div></main><footer class="closing closing-a" id="contact" aria-labelledby="closing-title"><div class="closing-invitation"><h2 id="closing-title">What shall we<br>make together?</h2><div class="invitation-side"><p>A website with character.<br>A film with a point of view.<br>Let’s start with your idea.</p><p class="assistant-preview-note">Send us a message about your project.</p></div></div><div class="closing-info"><div><p>Mauritius.<br>Working everywhere.</p></div><div><p>Write to the studio</p><button type="button" class="contact-link" data-contact>Send us a message</button><p class="cf-fallback">hello [at] studio26 [dot] me</p></div><nav aria-label="Footer navigation"><a href="/websites-ai-chatbots">Websites &amp; AI chatbots</a><a href="/ai-video">AI video ads &amp; films</a><a href="/#founder">Inside the studio</a><a href="/privacy">Privacy &amp; legal</a></nav></div><div class="closing-logo"><img src="/assets/brand/studio26-transparent-v1-1440.webp" srcset="/assets/brand/studio26-transparent-v1-360.webp 360w, /assets/brand/studio26-transparent-v1-800.webp 800w, /assets/brand/studio26-transparent-v1-1440.webp 1440w" sizes="92vw" width="2172" height="724" alt="Studio26 — chrome and blue sculpted logo" loading="lazy" decoding="async"></div><div class="closing-bottom"><span>© 2026 Studio26</span><a href="#main-content">Back to the top <span aria-hidden="true">↑</span></a></div></footer>
+<section class="legal-section" id="assistant" aria-labelledby="assistant-title"><h2 id="assistant-title">What can the assistant do?</h2><p>A dedicated assistant can answer questions about your business and help capture enquiries. Booking and other integrations depend on the agreed project scope. Its answers need approved source material and ongoing updates when your services or prices change.</p><h3>Can you add an assistant to an existing website?</h3><p>Yes. Studio26 can also build an assistant for an existing website. The integration and price are confirmed after discovery.</p><h3>Is Ash a demonstration of a live generative AI model?</h3><p>Ash, the studio assistant on our site, currently uses approved answers and guided project briefs in English and French. It is a curated site assistant, not a live generative model. A client assistant is scoped separately around the client's needs.</p><p>See our <a href="/privacy">privacy notice</a> for how this website handles enquiries.</p></section><section class="legal-section" id="work" aria-labelledby="work-title"><h2 id="work-title">See the work and meet the studio</h2><p>Explore our <a href="/#work">selected websites</a>, including Arizen Africa, Mauritius Global Diaspora and mauRadio. The portfolio links to the live websites so you can explore the experiences yourself.</p><p>Studio26 is based in Mauritius and works worldwide. Founder <a href="/#founder">Ruben Ramdhony</a> mentors the team and reviews the work. Our concept worlds are clearly labelled fictional creative explorations; they are not client results.</p></section><section class="legal-section" id="brief" aria-labelledby="brief-title"><h2 id="brief-title">What should I include in a project brief?</h2><p>Share your business, audience, existing website if you have one, desired launch date and budget range. For an assistant, include the questions customers ask most often and the information it should use. For video, tell us where the ads will run.</p><p>We will discuss the scope and next steps with you. You can also ask Ash in English or French using the launcher on this page, or <a href="/#contact">get in touch on the homepage</a>.</p><button type="button" class="btn btn-ink" data-contact>Discuss your project</button></section></div></div></main><footer class="closing closing-a" id="contact" aria-labelledby="closing-title"><div class="closing-invitation"><h2 id="closing-title">What shall we<br>make together?</h2><div class="invitation-side"><p>A website with character.<br>A film with a point of view.<br>Let’s start with your idea.</p><p class="assistant-preview-note">Send us a message about your project.</p></div></div><div class="closing-info"><div><p>Mauritius.<br>Working everywhere.</p></div><div><p>Write to the studio</p><button type="button" class="contact-link" data-contact>Send us a message</button><p class="cf-fallback">hello [at] studio26 [dot] me</p></div><nav aria-label="Footer navigation"><a href="/websites-ai-chatbots">Websites &amp; AI chatbots</a><a href="/ai-video">AI video ads &amp; films</a><a href="/#founder">Inside the studio</a><a href="/privacy">Privacy &amp; legal</a></nav></div><div class="closing-logo"><img src="/assets/brand/studio26-transparent-v1-1440.webp" srcset="/assets/brand/studio26-transparent-v1-360.webp 360w, /assets/brand/studio26-transparent-v1-800.webp 800w, /assets/brand/studio26-transparent-v1-1440.webp 1440w" sizes="92vw" width="2172" height="724" alt="Studio26 — chrome and blue sculpted logo" loading="lazy" decoding="async"></div><div class="closing-bottom"><span>© 2026 Studio26</span><a href="#main-content">Back to the top <span aria-hidden="true">↑</span></a></div></footer>
+<button class="ash-fab" id="ash-launcher" type="button" aria-haspopup="dialog" hidden>
+  <img class="ash-fab-avatar" src="/assets/ash-avatar-round-v1-128.png" alt="" width="38" height="38">
+  <span class="ash-fab-text">
+    <span class="ash-fab-title" data-ash-i18n="fabTitle">Ask Ash</span>
+    <span class="ash-fab-sub" data-ash-i18n="fabSub">Studio assistant</span>
+  </span>
+</button>
+<p class="ash-visually-hidden" id="ash-page-status" role="status"></p>
+<dialog class="ash-dialog" id="ash-dialog" aria-labelledby="ash-dialog-title" aria-describedby="ash-dialog-note">
+  <div class="ash-shell">
+    <header class="ash-head" aria-label="Ash">
+      <img class="ash-avatar" src="/assets/ash-avatar-round-v1-128.png" alt="" width="40" height="40">
+      <h2 class="ash-title" id="ash-dialog-title" tabindex="-1" data-i18n="dialogTitle">Ask Ash</h2>
+      <div class="lang-switch" role="group" aria-label="Language / Langue">
+        <button class="lang-button" type="button" data-lang="en" aria-pressed="true" lang="en" aria-label="English">EN</button>
+        <button class="lang-button" type="button" data-lang="fr" aria-pressed="false" lang="fr" aria-label="Français">FR</button>
+      </div>
+      <button class="ash-close" id="ash-close" type="button" data-i18n="close">Close</button>
+      <p class="ash-note" id="ash-dialog-note" data-i18n="dialogNote">Studio26 assistant. Answers come from the studio’s published pages.</p>
+    </header>
+    <section class="ash-transcript" id="ash-transcript" tabindex="0" aria-label="Conversation" data-i18n-aria="transcriptLabel">
+      <ol class="ash-turns" id="ash-turns"></ol>
+      <div class="ash-brief-panel" id="ash-brief-panel" hidden></div>
+      <div class="ash-failure" id="ash-failure" hidden>
+        <p data-i18n="failed">Ash’s answers could not be loaded right now. You can send a project brief or write to Ruben and the team.</p>
+        <p class="ash-failure-actions">
+          <button class="ash-action" type="button" data-contact data-i18n="emailLink">Send us a message</button>
+          <button class="ash-secondary" id="ash-retry" type="button" data-i18n="retry">Try again</button>
+        </p>
+      </div>
+    </section>
+    <div class="ash-topics-wrap" role="group" aria-labelledby="ash-topics-label">
+      <p class="ash-topics-label" id="ash-topics-label" data-i18n="topicsLabel">Or choose a topic</p>
+      <section class="ash-topics" id="ash-topics" tabindex="0" aria-labelledby="ash-topics-label"></section>
+    </div>
+    <form class="ash-form" id="ash-form" novalidate>
+      <label class="ash-label" for="ash-input" data-i18n="inputLabel">Your question (required)</label>
+      <input
+        class="ash-input"
+        id="ash-input"
+        name="question"
+        type="text"
+        maxlength="240"
+        autocomplete="off"
+        required
+        aria-describedby="ash-hint"
+        disabled
+      >
+      <button class="ash-ask" id="ash-ask" type="submit" disabled data-i18n="ask">Ask</button>
+      <p class="ash-hint" id="ash-hint"></p>
+      <div class="ash-composer-actions">
+        <button class="ash-action-btn" type="button" data-ash-brief-open="true" data-i18n="briefOpen">Send a project brief</button>
+        <button class="ash-action-btn ash-clear" id="ash-clear" type="button" data-i18n="clear">Clear chat</button>
+      </div>
+    </form>
+    <p class="ash-visually-hidden" id="ash-status" role="status"></p>
+  </div>
+</dialog>
+<script type="module" src="/assets/ash-widget.js"></script>
 <script src="/assets/contact-form.js" data-sitekey="0x4AAAAAAFxfS00WUBcBqypr" defer></script>
 </body>
 </html>
