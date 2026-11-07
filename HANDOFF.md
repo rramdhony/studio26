@@ -6,7 +6,7 @@
 - **Legal citation checked against the Act text** (AFRINIC mirror of Act 20/2017): legitimate interests is **s.28(1)(b)(vii)**, not 28(1)(f). Paragraph found by counting list position because the PDF numbering is garbled; confirm against the Gazette text when convenient.
 - **Decisions by Ruben:** keep page-view/click tracking; Frankfurt D1 location accepted (no PII stored there; the salted IP hash is still personal data, his call); do not change copy drastically.
 - **Rule for every agent: this checkout is shared.** Never `git add -A` / `git add .`; stage only the files you changed. On 7 Nov a PR swept another agent's uncommitted work into production unreviewed.
-- **Awaiting Ruben's confirmation (live claims added by agy, not independently verifiable):** "100% client ownership of code, domain and final video masters", "free 30-minute discovery call", "one-business-day reply", custom e-commerce/payment scope, "dedicated team ... personally reviewing every build", founder role "Founder & Creative Director".
+- **Confirmed true by Ruben on 7 Nov 2026 (claims added by agy; not independently verifiable by agents):** "100% client ownership of code, domain and final video masters", "free 30-minute discovery call", "one-business-day reply", custom e-commerce/payment scope, "dedicated team ... personally reviewing every build", founder role "Founder & Creative Director".
 - **Open:** enquiry deletion at 12 months is manual (oldest enquiry 25 Oct 2026, due Oct 2027); visitor-typed names are not redacted (notice says so); one production test row (`e2e-test-1107`) sits in `ash_questions`; `opening.spec.js:89` can time out under load (passes alone); `codex/ash-bilingual-preview` has unmerged work and an uncommitted Codex worktree - do not delete.
 
 
