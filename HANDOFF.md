@@ -17,6 +17,14 @@
 - **4-Point Studio Commitments / Risk-Reversal (Item C):** Added the 4-point Studio Commitments strip (`.service-commitments`) to `public/index.html` (`#services`) and `public/websites-ai-chatbots.html` (`#payments`): Fixed written quote after free 30-min discovery call; 50% upfront / 50% on delivery; 100% client ownership of code, domain, and video masters; and one-business-day reply in EN/FR.
 - **Footer WhatsApp CTA (Item D):** Added `Chat on WhatsApp` (`https://wa.me/23054549763`) to the footer across `public/index.html`, `public/websites-ai-chatbots.html`, `public/ai-video.html`, and `public/privacy.html` (leaving Ash without WhatsApp as requested).
 - **First-Party Edge Click & Visitor Telemetry (`migrations/0005_site_events.sql`, `GET /api/event`):** Logs `page_view`, `whatsapp_click`, `ash_open`, `contact_open`, `portfolio_click`, `linkedin_click`, and `cta_click` to D1 `site_events` with 2-letter Cloudflare country code and salted `SHA-256` `ip_hash` (12-month auto-retention in `scheduled()`), plus a built-in `window.gtag` bridge if Google Analytics 4 is loaded. Inspect anytime via `npm run site:stats` and `npm run site:clicks`.
+  Every pageview and click is now logged automatically with the visitor's 2-letter Country Code (`MU`, `FR`, `GB`, `ZA`, etc.) and salted `SHA-256` visitor hash:
+  - `page_view` (which page they visited, plus referrer domain or `direct`)
+  - `whatsapp_click` (clicking the footer **Chat on WhatsApp** link)
+  - `ash_open` (opening the **Ash** chatbot)
+  - `contact_open` (opening the **Send us a message** modal)
+  - `portfolio_click` (clicking any of the 6 client websites in `#work`)
+  - `linkedin_click` (clicking your LinkedIn badge)
+  - `cta_click` (clicking `/websites-ai-chatbots`, `/ai-video`, or header CTAs)
 
 ## 7 November 2026: Ash market-demand question telemetry (Option A), technical SEO Phase 1 & workers.dev removal
 

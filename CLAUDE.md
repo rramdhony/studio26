@@ -42,3 +42,12 @@ Core commercial offerings & published terms (`PUBLISHED_PRICES` in `public/asset
 - `npm run ash:enquiries` - Queries the latest 20 submitted project briefs/enquiries from remote D1 (`enquiries`).
 - `npm run site:stats` - Aggregated breakdown of pageviews and CTA clicks (`page_view`, `whatsapp_click`, `ash_open`, `contact_open`, `portfolio_click`, `linkedin_click`, `cta_click`) by country and unique visitor hash from D1 `site_events`.
 - `npm run site:clicks` - Latest 50 visitor click and pageview events in real time.
+- **First-Party Edge Click & Visitor Telemetry (`GET /api/event` -> D1 `site_events`):**
+  Every pageview and click is now logged automatically with the visitor's 2-letter Country Code (`MU`, `FR`, `GB`, `ZA`, etc.) and salted `SHA-256` visitor hash:
+  - `page_view` (which page they visited, plus referrer domain or `direct`)
+  - `whatsapp_click` (clicking the footer **Chat on WhatsApp** link)
+  - `ash_open` (opening the **Ash** chatbot)
+  - `contact_open` (opening the **Send us a message** modal)
+  - `portfolio_click` (clicking any of the 6 client websites in `#work`)
+  - `linkedin_click` (clicking your LinkedIn badge)
+  - `cta_click` (clicking `/websites-ai-chatbots`, `/ai-video`, or header CTAs)
