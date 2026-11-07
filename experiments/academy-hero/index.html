@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Academy opening study | Studio26</title>
+  <link rel="stylesheet" href="/study.css">
+  <script src="/particles.js" defer></script>
+</head>
+<body>
+  <a class="skip" href="#main-content">Skip to main content</a>
+  <header class="study-bar">
+    <a class="study-home" href="https://studio26.me/">Studio26</a>
+    <p>Opening study</p>
+    <nav aria-label="Compare placements">
+      <button type="button" data-mode="academy" aria-pressed="false">Academy opening</button>
+      <button type="button" data-mode="logo" aria-pressed="true">Homepage reveal</button>
+    </nav>
+  </header>
+  <main id="main-content">
+    <section class="stage" aria-labelledby="home-title" data-mode="logo" data-playing="false">
+      <svg class="still" viewBox="0 0 1000 700" aria-hidden="true" focusable="false">
+        <defs><radialGradient id="bloom"><stop stop-color="#d7e4ff"/><stop offset="0.4" stop-color="#8fa8ed"/><stop offset="1" stop-color="#173fc5" stop-opacity="0"/></radialGradient></defs>
+        <g fill="none" stroke="url(#bloom)" stroke-width="1.4" transform="translate(500 335)">
+          <ellipse rx="235" ry="90"/><ellipse rx="235" ry="90" transform="rotate(30)"/><ellipse rx="235" ry="90" transform="rotate(60)"/><ellipse rx="235" ry="90" transform="rotate(90)"/><ellipse rx="235" ry="90" transform="rotate(120)"/><ellipse rx="235" ry="90" transform="rotate(150)"/>
+        </g>
+      </svg>
+      <canvas id="bloom-canvas" aria-hidden="true"></canvas>
+      <div class="stage-top"><p id="stage-identity">Studio26</p><p id="stage-note">Websites, AI assistants &amp; films.</p></div>
+      <div class="homepage-copy">
+        <h1 id="home-title">A presence<br>worth feeling.</h1>
+        <p>Custom websites &amp; AI assistants.<br>AI video ads &amp; brand films.</p>
+        <div class="home-actions"><a href="https://studio26.me/#work">Explore the work</a><a href="https://studio26.me/#contact">Start a project <span aria-hidden="true">↗</span></a></div>
+      </div>
+      <div class="academy-copy" hidden>
+        <h2 id="hero-title">Learn by making.<br>Grow by doing.</h2>
+        <div class="hero-aside"><p>Real projects. Shared knowledge.<br>A new generation of digital craft.</p><a href="#academy-direction">Explore the direction <span aria-hidden="true">↓</span></a></div>
+      </div>
+      <div class="logo-reveal" aria-hidden="false"><img src="/assets/brand/studio26-transparent-v1-800.webp" width="800" height="267" alt="Studio26"></div>
+      <div class="stage-controls"><span id="motion-note">A finite opening. No loading screen.</span><button type="button" id="pause-motion" hidden>Pause motion</button><button type="button" id="replay-motion" hidden>Replay opening</button></div>
+      <p class="sr-only" id="motion-status" role="status" aria-live="polite"></p>
+    </section>
+    <section class="direction" id="academy-direction" aria-labelledby="direction-title">
+      <div><p class="direction-label">The homepage direction</p><h2 id="direction-title">One entrance. A lasting impression.</h2></div>
+      <div class="direction-copy"><p>Particles establish movement and depth, reveal the existing wordmark, then give it a smaller place beside the message.</p><p>The headline and offer take the lead after the opening. The large footer wordmark becomes the closing signature, giving each appearance a different role.</p><p class="qualification">A homepage composition study for review.</p></div>
+    </section>
+    <section class="comparison" aria-label="Placement notes">
+      <article><h2>As the Academy opening</h2><p>The particle bloom introduces growth and collective learning. The headline and navigation remain immediately usable. The motion settles after six seconds.</p></article>
+      <article><h2>A reveal with somewhere to go</h2><p>Particles introduce the wordmark, which settles at a smaller size beside the headline. The footer carries the large closing signature.</p></article>
+    </section>
+    <div class="footer-wordmark"><img src="/assets/brand/studio26-transparent-v1-1440.webp" width="2172" height="724" alt="Studio26" loading="lazy"></div>
+  </main>
+  <footer><p>Studio26 / Academy design exploration</p><p>Reference study: <a href="https://www.lewiszhang.dev/" target="_blank" rel="noopener noreferrer">Lewis Zhang</a>. Original geometry and shader implementation.</p></footer>
+</body>
+</html>

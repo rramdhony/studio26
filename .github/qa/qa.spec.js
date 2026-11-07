@@ -169,7 +169,8 @@ test.describe('Pillar 2 — Mobile Responsiveness', () => {
       await expect(art).toBeVisible();
       const frame = await page.locator('.opening-stage').boundingBox();
       const image = await art.boundingBox();
-      expect(image.width / image.height).toBeCloseTo(1.5, 1);
+      expect(image.width / image.height).toBeCloseTo(3, 1);
+      expect(image.width).toBeLessThanOrEqual(450);
       expect(frame.width, `Artwork frame overflows at ${width}px`).toBeLessThanOrEqual(width + 1);
       expect(frame.x).toBeGreaterThanOrEqual(-1);
       expect(frame.x + frame.width).toBeLessThanOrEqual(width + 1);
@@ -580,8 +581,8 @@ test.describe('Cinematic opening', () => {
     await expect(page.locator('.opening-project')).toHaveAttribute('href', '#contact');
     await context.close();
   });
-  test('Loss of the animation library leaves a complete, usable opening', async ({ page }) => {
-    await page.route('**/vendor/gsap-*.min.js', route => route.abort());
+  test('Loss of the opening script leaves a complete, usable opening', async ({ page }) => {
+    await page.route('**/studio-opening.js', route => route.abort());
     await page.goto(BASE_URL);
     await expect(page.locator('#introComplete')).toBeVisible();
     await expect(page.locator('#hero-title')).toBeVisible();
@@ -592,7 +593,7 @@ test.describe('Cinematic opening', () => {
 
 test.describe('Opening review regressions', () => {
   test('A slow opening-image response never replaces settled artwork automatically', async ({ page }) => {
-    await page.route('**/brand/sculpture-26-v1.webp', async route => {
+    await page.route('**/brand/studio26-transparent-v1-800.webp', async route => {
       await new Promise(resolve => setTimeout(resolve, 1700));
       await route.continue();
     });
@@ -602,7 +603,7 @@ test.describe('Opening review regressions', () => {
     await expect(page.locator('#introToggle')).toHaveText(/Replay opening/);
   });
   test('An unavailable opening frame leaves the completed mark and no unusable control', async ({ page }) => {
-    await page.route('**/brand/sculpture-26-v1.webp', route => route.abort());
+    await page.route('**/brand/studio26-transparent-v1-800.webp', route => route.abort());
     await page.goto(BASE_URL);
     await expect(page.locator('#opening')).toHaveAttribute('data-intro-state', 'complete');
     await expect(page.locator('#introComplete')).toBeVisible();

@@ -6,7 +6,7 @@ const { defineConfig } = require('@playwright/test');
 
 module.exports = defineConfig({
   testDir: __dirname,
-  testMatch: 'qa.spec.js',
+  testMatch: ['qa.spec.js', 'opening.spec.js', 'seo.spec.js'],
   timeout: 30_000,
   retries: 0,
 
@@ -17,6 +17,7 @@ module.exports = defineConfig({
 
   use: {
     baseURL: process.env.BASE_URL || 'http://localhost:3000',
+    launchOptions: { args: ['--use-angle=swiftshader', '--enable-unsafe-swiftshader'] },
     screenshot: 'only-on-failure',
     video: 'off',
     trace: 'retain-on-failure',
