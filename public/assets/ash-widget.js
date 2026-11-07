@@ -1,7 +1,7 @@
 import { loadTurnstile } from './turnstile.js';
 
 // Ash bilingual studio assistant. Runs locally in the browser against a static catalogue.
-// No external model calls or analytics. Project briefs are submitted securely to /api/enquiry.
+// No external model calls or third-party analytics. Anonymous question telemetry is sent to /api/ash-question and project briefs are submitted securely to /api/enquiry.
 
 const address = () => ['hello', 'studio26.me'].join(String.fromCharCode(64));
 const CATALOGUE_URL = new URL('./catalogue.v1.json', import.meta.url).href;
@@ -170,6 +170,15 @@ const TIMING_SIGNAL =
 const PROJECT_SIGNAL =
   /\b(?:studio26|project|projet|brief|websites?|site web|sites web|chatbots?|ai assistants?|assistants? ia|video|videos|film|films|launch|lancement|mise en ligne)\b/u;
 const SEGMENT_SPLIT = /[?!.;:,…\n]+|(?:^|\s)(?:and|et)(?:\s|$)/u;
+
+export function redactPii(raw) {
+  return String(raw || '')
+    .replace(/[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}/g, '[email]')
+    .replace(/(?:\+?\d[\d\s().-]{6,}\d)/g, '[phone]')
+    .replace(/[\r\n\t]+/g, ' ')
+    .trim()
+    .slice(0, MAX_QUESTION_LENGTH);
+}
 
 /** Case, accent, punctuation and whitespace folding. No stemming or fuzzy logic. */
 export function normalizeQuery(raw) {
@@ -1128,6 +1137,10 @@ function init() {
     }
     const briefBtn = event.target.closest?.('[data-ash-brief-open]');
     if (briefBtn) {
+      if (!state.briefDraft.message.trim()) {
+        const lastAsked = [...state.turns].reverse().find((t) => t.question);
+        if (lastAsked?.question) state.briefDraft.message = lastAsked.question;
+      }
       state.briefStep = 'draft';
       state.briefDraft.idempotencyKey = '';
       renderBriefPanel();
@@ -1143,11 +1156,30 @@ function init() {
     }
   }, { passive: false });
 
+  function logQuestion({ question, matchedId, lang, source }) {
+    const scrubbed = redactPii(question);
+    if (!scrubbed) return;
+    fetch('/api/ash-question', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+      body: JSON.stringify({
+        question: scrubbed,
+        matched_id: matchedId,
+        lang: lang === 'fr' ? 'fr' : 'en',
+        source: source === 'topic' ? 'topic' : 'typed',
+        page: window.location.pathname || '/',
+      }),
+      keepalive: true,
+    }).catch(() => {});
+  }
+
   topicsEl.addEventListener('click', (event) => {
     const button = event.target.closest('[data-answer-id]');
     if (!button || state.availability !== 'ready') return;
     const id = button.dataset.answerId;
     addTurn({ topic: id, answerId: id });
+    const label = state.catalogue.answers.get(id)?.[state.lang]?.label || id;
+    logQuestion({ question: label, matchedId: id, lang: state.lang, source: 'topic' });
   });
 
   form.addEventListener('submit', (event) => {
@@ -1164,6 +1196,7 @@ function init() {
     input.value = '';
     setHint('');
     addTurn({ question, questionLang: match.lang ?? state.lang, answerId: match.id });
+    logQuestion({ question, matchedId: match.id, lang: match.lang ?? state.lang, source: 'typed' });
     input.focus({ preventScroll: true });
   });
 

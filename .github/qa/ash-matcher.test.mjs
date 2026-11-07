@@ -9,6 +9,7 @@ import {
   validateCatalogue,
   PUBLISHED_PRICES,
   NEEDS_LABELS,
+  redactPii,
 } from '../../public/assets/ash-widget.js';
 
 const __filename = fileURLToPath(import.meta.url);
@@ -485,5 +486,66 @@ describe('SEO: www.studio26.me 301 canonical redirect & open-redirect protection
     const res = await worker.fetch(new Request('https://studio26.me/websites-ai-chatbots'), env, {});
     assert.equal(res.status, 200);
     assert.equal(called, true);
+  });
+
+  test('redactPii scrubs email addresses and phone numbers from visitor questions', () => {
+    const scrubbed = redactPii('Hi, email me at visitor@example.com or call +230 5712 3456 about a website');
+    assert.equal(scrubbed, 'Hi, email me at [email] or call [phone] about a website');
+  });
+
+  test('POST /api/ash-question logs country, salted SHA-256 ip_hash and redacted question', async () => {
+    let boundArgs = null;
+    const env = {
+      IP_SALT: 'unit-test-secret-salt',
+      DB: {
+        prepare: () => ({
+          bind: (...args) => {
+            boundArgs = args;
+            return { run: async () => ({ meta: { changes: 1 } }) };
+          },
+        }),
+      },
+    };
+    const req = new Request('https://studio26.me/api/ash-question', {
+      method: 'POST',
+      headers: {
+        Origin: 'https://studio26.me',
+        'Content-Type': 'application/json',
+        'CF-Connecting-IP': '197.225.10.20',
+        'CF-IPCountry': 'MU',
+      },
+      body: JSON.stringify({
+        question: 'How much is a website? Reach me at client@test.org',
+        matched_id: 'website',
+        lang: 'en',
+        source: 'typed',
+        page: '/websites-ai-chatbots',
+      }),
+    });
+    const res = await worker.fetch(req, env, {});
+    assert.equal(res.status, 202);
+    assert.ok(boundArgs, 'DB bind should be called');
+    const [country, ipHash, pagePath, lang, source, question, matchedId] = boundArgs;
+    assert.equal(country, 'MU');
+    assert.match(ipHash, /^[0-9a-f]{32}$/);
+    assert.notEqual(ipHash, '197.225.10.20');
+    assert.equal(pagePath, '/websites-ai-chatbots');
+    assert.equal(lang, 'en');
+    assert.equal(source, 'typed');
+    assert.equal(question, 'How much is a website? Reach me at [email]');
+    assert.equal(matchedId, 'website');
+  });
+
+  test('POST /api/ash-question rejects cross-origin requests with 403', async () => {
+    const req = new Request('https://studio26.me/api/ash-question', {
+      method: 'POST',
+      headers: {
+        Origin: 'https://evil.example',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ question: 'How much is a website?', matched_id: 'website' }),
+    });
+    const res = await worker.fetch(req, {}, {});
+    assert.equal(res.status, 403);
   });
 });

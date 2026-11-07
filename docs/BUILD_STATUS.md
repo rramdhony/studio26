@@ -1,5 +1,12 @@
 # Studio26 build status
 
+## Ash market-demand question telemetry (Option A) & SEO Phase 1, 7 November 2026
+
+- Implemented Option A anonymous Ash question logging (`migrations/0004_ash_questions.sql`, applied to remote D1 `studio26-db`; `POST /api/ash-question` in `src/index.js`; client beacon and brief pre-fill in `public/assets/ash-widget.js`).
+- Records `created_at`, 2-letter Cloudflare edge `country`, salted `SHA-256` `ip_hash` (never raw IP), `page`, `lang`, `source` (`typed` or `topic`), PII-redacted `question`, and `matched_id`.
+- Updated `public/privacy.html` (Sections 2B and 2C) and `public/assets/catalogue.v1.json` (`privacy-data`, `fallback-ambiguous`) to match. Added `npm run ash:questions` and `npm run ash:enquiries` helper scripts in `package.json`, and updated `AGENTS.md`, `CLAUDE.md`, and `HANDOFF.md`.
+- Completed SEO Phase 1 (`9934ff0`): disabled `.workers.dev` previews (`workers_dev = false`), deleted `studio26-site-ash-preview`, added hardened `www.studio26.me` -> `https://studio26.me` 301 redirect (`run_worker_first = true`), upgraded `@graph` JSON-LD and social metadata (`studio26-complete-v1.webp`, `1536x1024`, `en_GB`), and mounted Ash on `/websites-ai-chatbots`.
+
 ## Homepage compact-logo opening, 7 November 2026
 
 Ruben approved replacing the oversized static homepage artwork with the finite particle reveal and compact settled wordmark. Branch `codex/homepage-logo-reveal` now integrates the study into the actual public homepage; earlier study-only status below is historical. Claude Sonnet CLI review approved the final fixes. Release evidence and manual QA limits: `docs/reviews/homepage-opening-code-review-2026-11-07.md`. The existing footer, enquiry flow, Ash and discovery content remain in place. Academy is still future work. Release PR: https://github.com/rramdhony/studio26/pull/2. Its description records merge and deployment verification after the final checks pass. The separate SEO update `9934ff0` was integrated without changing the reviewed opening assets.

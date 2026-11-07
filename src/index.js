@@ -1,33 +1,6 @@
 import { EmailMessage } from 'cloudflare:email';
 
 // Worker runs first to enforce canonical www -> apex 301 redirects, /api/* endpoints, and /video/* HTTP 206 Range seeking before falling back to static assets.
-export default {
-  async scheduled(_event, env) {
-    if (!env.NOTIFY || !env.NOTIFY_TO || !env.NOTIFY_FROM) return;
-    const { results } = await env.DB.prepare(
-      "SELECT id FROM enquiries WHERE notify_attempts < 5 AND notification_status IN ('pending', 'failed', 'sending') AND (notify_after IS NULL OR notify_after <= datetime('now')) ORDER BY id LIMIT 20"
-    ).all();
-    for (const { id } of results) await notifyAndRecord(id, env);
-  },
-  async fetch(request, env, ctx) {
-    const url = new URL(request.url);
-    if (url.hostname === 'www.studio26.me' && (request.method === 'GET' || request.method === 'HEAD')) {
-      const target = new URL('https://studio26.me');
-      target.pathname = '/' + url.pathname.replace(/^\/+/, '');
-      target.search = url.search;
-      return new Response(null, {
-        status: 301,
-        headers: {
-          Location: target.toString(),
-          'Cache-Control': 'public, max-age=3600',
-        },
-      });
-    }
-    if (url.pathname.startsWith('/api/')) return handleApi(request, env, ctx, url);
-    if (url.pathname.startsWith('/video/')) return handleVideoRange(request, env, url);
-    return env.ASSETS.fetch(request);
-  },
-};
 
 async function handleVideoRange(request, env, url) {
   if (request.method !== 'GET' && request.method !== 'HEAD') {
@@ -140,6 +113,14 @@ async function handleApi(request, env, ctx, url) {
       return await handleEnquiry(request, env, ctx, url);
     } catch {
       return json({ error: 'Enquiries are temporarily unavailable. Please try again.' }, 503);
+    }
+  }
+  if (url.pathname === '/api/ash-question') {
+    if (request.method !== 'POST') return json({ error: 'Method not allowed' }, 405, { Allow: 'POST' });
+    try {
+      return await handleAshQuestion(request, env, url);
+    } catch {
+      return json({ ok: false }, 202);
     }
   }
   return json({ error: 'Not found' }, 404);
@@ -377,3 +358,106 @@ async function notify(e, env) {
   await env.NOTIFY.send(new EmailMessage(env.NOTIFY_FROM, env.NOTIFY_TO, raw));
   return true;
 }
+
+const ASH_MAX_BODY_BYTES = 4096;
+const ASH_QUESTION_LIMIT_PER_IP_HOUR = 60;
+const ASH_QUESTION_GLOBAL_PER_HOUR = 600;
+const ASH_MATCHED_ID_RE = /^[a-z0-9-]{2,64}$/;
+
+function redactPii(value) {
+  return String(value || '')
+    .replace(/[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}/g, '[email]')
+    .replace(/(?:\+?\d[\d\s().-]{6,}\d)/g, '[phone]')
+    .replace(/[\r\n\t]+/g, ' ')
+    .trim()
+    .slice(0, 240);
+}
+
+async function handleAshQuestion(request, env, url) {
+  if (request.headers.get('Origin') !== url.origin) {
+    return json({ error: 'Forbidden' }, 403);
+  }
+  if (Number(request.headers.get('Content-Length') || 0) > ASH_MAX_BODY_BYTES) {
+    return json({ error: 'Payload too large' }, 413);
+  }
+  if (!env.DB || !env.IP_SALT) {
+    return json({ ok: false }, 202);
+  }
+
+  let data;
+  try {
+    const raw = await request.text();
+    if (!raw || raw.length > ASH_MAX_BODY_BYTES) return json({ error: 'Invalid payload' }, 400);
+    data = JSON.parse(raw);
+    if (!data || typeof data !== 'object' || Array.isArray(data)) return json({ error: 'Invalid payload' }, 400);
+  } catch {
+    return json({ error: 'Invalid JSON' }, 400);
+  }
+
+  const field = (k) => (typeof data[k] === 'string' ? data[k].trim() : '');
+  const question = redactPii(field('question'));
+  if (!question) return json({ error: 'Empty question' }, 422);
+
+  const rawMatched = field('matched_id');
+  const matchedId = ASH_MATCHED_ID_RE.test(rawMatched) ? rawMatched : 'fallback-unknown';
+  const lang = field('lang') === 'fr' ? 'fr' : 'en';
+  const source = field('source') === 'topic' ? 'topic' : 'typed';
+  const rawPage = field('page');
+  const pagePath = ('/' + rawPage.replace(/^\/+/, '').replace(/[^\w/-]/g, '')).slice(0, 120) || '/';
+
+  const rawCountry = String(request.cf?.country || request.headers.get('CF-IPCountry') || '').toUpperCase();
+  const country = /^[A-Z]{2}$/.test(rawCountry) ? rawCountry : 'XX';
+
+  const network = rateLimitNetwork(request.headers.get('CF-Connecting-IP') || '');
+  const ipHash = await hash(network + env.IP_SALT);
+
+  await env.DB.prepare(
+    "INSERT INTO ash_questions (country, ip_hash, page, lang, source, question, matched_id) " +
+    "SELECT ?, ?, ?, ?, ?, ?, ? " +
+    "WHERE (SELECT COUNT(*) FROM ash_questions WHERE ip_hash = ? AND created_at > datetime('now', '-1 hour')) < ? " +
+    "AND (SELECT COUNT(*) FROM ash_questions WHERE created_at > datetime('now', '-1 hour')) < ?"
+  )
+    .bind(
+      country,
+      ipHash,
+      pagePath,
+      lang,
+      source,
+      question,
+      matchedId,
+      ipHash,
+      ASH_QUESTION_LIMIT_PER_IP_HOUR,
+      ASH_QUESTION_GLOBAL_PER_HOUR,
+    )
+    .run();
+
+  return json({ ok: true }, 202);
+}
+
+export default {
+  async scheduled(_event, env) {
+    if (!env.NOTIFY || !env.NOTIFY_TO || !env.NOTIFY_FROM) return;
+    const { results } = await env.DB.prepare(
+      "SELECT id FROM enquiries WHERE notify_attempts < 5 AND notification_status IN ('pending', 'failed', 'sending') AND (notify_after IS NULL OR notify_after <= datetime('now')) ORDER BY id LIMIT 20"
+    ).all();
+    for (const { id } of results) await notifyAndRecord(id, env);
+  },
+  async fetch(request, env, ctx) {
+    const url = new URL(request.url);
+    if (url.hostname === 'www.studio26.me' && (request.method === 'GET' || request.method === 'HEAD')) {
+      const target = new URL('https://studio26.me');
+      target.pathname = '/' + url.pathname.replace(/^\/+/, '');
+      target.search = url.search;
+      return new Response(null, {
+        status: 301,
+        headers: {
+          Location: target.toString(),
+          'Cache-Control': 'public, max-age=3600',
+        },
+      });
+    }
+    if (url.pathname.startsWith('/api/')) return handleApi(request, env, ctx, url);
+    if (url.pathname.startsWith('/video/')) return handleVideoRange(request, env, url);
+    return env.ASSETS.fetch(request);
+  },
+};

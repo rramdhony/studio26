@@ -8,7 +8,9 @@
     "qa:headed": "start-server-and-test \"wrangler dev --port 3000\" http://localhost:3000 \"playwright test --config .github/qa/playwright.config.js --headed\"",
     "qa:report": "playwright show-report playwright-report",
     "qa:html": "html-validate --config .github/qa/.htmlvalidate.json public/index.html public/ai-video.html public/privacy.html public/websites-ai-chatbots.html",
-    "postinstall": "playwright install chromium"
+    "postinstall": "playwright install chromium",
+    "ash:questions": "wrangler d1 execute studio26-db --remote --command \"SELECT id, created_at, country, substr(ip_hash, 1, 8) AS visitor, lang, source, page, matched_id, question FROM ash_questions ORDER BY id DESC LIMIT 50;\"",
+    "ash:enquiries": "wrangler d1 execute studio26-db --remote --command \"SELECT id, created_at, name, email, company, need, source, message FROM enquiries ORDER BY id DESC LIMIT 20;\""
   },
   "devDependencies": {
     "@axe-core/playwright": "^4.9.1",

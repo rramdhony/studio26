@@ -1,5 +1,18 @@
 # Studio26 — Handoff & Unified Status (All LLM Agents)
 
+## 7 November 2026: Ash market-demand question telemetry (Option A), technical SEO Phase 1 & workers.dev removal
+
+- **Anonymous Ash Question Logger (`POST /api/ash-question` -> D1 `ash_questions`, Migration `0004_ash_questions.sql`):**
+  - Ruben approved Option A market-demand logging so Studio26 can see what prospective clients ask Ash across `/`, `/websites-ai-chatbots`, and `/ai-video` even when they do not submit a project brief.
+  - `public/assets/ash-widget.js` sends a non-blocking `POST /api/ash-question` beacon on typed questions (`source = 'typed'`) and topic clicks (`source = 'topic'`), and pre-fills the visitor's last typed question into the in-dialog project brief textarea when they click **Send a project brief**.
+  - `src/index.js` validates same-origin (`Origin === url.origin`), scrubs any accidental email addresses or phone numbers via `redactPii()`, extracts the 2-letter ISO country code from Cloudflare's edge (`request.cf.country` / `CF-IPCountry`), computes the salted `SHA-256` `ip_hash` (`rateLimitNetwork(ip) + env.IP_SALT`, never storing raw IP addresses), enforces hourly per-visitor (60/hr) and global (600/hr) D1 rate limits, and inserts into `ash_questions`.
+  - Disclosed transparently in `public/privacy.html` (Sections 2B and 2C, under Section 28(1)(f) of the Mauritius Data Protection Act 2017 with 12-month retention) and in `public/assets/catalogue.v1.json` (`privacy-data` and `fallback-ambiguous`).
+  - Run `npm run ash:questions` to inspect the latest 50 visitor questions by country and visitor hash, or `npm run ash:enquiries` to inspect submitted project briefs.
+- **Technical SEO Phase 1 & `.workers.dev` Removal (`9934ff0`, reviewed & `APPROVE`d by Claude Sonnet 5.5 CLI):**
+  - Deleted temporary Worker `studio26-site-ash-preview`, set `workers_dev = false` and `run_worker_first = true` in `wrangler.toml`, and removed obsolete `.workers.dev` rules from `public/_headers`.
+  - Added open-redirect-hardened `www.studio26.me` -> `https://studio26.me` 301 redirect in `src/index.js`.
+  - Upgraded JSON-LD on `/websites-ai-chatbots` and `/ai-video` to `@graph` schemas, mounted the Ash launcher on `/websites-ai-chatbots`, expanded full-service scope (e-commerce/Shopify, logo & brand identity, custom web & iOS/Android mobile apps, 2-to-4-week website turnaround guide, and 50/50 payment terms) across `public/websites-ai-chatbots.html` and `public/llms.txt`, and set `og:image` / `twitter:image` across all 4 HTML pages to `https://studio26.me/assets/brand/studio26-complete-v1.webp` (`1536x1024`, `og:locale="en_GB"`).
+
 ## 7 November 2026: production homepage opening release
 
 Ruben approved replacing the oversized static homepage artwork with the finite particle reveal and compact settled wordmark. Branch `codex/homepage-logo-reveal` now integrates the study into the actual public homepage; earlier study-only status below is historical. Claude Sonnet CLI review approved the final fixes. Release evidence and manual QA limits: `docs/reviews/homepage-opening-code-review-2026-11-07.md`. The existing footer, enquiry flow, Ash and discovery content remain in place. Academy is still future work. Release PR: https://github.com/rramdhony/studio26/pull/2. Its description records merge and deployment verification after the final checks pass. The separate SEO update `9934ff0` was integrated without changing the reviewed opening assets.

@@ -1649,7 +1649,7 @@
       "id": "privacy-data",
       "source": "https://studio26.me/privacy#collection",
       "en": {
-        "text": "Studio26 does not use advertising pixels, cross-site trackers or third-party analytics cookies. In this preview, what you type stays in your browser and is cleared when you reload. Studio26 complies with the Mauritius Data Protection Act 2017.",
+        "text": "Studio26 does not use advertising pixels, cross-site trackers or third-party analytics cookies. When you ask Ash a question, we record an anonymous question log (your question with any email or phone number redacted, matched topic, language, 2-letter country code and a salted SHA-256 IP hash, never your raw IP address) to improve our service guide. Studio26 complies with the Mauritius Data Protection Act 2017.",
         "aliases": [
           "Privacy",
           "Privacy policy",
@@ -1662,7 +1662,7 @@
         ]
       },
       "fr": {
-        "text": "Studio26 n’utilise aucun pixel publicitaire, traceur inter-sites ni cookie d’analyse tiers. Dans cet aperçu, ce que vous saisissez reste dans votre navigateur et s’efface au rechargement. Studio26 respecte le Data Protection Act 2017 de l’île Maurice.",
+        "text": "Studio26 n’utilise aucun pixel publicitaire, traceur inter-sites ni cookie d’analyse tiers. Lorsque vous posez une question à Ash, nous enregistrons un journal anonyme (votre question après masquage d’éventuels e-mails ou numéros, le sujet associé, la langue, le code pays à 2 lettres et un hachage SHA-256 salé de l’IP, sans jamais stocker votre adresse IP brute) afin d’améliorer notre guide de services. Studio26 respecte le Data Protection Act 2017 de l’île Maurice.",
         "aliases": [
           "Confidentialité",
           "Politique de confidentialité",
@@ -1929,13 +1929,13 @@
       "source": "https://studio26.me/#services",
       "handoff": true,
       "en": {
-        "text": "That could cover more than one topic, so I won’t guess which you mean. Please ask one specific question at a time or choose a topic below (websites from US$2,500, AI assistants from US$4,000, or AI video ads from US$450). You can also use Send a project brief or click Show our address below. Nothing has been sent from this chat.",
+        "text": "That could cover more than one topic, so I won’t guess which you mean. Please ask one specific question at a time or choose a topic below (websites from US$2,500, AI assistants from US$4,000, or AI video ads from US$450). You can also use Send a project brief or click Show our address below. No project brief has been sent yet.",
         "aliases": [
           "AI"
         ]
       },
       "fr": {
-        "text": "Cela peut concerner plusieurs sujets et je préfère ne pas deviner lequel. Merci de poser une seule question précise à la fois ou de choisir un sujet ci-dessous (sites web dès 2 500 USD, assistants IA dès 4 000 USD ou vidéos IA dès 450 USD). Vous pouvez aussi utiliser Envoyer un brief ou cliquer sur Afficher notre adresse ci-dessous. Rien n’a été envoyé depuis cette discussion.",
+        "text": "Cela peut concerner plusieurs sujets et je préfère ne pas deviner lequel. Merci de poser une seule question précise à la fois ou de choisir un sujet ci-dessous (sites web dès 2 500 USD, assistants IA dès 4 000 USD ou vidéos IA dès 450 USD). Vous pouvez aussi utiliser Envoyer un brief ou cliquer sur Afficher notre adresse ci-dessous. Aucun brief de projet n’a encore été envoyé.",
         "aliases": [
           "IA"
         ]

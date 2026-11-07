@@ -1,4 +1,4 @@
-# Studio26 — Agent & Project Guide (`AGENTS.md`)
+# Studio26 - Agent & Project Guide (`AGENTS.md`)
 
 > **Read `HANDOFF.md`, `CLAUDE.md`, and `docs/BUILD_STATUS.md` first.**
 >
@@ -7,11 +7,19 @@
 > - `C:\Users\ruben\.claude\Studio26_Build_Deploy_Playbook.md`
 > - `C:\Users\ruben\.claude\Studio26_Agent_Orchestration.md`
 
-## Quick Reference (2 November 2026)
+## Quick Reference (7 November 2026)
 
-1. **Live Preview Worker:** https://studio26-site.ruben-ramdhony.workers.dev/ (`studio26-site`, Version `c88b15f7-8922-4796-aa6b-77dd9df6e97a`).
-2. **Primary Deploy Worktree:** `C:\Users\ruben\Downloads\studio26\site-ai-video` (contains the unified site + gitignored `public/video/` assets). Sync changes across `site-ai-video`, `site`, and `C:\Users\ruben\Documents\GitHub\studio26`.
+1. **Production Live URL:** `https://studio26.me` (canonical apex). `https://www.studio26.me/*` 301-redirects to `https://studio26.me/*` via `src/index.js` (`run_worker_first = true` in `wrangler.toml`). `.workers.dev` preview subdomains are disabled (`workers_dev = false`).
+2. **Synchronized Checkouts:** `C:\Users\ruben\Documents\GitHub\studio26` (canonical GitHub repo, deploys to production on every push to `main`) and `C:\Users\ruben\Downloads\studio26\site`.
 3. **Mandatory Backup Rule:** Create a git backup branch/tag or file snapshot in `C:\Users\ruben\Downloads\studio26\backups\<timestamp>` before editing any files.
-4. **Current Status:**
-   - Homepage (`/`), AI Video Ads & Films (`/ai-video`), Concept Worlds (`/concepts/*`), Privacy/DPA 2017/WCAG 2.1 AA (`/privacy`), USD pricing (`data-price` / `data-term`), brushed-chrome & deep-cobalt gradient buttons, Ruben's LinkedIn badge (`#founder`), and SEO/GEO files (`JSON-LD`, `/llms.txt`, `/robots.txt`, `/sitemap.xml`) are **complete, QA-verified, and live on the preview URL**.
-5. **Next Milestone:** Build **Ash** (Studio26's bilingual EN/FR AI assistant) using the approved oxblood portrait (`C:\Users\ruben\Downloads\studio26\brand-kit\ash\v1\brand-guide-v1.md`), architecture plan (`docs/creative/ash-architecture-plan-v01.md`), and knowledge base (`docs/content/assistant-knowledge-base.md`).
+4. **Live Pages & Surfaces:**
+   - `/` (`public/index.html`) - Homepage with finite particle reveal into compact wordmark, Selected websites, Services, Process, Concept worlds, Inside the studio + Founder LinkedIn, Invitation footer, Contact dialog, and Ash assistant.
+   - `/websites-ai-chatbots` (`public/websites-ai-chatbots.html`) - Dedicated commercial service guide covering custom websites, e-commerce/Shopify, logo & brand identity, custom web & iOS/Android mobile apps, 2-to-4-week website turnaround guide, 50% upfront / 50% on delivery payment terms, technical SEO scope, Ash architecture disclosure, Contact dialog, and Ash assistant.
+   - `/ai-video` (`public/ai-video.html`) - AI Video Ads & Films page with vertical feed, showcase films, interactive aspect-ratio template, USD monthly retainers, 4-step process, FAQ, Contact dialog, and Ash assistant.
+   - `/privacy` (`public/privacy.html`) - Mauritius Data Protection Act 2017 privacy notice, WCAG 2.1 Level AA accessibility statement, and website & creative terms.
+   - `/llms.txt`, `/robots.txt`, `/sitemap.xml` - Search and AI discovery files with `@graph` JSON-LD (`Organization`, `WebSite`, `Service`, `WebPage`, `BreadcrumbList`, `Person`) and Open Graph / Twitter Card metadata (`studio26-complete-v1.webp`, `1536x1024`, `en_GB`).
+5. **Ash Studio Assistant & Market Telemetry (Option A):**
+   - `public/assets/ash-widget.js`, `public/assets/ash-widget.css`, `public/assets/catalogue.v1.json` - Bilingual (EN/FR) deterministic studio assistant (Tier-1 exact alias + Tier-2 natural-language intent classifier, prompt-injection & commitment safeguards, click-to-reveal email, and in-dialog project brief submission to `POST /api/enquiry`).
+   - **Anonymous Question Logger (`POST /api/ash-question` -> D1 `ash_questions`):** Logs visitor questions with automatic email/phone redaction (`redactPii`), matched topic ID (`matched_id`), language (`en`/`fr`), source (`typed`/`topic`), page path, 2-letter Cloudflare edge country code (`country`), and salted `SHA-256` IP hash (`ip_hash`). Never stores raw IP addresses.
+   - **Inspect live visitor questions:** `npm run ash:questions`
+   - **Inspect live project enquiries:** `npm run ash:enquiries`
