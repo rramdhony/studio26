@@ -1,7 +1,7 @@
 import { loadTurnstile } from './turnstile.js';
 
 // Ash bilingual studio assistant. Runs locally in the browser against a static catalogue.
-// No external model calls or third-party analytics. Anonymous question telemetry is sent to /api/ash-question and project briefs are submitted securely to /api/enquiry.
+// No external model calls or third-party analytics. Pseudonymised question logging is sent to /api/ash-question and project briefs are submitted securely to /api/enquiry.
 
 const address = () => ['hello', 'studio26.me'].join(String.fromCharCode(64));
 const CATALOGUE_URL = new URL('./catalogue.v1.json', import.meta.url).href;
@@ -56,6 +56,8 @@ const UI = {
     ash: 'Ash',
     topicsLabel: 'Or choose a topic',
     inputLabel: 'Your question (required)',
+    logNotice: 'Questions you ask are logged without your name or raw IP address and kept for 12 months.',
+    privacyLink: 'Privacy notice',
     ask: 'Ask',
     clear: 'Clear chat',
     retry: 'Try again',
@@ -112,6 +114,8 @@ const UI = {
     ash: 'Ash',
     topicsLabel: 'Ou choisissez un sujet',
     inputLabel: 'Votre question (obligatoire)',
+    logNotice: 'Les questions posées sont enregistrées sans votre nom ni votre IP brute, et conservées 12 mois.',
+    privacyLink: 'Confidentialité',
     ask: 'Demander',
     clear: 'Effacer',
     retry: 'Réessayer',

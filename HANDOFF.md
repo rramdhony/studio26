@@ -2,7 +2,7 @@
 
 ## 7 November 2026: Ash market-demand question telemetry (Option A), technical SEO Phase 1 & workers.dev removal
 
-- **Anonymous Ash Question Logger (`POST /api/ash-question` -> D1 `ash_questions`, Migration `0004_ash_questions.sql`):**
+- **Pseudonymised Ash Question Logger (`POST /api/ash-question` -> D1 `ash_questions`, Migration `0004_ash_questions.sql`):**
   - Ruben approved Option A market-demand logging so Studio26 can see what prospective clients ask Ash across `/`, `/websites-ai-chatbots`, and `/ai-video` even when they do not submit a project brief.
   - `public/assets/ash-widget.js` sends a non-blocking `POST /api/ash-question` beacon on typed questions (`source = 'typed'`) and topic clicks (`source = 'topic'`), and pre-fills the visitor's last typed question into the in-dialog project brief textarea when they click **Send a project brief**.
   - `src/index.js` validates same-origin (`Origin === url.origin`), scrubs any accidental email addresses or phone numbers via `redactPii()`, extracts the 2-letter ISO country code from Cloudflare's edge (`request.cf.country` / `CF-IPCountry`), computes the salted `SHA-256` `ip_hash` (`rateLimitNetwork(ip) + env.IP_SALT`, never storing raw IP addresses), enforces hourly per-visitor (60/hr) and global (600/hr) D1 rate limits, and inserts into `ash_questions`.

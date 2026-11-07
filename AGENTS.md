@@ -20,6 +20,6 @@
    - `/llms.txt`, `/robots.txt`, `/sitemap.xml` - Search and AI discovery files with `@graph` JSON-LD (`Organization`, `WebSite`, `Service`, `WebPage`, `BreadcrumbList`, `Person`) and Open Graph / Twitter Card metadata (`studio26-complete-v1.webp`, `1536x1024`, `en_GB`).
 5. **Ash Studio Assistant & Market Telemetry (Option A):**
    - `public/assets/ash-widget.js`, `public/assets/ash-widget.css`, `public/assets/catalogue.v1.json` - Bilingual (EN/FR) deterministic studio assistant (Tier-1 exact alias + Tier-2 natural-language intent classifier, prompt-injection & commitment safeguards, click-to-reveal email, and in-dialog project brief submission to `POST /api/enquiry`).
-   - **Anonymous Question Logger (`POST /api/ash-question` -> D1 `ash_questions`):** Logs visitor questions with automatic email/phone redaction (`redactPii`), matched topic ID (`matched_id`), language (`en`/`fr`), source (`typed`/`topic`), page path, 2-letter Cloudflare edge country code (`country`), and salted `SHA-256` IP hash (`ip_hash`). Never stores raw IP addresses.
+   - **Pseudonymised Question Logger (`POST /api/ash-question` -> D1 `ash_questions`):** Logs visitor questions with automatic email/phone redaction (`redactPii`), matched topic ID (`matched_id`), language (`en`/`fr`), source (`typed`/`topic`), page path, 2-letter Cloudflare edge country code (`country`), and salted `SHA-256` IP hash (`ip_hash`). Never stores raw IP addresses.
    - **Inspect live visitor questions:** `npm run ash:questions`
    - **Inspect live project enquiries:** `npm run ash:enquiries`
