@@ -1,5 +1,9 @@
 # Studio26 build status
 
+## Academy opening study, 7 November 2026
+
+Branch `codex/academy-hero-study` contains an isolated comparison of an original particle bloom on Academy and a finite transition into the existing Studio26 wordmark. Reference: Lewis Zhang's live particle-flower hero. Study URL `http://127.0.0.1:3001/`; run `node scripts/serve-academy-study.mjs`. Six focused tests and HTML/JS validation passed. Notes and remaining graphics/manual QA: `docs/creative/academy-hero-reference-study.md`. No public assets, production deployment or main-page motion changes are included. Academy page build follows the visual placement decision.
+
 ## 7 November 2026: release review fixes
 
 Ruben authorized a PR, merge and production publication of the reviewed Ash A/B + SEO bundle. Branch `codex/ash-seo-release-fixes` fixes excluded-service pricing matches, mixed commitment requests and broken answer sources. The service guide now publishes approved delivery, payment and technical SEO scope. Preview-only noindex protection is restricted to the isolated Ash hostname. Matcher/source checks: 225 passed; four-page HTML validation passed. Final browser/deployment evidence is in `docs/SEO_AI_DISCOVERY_VALIDATION.md`. Academy and a model fallback remain separate future work.

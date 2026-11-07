@@ -1,5 +1,9 @@
 # Studio26 — Handoff & Unified Status (All LLM Agents)
 
+## 7 November 2026: Academy opening study
+
+Current work starts on `codex/academy-hero-study` from released `40bf0b8`, backed by `backup/pre-academy-20261107-40bf0b8`. Ruben asked to study the Lewis Zhang hero before deciding between an Academy opening and a pre-logo animation. Reverse-engineering notes and scope: `docs/creative/academy-hero-reference-study.md`. An original local comparison lives in `experiments/academy-hero/`, served by `node scripts/serve-academy-study.mjs` at `http://127.0.0.1:3001/`. Six focused motion/mobile/accessibility/fallback tests passed. No production page or Academy registration flow is implemented by this study. The existing homepage reveal remains unchanged. Recommended first placement is Academy, pending visual review.
+
 ## 7 November 2026: reviewed Ash A/B and SEO release
 
 Ruben authorized fixes, a PR, merge and production publication in this chat. The release branch is `codex/ash-seo-release-fixes`. The reviewed bundle includes Ash A/B, the website/chatbot service guide and discovery files. Review fixes preserve excluded-service questions as safe fallbacks, retain commitment handoffs for mixed cancellation/deadline requests, validate all catalogue anchors, publish the approved delivery/payment/search facts, and add a hostname-scoped noindex header for the isolated Ash preview. See `docs/SEO_AI_DISCOVERY_VALIDATION.md` for verification and remaining manual QA limits. No Academy page or LLM fallback is part of this release.
