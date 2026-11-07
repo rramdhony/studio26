@@ -25,7 +25,7 @@ A local prompt preparation failed before a model job started; UTF-8 file handlin
 
 ## Validation
 
-Initial full regression:81/81 passed. Repeat after review fixes:80/81 passed; one unchanged AI-video scroll sampling check missed a phase while competing browser jobs ran. Its isolated rerun passed without a source or test change. Final opening and SEO checks:13/13 passed (9 opening, 3 SEO, 1 video-scroll regression). Ash matcher/source checks:225/225 passed. Four-page HTML validation, JavaScript syntax and diff-whitespace checks passed. Desktop1440px, tablet768px and mobile390px settled screenshots were visually inspected; responsive checks include320px and the750-768px breakpoint band.
+Initial full regression:81/81 passed. Repeat after review fixes:80/81 passed; one unchanged AI-video scroll sampling check missed a phase while competing browser jobs ran. Its isolated rerun passed without a source or test change. Final opening and SEO checks:13/13 passed (9 opening, 3 SEO, 1 video-scroll regression). After integrating the separately released SEO commit `9934ff0`, the complete combined browser suite passed93/93 in3.4minutes with one worker, and Ash matcher/source checks passed228/228. The reviewed production JS/CSS hashes remained unchanged. Four-page HTML validation, JavaScript syntax and diff-whitespace checks passed. Desktop1440px, tablet768px and mobile390px settled screenshots were visually inspected; responsive checks include320px and the750-768px breakpoint band.
 
 Functional, mobile and automated WCAG AA coverage includes motion controls, missing scripts/graphics, shader failure, context loss, focus, responsive layouts, enlarged/spaced text, enquiry dialog and unchanged service/Ash behavior. `npm run qa` now includes the new opening and existing SEO browser tests.
 
@@ -34,3 +34,7 @@ This is a bounded release review, not full manual QA completion. Physical device
 ## Reviewed production file hashes (SHA-256)
 - `public/assets/studio-opening.js`: `3922329fa77e9f3b7216de8808dec7a5b7fabf9607b0f4458752dacac19248d8`
 - `public/assets/studio-opening.css`: `46f5f8b1ee953f719c0f152cd2e744116da3f597a0b9994c2f1dbd08b1ec9e52`
+
+## Release tracking
+
+PR: https://github.com/rramdhony/studio26/pull/2. Merge and live deployment evidence are recorded in its description after publication. Homepage integration and new assets are synchronized surgically into the three existing local mirrors after backup; unrelated pending edits are preserved.

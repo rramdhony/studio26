@@ -2,7 +2,7 @@
 
 ## 7 November 2026: production homepage opening release
 
-Ruben approved replacing the oversized static homepage artwork with the finite particle reveal and compact settled wordmark. Branch `codex/homepage-logo-reveal` now integrates the study into the actual public homepage; earlier study-only status below is historical. Claude Sonnet CLI review approved the final fixes. Release evidence and manual QA limits: `docs/reviews/homepage-opening-code-review-2026-11-07.md`. The existing footer, enquiry flow, Ash and discovery content remain in place. Academy is still future work. Merge/deploy is authorized after the final checks pass.
+Ruben approved replacing the oversized static homepage artwork with the finite particle reveal and compact settled wordmark. Branch `codex/homepage-logo-reveal` now integrates the study into the actual public homepage; earlier study-only status below is historical. Claude Sonnet CLI review approved the final fixes. Release evidence and manual QA limits: `docs/reviews/homepage-opening-code-review-2026-11-07.md`. The existing footer, enquiry flow, Ash and discovery content remain in place. Academy is still future work. Release PR: https://github.com/rramdhony/studio26/pull/2. Its description records merge and deployment verification after the final checks pass. The separate SEO update `9934ff0` was integrated without changing the reviewed opening assets.
 
 ## 7 November 2026: Academy opening study
 
