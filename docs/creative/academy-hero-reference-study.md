@@ -1,5 +1,11 @@
 # Academy opening: reference study
 
+## Revised direction after Ruben’s review
+
+Ruben prefers the homepage particle-to-logo reveal, with a compact mark after the animation and the large footer signature. The local study defaults to this 4.4-second composition. The mark settles to 384px on the tested desktop and approximately 258px on mobile. The existing headline and offer become the focus. This supersedes the initial Academy-first recommendation below.
+
+The revision is isolated in branch `codex/homepage-logo-reveal` in its own worktree after a concurrent process restored the earlier study files in the shared checkout. Unrelated site work remains untouched. No production page is changed by this study. All six focused checks passed again in the isolated checkout (36.9 seconds), including compact desktop/mobile sizing and exactly one H1 after mode selection. HTML and JavaScript validation passed.
+
 7 November 2026. Branch: `codex/academy-hero-study`. Backup reference: `backup/pre-academy-20261107-40bf0b8`.
 
 ## Reference findings
@@ -30,7 +36,7 @@ The study uses original procedural geometry and original shaders. It does not re
 
 ## Local review
 
-Run `node scripts/serve-academy-study.mjs`, then open http://127.0.0.1:3001/.
+Run `node scripts/serve-academy-study.mjs`, then open http://127.0.0.1:3002/.
 
 Study source lives under `experiments/`, outside deployed `public/`. The server exposes only an explicit file allow-list, binds to localhost, and adds noindex headers. No production page, navigation, sitemap, form or Ash content is changed.
 

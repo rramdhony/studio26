@@ -7,10 +7,28 @@
   const pause = document.getElementById('pause-motion');
   const replay = document.getElementById('replay-motion');
   const status = document.getElementById('motion-status');
-  let mode = 'academy';
+  let mode = 'logo';
   let gl, program, buffer, frame = 0, time = 0, last = 0, playing = false, visible = true;
   let pointer = [0, 0], current = [0, 0], energy = 0, count = 0;
   const uniforms = {};
+  const duration = () => mode === 'logo' ? 4.4 : 6;
+  const ease = n => { const t = Math.max(0, Math.min(1, n)); return t*t*(3-2*t); };
+  function headingLevel(id, tag) {
+    const old = document.getElementById(id);
+    if(old.tagName.toLowerCase() === tag) return;
+    const heading = document.createElement(tag); heading.id = id;
+    heading.append(...old.childNodes); old.replaceWith(heading);
+  }
+  function logoFrame(reveal, compact) {
+    const mobile = stage.clientWidth < 750;
+    stage.style.setProperty('--logo-opacity', String(reveal));
+    stage.style.setProperty('--logo-scale', String(.96 + reveal*.04 - compact*(mobile ? .28 : .52)));
+    stage.style.setProperty('--logo-x', `${compact*(mobile ? 0 : stage.clientWidth*.19)}px`);
+    stage.style.setProperty('--logo-y', `${compact*(mobile ? -190 : -70)}px`);
+    stage.style.setProperty('--particle-opacity', String(1-reveal));
+    stage.style.setProperty('--copy-opacity', String(compact));
+    stage.dataset.phase = compact >= 1 ? 'settled' : 'revealing';
+  }
   const vertex = `
     precision highp float;
     attribute vec3 aBase;
@@ -64,9 +82,7 @@
     stage.dataset.playing = 'false';
     pause.textContent = 'Play motion';
     if (mode === 'logo') {
-      stage.style.setProperty('--logo-opacity', '1');
-      stage.style.setProperty('--logo-scale', '1');
-      stage.style.setProperty('--particle-opacity', '0');
+      logoFrame(1, 1);
     }
   }
   function build() {
@@ -119,7 +135,7 @@
     }
   }
   function resize() {
-    if(!gl) return;
+    if(!gl) { if(mode==='logo') logoFrame(1,1); return; }
     const dpr = Math.min(devicePixelRatio || 1,1.5);
     const w=stage.clientWidth,h=stage.clientHeight;
     canvas.width=Math.round(w*dpr);canvas.height=Math.round(h*dpr);
@@ -127,6 +143,7 @@
     gl.uniform1f(uniforms.uAspect,w/h);gl.uniform1f(uniforms.uDpr,dpr);
     gl.uniform1f(uniforms.uScale,w<750?.30:.65);
     draw();
+    if(!playing && mode==='logo' && (time>=duration() || reduced.matches)) logoFrame(1,1);
   }
   function draw() {
     if(!gl || gl.isContextLost()) return;
@@ -136,11 +153,7 @@
     gl.uniform1f(uniforms.uEnergy,energy);gl.uniform2f(uniforms.uPointer,current[0],current[1]);
     gl.drawArrays(gl.POINTS,0,count);
     if(mode==='logo') {
-      const reveal = Math.max(0,Math.min(1,(time-2.25)/1.1));
-      const eased = reveal*reveal*(3-2*reveal);
-      stage.style.setProperty('--logo-opacity',String(eased));
-      stage.style.setProperty('--logo-scale',String(.96+eased*.04));
-      stage.style.setProperty('--particle-opacity',String(1-eased));
+      logoFrame(ease((time-1.45)/.9), ease((time-2.35)/1.4));
     }
   }
   function tick(now) {
@@ -149,18 +162,19 @@
     time+=Math.min((now-last)/1000,.05);last=now;
     current=current.map((v,i)=>v+(pointer[i]-v)*.045);energy*=.96;
     draw();
-    if(time>=(mode==='logo'?4:6)) { settle(); announce('Opening complete. Replay is available.'); return; }
+    if(time>=duration()) { settle(); announce('Opening complete. Replay is available.'); return; }
     frame=requestAnimationFrame(tick);
   }
   function start(reset=false) {
     if(reduced.matches || !gl) return;
     if(reset) {time=0;energy=0;current=[0,0];pointer=[0,0];}
     playing=true;stage.dataset.playing='true';pause.hidden=false;pause.textContent='Pause motion';
+    if(reset) draw();
     if(!frame && visible && !document.hidden) {last=performance.now();frame=requestAnimationFrame(tick);}
   }
   pause.addEventListener('click',()=>{
     if(playing) {playing=false;cancelAnimationFrame(frame);frame=0;stage.dataset.playing='false';pause.textContent='Resume motion';announce('Opening paused.');}
-    else {start(time>=(mode==='logo'?4:6));announce('Opening playing.');}
+    else {start(time>=duration());announce('Opening playing.');}
   });
   replay.addEventListener('click',()=>{start(true);announce('Opening replaying.');});
   document.querySelectorAll('[data-mode]').forEach(button=>{
@@ -169,7 +183,12 @@
       mode=button.dataset.mode;stage.dataset.mode=mode;
       document.querySelectorAll('button[data-mode]').forEach(b=>b.setAttribute('aria-pressed',String(b===button)));
       document.getElementById('stage-identity').textContent=mode==='academy'?'Studio26 Academy':'Studio26';
-      document.getElementById('stage-note').textContent=mode==='academy'?'An idea taking shape.':'Particles into presence.';
+      document.getElementById('stage-note').textContent=mode==='academy'?'An idea taking shape.':'Websites, AI assistants & films.';
+      document.querySelector('.academy-copy').hidden = mode !== 'academy';
+      document.querySelector('.homepage-copy').hidden = mode !== 'logo';
+      headingLevel('hero-title', mode === 'academy' ? 'h1' : 'h2');
+      headingLevel('home-title', mode === 'logo' ? 'h1' : 'h2');
+      stage.setAttribute('aria-labelledby', mode === 'academy' ? 'hero-title' : 'home-title');
       document.querySelector('.logo-reveal').setAttribute('aria-hidden',String(mode!=='logo'));
       start(true);
       if(reduced.matches || !gl) settle();
@@ -187,9 +206,10 @@
   if('IntersectionObserver' in window) new IntersectionObserver(entries=>{visible=entries[0].isIntersecting;syncVisibility();}).observe(stage);
   reduced.addEventListener('change',()=>{
     if(reduced.matches){settle();pause.hidden=true;replay.hidden=true;stage.dataset.ready='false';}
-    else {if(!gl) build();stage.dataset.ready=String(Boolean(gl));replay.hidden=!gl;draw();}
+    else {if(!gl) build();stage.dataset.ready=String(Boolean(gl));replay.hidden=!gl;draw();settle();}
   });
   canvas.addEventListener('webglcontextlost',event=>{event.preventDefault();settle();stage.dataset.ready='false';pause.hidden=true;replay.hidden=true;});
   window.addEventListener('resize',resize,{passive:true});
   if(!reduced.matches && build()) start(true);
+  if(reduced.matches || !gl) settle();
 })();
