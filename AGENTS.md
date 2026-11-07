@@ -9,6 +9,7 @@
 
 ## Quick Reference (7 November 2026)
 
+- **Shared checkout:** never use `git add -A` or `git add .`; stage only the files you changed, and check `git status` for other agents' uncommitted work first (7 Nov 2026: a PR swept another agent's unreviewed edits into production).
 1. **Production Live URL:** `https://studio26.me` (canonical apex). `https://www.studio26.me/*` 301-redirects to `https://studio26.me/*` via `src/index.js` (`run_worker_first = true` in `wrangler.toml`). `.workers.dev` preview subdomains are disabled (`workers_dev = false`).
 2. **Synchronized Checkouts:** `C:\Users\ruben\Documents\GitHub\studio26` (canonical GitHub repo, deploys to production on every push to `main`) and `C:\Users\ruben\Downloads\studio26\site`.
 3. **Mandatory Backup Rule:** Create a git backup branch/tag or file snapshot in `C:\Users\ruben\Downloads\studio26\backups\<timestamp>` before editing any files.

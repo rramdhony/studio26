@@ -1,5 +1,9 @@
 # Studio26 build status
 
+## 7 November 2026 (late): privacy reconciliation
+
+PRs #3-#7 merged and live: CTA/hover fixes, enforced 12-month purge for `ash_questions` and `site_events`, pseudonymised wording, input notice, DPA s.28(1)(b)(vii) citation, notice covering the page-view/click log. Matcher 233/233; full browser suite 92/93 (one load-sensitive opening timing test passes alone). See HANDOFF.md for decisions and open items.
+
 ## 7 November 2026: SWOT conversion upgrades, footer WhatsApp & first-party click/visitor telemetry
 
 - **Reframed `#founder` Senior Positioning (Item A):** Updated `public/index.html` (`#founder`), `public/websites-ai-chatbots.html` (`#work`), `public/llms.txt`, and `public/assets/catalogue.v1.json` (`team`, `chatbot-builder`) so Studio26 leads with founder Ruben Ramdhony's architectural and creative direction (`Founder & Creative Director`) and personal sign-off on every build rather than "emerging developers".

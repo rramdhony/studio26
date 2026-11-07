@@ -28,16 +28,17 @@ Core commercial offerings & published terms (`PUBLISHED_PRICES` in `public/asset
 - `public/privacy.html` - Privacy Notice (Mauritius Data Protection Act 2017), WCAG 2.1 Level AA Accessibility Statement (`#accessibility`), and Website & Creative Terms (`#terms`).
 - `public/llms.txt`, `public/robots.txt`, `public/sitemap.xml` - AI search (GEO) and crawler discovery files.
 - `src/index.js` - Cloudflare Worker handling canonical `www` -> apex 301 redirects, `POST /api/enquiry` (contact form + Ash project briefs stored in D1 `enquiries` and emailed via Cloudflare Email Routing), `POST /api/ash-question` (anonymous market-demand question telemetry stored in D1 `ash_questions` with `country`, salted `SHA-256` `ip_hash`, and PII redaction), and `/video/*` HTTP 206 Range streaming.
-- `migrations/0001_enquiries.sql` through `migrations/0004_ash_questions.sql` - D1 schema migrations for `enquiries` and `ash_questions`.
-- `public/assets/ash-widget.js`, `ash-widget.css`, `catalogue.v1.json` - Ash studio assistant (bilingual EN/FR Q&A, Tier-1 alias + Tier-2 intent classifier, anonymous question telemetry to `/api/ash-question`, click-to-reveal address protection, and in-dialog project brief submission to `/api/enquiry`).
+- `migrations/0001_enquiries.sql` through `migrations/0005_site_events.sql` - D1 schema migrations for `enquiries`, `ash_questions` and `site_events`.
+- `public/assets/ash-widget.js`, `ash-widget.css`, `catalogue.v1.json` - Ash studio assistant (bilingual EN/FR Q&A, Tier-1 alias + Tier-2 intent classifier, pseudonymised question telemetry to `/api/ash-question`, click-to-reveal address protection, and in-dialog project brief submission to `/api/enquiry`).
 - `.github/qa/ash-matcher.test.mjs`, `.github/qa/seo.spec.js`, `.github/qa/qa.spec.js` - Unit, SEO/discovery, and 3-pillar Playwright + `axe-core` QA suites.
 
 ## 4. QA & Operational Commands
 
+- **Shared checkout:** never use `git add -A` or `git add .`; stage only the files you changed, and check `git status` for other agents' uncommitted work first (7 Nov 2026: a PR swept another agent's unreviewed edits into production).
 - `npm run test:ash` - Runs the 231+ Node unit tests covering Ash catalogue validation, bilingual intent matching, exclusions, prompt-injection/commitment safeguards, price synchronization (`B7`), `www` 301 redirect hardening, and `/api/ash-question` telemetry.
 - `npm run qa:html` - Runs `html-validate` across `public/index.html`, `public/ai-video.html`, `public/privacy.html`, and `public/websites-ai-chatbots.html`.
 - `npm run qa` - Runs unit tests + full Playwright 3-pillar QA suite.
-- `npm run ash:questions` - Queries the latest 50 anonymous visitor questions from remote D1 (`ash_questions`) with timestamp, country code, 8-char visitor hash prefix, language, page, matched topic ID, and redacted question.
+- `npm run ash:questions` - Queries the latest 50 pseudonymised visitor questions from remote D1 (`ash_questions`) with timestamp, country code, 8-char visitor hash prefix, language, page, matched topic ID, and redacted question.
 - `npm run ash:enquiries` - Queries the latest 20 submitted project briefs/enquiries from remote D1 (`enquiries`).
 - `npm run site:stats` - Aggregated breakdown of pageviews and CTA clicks (`page_view`, `whatsapp_click`, `ash_open`, `contact_open`, `portfolio_click`, `linkedin_click`, `cta_click`) by country and unique visitor hash from D1 `site_events`.
 - `npm run site:clicks` - Latest 50 visitor click and pageview events in real time.
