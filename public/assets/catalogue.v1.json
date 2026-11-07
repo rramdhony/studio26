@@ -617,7 +617,7 @@
       "id": "chatbot-builder",
       "source": "https://studio26.me/#founder",
       "en": {
-        "text": "Our development team in Mauritius will build your chatbot. Ruben Ramdhony, Studio26’s founder, mentors the developers and personally reviews their work before your chatbot goes live.",
+        "text": "Our studio engineering team in Mauritius builds your website and AI assistant under the direct technical leadership of founder Ruben Ramdhony, who personally reviews and signs off every build before launch.",
         "aliases": [
           "Who will build my chatbot?",
           "Who builds the chatbot?",
@@ -638,7 +638,7 @@
         ]
       },
       "fr": {
-        "text": "Notre équipe de développement à Maurice créera votre chatbot. Ruben Ramdhony, le fondateur de Studio26, accompagne les développeurs et vérifie personnellement leur travail avant la mise en ligne de votre chatbot.",
+        "text": "Notre équipe d’ingénierie à Maurice conçoit et développe votre site et votre assistant IA sous la direction technique de Ruben Ramdhony, fondateur de Studio26, qui vérifie et valide personnellement chaque réalisation avant sa mise en ligne.",
         "aliases": [
           "Qui va créer mon chatbot ?",
           "Qui va développer mon chatbot ?",
@@ -662,7 +662,7 @@
       "source": "https://studio26.me/#founder",
       "en": {
         "label": "The team",
-        "text": "Studio26 is led by its founder, Ruben Ramdhony, who mentors emerging developers and reviews every delivery. The studio is based in Mauritius and works remotely worldwide.",
+        "text": "Studio26 is led by its founder, Ruben Ramdhony, who directs the studio’s architecture and creative work with our dedicated team in Mauritius and personally reviews and signs off every delivery. We work with clients in Mauritius and worldwide.",
         "aliases": [
           "Team",
           "The team",
@@ -699,7 +699,7 @@
       },
       "fr": {
         "label": "L’équipe",
-        "text": "Studio26 est dirigé par son fondateur, Ruben Ramdhony, qui accompagne de jeunes développeurs et vérifie chaque livraison. Le studio est basé à l’île Maurice et travaille à distance dans le monde entier.",
+        "text": "Studio26 est dirigé par son fondateur, Ruben Ramdhony, qui pilote l’architecture et la direction créative avec notre équipe dédiée à Maurice et valide personnellement chaque livraison. Nous accompagnons des clients à l’île Maurice et à l’international.",
         "aliases": [
           "Équipe",
           "L'équipe",
@@ -1800,7 +1800,7 @@
       "id": "ecommerce",
       "source": "https://studio26.me/#services",
       "en": {
-        "text": "Yes. Studio26 designs and builds custom online stores and e-commerce experiences tailored to your business, including product catalogues, checkout flows, payment gateway integration and Shopify or custom storefronts. Custom websites start from US$2,500 and e-commerce scope is confirmed on discovery. Use Send a project brief below to tell Ruben and the team what you are selling.",
+        "text": "Yes. Studio26 designs and builds custom online stores and e-commerce experiences tailored to your business, including product catalogues, checkout flows and online payment options suited to your market. Custom websites start from US$2,500 and e-commerce scope is confirmed on discovery. Use Send a project brief below to tell Ruben and the team what you are selling.",
         "aliases": [
           "Can you build me a Shopify store?",
           "Do you build Shopify stores?",
@@ -1816,7 +1816,7 @@
         ]
       },
       "fr": {
-        "text": "Oui. Studio26 conçoit et développe des boutiques en ligne et des sites e-commerce sur mesure adaptés à votre activité, incluant catalogues produits, parcours de commande, intégration de paiement et boutiques Shopify ou sur mesure. Nos sites démarrent à 2 500 USD et le périmètre e-commerce est défini lors de la découverte. Utilisez Envoyer un brief ci-dessous pour nous décrire votre projet.",
+        "text": "Oui. Studio26 conçoit et développe des boutiques en ligne et des sites e-commerce sur mesure adaptés à votre activité, incluant catalogues produits, parcours de commande et solutions de paiement en ligne adaptées à votre marché. Nos sites démarrent à 2 500 USD et le périmètre e-commerce est défini lors de la découverte. Utilisez Envoyer un brief ci-dessous pour nous décrire votre projet.",
         "aliases": [
           "Pouvez-vous créer une boutique Shopify ?",
           "Utilisez-vous Shopify ?",
