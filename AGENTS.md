@@ -23,3 +23,5 @@
    - **Pseudonymised Question Logger (`POST /api/ash-question` -> D1 `ash_questions`):** Logs visitor questions with automatic email/phone redaction (`redactPii`), matched topic ID (`matched_id`), language (`en`/`fr`), source (`typed`/`topic`), page path, 2-letter Cloudflare edge country code (`country`), and salted `SHA-256` IP hash (`ip_hash`). Never stores raw IP addresses.
    - **Inspect live visitor questions:** `npm run ash:questions`
    - **Inspect live project enquiries:** `npm run ash:enquiries`
+- `npm run site:stats` - Aggregated breakdown of pageviews and CTA clicks (`page_view`, `whatsapp_click`, `ash_open`, `contact_open`, `portfolio_click`, `linkedin_click`, `cta_click`) by country and unique visitor hash from D1 `site_events`.
+- `npm run site:clicks` - Latest 50 visitor click and pageview events in real time.

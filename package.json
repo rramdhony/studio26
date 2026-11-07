@@ -10,7 +10,9 @@
     "qa:html": "html-validate --config .github/qa/.htmlvalidate.json public/index.html public/ai-video.html public/privacy.html public/websites-ai-chatbots.html",
     "postinstall": "playwright install chromium",
     "ash:questions": "wrangler d1 execute studio26-db --remote --command \"SELECT id, created_at, country, substr(ip_hash, 1, 8) AS visitor, lang, source, page, matched_id, question FROM ash_questions ORDER BY id DESC LIMIT 50;\"",
-    "ash:enquiries": "wrangler d1 execute studio26-db --remote --command \"SELECT id, created_at, name, email, company, need, source, message FROM enquiries ORDER BY id DESC LIMIT 20;\""
+    "ash:enquiries": "wrangler d1 execute studio26-db --remote --command \"SELECT id, created_at, name, email, company, need, source, message FROM enquiries ORDER BY id DESC LIMIT 20;\"",
+    "site:stats": "wrangler d1 execute studio26-db --remote --command \"SELECT event, target, country, COUNT(*) AS hits, COUNT(DISTINCT ip_hash) AS unique_visitors FROM site_events GROUP BY event, target, country ORDER BY hits DESC LIMIT 40;\"",
+    "site:clicks": "wrangler d1 execute studio26-db --remote --command \"SELECT id, created_at, country, substr(ip_hash, 1, 8) AS visitor, page, event, target FROM site_events ORDER BY id DESC LIMIT 50;\""
   },
   "devDependencies": {
     "@axe-core/playwright": "^4.9.1",

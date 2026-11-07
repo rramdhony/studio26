@@ -115,6 +115,14 @@ async function handleApi(request, env, ctx, url) {
       return json({ error: 'Enquiries are temporarily unavailable. Please try again.' }, 503);
     }
   }
+  if (url.pathname === '/api/event') {
+    if (request.method !== 'GET') return json({ error: 'Method not allowed' }, 405, { Allow: 'GET' });
+    try {
+      return await handleSiteEvent(request, env, url);
+    } catch {
+      return new Response(null, { status: 204, headers: SECURITY_HEADERS });
+    }
+  }
   if (url.pathname === '/api/ash-question') {
     if (request.method !== 'POST') return json({ error: 'Method not allowed' }, 405, { Allow: 'POST' });
     try {
@@ -434,11 +442,60 @@ async function handleAshQuestion(request, env, url) {
   return json({ ok: true }, 202);
 }
 
+const SITE_EVENT_RE = /^[a-z0-9_]{2,40}$/;
+const SITE_EVENT_LIMIT_PER_IP_HOUR = 180;
+const SITE_EVENT_GLOBAL_PER_HOUR = 3000;
+
+async function handleSiteEvent(request, env, url) {
+  const fetchSite = request.headers.get('Sec-Fetch-Site');
+  if (fetchSite && fetchSite !== 'same-origin' && fetchSite !== 'none') {
+    return new Response(null, { status: 403, headers: SECURITY_HEADERS });
+  }
+  if (!env.DB || !env.IP_SALT) {
+    return new Response(null, { status: 204, headers: SECURITY_HEADERS });
+  }
+
+  const rawEvent = (url.searchParams.get('e') || '').trim();
+  if (!SITE_EVENT_RE.test(rawEvent)) {
+    return new Response(null, { status: 204, headers: SECURITY_HEADERS });
+  }
+  const rawTarget = (url.searchParams.get('t') || '').trim().replace(/[^a-zA-Z0-9._/-]/g, '').slice(0, 80);
+  const rawPage = (url.searchParams.get('p') || '/').trim();
+  const pagePath = ('/' + rawPage.replace(/^\/+/, '').replace(/[^\w/-]/g, '')).slice(0, 120) || '/';
+
+  const rawCountry = String(request.cf?.country || request.headers.get('CF-IPCountry') || '').toUpperCase();
+  const country = /^[A-Z]{2}$/.test(rawCountry) ? rawCountry : 'XX';
+
+  const network = rateLimitNetwork(request.headers.get('CF-Connecting-IP') || '');
+  const ipHash = await hash(network + env.IP_SALT);
+
+  await env.DB.prepare(
+    "INSERT INTO site_events (country, ip_hash, page, event, target) " +
+    "SELECT ?, ?, ?, ?, ? " +
+    "WHERE (SELECT COUNT(*) FROM site_events WHERE ip_hash = ? AND created_at > datetime('now', '-1 hour')) < ? " +
+    "AND (SELECT COUNT(*) FROM site_events WHERE created_at > datetime('now', '-1 hour')) < ?"
+  )
+    .bind(
+      country,
+      ipHash,
+      pagePath,
+      rawEvent,
+      rawTarget,
+      ipHash,
+      SITE_EVENT_LIMIT_PER_IP_HOUR,
+      SITE_EVENT_GLOBAL_PER_HOUR,
+    )
+    .run();
+
+  return new Response(null, { status: 204, headers: SECURITY_HEADERS });
+}
+
 export default {
   async scheduled(_event, env) {
     // Enforce the published 12-month retention of the Ash question log.
     try {
       await env.DB.prepare("DELETE FROM ash_questions WHERE created_at < datetime('now', '-12 months')").run();
+      await env.DB.prepare("DELETE FROM site_events WHERE created_at < datetime('now', '-12 months')").run();
     } catch {}
     if (!env.NOTIFY || !env.NOTIFY_TO || !env.NOTIFY_FROM) return;
     const { results } = await env.DB.prepare(

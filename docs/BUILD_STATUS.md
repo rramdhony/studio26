@@ -1,5 +1,13 @@
 # Studio26 build status
 
+## 7 November 2026: SWOT conversion upgrades, footer WhatsApp & first-party click/visitor telemetry
+
+- **Reframed `#founder` Senior Positioning (Item A):** Updated `public/index.html` (`#founder`), `public/websites-ai-chatbots.html` (`#work`), `public/llms.txt`, and `public/assets/catalogue.v1.json` (`team`, `chatbot-builder`) so Studio26 leads with founder Ruben Ramdhony's architectural and creative direction (`Founder & Creative Director`) and personal sign-off on every build rather than "emerging developers".
+- **Global E-Commerce & Payment Options (Item B):** Updated `public/index.html`, `public/websites-ai-chatbots.html`, `public/llms.txt`, and `public/assets/catalogue.v1.json` (`ecommerce`) to highlight custom online stores, checkout flows, and online payment integration tailored to the client's market.
+- **4-Point Studio Commitments / Risk-Reversal (Item C):** Added the 4-point Studio Commitments strip (`.service-commitments`) to `public/index.html` (`#services`) and `public/websites-ai-chatbots.html` (`#payments`): Fixed written quote after free 30-min discovery call; 50% upfront / 50% on delivery; 100% client ownership of code, domain, and video masters; and one-business-day reply in EN/FR.
+- **Footer WhatsApp CTA (Item D):** Added `Chat on WhatsApp` (`https://wa.me/23054549763`) to the footer across `public/index.html`, `public/websites-ai-chatbots.html`, `public/ai-video.html`, and `public/privacy.html` (leaving Ash without WhatsApp as requested).
+- **First-Party Edge Click & Visitor Telemetry (`migrations/0005_site_events.sql`, `GET /api/event`):** Logs `page_view`, `whatsapp_click`, `ash_open`, `contact_open`, `portfolio_click`, `linkedin_click`, and `cta_click` to D1 `site_events` with 2-letter Cloudflare country code and salted `SHA-256` `ip_hash` (12-month auto-retention in `scheduled()`), plus a built-in `window.gtag` bridge if Google Analytics 4 is loaded. Inspect anytime via `npm run site:stats` and `npm run site:clicks`.
+
 ## Ash market-demand question telemetry (Option A) & SEO Phase 1, 7 November 2026
 
 - Implemented Option A pseudonymised Ash question logging (`migrations/0004_ash_questions.sql`, applied to remote D1 `studio26-db`; `POST /api/ash-question` in `src/index.js`; client beacon and brief pre-fill in `public/assets/ash-widget.js`).

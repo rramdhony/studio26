@@ -548,4 +548,45 @@ describe('SEO: www.studio26.me 301 canonical redirect & open-redirect protection
     const res = await worker.fetch(req, {}, {});
     assert.equal(res.status, 403);
   });
+
+  test('GET /api/event logs whatsapp_click and page_view with country and salted ip_hash', async () => {
+    let boundArgs = null;
+    const env = {
+      IP_SALT: 'unit-test-secret-salt',
+      DB: {
+        prepare: () => ({
+          bind: (...args) => {
+            boundArgs = args;
+            return { run: async () => ({ meta: { changes: 1 } }) };
+          },
+        }),
+      },
+    };
+    const req = new Request('https://studio26.me/api/event?e=whatsapp_click&t=whatsapp_footer&p=/websites-ai-chatbots', {
+      method: 'GET',
+      headers: {
+        'Sec-Fetch-Site': 'same-origin',
+        'CF-Connecting-IP': '197.225.10.20',
+        'CF-IPCountry': 'MU',
+      },
+    });
+    const res = await worker.fetch(req, env, {});
+    assert.equal(res.status, 204);
+    assert.ok(boundArgs, 'DB bind should be called for /api/event');
+    const [country, ipHash, pagePath, eventName, targetName] = boundArgs;
+    assert.equal(country, 'MU');
+    assert.match(ipHash, /^[0-9a-f]{32}$/);
+    assert.equal(pagePath, '/websites-ai-chatbots');
+    assert.equal(eventName, 'whatsapp_click');
+    assert.equal(targetName, 'whatsapp_footer');
+  });
+
+  test('GET /api/event rejects cross-site Sec-Fetch-Site with 403', async () => {
+    const req = new Request('https://studio26.me/api/event?e=whatsapp_click&t=whatsapp_footer&p=/', {
+      method: 'GET',
+      headers: { 'Sec-Fetch-Site': 'cross-site' },
+    });
+    const res = await worker.fetch(req, {}, {});
+    assert.equal(res.status, 403);
+  });
 });

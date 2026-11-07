@@ -39,3 +39,5 @@ Core commercial offerings & published terms (`PUBLISHED_PRICES` in `public/asset
 - `npm run qa` - Runs unit tests + full Playwright 3-pillar QA suite.
 - `npm run ash:questions` - Queries the latest 50 anonymous visitor questions from remote D1 (`ash_questions`) with timestamp, country code, 8-char visitor hash prefix, language, page, matched topic ID, and redacted question.
 - `npm run ash:enquiries` - Queries the latest 20 submitted project briefs/enquiries from remote D1 (`enquiries`).
+- `npm run site:stats` - Aggregated breakdown of pageviews and CTA clicks (`page_view`, `whatsapp_click`, `ash_open`, `contact_open`, `portfolio_click`, `linkedin_click`, `cta_click`) by country and unique visitor hash from D1 `site_events`.
+- `npm run site:clicks` - Latest 50 visitor click and pageview events in real time.
