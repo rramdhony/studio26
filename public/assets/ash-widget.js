@@ -108,7 +108,7 @@ const UI = {
     dialogNote: 'L’assistante de Studio26. Les réponses proviennent des pages publiées par le studio.',
     transcriptLabel: 'Conversation',
     intro:
-      'Bonjour, je suis Ash. Posez-moi vos questions sur nos sites web, assistants IA, vidéos IA et tarifs, ou envoyez un brief à Ruben et à son équipe.',
+      'Bonjour, je suis Ash. Posez-moi vos questions sur nos sites web, assistants IA, vidéos IA et tarifs, ou envoyez un brief à notre équipe.',
     you: 'Vous',
     ash: 'Ash',
     topicsLabel: 'Ou choisissez un sujet',
