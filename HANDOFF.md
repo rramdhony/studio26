@@ -1,5 +1,38 @@
 # Studio26 — Handoff & Unified Status (All LLM Agents)
 
+## 12 November 2026: availability hardening, www redirect rule and CI gate (PR #8, live)
+
+Live on studio26.me since 12 Nov 2026, 10:50 UTC: merge commit `55114d2`, Worker version `0cdd73d2-6f5a-46c3-9e4e-d5ca3a57b6f3`. PR: https://github.com/rramdhony/studio26/pull/8. This section overrides older notes below about `run_worker_first`, the www redirect, telemetry limits and CI.
+
+- **The Worker runs first only for `/api/*` and `/video/*`** (`run_worker_first = ["/api/*", "/video/*"]` in `wrangler.toml`). Pages and assets are served directly. Why: with `run_worker_first = true`, every page, image, CSS and JS request was a Worker invocation. The Workers free plan allows 100,000 a day and then returns 429 instead of the asset ([Cloudflare docs](https://developers.cloudflare.com/workers/static-assets/billing-and-limitations/)), so a short flood could take the whole site down. Do not set it back to `true`. If you add a Worker-handled path, add it to the array and to the unit test that pins it.
+- **www -> apex 301 now comes from a Cloudflare Single Redirect rule**, not the Worker. Rule name "Redirect www.studio26.me to studio26.me (301)", in the dashboard under studio26.me > Rules > Redirect Rules. Pattern `http*://www.studio26.me/*`, target `https://studio26.me/${2}`, 301, query string kept. Created on 12 Nov at Ruben's request and verified for https, http, query strings and `//evil.com` paths (all stay on studio26.me). Do not delete or disable it. The Worker's own www 301 in `src/index.js` remains as a fallback, but now only sees `/api/*`, `/video/*` and unmatched paths.
+- **Telemetry can no longer drain D1.** `GET /api/event` and `POST /api/ash-question` check per-visitor rate-limit bindings before any D1 query:
+  - `EVENT_GATE`: 20/min, namespace `260261112`
+  - `ASH_GATE`: 12/min, namespace `260261113`
+  - Over the limit, the event or question is dropped quietly (204/202), so visitors get no console errors.
+  - The global hourly caps are 300 events and 120 questions; vars `SITE_EVENT_GLOBAL_PER_HOUR` and `ASH_QUESTION_GLOBAL_PER_HOUR` can override them. They use an id-based check that reads two rows, not `COUNT(*)`.
+  - Why: D1 free-tier queries fail, including `/api/enquiry`, once the daily row quota is exceeded ([enforced since 1 Sep 2026](https://developers.cloudflare.com/changelog/post/2026-09-01-d1-free-tier-limit-enforcement/)). Rules for future work: never put a `COUNT(*)` over a time window on a public request path, and give every new rate-limit binding a unique `namespace_id` (shared ids share counters).
+- **`/websites-ai-chatbots` now loads `site.js`**, so its page views and clicks are recorded in `site_events` from 12 Nov. Before that the page was untracked, so missing rows for it do not mean zero traffic.
+- **CI gate.** `.github/workflows/deploy.yml` now has a `test` job (`npm ci --ignore-scripts`, `npm run test:ash`, `npm run qa:html`, `npx wrangler deploy --dry-run`). It runs on every PR and every push to `main`, and `deploy` runs only after it passes. A failing unit test or invalid HTML now blocks production. Playwright still runs locally only (`npm run qa`), per the Build & Deploy Playbook. Actions are pinned to commit SHAs. GitHub shows a Node 20 deprecation notice for them; it is harmless for now, so bump the pins when convenient. Any page added to `qa:html` must pass in CI.
+- **Tests:** `npm run test:ash` is now 244 tests, 11 of them new, including the hourly cap run against real `node:sqlite`. Config guards fail if `run_worker_first` changes, if rate-limit namespaces collide, if a public page drops `site.js`, or if deploy stops depending on the tests. Full `npm run qa` on the branch: 93/93 Playwright checks pass.
+- **Verified live after the deploy:**
+  - all pages and assets load
+  - `/video/*` returns 206 with `Content-Range`
+  - cross-site `/api/event` returns 403, and `GET /api/enquiry` returns 405
+  - security headers are still sent on pages
+  - www redirects with 301
+- **Production data at the time (7 to 12 Nov, read-only D1 query):**
+  - 8 distinct visitors and 35 page views, mostly Mauritius and direct traffic
+  - 1 logged Ash question (a topic click)
+  - 4 enquiries, all before 5 Nov
+- **Not covered:**
+  - no production load test
+  - rate-limit bindings are approximate and counted per Cloudflare location
+  - flood traffic to `/api/*` still spends Worker requests; a free WAF rate-limiting rule on `/api/` would stop it earlier (not done)
+- **Rollback:** `npx wrangler rollback`.
+- **Backups:** branches `backup/pre-availability-fixes-20261112-fa696d2` and `backup/pre-docs-availability-20261112-55114d2`.
+- **Shared checkout warning:** the 12 Nov Academy prototype in `C:\Users\ruben\Documents\GitHub\studio26` was still uncommitted when this landed, and it also edits `HANDOFF.md` and `docs/BUILD_STATUS.md`. `git pull` there will refuse until that work is committed. Then merge both files keeping both 12 Nov sections. No code files overlap.
+
 ## 7 November 2026 (late): privacy notice reconciled, review fixes, shared-checkout rule
 
 - **Live now (PRs #3-#7, all squash-merged, deployed by CI):** opening CTA pills and Replay/Ash overlap fixed; service pill hover text fixed; Ash question log has an enforced 12-month purge (`scheduled()` deletes old `ash_questions` and `site_events`); "anonymous" corrected to "pseudonymised" (salted IP hash is kept); visible EN/FR notice under Ash's input (`.ash-log-notice`, i18n `logNotice`/`logPrivacyLink`); privacy notice and Ash's `privacy-data` answer now describe both the question log and the first-party page-view/click log.

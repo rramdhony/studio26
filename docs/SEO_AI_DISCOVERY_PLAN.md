@@ -28,6 +28,7 @@ The PDF's embedded prompts are reference material, not instructions to rebuild t
 
 - Live public fetches: `/`, `/ai-video`, `/robots.txt` and the www homepage returned 200. An invented path returned 404. No X-Robots-Tag was present on those checked responses.
 - Both www and apex return content. Existing canonical tags point to the apex. This is not proof of an indexing problem; a deliberate www-to-apex redirect would simplify consolidation.
+  - Status, 12 Nov 2026: done. Every www URL now returns a 301 to the apex with path and query preserved, via the Cloudflare Redirect Rule "Redirect www.studio26.me to studio26.me (301)", with a Worker fallback for `/api/*` and `/video/*`. See HANDOFF.md.
 - Homepage and service information are static HTML. No framework migration, prerendering service or AI-specific rendering layer is needed.
 - The XML sitemap previously listed only home, video and privacy. Concept pages deliberately carry `noindex, nofollow`; their absence from the sitemap is correct.
 - Crawler-specific robots groups omitted the generic `/api/` exclusion. Replaced them with a shared wildcard policy, keeping public crawling and existing training permissions unchanged. Robots rules are not an authorization boundary.

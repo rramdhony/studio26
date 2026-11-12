@@ -1,5 +1,17 @@
 # Studio26 build status
 
+## 12 November 2026: availability hardening and CI gate (PR #8, live)
+
+Live since 12 Nov 10:50 UTC (merge `55114d2`, Worker version `0cdd73d2-6f5a-46c3-9e4e-d5ca3a57b6f3`).
+
+- `run_worker_first` is now `["/api/*", "/video/*"]`, so pages and assets no longer use the Workers free-plan request quota.
+- www -> apex 301 now comes from the Cloudflare Redirect Rule "Redirect www.studio26.me to studio26.me (301)".
+- `/api/event` and `/api/ash-question` are gated by `EVENT_GATE` (20/min) and `ASH_GATE` (12/min) before any D1 query. Their hourly caps (300 / 120) no longer run `COUNT(*)`.
+- `/websites-ai-chatbots` now loads `site.js`.
+- `deploy.yml` runs unit tests, HTML validation and a wrangler dry-run on PRs and before every deploy.
+
+Unit tests 244/244, Playwright 93/93, HTML validation and dry-run pass. Live checks after deploy all pass. No production load test. Details, reasons and open items: HANDOFF.md, 12 November 2026 section.
+
 ## 7 November 2026 (late): privacy reconciliation
 
 PRs #3-#7 merged and live: CTA/hover fixes, enforced 12-month purge for `ash_questions` and `site_events`, pseudonymised wording, input notice, DPA s.28(1)(b)(vii) citation, notice covering the page-view/click log. Matcher 233/233; full browser suite 92/93 (one load-sensitive opening timing test passes alone). See HANDOFF.md for decisions and open items.
