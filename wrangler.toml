@@ -10,7 +10,12 @@ routes = [
 [assets]
 directory = "./public"
 binding = "ASSETS"
-run_worker_first = true
+# Only API and video requests invoke the Worker. Pages and assets are served directly, so they
+# cost no Worker requests and stay up if the daily Workers quota is exhausted (with
+# run_worker_first = true, every request counted and an exhausted quota returned 429 site-wide).
+# Consequence: the Worker no longer sees page requests on www.studio26.me, so the www -> apex
+# 301 for pages must come from a Cloudflare Redirect Rule ("Redirect from WWW to Root").
+run_worker_first = ["/api/*", "/video/*"]
 
 [[d1_databases]]
 binding = "DB"
@@ -29,6 +34,18 @@ ENQUIRY_GLOBAL_PER_HOUR = "50"
 name = "ENQUIRY_GATE"
 namespace_id = "260261105"
 simple = { limit = 15, period = 60 }
+
+# Telemetry gates, checked before any D1 query so a flood cannot spend the D1 daily quota
+# that the enquiry form depends on. Keyed per visitor network; approximate, per Cloudflare location.
+[[ratelimits]]
+name = "EVENT_GATE"
+namespace_id = "260261112"
+simple = { limit = 20, period = 60 }
+
+[[ratelimits]]
+name = "ASH_GATE"
+namespace_id = "260261113"
+simple = { limit = 12, period = 60 }
 
 [triggers]
 crons = ["*/5 * * * *"]
