@@ -1,6 +1,9 @@
 import { EmailMessage } from 'cloudflare:email';
 
-// Worker runs first to enforce canonical www -> apex 301 redirects, /api/* endpoints, and /video/* HTTP 206 Range seeking before falling back to static assets.
+// The Worker runs first only for /api/* and /video/* (run_worker_first in wrangler.toml), plus any
+// path that matches no static asset. Pages and assets are served directly and never reach this code,
+// so the www -> apex 301 below covers API, video and unmatched paths; a Cloudflare Redirect Rule
+// covers www page URLs.
 
 async function handleVideoRange(request, env, url) {
   if (request.method !== 'GET' && request.method !== 'HEAD') {
@@ -367,10 +370,40 @@ async function notify(e, env) {
   return true;
 }
 
+// Telemetry limits. The telemetry tables share D1's daily quota with the enquiry form, so
+// nothing here may cost more than a few rows per request, however many requests arrive.
+// - Per visitor: the EVENT_GATE / ASH_GATE rate-limit bindings, checked before any D1 query.
+// - Globally: an hourly cap on inserts, checked in O(1) (see telemetryCapClause).
+// Worst case written per day: (300 + 120) inserts/hour x 24 x 4 rows (table + 3 indexes)
+// = 40,320, under half of D1's free 100,000 rows written per day.
 const ASH_MAX_BODY_BYTES = 4096;
-const ASH_QUESTION_LIMIT_PER_IP_HOUR = 60;
-const ASH_QUESTION_GLOBAL_PER_HOUR = 600;
+const ASH_QUESTION_GLOBAL_PER_HOUR = 120;
 const ASH_MATCHED_ID_RE = /^[a-z0-9-]{2,64}$/;
+
+async function underRateLimit(gate, key) {
+  try {
+    return (await gate.limit({ key })).success === true;
+  } catch {
+    return false;
+  }
+}
+
+// Hourly insert cap without counting rows. Ids only grow, so if the row `cap - 1` ids behind
+// the newest is less than an hour old, at least `cap` rows were written this hour. This reads
+// two rows; COUNT(*) over the last hour read every one of them, on every request.
+// Bind `cap - 1` for the placeholder. `table` is a constant from this file, never user input.
+function telemetryCapClause(table) {
+  return (
+    `WHERE COALESCE((SELECT created_at FROM ${table} ` +
+    `WHERE id <= (SELECT MAX(id) FROM ${table}) - ? ORDER BY id DESC LIMIT 1), '') ` +
+    "<= datetime('now', '-1 hour')"
+  );
+}
+
+function hourlyCap(override, fallback) {
+  const value = Number(override);
+  return Number.isInteger(value) && value > 0 ? value : fallback;
+}
 
 function redactPii(value) {
   return String(value || '')
@@ -388,7 +421,13 @@ async function handleAshQuestion(request, env, url) {
   if (Number(request.headers.get('Content-Length') || 0) > ASH_MAX_BODY_BYTES) {
     return json({ error: 'Payload too large' }, 413);
   }
-  if (!env.DB || !env.IP_SALT) {
+  if (!env.DB || !env.IP_SALT || !env.ASH_GATE) {
+    return json({ ok: false }, 202);
+  }
+  // Over the limit, the question is dropped with the same quiet 202: the beacon is fire-and-forget,
+  // and an error status would only put a console error in a real visitor's browser.
+  const network = rateLimitNetwork(request.headers.get('CF-Connecting-IP') || '');
+  if (!(await underRateLimit(env.ASH_GATE, network))) {
     return json({ ok: false }, 202);
   }
 
@@ -416,14 +455,12 @@ async function handleAshQuestion(request, env, url) {
   const rawCountry = String(request.cf?.country || request.headers.get('CF-IPCountry') || '').toUpperCase();
   const country = /^[A-Z]{2}$/.test(rawCountry) ? rawCountry : 'XX';
 
-  const network = rateLimitNetwork(request.headers.get('CF-Connecting-IP') || '');
   const ipHash = await hash(network + env.IP_SALT);
 
   await env.DB.prepare(
     "INSERT INTO ash_questions (country, ip_hash, page, lang, source, question, matched_id) " +
     "SELECT ?, ?, ?, ?, ?, ?, ? " +
-    "WHERE (SELECT COUNT(*) FROM ash_questions WHERE ip_hash = ? AND created_at > datetime('now', '-1 hour')) < ? " +
-    "AND (SELECT COUNT(*) FROM ash_questions WHERE created_at > datetime('now', '-1 hour')) < ?"
+    telemetryCapClause('ash_questions')
   )
     .bind(
       country,
@@ -433,9 +470,7 @@ async function handleAshQuestion(request, env, url) {
       source,
       question,
       matchedId,
-      ipHash,
-      ASH_QUESTION_LIMIT_PER_IP_HOUR,
-      ASH_QUESTION_GLOBAL_PER_HOUR,
+      hourlyCap(env.ASH_QUESTION_GLOBAL_PER_HOUR, ASH_QUESTION_GLOBAL_PER_HOUR) - 1,
     )
     .run();
 
@@ -443,15 +478,18 @@ async function handleAshQuestion(request, env, url) {
 }
 
 const SITE_EVENT_RE = /^[a-z0-9_]{2,40}$/;
-const SITE_EVENT_LIMIT_PER_IP_HOUR = 180;
-const SITE_EVENT_GLOBAL_PER_HOUR = 3000;
+const SITE_EVENT_GLOBAL_PER_HOUR = 300;
 
 async function handleSiteEvent(request, env, url) {
   const fetchSite = request.headers.get('Sec-Fetch-Site');
   if (fetchSite && fetchSite !== 'same-origin' && fetchSite !== 'none') {
     return new Response(null, { status: 403, headers: SECURITY_HEADERS });
   }
-  if (!env.DB || !env.IP_SALT) {
+  if (!env.DB || !env.IP_SALT || !env.EVENT_GATE) {
+    return new Response(null, { status: 204, headers: SECURITY_HEADERS });
+  }
+  const network = rateLimitNetwork(request.headers.get('CF-Connecting-IP') || '');
+  if (!(await underRateLimit(env.EVENT_GATE, network))) {
     return new Response(null, { status: 204, headers: SECURITY_HEADERS });
   }
 
@@ -466,14 +504,12 @@ async function handleSiteEvent(request, env, url) {
   const rawCountry = String(request.cf?.country || request.headers.get('CF-IPCountry') || '').toUpperCase();
   const country = /^[A-Z]{2}$/.test(rawCountry) ? rawCountry : 'XX';
 
-  const network = rateLimitNetwork(request.headers.get('CF-Connecting-IP') || '');
   const ipHash = await hash(network + env.IP_SALT);
 
   await env.DB.prepare(
     "INSERT INTO site_events (country, ip_hash, page, event, target) " +
     "SELECT ?, ?, ?, ?, ? " +
-    "WHERE (SELECT COUNT(*) FROM site_events WHERE ip_hash = ? AND created_at > datetime('now', '-1 hour')) < ? " +
-    "AND (SELECT COUNT(*) FROM site_events WHERE created_at > datetime('now', '-1 hour')) < ?"
+    telemetryCapClause('site_events')
   )
     .bind(
       country,
@@ -481,9 +517,7 @@ async function handleSiteEvent(request, env, url) {
       pagePath,
       rawEvent,
       rawTarget,
-      ipHash,
-      SITE_EVENT_LIMIT_PER_IP_HOUR,
-      SITE_EVENT_GLOBAL_PER_HOUR,
+      hourlyCap(env.SITE_EVENT_GLOBAL_PER_HOUR, SITE_EVENT_GLOBAL_PER_HOUR) - 1,
     )
     .run();
 

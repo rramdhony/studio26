@@ -460,6 +460,7 @@ describe('SEO: www.studio26.me 301 canonical redirect & open-redirect protection
     .replace(/^import\s+\{\s*EmailMessage\s*\}\s+from\s+'cloudflare:email';/m, 'const EmailMessage = class {};')
     .replace(/export\s+default\s+\{/, 'return {');
   const worker = new Function(workerSrc)();
+  const allowGate = { limit: async () => ({ success: true }) };
 
   test('redirects www.studio26.me path and query string to https://studio26.me via real worker.fetch()', async () => {
     const res = await worker.fetch(new Request('https://www.studio26.me/websites-ai-chatbots?ref=search'), {}, {});
@@ -497,6 +498,8 @@ describe('SEO: www.studio26.me 301 canonical redirect & open-redirect protection
     let boundArgs = null;
     const env = {
       IP_SALT: 'unit-test-secret-salt',
+      ASH_GATE: allowGate,
+      EVENT_GATE: allowGate,
       DB: {
         prepare: () => ({
           bind: (...args) => {
@@ -553,6 +556,8 @@ describe('SEO: www.studio26.me 301 canonical redirect & open-redirect protection
     let boundArgs = null;
     const env = {
       IP_SALT: 'unit-test-secret-salt',
+      ASH_GATE: allowGate,
+      EVENT_GATE: allowGate,
       DB: {
         prepare: () => ({
           bind: (...args) => {
@@ -588,5 +593,146 @@ describe('SEO: www.studio26.me 301 canonical redirect & open-redirect protection
     });
     const res = await worker.fetch(req, {}, {});
     assert.equal(res.status, 403);
+  });
+});
+
+describe('Availability: telemetry cannot spend the quotas the enquiry form depends on', () => {
+  const read = (file) => fs.readFileSync(path.join(ROOT, file), 'utf8');
+  const worker = new Function(
+    read('src/index.js')
+      .replace(/^import\s+\{\s*EmailMessage\s*\}\s+from\s+'cloudflare:email';/m, 'const EmailMessage = class {};')
+      .replace(/export\s+default\s+\{/, 'return {'),
+  )();
+  const denyGate = { limit: async () => ({ success: false }) };
+  const allowGate = { limit: async () => ({ success: true }) };
+  const trackingDb = () => {
+    const calls = [];
+    return {
+      calls,
+      prepare: (sql) => ({
+        bind: (...args) => {
+          calls.push({ sql, args });
+          return { run: async () => ({ meta: { changes: 1 } }) };
+        },
+      }),
+    };
+  };
+  const eventRequest = () =>
+    new Request('https://studio26.me/api/event?e=page_view&t=direct&p=/', {
+      headers: { 'Sec-Fetch-Site': 'same-origin', 'CF-Connecting-IP': '197.225.10.20' },
+    });
+  const questionRequest = () =>
+    new Request('https://studio26.me/api/ash-question', {
+      method: 'POST',
+      headers: { Origin: 'https://studio26.me', 'Content-Type': 'application/json', 'CF-Connecting-IP': '197.225.10.20' },
+      body: JSON.stringify({ question: 'How much is a website?', matched_id: 'website' }),
+    });
+
+  test('GET /api/event drops the event without touching D1 when the visitor is over the rate limit', async () => {
+    const DB = trackingDb();
+    const res = await worker.fetch(eventRequest(), { IP_SALT: 's', DB, EVENT_GATE: denyGate }, {});
+    assert.equal(res.status, 204);
+    assert.equal(DB.calls.length, 0);
+  });
+
+  test('GET /api/event drops the event without touching D1 when the rate-limit binding is missing', async () => {
+    const DB = trackingDb();
+    const res = await worker.fetch(eventRequest(), { IP_SALT: 's', DB }, {});
+    assert.equal(res.status, 204);
+    assert.equal(DB.calls.length, 0);
+  });
+
+  test('POST /api/ash-question drops the question without touching D1 when the visitor is over the rate limit', async () => {
+    const DB = trackingDb();
+    const res = await worker.fetch(questionRequest(), { IP_SALT: 's', DB, ASH_GATE: denyGate }, {});
+    assert.equal(res.status, 202);
+    assert.equal(DB.calls.length, 0);
+  });
+
+  test('POST /api/ash-question drops the question without touching D1 when the rate-limit binding is missing', async () => {
+    const DB = trackingDb();
+    const res = await worker.fetch(questionRequest(), { IP_SALT: 's', DB }, {});
+    assert.equal(res.status, 202);
+    assert.equal(DB.calls.length, 0);
+  });
+
+  test('the rate limit is keyed on the visitor network, not a constant', async () => {
+    const keys = [];
+    const gate = { limit: async ({ key }) => { keys.push(key); return { success: true }; } };
+    await worker.fetch(eventRequest(), { IP_SALT: 's', DB: trackingDb(), EVENT_GATE: gate }, {});
+    assert.deepEqual(keys, ['197.225.10.20']);
+  });
+
+  test('telemetry inserts never count rows, and bind the hourly cap as cap - 1', async () => {
+    const DB = trackingDb();
+    const env = { IP_SALT: 's', DB, EVENT_GATE: allowGate, ASH_GATE: allowGate };
+    await worker.fetch(eventRequest(), env, {});
+    await worker.fetch(questionRequest(), env, {});
+    assert.equal(DB.calls.length, 2);
+    for (const { sql } of DB.calls) assert.ok(!/COUNT\s*\(/i.test(sql), sql);
+    assert.equal(DB.calls[0].args.at(-1), 299);
+    assert.equal(DB.calls[1].args.at(-1), 119);
+    const overridden = trackingDb();
+    await worker.fetch(eventRequest(), { ...env, DB: overridden, SITE_EVENT_GLOBAL_PER_HOUR: '50' }, {});
+    assert.equal(overridden.calls[0].args.at(-1), 49);
+  });
+
+  test('the hourly cap SQL admits exactly the cap on a real SQLite database', async (t) => {
+    let DatabaseSync;
+    try {
+      ({ DatabaseSync } = await import('node:sqlite'));
+    } catch {
+      t.skip('node:sqlite is not available in this Node version');
+      return;
+    }
+    const db = new DatabaseSync(':memory:');
+    db.exec(read('migrations/0005_site_events.sql'));
+    const sqlite = {
+      prepare: (sql) => ({
+        bind: (...args) => ({ run: async () => ({ meta: { changes: Number(db.prepare(sql).run(...args).changes) } }) }),
+      }),
+    };
+    const env = { IP_SALT: 's', DB: sqlite, EVENT_GATE: allowGate, SITE_EVENT_GLOBAL_PER_HOUR: '5' };
+    const rows = () => db.prepare('SELECT COUNT(*) AS n FROM site_events').get().n;
+
+    for (let i = 0; i < 9; i++) await worker.fetch(eventRequest(), env, {});
+    assert.equal(rows(), 5, 'inserts stop at the cap');
+
+    db.exec("UPDATE site_events SET created_at = datetime('now', '-2 hours')");
+    for (let i = 0; i < 9; i++) await worker.fetch(eventRequest(), env, {});
+    assert.equal(rows(), 10, 'the cap frees up once the earlier rows are over an hour old');
+
+    db.exec('DELETE FROM site_events WHERE id IN (7, 8)');
+    await worker.fetch(eventRequest(), env, {});
+    assert.equal(rows(), 8, 'gaps in ids never let more rows in');
+  });
+
+  test('wrangler.toml runs the Worker first only for /api/* and /video/*', () => {
+    const setting = read('wrangler.toml').match(/^run_worker_first\s*=\s*(.+)$/m);
+    assert.ok(setting, 'run_worker_first must be set');
+    assert.deepEqual(JSON.parse(setting[1]), ['/api/*', '/video/*']);
+  });
+
+  test('wrangler.toml binds a separate rate limiter for each gated endpoint', () => {
+    const limiters = [...read('wrangler.toml').matchAll(/\[\[ratelimits\]\]\s+name\s*=\s*"(\w+)"\s+namespace_id\s*=\s*"(\d+)"/g)];
+    assert.deepEqual(limiters.map((m) => m[1]).sort(), ['ASH_GATE', 'ENQUIRY_GATE', 'EVENT_GATE']);
+    assert.equal(new Set(limiters.map((m) => m[2])).size, 3, 'namespace ids must differ or the counters are shared');
+  });
+
+  test('every public page loads site.js, the only script that records page views and clicks', () => {
+    for (const file of ['index.html', 'ai-video.html', 'websites-ai-chatbots.html', 'privacy.html']) {
+      assert.ok(read(`public/${file}`).includes('<script src="/assets/site.js" defer></script>'), file);
+    }
+  });
+
+  test('the deploy workflow cannot reach production without passing the checks', () => {
+    const workflow = read('.github/workflows/deploy.yml');
+    const deployAt = workflow.search(/^  deploy:/m);
+    assert.ok(deployAt > 0, 'deploy job exists');
+    const deployJob = workflow.slice(deployAt);
+    assert.ok(workflow.indexOf('npm run test:ash') < deployAt, 'tests run in the job before deploy');
+    assert.match(deployJob, /needs:\s*test/);
+    assert.match(deployJob, /if:.*refs\/heads\/main/);
+    assert.match(workflow, /npm ci/);
   });
 });
