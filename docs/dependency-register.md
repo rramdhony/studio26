@@ -4,7 +4,7 @@ Required by the brand plan (dependency discipline) and REVIEW.md. Update in the
 same commit that adds, upgrades or removes anything. Licence column marked
 "verify" must be checked against the package or source before launch.
 
-Last updated: 3 Nov 2026 (Claude: Turnstile and Email Routing for the contact form).
+Last updated: 12 Nov 2026 (Claude: Workers rate-limit bindings and pinned GitHub Actions, PR #8).
 
 ## Runtime (shipped to visitors)
 
@@ -12,6 +12,8 @@ Last updated: 3 Nov 2026 (Claude: Turnstile and Email Routing for the contact fo
 |---|---|---|---|---|
 | Cloudflare Turnstile (api.js, loaded on demand) | hosted v0 | public/assets/contact-form.js, src/index.js | Cloudflare service terms | Added 3 Nov 2026. Widget "Studio26 contact form" (studio26.me, preview host). Script loads only when the contact dialog opens.
 | Cloudflare Email Routing send_email binding (cloudflare:email) | Workers runtime | src/index.js, wrangler.toml | Cloudflare service terms | Added 3 Nov 2026. Emails enquiries to the verified studio inbox; NOTIFY_TO is a Worker secret.
+| Cloudflare Workers Rate Limiting bindings (ENQUIRY_GATE, EVENT_GATE, ASH_GATE) | Workers runtime | wrangler.toml, src/index.js | Cloudflare service terms | ENQUIRY_GATE existed before 12 Nov; EVENT_GATE (namespace 260261112) and ASH_GATE (260261113) added 12 Nov 2026 to gate telemetry before D1. Each binding needs a unique namespace_id.
+| Cloudflare Single Redirect rule (www to apex) | dashboard config | studio26.me zone, Rules > Redirect Rules | Cloudflare service terms | Added 12 Nov 2026. "Redirect www.studio26.me to studio26.me (301)". Not in the repo; recreate by hand if the zone is rebuilt.
 | GSAP | 3.15.0 | public/assets/vendor/gsap-3.15.0.min.js | GSAP standard licence (verify current terms) | Used by section 01 opening |
 | three.js | 0.187.0 | package.json dependency | MIT | Installed, not yet shipped. Remove if unused at launch |
 | Instrument Sans (variable, latin) | n/a | public/assets/fonts | SIL OFL 1.1 (InstrumentSans-OFL.txt included) | Used site-wide |
@@ -27,6 +29,8 @@ Last updated: 3 Nov 2026 (Claude: Turnstile and Email Routing for the contact fo
 | html-validate | 11.17.0 | MIT |
 | lighthouse | 13.5.0 | Apache-2.0 |
 | wrangler | 4.156.0 | MIT OR Apache-2.0 |
+| actions/checkout (GitHub Actions, CI only) | v4, pinned 11d5960a326750d5838078e36cf38b85af677262 | MIT |
+| actions/setup-node (GitHub Actions, CI only) | v4, pinned 49933ea5288caeca8642d1e84afbd3f7d6820020 | MIT |
 | start-server-and-test | ^2.0.3 | MIT |
 | wait-on | ^7.2.0 | MIT |
 

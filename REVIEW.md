@@ -33,6 +33,13 @@ this file first and grades only against it.
    parameterised D1 queries, no secrets in the repo, spam protection on forms),
    correctness, maintainability, dependency register kept current
    (`docs/dependency-register.md`).
+   - Availability on the Workers and D1 free tiers (added 12 Nov 2026, PR #8).
+     Each of these is a Blocker:
+     - `run_worker_first = true`
+     - a public endpoint that queries D1 before its rate-limit binding
+     - a per-request `COUNT(*)` over a time window
+     - a rate-limit binding that reuses another's `namespace_id`
+     - a change that lets `deploy` run without the CI `test` job
 
 ## Severity scale
 

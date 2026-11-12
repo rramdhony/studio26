@@ -15,8 +15,8 @@ Core commercial offerings & published terms (`PUBLISHED_PRICES` in `public/asset
 
 ## 2. Deployment & Worktrees
 
-- **Runtime:** Cloudflare Worker with static assets (`wrangler.toml`, Worker name `studio26-site`, `workers_dev = false`, `run_worker_first = true`) + D1 database (`studio26-db`).
-- **Production URL:** `https://studio26.me` (canonical apex). `https://www.studio26.me/*` returns a safe 301 redirect to `https://studio26.me/*` via `src/index.js`. Every push to `main` deploys to production via GitHub Actions.
+- **Runtime:** Cloudflare Worker with static assets (`wrangler.toml`, Worker name `studio26-site`, `workers_dev = false`, `run_worker_first = ["/api/*", "/video/*"]`) + D1 database (`studio26-db`) + rate-limit bindings `ENQUIRY_GATE`, `EVENT_GATE`, `ASH_GATE`. Pages and assets are served without invoking the Worker; never set `run_worker_first = true` again (on the free plan an exhausted daily Worker quota then returns 429 for the whole site; see HANDOFF.md, 12 Nov 2026).
+- **Production URL:** `https://studio26.me` (canonical apex). `https://www.studio26.me/*` returns a 301 to `https://studio26.me/*` from the Cloudflare Redirect Rule "Redirect www.studio26.me to studio26.me (301)" (studio26.me > Rules > Redirect Rules); `src/index.js` keeps a fallback for `/api/*`, `/video/*` and unmatched paths. Every push to `main` deploys to production via GitHub Actions, but only after the CI `test` job passes (unit tests, HTML validation, wrangler dry-run). PRs run the same checks.
 - **Synchronized Checkouts:** `C:\Users\ruben\Documents\GitHub\studio26` (canonical GitHub repo) and `C:\Users\ruben\Downloads\studio26\site`. Always create a restorable backup before editing files.
 
 ## 3. Codebase Architecture
@@ -27,7 +27,8 @@ Core commercial offerings & published terms (`PUBLISHED_PRICES` in `public/asset
 - `public/concepts/*.html` - Interactive concept pages (`/concepts/island`, `/concepts/architecture`, `/concepts/product`).
 - `public/privacy.html` - Privacy Notice (Mauritius Data Protection Act 2017), WCAG 2.1 Level AA Accessibility Statement (`#accessibility`), and Website & Creative Terms (`#terms`).
 - `public/llms.txt`, `public/robots.txt`, `public/sitemap.xml` - AI search (GEO) and crawler discovery files.
-- `src/index.js` - Cloudflare Worker handling canonical `www` -> apex 301 redirects, `POST /api/enquiry` (contact form + Ash project briefs stored in D1 `enquiries` and emailed via Cloudflare Email Routing), `POST /api/ash-question` (anonymous market-demand question telemetry stored in D1 `ash_questions` with `country`, salted `SHA-256` `ip_hash`, and PII redaction), and `/video/*` HTTP 206 Range streaming.
+- `src/index.js` - Cloudflare Worker handling the fallback `www` -> apex 301, `POST /api/enquiry` (contact form + Ash project briefs stored in D1 `enquiries` and emailed via Cloudflare Email Routing), `POST /api/ash-question` (pseudonymised market-demand question telemetry stored in D1 `ash_questions` with `country`, salted `SHA-256` `ip_hash`, and PII redaction), `GET /api/event` (page-view and click telemetry in D1 `site_events`), and `/video/*` HTTP 206 Range streaming. Both telemetry endpoints check a per-visitor rate-limit binding before any D1 query and cap inserts per hour without `COUNT(*)`, so a flood cannot spend the D1 daily quota that `/api/enquiry` depends on. Keep it that way: no `COUNT(*)` over a time window on a public request path.
+- `.github/workflows/deploy.yml` - CI: `test` job (`npm ci --ignore-scripts`, `npm run test:ash`, `npm run qa:html`, `npx wrangler deploy --dry-run`) on every PR and push to `main`; `deploy` job (`npx wrangler deploy`) runs on `main` only after `test` passes. Actions pinned to commit SHAs.
 - `migrations/0001_enquiries.sql` through `migrations/0005_site_events.sql` - D1 schema migrations for `enquiries`, `ash_questions` and `site_events`.
 - `public/assets/ash-widget.js`, `ash-widget.css`, `catalogue.v1.json` - Ash studio assistant (bilingual EN/FR Q&A, Tier-1 alias + Tier-2 intent classifier, pseudonymised question telemetry to `/api/ash-question`, click-to-reveal address protection, and in-dialog project brief submission to `/api/enquiry`).
 - `.github/qa/ash-matcher.test.mjs`, `.github/qa/seo.spec.js`, `.github/qa/qa.spec.js` - Unit, SEO/discovery, and 3-pillar Playwright + `axe-core` QA suites.
@@ -35,7 +36,7 @@ Core commercial offerings & published terms (`PUBLISHED_PRICES` in `public/asset
 ## 4. QA & Operational Commands
 
 - **Shared checkout:** never use `git add -A` or `git add .`; stage only the files you changed, and check `git status` for other agents' uncommitted work first (7 Nov 2026: a PR swept another agent's unreviewed edits into production).
-- `npm run test:ash` - Runs the 231+ Node unit tests covering Ash catalogue validation, bilingual intent matching, exclusions, prompt-injection/commitment safeguards, price synchronization (`B7`), `www` 301 redirect hardening, and `/api/ash-question` telemetry.
+- `npm run test:ash` - Runs the 244 Node unit tests covering Ash catalogue validation, bilingual intent matching, exclusions, prompt-injection/commitment safeguards, price synchronization (`B7`), `www` 301 redirect hardening, `/api/ash-question` and `/api/event` telemetry, and availability guards (rate limits before D1, the hourly cap against real SQLite, `run_worker_first` scope, unique rate-limit namespaces, `site.js` on every public page, deploy gated on tests). Runs in CI before every deploy.
 - `npm run qa:html` - Runs `html-validate` across `public/index.html`, `public/ai-video.html`, `public/privacy.html`, and `public/websites-ai-chatbots.html`.
 - `npm run qa` - Runs unit tests + full Playwright 3-pillar QA suite.
 - `npm run ash:questions` - Queries the latest 50 pseudonymised visitor questions from remote D1 (`ash_questions`) with timestamp, country code, 8-char visitor hash prefix, language, page, matched topic ID, and redacted question.
